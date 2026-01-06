@@ -1,0 +1,977 @@
+\chapter{Rings}
+\section{Basic Definition}
+\subsection*{Rings}
+
+\begin{definition}[Ring]
+A ring $(R, +, \cdot)$ is a set equipped with 2 binary operations $+, \cdot : R \times R \to R$ such that
+\begin{enumerate} 
+    \item $(R, +)$ is an abelian group with additive identity $0_R \in R$.
+    \item $(R, \cdot)$ is associative: $(a \cdot b) \cdot c = a \cdot (b \cdot c) \quad \forall a, b, c \in R$.
+    \item $(R, +, \cdot)$ is distributive:
+    \[
+    \left\{ 
+    \begin{aligned} 
+        a \cdot (b+c) &= a \cdot b + a \cdot c \\ 
+        (a+b) \cdot c &= a \cdot c + b \cdot c
+    \end{aligned}
+    \right. 
+    \quad \forall a, b, c \in R.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ are rings.
+    \item $\mathbb{Z}[i] = \{a + bi \mid a, b \in \mathbb{Z}\}$ where $i =  \sqrt{-1}$ (Gaussian integers)\\
+    $(a+bi) \cdot (c+di) := (ac-bd) + (ad+bc)i$ \\
+    $(a+bi) + (c+di) := (a+c) + (b+d)i$
+    \item More generally, $\mathbb{Z}[e^{\frac{2\pi i}{n}}] = \{a_0 + a_1e^{\frac{2\pi i}{n}} + \cdots + a_ke^{\frac{2\pi ki}{n}} + \cdots + a_{n-1}e^{\frac{2\pi (n-1)i}{n}} \mid a^i \in \mathbb{Z}\}$\\
+    Since $e^{\frac{2\pi i}{n}} := cos\frac{2\pi i}{n} + i(sin\frac{2\pi i}{n})$, then $n=4$, $e^{\frac{2\pi i}{4}}=i$.
+    \item $2\mathbb{Z}=\{2a\mid a \in \mathbb{Z}\}$ is a ring, \\
+    but $(\{\cdots, -3, -1, 1, 3,\cdots\}, +, \cdot)$ is \textbf{NOT} a ring.
+    \item $n\mathbb{Z}=\{na \mid a \in \mathbb{Z}\}$ is a ring
+    \item $M_{n\times n}(\mathbb{Z})$ is a ring
+    \item $\mathbb{Z}[x]=$ \{all polynomials with integer coefficients\}\\
+    For $f(x)=a_mx^m+\cdots +a_1x+a_0$ and $g(x)=b_nx^n+\cdots +b_1x+b_0$ $\in \mathbb{Z}[x]$, \\
+    $(f\cdot g)(x):=a_mb_nx^{n+m}+\cdots +\sum_{\substack{p \ge 0 \\ q \ge 0 \\ p+q=i}}a_p b_qx^i+ \cdots + a_0b_0$.
+\end{itemize}
+\end{example}
+
+\noindent \textbf{Mativation}\\
+Solve $x^2+y^2=z^2$ for integers x, y, z.
+$\Rightarrow (x+iy)(x-iy)=z^2$ in $\mathbb{Z}[i]$,\\
+so we wish to study more about properties of the Gaussian integers $\mathbb{Z}[i]$, e.g.: does the \textbf{fundamental theorem of arithmetic} hold for $\mathbb{Z}[i]$, i.e.: can every element in $\mathbb{Z}[i]$ be factorized into product of prime numbers uniquely?
+
+\vspace{0.5em}
+\noindent \textbf{Fermat's Last Theorem:}
+$x^n+y^n=z^n$ for $n\geq3$, $x^n+y^n=(x-e^{\frac{2\pi i}{n}}y) \cdots (x-e^{\frac{2\pi (n-1)i}{n}}y)$ in $\mathbb{Z}[e^{\frac{2\pi i}{n}}]$
+
+\begin{definition}[Unital Rings and Commutative Rings]
+Let $(R, +, \cdot)$ be a ring. We say:
+\begin{enumerate}
+    \item R is \textbf{unital} if $\exists$ $1_R \in R$ such that\\
+    $1_R \cdot r=r\cdot 1_R=r$ $\forall$ $r \in R$\\
+    ($1_R$ is the multiplication identity of R)\\
+    (non-example: $R=2\mathbb{Z}$ or $n\mathbb{Z}$)
+    \item If R is unital, then the \textbf{units} of R are the elements\\
+    $U(R)=\{a \in R \mid \exists a^{-1} \in R$ s.t. $aa^{-1}=a^{-1}a=1_R\}$\\
+    (e.g.: $U(\mathbb{Z})=\{\pm 1\}$, $U(M_{n \times n}(R))=GL(n,\mathbb{R})$), and $U(\mathbb{Z}[i])=\{\pm 1,\pm i\}$, why they are the only units?)
+    \item R is \textbf{commutative} if $a\cdot b=b\cdot a$ $\forall a,b \in R$\\
+    (non-example: $R=M_{n\times n}(\mathbb{Z})$)
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$(\mathbb{Z}_n,+,\cdot)$ is a commutative and unital ring with the multiplication identity $1_R=[1]$. The units of $\mathbb{Z}_n$ are $U(\mathbb{Z})=\mathbb{Z}_n^*=\{a\mid gcd(a,n)=1\}$
+\end{example}
+
+\begin{remark}
+\begin{itemize}
+    \item The additive identity $0_R \in R$ is unique in R. If R is unital, then the multiplication ifentity $1_R\in R$ is also unique 
+    \item We write $-r\in R $ to be the additive inverse of $r\in R$, i.e.: $(-r)+r=r+(-r)=0_R$
+    \item If $r\in U(R)$ is a unit in a (commutative) unital ring, then we write $r^{-1}$ to be the multiplication inverse of r, i.e.: $r^{-1}r=rr^{-1}=1_R$
+    \item We write $nr:=r+\cdots + r$ (n terms of r) for $n\in \mathbb{N}$ and $r\in R$.
+    \item For $a,b\in R$, we write $a\mid b$ if $\exists c\in R$ s.t.: $ac=b$
+\end{itemize}
+\end{remark}
+
+\begin{proposition}
+\begin{enumerate}
+    \item $0_R\cdot r=r\cdot 0_R=0_R$
+    \item $(-1_R)\cdot r=r\cdot (-1_R)=-r$
+    \item $(-1_R)\cdot(-r)=(-r)\cdot(-1_R)=r$
+\end{enumerate}
+\end{proposition}
+
+\noindent {Proof:}
+\begin{enumerate}
+    \item For any $a\in R$, $a\cdot r=(0_R+a)\cdot r=0_R\cdot r+a\cdot r$\\
+    By the uniqueness of $0_R$, $0_R\cdot r=0_R$
+    \item $0_R=0_R\cdot r=(1_R+(-1_R))\cdot r=1_R\cdot r+(-1_R)\cdot r=r+(-1_R)\cdot r$\\
+    $\Rightarrow -r=(-r)+0_R=(-r)+(r+(-1_R)\cdot r)=(-1_R)\cdot r$\\
+    Similarly for $r\cdot(-1_R)=-r$, by taking $0_R\cdot r=((-1_R)+1_R)\cdot r$
+    \item Directly proved by proposition 3.5(2).\hfill$\square$
+\end{enumerate}
+
+\begin{definition}[Product Rings]
+Let $(R_1,+_1, \cdot_1)$ and $(R_2,+_2,\cdot_2)$ be two rings. Then $R_1\times R_2$ is called a \textbf{product ring} with\\
+$(r_1,r_2)+_{R_1\times R_2}(r_1^\prime +r_2^\prime):=(r_1+_1r_1^\prime,r_2+_2r_2^\prime)$\\
+$(r_1,r_2)\cdot_{R_1\times R_2}(r_1\cdot_1r_1^\prime,r_2\cdot_2r_2^\prime)$
+\end{definition}
+
+\begin{definition}[Subrings]
+Let $(R,+,\cdot)$ be a ring. A subset $S\subset R$ is a subring if\\
+$+\mid_{S\times S}$: $S\times S\rightarrow S$ and $\cdot\mid_{S\times S}$: $S\times S\rightarrow S$ give a ring substructure of S.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Z}[i]\subset \mathbb{C}$ is a subring
+    \item $n\mathbb{Z}\subset \mathbb{Z}$ is a subring
+    \item $\{\cdots,-3,-1,1,3,\cdots\}\subset\mathbb{Z}$ is \textbf{NOT} a subring
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+S$\subset$R is a subring $\Leftrightarrow$ $\forall a,b\in S$: $a+b\in S$, $-a\in S$, and $a\cdot b \in S$
+\end{proposition}
+
+\begin{definition}[Field]
+Let R be a commutative unital ring. We say R is a \textbf{field} if all nonzero elemens of R are in the units U(R) of R.\\
+(Field is a very special kind of ring)
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Q}$ is a field, since all nonzero elements $\frac{a}{b}$ of $\mathbb{Q}$ has a multiplication inverse $(\frac{a}{b})^{-1}=\frac{b}{a}$
+    \item $\mathbb{R}$ and $\mathbb{C}$ are fields
+    \item $\mathbb{Z}$ is \textbf{NOT} a field: $u(\mathbb{Z})=\{\pm 1\}\neq\mathbb{Z}\setminus\{0\}$
+    \item $\mathbb{Z}_p$ is a field for all p prime
+\end{itemize}
+\end{example}
+
+\noindent \textbf{More examples:}
+\begin{itemize}
+    \item $n\mathbb{Z}$(\textbf{NOT} unital) $\subset$ $\mathbb{Z}$(\textbf{NOT} field) $\subset$ $\mathbb{Q}$(field) $\subset$ $\mathbb{R}$(field) $\subset$ $\mathbb{C}$(field)
+    \item $R[x]=\{\sum_ia_ix^i\mid a_i\in R\}$ is commutative if R is commutative, and is unital if R is unital
+    \item $M_{n\times n}(R)=\{(a_{ij})\mid a_{ij}\in R\}$ is \textbf{NOT} commutative for $n\geq2$
+\end{itemize}
+
+\section{Ring Homomorphism}
+\begin{definition}[Ring Homomorphism]
+Let R and S be rings. A map $\phi$: $R\rightarrow S$ is a \textbf{homomorphism of rings} if\\
+$\phi (a+_Rb)=\phi(a)+_S\phi(b)$ and $\phi(a\cdot_Rb)=\phi(a)\cdot_S\phi(b)$
+\begin{itemize}
+    \item If R and S are unital, we say a homomorphism $\phi:R\rightarrow S$ is \textbf{unital} if $\phi(1_R)=1_S$
+    \item If $\phi$ is bijective,then $\phi$ is called a \textbf{ring isomorphism}
+\end{itemize}
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\phi:\mathbb{Z}\rightarrow\mathbb{Z}$, $\phi(n):=2n$. Then:
+    \begin{enumerate}
+        \item $\phi:(\mathbb{Z},+)\rightarrow(\mathbb{Z},+)$ is a group homomorphism, \textbf{BUT}
+        \item $\phi:(\mathbb{Z},+,\cdot)\rightarrow(\mathbb{Z},+,\cdot)$ is \textbf{NOT} a ring homomorphism, since $\phi(a\cdot b)=2ab\neq 4ab=(2a)\cdot(2b)=\phi(a)\cdot\phi(b)$ for $a,b\neq0$
+    \end{enumerate} 
+    \item Similarly, $\phi:\mathbb{Z}_{10}\rightarrow\mathbb{Z}_{10}$ with $\phi(n)=2n$ is a group homomorphism, but \textbf{NOT} a ring homomorphism.\\
+    But $\phi(n):=5n$ is a ring homomorphism.
+    \item $\phi:\mathbb{Z}\rightarrow\mathbb{Z}_m$ with $\phi(n)$:=n(mod m) is a ring homomorphism
+    \item Let R be a commutative unital ring. $\phi:R[x]\rightarrow R$ with $\phi(p(x)):=p(1_R)$\\
+    Check $\phi(p+q)=(p+q)(1_R)=p(1_R)+q(1_R)=\phi(p)+\phi(q)$ and $\phi(p\cdot_{R[x]}q)=\phi(p)\cdot_R\phi(q)$
+    \item $\mathbb{Z}\mapsto\mathbb{Q}$, $\mathbb{Q}\mapsto\mathbb{R}$, $\mathbb{R}\mapsto\mathbb{C}$
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+Let $\phi:R\rightarrow S$ be a ring homomorphism.
+\begin{enumerate}
+    \item $\phi(0_R)=0_S$
+    \item $\phi(-a)=-\phi(a)$
+    \item If $\phi$ is unital and a $\in U(R)$, then $\phi(a)\in U(S)$ with $\phi(a)^{-1}=\phi(a^{-1})$
+    \item If $\phi:R\xrightarrow{\cong} S$ is an isomorphism, then $\phi^{-1}:S\rightarrow R$ is a ring isomorphism as well
+\end{enumerate}
+\end{proposition}
+
+\textbf{Proof:}
+\begin{enumerate}
+    \item $\phi(r)=\phi(0_R+r)=\phi(0_R)+\phi(r)$. By uniqueness of additive identity $\phi(0_r)=0_S$
+    \item Same as group homomorphism
+    \item $\phi(a^{-1})\cdot\phi(a)=\phi(a^{-1}a)=\phi(1_R)=1_S$ and similarly we have $\phi(a)\phi(a^{-1})=1_S$. Hence, $\phi(a)$ is a unit with $\phi(a)^{-1}=\phi(a^{-1})$
+    \item Let $\alpha$ and $\beta$ $\in S$. Then $\exists a,b\in R,s.t.:\phi(a)=\alpha$ and $\phi(b)=\beta$——(*)\\
+    (WTS: $\phi^{-1}(\alpha\beta)=\phi^{-1}(\alpha)\phi^{-1}(\beta)$)\\
+    $\phi^{-1}(\alpha)\cdot\phi^{-1}(\beta)=a\cdot b=\phi^{-1}(\phi(ab))=\phi^{-1}(\phi(a)\cdot\phi(b))=\phi^{-1}(\alpha\cdot\beta)$\\
+    (HW: Check $\phi^{-1}(\alpha+\beta)=\phi^{-1}(\alpha)+\phi^{-1}(\beta)$)\hfill $\square$
+\end{enumerate}
+
+\begin{proposition}
+Let $\phi:R\rightarrow S$ be a ring homomorphism. Then $ker\phi:=\{r\in R\mid \phi(r)=0_S\}\leq R$ and $im\phi:=\{\phi(r)\mid r\in R\}\leq S$ are sunrings.
+\end{proposition}
+
+\textbf{Proof:}
+Let a,b$\in ker\phi$, i.e.: $\phi(a)=\phi(b)=0_S$. (WTS: a+b, -a, $a\cdot b$ $\in ker\phi$)
+\begin{itemize}
+    \item $\phi(a+b)=\phi(a)+\phi(b)=0_S+0_S=0_S$
+    \item $\phi(-a)=-\phi(a)=-0_S=0_S$
+    \item $\phi(a\cdot b)=\phi(a)\cdot\phi(b)=0_S\cdot0_S=0_S$ (the last equality is left to check in the last lecture)
+\end{itemize}
+
+\begin{remark}
+In groups, we know $ker\phi$ is a \textbf{normal} subroup of R. How about rings, are there any notion of "normal subring"?\\
+\textbf{Answer}: We'll study \textbf{ideals}, which is the ring analogue of normal subgroups.
+\end{remark}
+
+\section{Integral Domain}
+
+\begin{definition}[Zero-divisor]
+Let R be a ring. A nonzero element r$\in R$ is a \textbf{zero-divisor} if $\exists 0\neq s\in R,s.t.:r\cdot s=0$ or $s\cdot r=0$.
+\end{definition}
+
+\begin{example}
+R=$\mathbb{Z}$. Then $2\in R$ is a zerodivisor, since $2\cdot 3=6=0$ in R.
+\end{example}
+
+\begin{definition}[Integral Domain]
+If R has no zerodivisors, then R is a \textbf{domain}.\\
+Moreover, if R is commutative ring with no zerodivisors, then R is an \textbf{integral domain (ID)}.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Z}_6$ is \textbf{NOT} ID. More generally, $\mathbb{Z}_m$ is ID $\Leftrightarrow$ m is prime.
+    \item $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C},\mathbb{Z}[i]$ are IDs.
+    \item If R is ID, then so is R[x].
+\end{itemize}
+\end{example}
+
+\begin{proposition}[Cancellation Property]
+Let R be commutative ring. Then R is ID $\Leftrightarrow$ whenever ca=cb for some $c\neq 0$, then a=b.
+\end{proposition}
+
+\noindent\textbf{Proof:}
+ca=cb $\Leftrightarrow$ ca+c(-b)=0 $\Leftrightarrow$ c(a+(-b))=0 $\Leftrightarrow$ c(a-b)=0 $\Leftarrow$(R is ID)$\Rightarrow$ c=0 OR a-b=0 $\Leftrightarrow$ a-b=0 $\Leftrightarrow$ a=b.\hfill$\square$
+
+\begin{remark}
+One can cancel the common factor on both sides of equation \textbf{exactly} when R is an ID.
+\end{remark}
+
+\noindent\textbf{Overview}
+Fields $\subsetneq$ Euclidean Domain (ED) $\subsetneq$ Principal Ideal Domain (PID) $\subsetneq$ Unique Factorization Domain (UFD) $\subsetneq$ Itegral Domain (ID) \\
+(HW: If R is a field, then R is integral domain.)
+
+\begin{lemma}
+Let R be ID with $\mid R\mid < \infty$. Then R is unital.
+\end{lemma}
+
+\textbf{Proof:}
+Let a $\in R$ be nonzero. Then $\{a,a^2,\cdots\}(\subset R)$ must repeat, since $\mid R\mid < \infty$. Say $a^m=a^n$ for some m>n.\\
+\textbf{Claim:} $1_R=a^{m-n}$.\\
+\textbf{Proof of claim:} $\forall x \in R$, let $xa^{m-n}=y$. Then $xa^m=xa^{m-n}a^n=ya^n=ya^m$. Then, by cancellation property, we have: x=y. Again by cancellation property and $xa^{m-n}=y$, $a^{m-n}=1_R$.\\
+Hence, by the claim, $1_R=a^{m-n}\in R$. Therefore, R is unital.\hfill $\square$
+
+\vspace{1em}
+\begin{proposition}
+Let R be an ID with $\mid R\mid < \infty$. Then R is a field.
+\end{proposition}
+
+\textbf{Proof:}
+Let $R\setminus\{0_R\}=\{r_1=1_R,r_2,\cdots,r_m\}$. Then for all a$\neq 0$ in R, consider 
+\[S:=\{ar_1,ar_2,\cdots,ar_m\}\]
+Suppose this set has repetitions, i.e.: $\exists i\neq j, s.t.: ar_i=ar_j$. Then by cancellation property, $r_i=r_j$. Then i=j. 
+
+Hence, S has no repetitions. Then S=$R\setminus\{0_R\}$. In particular, $\exists r_l,s.t.:ar_l=r_1=1_R$, and hence, a$\in U(R)$.\hfill$\square$
+
+\section{ideal}
+\noindent\textbf{Motivation}
+A ring analogue of normal subgroup.
+
+\begin{definition}[Ideal]
+Let R be a ring. We say I $\subset R$ an \textbf{ideal} if
+\begin{itemize}
+    \item I is an additive subgroup of (R,+)
+    \item For all x $\in R$, i $\in I$, we have xi,ix $\in I$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+\begin{itemize}
+    \item We write I $\triangleleft$ R if I is an ideal
+    \item If I $\triangleleft$ R, then I $\leq$ R automatically. (REASON: Take x $\in$ I, then ax=xa$\in I$)
+\end{itemize}
+\end{remark}
+
+\begin{example}
+\begin{itemize}
+    \item (Nonexample:)$\mathbb{Z}\leq \mathbb{Q}$ is \textbf{NOT} an ideal, since 2$\in\mathbb{Z}$ and $\frac{1}{3}\in \mathbb{Q}$, \textbf{BUT} $2\cdot \frac{1}{3}=\frac{2}{3}\notin \mathbb{Z}$
+    \item R=$\mathbb{Z}$, I=$n\mathbb{Z}$. Take na$\in I$, m$\in R$. Then $(na)m=n(am)\in I$
+    \item R=$\mathbb{Z}[x]$, I=$\{p(x)\in R\mid p(0)=0\}$(=$\{$polynomials with no constant term$\}$)\\
+    (HW: Check I is subring.)\\
+    Now take $p(x)=a_nx^n+\cdots+a_1x\in I$ and $q(x)=b_mx^m+\cdots+b_1x+b_0\in R$. Then $p(x)q(x)=a_nb_mx^{n+m}+\cdots+a_1b_0x\in I$.\\
+    (Alternatingly, $p(0)q(0)=0\cdot q(0)=0$, and hence p(x)q(x)$\in I$)
+    \item $R=\mathbb{Z}[x]$, $I=\{p(x)\in R\mid$constant term is an even integer$\}$\\
+    e.g.: $1+x\notin I, 10002+x^2\notin I, (0+)x^3+15x^5\in I$\\
+    (HW: Check that this is an ideal)
+\end{itemize}
+\end{example}
+
+\noindent\textbf{Question:}
+For any R, how to construct I?
+
+\begin{definition}
+Let R be a ring, V $\subset$ R subset. Then the \textbf{ideal generated by V} is <V>, which is the smallest ideal in R containing all elements in V.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item R=$\mathbb{Z}$, V={n}. What's <V>=<n>?\\
+    For any ideal I s.t.: $n \in I$, then $n+\cdots+n$ and $(-n)+\cdots+(-n)$ $\in S$, since I is a subgroup of (R,+). Then $n\mathbb{Z}\subset I$. But $n\mathbb{Z}$ itself is an ideal. So <n>=$n\mathbb{Z}$
+    \item How about general case? Let R be a unital commutative ring, and let $V=\{a_1,\cdots,a_n\}$ is a finite set. Then <V>=<$a_1,\cdots,a_n$>=$\{r_1a_1+\cdots+r_na_n\mid r_1,\cdots,r_n\in R\}$=:S
+    \begin{enumerate}
+        \item Check S contains $a_1,\cdots,a_n$, e.g.: $a_2=0a_1+1a_2+0a_3+\cdots+0a_n\in S$
+        \item Check S $\triangleleft$ R. (Check $s\in S$, $r\in R$, then $s\cdot r\in S$)
+        \item For any ideal I satisfying: $a_1,\cdots,a_n$ $\in I$, check $S\subset I$\\
+        (\textbf{Proof:} $a_1,\cdots,a_n\in S$. Then by the definition of ideal, $a_1r_1,\cdots,a_nr_n\in I$. Since I is an additive subgroup, then $a_1r_1+\cdots+a_nr_n\in I$)
+    \end{enumerate}
+    \item R$=\mathbb{Z}[x]$, $I=<2,x>=\{2p(x)+xq(x)\mid p(x),q(x)\in R\}=\{$all polynomials with even constant term$\}$.
+\end{itemize}
+\end{example}
+
+\begin{lemma}
+Suppose $I_1,\cdots,I_k\triangleleft R$, then 
+\begin{enumerate}
+    \item $I_1+\cdots+I_k:=\{i_1+\cdots+i_k\mid i_r\in I_r\}\triangleleft R$
+    \item $\bigcap_{i=1}^{k} I_i\triangleleft R$
+\end{enumerate}
+\end{lemma}
+
+\textbf{Proof:}
+\begin{enumerate}
+    \item Let $(i_1+\cdots+i_k)$ and $(i_1^\prime+\cdots+i_k^\prime)\in I_1+\cdots+I_k$.Then $(-i_r)\in I_r$ $\forall r=1,\cdots,k$.\\
+    $\Rightarrow$ $-(i_1+\cdots+i_k)=(-i_1)+\cdots+(-i_k)\in I_1+\cdots+I_k$\\
+    Also, $(i_1+\cdots+i_k)+(i_1^\prime+\cdots+i_k^\prime)=(i_1+i_1^\prime)+\cdots+(i_k+i_k^\prime)\in I_1+\cdots+I_k$\\
+    Hence, $I_1+\cdots+I_k$ is an additive subgroup.\\
+    Now, take any $r\in R$, then $r\cdot(i_1+\cdots+i_k)=ri_1+\cdots+ri_k\in I_1+\cdots+I_k$. Similarly, $(i_1+\cdots+i_k)\cdot r\in I_1+\cdots+I_k$
+    \item Left to the readers.\hfill$\square$
+\end{enumerate}
+
+\begin{example}
+$R=\mathbb{Z}$, $I_r=a_r\mathbb{Z}$ where $a_r\in \mathbb{N}$\\
+Then $I_1+\cdots+I_k=gcd(a_1,\cdots,a_k)\mathbb{Z}$ and $I_1\bigcap\cdots\bigcap I_k=lcm(a_1,\cdots,a_k)\mathbb{Z}$
+\end{example}
+
+\begin{definition}[Principle Ideal Domain]
+\begin{enumerate}
+    \item Let R be a commutative ring. An ideal I $\triangleleft$ R is called \textbf{principal} if I=<a> for some a$\in R$.
+    \item Let R be an ID. We say r is a \textbf{principal ideal domain(PID)} if all ideals in R are principal.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+Let $\phi:R\rightarrow S$ be a ring homomorphism. Then $ker\phi$ $\triangleleft$ R.
+\end{proposition}
+
+\textbf{Proof:}
+We only need to show that $\forall r\in R,i\in ker\phi\Rightarrow ri,ir\in ker\phi$, since we know $ker\phi\leq R$ already.\\
+Indeed, $\phi(ri)=\phi(r)\phi(i)=\phi(r)\cdot 0_S=0_S$. Hence, $ri\in ker\phi$. Similarly for ir.\hfill$\square$
+
+\section{Quotient Ring}
+\begin{definition}[Quotient Ring]
+Let R be a ring, and I $\triangleleft$ R ideal. Consider the collection of left cosets of (R,+), $R/I:=\{r+I\mid r\in R\}$ (Then (R/I,+) has a group structure) with the operations:\\
+$(r_1+I)+_{R/I}(r_2+I):=(r_1+r_2)+I$\\
+$(r_1+I)\cdot_{R/I}(r_2+I):=(r_1\cdot r_1)+I$.\\
+Then $(R/I,+_{R/I},\cdot_{R/I})$ is a ring, and it's called the \textbf{quotient ring of R} by I.
+\end{definition}
+
+\textbf{Check:}
+\begin{itemize}
+    \item $\cdot_{R/I}$ is well-defined:\\
+    Take $r_1+I=r_1^\prime+I$ and $r_2+I=r_2^\prime+I$ (*). \\
+    (*) $\Leftrightarrow$ $r_1-r_1^\prime\in I$ and $r_2-r_2^\prime\in I$ $\Rightarrow$ $r_1^\prime=r_1+i_1$ and $r_2^\prime=r_2+i_2$ for some $i_1,i_2\in I$ $\Rightarrow$ $r_1^\prime r_2^\prime=r_1r_2+r_1i_2+i_1r_2+i_1i_2$ $\Rightarrow$ $r_1^\prime r_2^\prime-r_1r_2\in I$ $\Leftrightarrow$  $r_1^\prime r_2^\prime+I=r_1r_2+I$ $\Leftrightarrow$ $(r_1^\prime+I)\cdot_{R/I}(r_2^\prime+I)=(r_1+I)\cdot_{R/I}(r_2+I)$
+    \item $+_{R/I}$ is well-defined by quotient theory
+    \item Check $(R/I, +_{R/I}, \cdot_{R/I})$ is associative:\\
+    $(r_1+I)\cdot_{R/I}((r_2+I)\cdot_{R/I}(r_3+I))=((r_1+I)\cdot_{R/I}(r_2+I))\cdot_{R/I}(r_3+I)$
+    \item Check $(R/I,+_{R/I},\cdot_{R/I})$ is distributive, e.g.:\\
+    $(r_1+I)\cdot_{R/I}((r_2+I)+_{R/I}(r_3+I))=(r_1+I)\cdot_{R/I}(r_2+I)+_{R/I}(r_1+I)\cdot_{R/I}(r_3+I)$ \hfill $\square$
+\end{itemize}
+
+\noindent \textbf{Easy Exercise}
+\begin{itemize}
+    \item If R is commutative, then R/I is commutative.
+    \item If $1_R\in R$ unital, then $1_{R/I}:=1_R+I$ unital.
+\end{itemize}
+
+\begin{example}
+    \begin{itemize}
+        \item $\mathbb{R}[x]/\langle x^2-1\rangle=\{p(x)+\langle x^2-1\rangle \mid p(x)\in \mathbb{R} [x]\}=\{(ax+b)+\langle x^2-1\rangle \mid a,b\in \mathbb{R}\}$\\
+        (shorthand: $\overline{p(x)}:=p(x)+\langle x^2-1\rangle$)
+        $$\overline{x-1},\overline{x+1}\in \mathbb{R}[x]/\langle x^2-1\rangle \quad and \quad (x-1)\cdot(x+1)=x^2-1\in \langle x^2-1\rangle$$ $\Rightarrow$ 
+        $$\overline{x-1}\cdot\overline{x+1}=\overline{0}\in \mathbb{R}[x]/\langle x^2-1\rangle$$\\
+        $\therefore \overline{x-1},\overline{x+1}$ are zerodivisors of $\mathbb{R}[x]/\langle x^2-1\rangle$ and hence it is \textbf{NOT integral domain (ID)}\\
+        (issue: $x^2-1=(x+1)(x-1)$ is not irreducible in $\mathbb{R}[x]$)
+        \item $\mathbb{R}[x]/\langle x^2+1\rangle$. Then 
+        $$\overline{x}\cdot\overline{x}=\overline{x^2}=\overline{x^2-(x^2+1)}=\overline{-1} \, \Rightarrow \, (\overline{x})^2=\overline{-1}$$
+        \item $\mathbb{Z}/\langle 2,x\rangle=\{(a_nx^n+\cdots+a_1x+a_0)+\langle 2,x\rangle\}=\{a_0+\langle2,x\rangle\}=\{0+\langle2,x\rangle,1+\langle2,x\rangle\}\cong\mathbb{Z}_2$
+    \end{itemize}
+\end{example}
+
+\begin{theorem}[First Isomorphism Theorem of Rings]
+Let $\Phi:R\rightarrow S$ be a ring homomorphism. Then the map $\phi:R/ker\Phi\rightarrow im\Phi$ defined by $\phi(r+ker\Phi):=\Phi(r)$ is a well-defined ring isomorphism.
+\end{theorem}
+
+\textbf{Proof:}
+\begin{itemize}
+    \item $\phi$ is well-defined, i.e.: if (*)"$r+ker\Phi=r^\prime+ker\Phi$", then $\Phi(r)=\Phi(r^\prime)$.\\
+    (Exercise: recall (*) $\Leftrightarrow$ $r-r^\prime\in ker\Phi$)
+    \item $\phi$ is a ring homomorphism: only need to check $\phi(rr^\prime)=\phi(r)\phi(r^\prime)$, since we know $\phi$ is group homomorphism already by the $1_{st}$ isomorphism theorem of groups.
+    \item $\phi$ is bijective as in the $1_{st}$ isomorphism theorem of groups.\hfill $\square$
+\end{itemize}
+
+\begin{example}
+\begin{itemize}
+    \item Let $\Phi:\mathbb{R}[x]\rightarrow \mathbb{C}$ be defined by $\Phi(p(x)):=p(i)$ where $(i=\sqrt{}{-1})$. Then $\phi$ is a homomorphism. (Exercise: $\phi(pq)=\phi(p)\phi(q)$)\\
+    Now, $im\phi=\mathbb{C}$, e.g.: $\Phi(bx+a):=a+bi\in \mathbb{C}$ and
+    $$p(x)\in ker\Phi$$ $$\Leftrightarrow p(i)=0$$ $$\Leftrightarrow \overline{p(i)}=p(i)=0$$ $$\Leftrightarrow p(-i)=p(i)=0$$ $$\Leftarrow(Factor\; theorem\; on\; \mathbb{C}[x])\Rightarrow(x-i),(x-(-i))\mid p(x)$$ $$\Leftrightarrow(x-i)(x+i)=x^2+1\mid p(x) \; in\; \mathbb{R}[x]$$
+    $\therefore\; ker\Phi=\{(x^2+1)q(x)\mid q(x)\in\mathbb{R}[x]\}=\langle x^2+1\rangle$.\\
+    $\therefore$ $1_{st}$ isomorphism theorem says $$\mathbb{R}[x]/\langle x^2+1\rangle\cong\mathbb{C}$$
+    \item Let $\Phi:\mathbb{Z}[x]\rightarrow\mathbb{Z}_2$ with $\Phi:=p(0)$(mod 2).\\
+    Check that $im\Phi=\mathbb{Z}_2,\; ker\Phi=\langle2,x\rangle$. (Exercise)$$\Rightarrow\; \mathbb{Z}[x]/\langle2,x\rangle\cong\mathbb{Z}_2$$
+\end{itemize}
+\end{example}
+
+\section{Chinese Remainder Theorem}
+
+\begin{definition}[Product Ring]
+Let $R_i$ be rings. Then the \textbf{product ring} $\Pi_iR_i(=R_1\times\cdots \times R_k)$ has a ring structure given by $$(r_1,\cdots,r_k)+_{\Pi_iR_i}(r_1^\prime,\cdots,r_k^\prime):=(r_1+r_1^\prime,\cdots,r_k+r_k^\prime)$$ $$(r_1,\cdots,r_k)\cdot_{\Pi_iR_i}(r_1^\prime,\cdots,r_k^\prime):=(r_1r_1^\prime,\cdots,r_kr_k^\prime)$$
+\end{definition}
+
+\begin{remark}
+If $R_1$, $R_2$ are ID, then $R_1\times R_2$ is \textbf{NOT} an ID: $$(r_1,0)\cdot(0,r_2)=(0,0)=0_{R_1\times R_2}$$
+\end{remark}
+
+\begin{definition}
+Let R be a commutative ring. We say $I_1,I_2\triangleleft R$ \textbf{coprime} if $I_1+I_2=R$.
+\end{definition}
+
+\begin{example}
+Let $R=\mathbb{Z}$ and $I_1=\langle m\rangle=m\mathbb{Z}$, $I_2=\langle n\rangle=n\mathbb{Z}$.\\
+Then $I_1+I_2:=\{mp+nq\mid p,q\in\mathbb{Z}\}=\langle gcd(m,n)\rangle$. (Exercise: prove the second equality.)\\
+$\therefore \; I_1 \; \& \; I_2$ are coprime $\Leftrightarrow$ $I_1+I_2=\mathbb{Z}$ $\Leftrightarrow$ $\langle gcd(m,n)\rangle=\mathbb{Z}$ $\Leftrightarrow$ $gcd(m,n)=1$ $\Leftrightarrow$ m,n coprime as integers.
+\end{example}
+
+The above example generalizes our understanding of "coprime" frome $\mathbb{Z}$ to any commutative ring R: 
+Two elements $r_1,r_2$ are coprime in R means $\langle r_1\rangle+\langle r_2\rangle=R$.
+
+\begin{theorem}
+Let R be commutative unital, and $I_1,\cdots ,I_k\triangleleft R,s.t.:I_i,I_j$ are pairwise coprime. Then we have a ring isomorphism $$\phi:R/I_1\cap\cdots\cap I_k\rightarrow R/I_1\times\cdots\times R/I_k \quad defined\; by \quad \phi(r+I_1\cap\cdots\cap I_k):=(r+I_1,\cdots,r+I_k).$$
+\end{theorem}
+
+\textbf{Proof:}
+Let $\Phi:R\rightarrow R/I_1\times\cdots\times R/I_k$ be a ring homomorphism with $\Phi(r):=(r+I_1,\cdots,r+I_k).$ By the first isomorphism theorem, we need to show:
+\begin{enumerate}
+    \item $ker\Phi=I_1\cap\cdots\cap I_k$ and 
+    \item $im\Phi=R/I_1\times\cdots\times R/I_k$
+\end{enumerate}
+\begin{enumerate}
+    \item $r\in ker\Phi\Leftrightarrow r+I_l=0+I_l \:\forall l\Leftrightarrow r-0\in I_l\: \forall l=1,\cdots,k\Leftrightarrow r\in I_1\cap\cdots\cap I_k$
+    \item Fix $j\in\{1,\cdots,k\}$. Since R is unital and $I_j$, $I_i$ coprime for all $i\neq j$, so we have $z_i\in I_j\quad w_i\in I_i$, s.t.: $$(*): z_i+w_i=1\;\; (1\in I_i+I_j=R)\;\forall i\neq j$$
+    Consider $1=(1-\Pi_{i\neq j}w_i)+(\Pi_{i\neq j}w_i)$. $$Set\;\;\;x_j:=1-\Pi_{i\neq j}w_i=1-\Pi_{i\neq j}(1-z_i)=sum\; of\; products\; of \;z_i's\;with\; no\; constants\in I_j$$ $$Set\;\;\;y_j:=\Pi_{i\neq j}w_i\in \bigcap_{i\neq j}I_i,\; since\; I_i\; ideals$$
+    $\therefore$ For each fixed j, we have $$(**):\;\;1=x_j(\in I_j)+y_j(\in \bigcap_{i\neq j}I_i)$$ We already to check $\Phi$ is surjective:\\
+    For each $(u_1+I_1,\cdots,u_k+I_k)\in R/I_1\times\cdots\times R/I_k$, we \textbf{CLAIM} that $\Phi(u_1y_1+\cdots+u_ky_k)=(u_1+I_1,\cdots,u_k+I_k)$:\\
+    \textbf{REASON}: $\Phi(u_1y_1+\cdots+u_ky_k)=(\cdots,u_1y_1+\cdots+u_ky_k+I_l,\cdots)=(u_1+I_1,\cdots,u_k+I_k)$, since $$(u_1y_1+\cdots+u_ly_l+\cdots+u_ky_k+I_l)=u_ly_l+I_l\overset{(**)}{=}u_l(1-x_l)+I_l=u_l-u_lx_l+I_l=u_l+I_l$$ \hfill $\square$
+\end{enumerate}
+
+\begin{corollary}
+Let $p_1,\cdots,p_n$ be distinct prime numbers. Then $$\mathbb{Z}/\langle p_1^{a_1}\cdots p_n^{a_n}\rangle\cong\mathbb{Z}/\langle p_1^{a_1}\rangle\times\cdots\times\mathbb{Z}/\langle p_n^{a_n}\rangle.$$
+\end{corollary}
+
+Therefore, for each $b_i\in \mathbb{Z}/\langle p_i^{a_i}\rangle\cong \mathbb{Z}_{p_i^{a_i}}$, there exists $x\in \mathbb{Z},s.t.:\Phi(x)=(b_1+\langle p_1^{a_1}\rangle,\cdots,b_n+\langle p_n^{a_n}\rangle)\quad x\equiv b_i \pmod{\mathbb{Z}_{p_i^{a_i}}}$ for all i.
+
+\section{Prime and Maximal Ideals}
+
+\noindent\textbf{Motivation:}
+Define "prime" in any commutative unital R.\\
+(Kummer, mid 1800's): Rather thaan studying $r\in R$, study ideals $I\triangleleft R$.\\
+\textbf{Basic case:} $R=\mathbb{Z}$\\
+All ideals $I\triangleleft\mathbb{Z}$ are of the form $I=\langle n \rangle$. So study $\langle n\rangle$ instead of n. \\
+e.g.: in $R=\mathbb{Z}$, $$(\langle p\rangle,\langle q\rangle \;coprime\;(as\; ideals))\Leftrightarrow(p,q\; are\; coprime\;(as\; integers))$$
+
+\begin{definition}
+Let R be a commutative, unital ring. We say a proper ($I\neq R$) ideal $I\triangleleft R$ is 
+\begin{enumerate}
+    \item \textbf{prime} if for all a,b $\in$ R such that ab $\in$ R, then we must have $a\in I\; or\; b\in R$;
+    \item \textbf{maximal} if for all ideals $J\triangleleft R$ s.t. $I\subset J\subset R$, then J=I or J=R.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item R=$\mathbb{Z}$. Let's check $$(p\in \mathbb{Z},\; prime)\Leftrightarrow(I=\langle p\rangle \; is\; a \; prime\; ideal)$$
+    \textbf{Proof:} Let $a,b\in \mathbb{Z}$ s.t. $$ab\in \langle p\rangle\Leftrightarrow ab=pk\; for \; some\; k\in \mathbb{Z}\Leftrightarrow p\mid ab\Leftrightarrow p\mid a\; or\; p\mid b\Leftrightarrow a\in \mathbb{Z}\; or\; b\in \mathbb{Z}$$
+    (\textbf{Exercise:} $\langle n\rangle$ is a maximal ideal $\Leftrightarrow$ n is prime $\Leftrightarrow$ $\langle n\rangle$ is prime)\\
+    (\textbf{Nonexample:} $\langle 6\rangle$ is \textbf{NOT} maximal since $\langle 6\rangle \subsetneq \langle 2\rangle\subsetneq \mathbb{Z}$)
+    \item R=$\mathbb{Z}_{12}$. All the ideals of R are:$$I_0=\{0\},\; I_1=\{0,2,4,6,8,10\}(maximal\; and\; prime),\; I_2=\{0,3,6,9\}(maximal\; and\; prime),$$$$I_3=\{0,4,8\}(\textbf{NOT\; }prime,\; since\; 2\cdot 2=4),\; I_4=\{0,6\}(\textbf{NOT\; }prime,\; since\; 2\cdot 3=6),\; I_5=R$$
+    \item $R=\mathbb{Z}[x].$ $I=\langle x\rangle$=polynomials with 0 constant term is a prime ideal:\\
+    Take $p(x)=a_0+a_1x+\cdots+a_mx^m$, $q(x)=b_0+b_1x+\cdots+b_nx^n$ $\in I$. Then $$pq\in I\Leftrightarrow a_0b_0=0 \Leftrightarrow a_0=0\; or \; b_0=0\Leftrightarrow p(x)\in I\;or\; q(x)\in I$$
+    But I is \textbf{NOT} maximal:$$I\subsetneq \langle 2,x\rangle\subsetneq R$$
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+Let R be commutative unital, and $I\triangleleft R$. Then
+\begin{enumerate}
+    \item I is prime $\Leftrightarrow$ R/I is ID
+    \item I is maximal $\Leftrightarrow$ R/I is a field
+\end{enumerate}
+\end{proposition}
+
+\textbf{Example 3.46.(3) revisited:} Consider $\langle x\rangle\subset \mathbb{Z}[x]$. Then$$R/I=\mathbb{Z}[x]/\langle x\rangle\cong\mathbb{Z}.$$
+$\mathbb{Z}$ is ID $\Leftrightarrow$ $\langle x\rangle$ is prime\\
+$\mathbb{Z}$ is \textbf{NOT} a field $\Leftrightarrow$ $\langle x \rangle$ is \textbf{NOT} maximal
+
+\textbf{Proof:}
+\begin{enumerate}
+    \item Let (a+I), (b+I) $\in R/I$. Then (*): $(a+I)\cdot(b+I)=0+I\Leftrightarrow ab\in I$.\\
+    If I is prime, then (*) says $$(a+I)(b+I)=0_{R/I}\Leftrightarrow ab\in I\Leftrightarrow a\in I\; or\; b\in I\Leftrightarrow a+I=0_{R/I}\; or\; b+I=0_{R/I}\Leftrightarrow R/I \; is \;ID$$
+    \item Suppose $I\subset J\subset R$ for some $J\triangleleft R$. Then $I/I\subset J/I\subset R/I$. (HW9: J/I $\triangleleft$ R/I)\\
+    Recall: $\mathbb{F}$ is a field $\Leftrightarrow$ the only ideals of $\mathbb{F}$ are {0} and $\mathbb{F}$\\
+    (\textbf{Proof} of "Recall": Let $I\triangleleft \mathbb{F}$ be nonzero. Take $0\neq a \in I$. Then $1=a\cdot a^{-1}\in I$ $\Rightarrow$ $\forall x \in \mathbb{F}$, $x=x\cdot1\in I$)\\
+    Therefore, $$\mathbb{F}=R/I\; is\; a\; field\Leftrightarrow J/I\triangleleft R/I \;must\; be\; \{0\}\;or\;R/I\Leftrightarrow J=\{0\}\;or\;J=R$$ \hfill$\square$
+\end{enumerate}
+
+\begin{corollary}
+Let $R$ be commutative unital. Then $I \triangleleft R$ is maximal $\Rightarrow I \triangleleft R$ is prime.
+\end{corollary}
+
+\begin{proof}
+All fields are IDs.
+\end{proof}
+
+\begin{definition}
+Let $R$ be commutative unital. We say $a \in R$ is \textbf{prime} if $\langle a \rangle$ is a prime ideal.\\
+(Generalization of ``prime number'' in $R = \mathbb{Z}$)
+\end{definition}
+
+\begin{definition}
+Let $a, b \in R$ (commutative unital). We say $a$ \textbf{divides} $b$ (or $a \mid b$ in short) if $\langle b \rangle \subseteq \langle a \rangle$. (or equivalently, $b \in \langle a \rangle$, or $\exists x \in R$, s.t.: $ax = b$.)
+\end{definition}
+
+\noindent We say $a$ and $b$ are \textbf{associates} ($a \sim b$) if ($a \mid b$ \& $b \mid a$), (or $\langle a \rangle = \langle b \rangle$).
+
+\begin{lemma}
+Suppose $R$ is an integral domain. Then $(a \sim b) \Leftrightarrow \exists \text{ unit } x \in U(R) \text{ s.t.: } a = xb$.
+\end{lemma}
+
+\noindent \textbf{Proof:} \\
+($\Leftarrow$): $a = xb \Rightarrow a \in \langle b \rangle \Rightarrow \langle a \rangle \subseteq \langle b \rangle$, \\
+AND $x^{-1}a = b \Rightarrow \langle b \rangle \subseteq \langle a \rangle$ Similarly. \\
+$\therefore \langle a \rangle = \langle b \rangle$
+
+\noindent ($\Rightarrow$): Suppose $a \sim b$, i.e.: $\langle a \rangle = \langle b \rangle$. Then we have $a \in \langle b \rangle$. \\
+$\Rightarrow a = p \cdot b$ for $p \in R$. Similarly, $b \in \langle a \rangle \Rightarrow b = q \cdot a$ ($q \in R$) \\
+$\Rightarrow a = p \cdot q \cdot a \xrightarrow{\text{cancellation property}} 1_R = p \cdot q \Rightarrow p, q \in U(R)$. \hfill $\square$
+
+\section{Principal Ideal Domain}
+
+\noindent Recall: $I$ maximal $\Rightarrow I$ prime for $R$ unital commutative. \\
+Converse NOT holds in general (e.g. $\mathbb{Z}[x] = R$). \\
+Goal: Study $R$ s.t.: ($I$ maximal) $\Leftrightarrow$ ($I$ prime).
+
+\begin{definition}[Principal Integral Domain]
+Let $R$ be ID. We call $R$ a \textbf{principal ideal domain (PID)} if all ideals $I \triangleleft R$ are principal, i.e.: all $I$ are of the form $I = \langle a \rangle$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Z}$ is PID. \\
+    \textbf{Proof:} Let $I$ be a nonzero ideal of $\mathbb{Z}$. (Otherwise $I = \{0\} = \langle 0 \rangle$) \\
+    Let $\mu > 0$ be the smallest positive integer in $I$. \\
+    \underline{Claim:} $I = \langle \mu \rangle$. \\
+    Suppose on contrary that $I \setminus \langle \mu \rangle$ is nonempty. Take $\lambda > 0$ be the smallest integer in $I \setminus \langle \mu \rangle$. By minimality of $\mu$, we have $\lambda > \mu$. Then $\lambda - \mu \in I$ and $\lambda - \mu \notin \langle \mu \rangle$, since otherwise $(\lambda - \mu) + \mu = \lambda \in \langle \mu \rangle$, contradicting the choice of $\lambda$. \\
+    Hence, $(\lambda - \mu)$ is an element in $I \setminus \langle \mu \rangle$, which is smaller than $\lambda$, contradicting the minimality of $\lambda$ in $I \setminus \langle \mu \rangle$. \\
+    $\therefore I = \langle \mu \rangle$ and hence $\mathbb{Z}$ is PID.
+    
+    \item $\mathbb{Z}[x]$ is \underline{NOT} PID, since $I = \langle 2, x \rangle \neq \langle p \rangle$ for any $p \in \mathbb{Z}[x]$ which could be proven in HW9.
+
+    \item For any field $\mathbb{F}$ (e.g. $\mathbb{F} = \mathbb{Q}, \mathbb{R}, \mathbb{C}$), $\mathbb{F}[x]$ is PID. \\
+    \textbf{Proof:} Let $I$ be an ideal of $\mathbb{F}$ which is nonzero. For any elements $p(x) \in I$, we can multiply unit $u \in \mathbb{F}$ st.: $u \cdot p(x) \in I$ is a \textbf{monic} polynomial (leading power coefficient is 1). Take a monic polynomial $p(x) \in I$ of smallest possible degree in $I$. \\
+    \textbf{Claim:} $I = \langle p(x) \rangle$. \\
+    \textbf{Proof of claim:} Suppose on contrary. Take monic $q(x) \in I \setminus \langle p(x) \rangle$ such that $q$ is of smallest positive degree in $I \setminus \langle p \rangle$. Then $\deg(p) \leq \deg(q)$ by the minimality of $\deg(p)$ in $I$. \\
+    Let $h(x) := q(x) - x^{\deg(q)-\deg(p)} \cdot p(x)$. Then:
+    \begin{itemize}
+        \item $h(x) \in I$
+        \item $h(x) \notin \langle p(x) \rangle$
+        \item $\deg(h) < \deg(q)$
+    \end{itemize}
+    Then $h \in I \setminus \langle p \rangle$ with $\text{degree} < \deg(q)$. Contradict! \hfill $\square$
+\end{itemize}
+\end{example}
+
+\noindent \textbf{Note:} We have division algorithm for $\mathbb{F}[x]$ just like the case of $\mathbb{Z}$: 
+\[p(x) = q(x)a(x) + r(x) \quad (\deg(r) < \deg(q))\] 
+and so we have Euclidean algorithm to find $\gcd(p(x), q(x))$ in $\mathbb{F}[x]$
+
+\section{Irreducible Elements and Unique Factorization Domain}
+
+\begin{definition}[Irreducibility]
+Let $R$ be unital commutative ring. An element $a \in R$ is \textbf{irreducible} if the followings hold: \\
+Whenever $\langle a \rangle \subseteq \langle b \rangle \subseteq R$ for some $b \in R$, we have $\langle a \rangle = \langle b \rangle$ or $\langle b \rangle = R$, i.e.: $\langle a \rangle$ is maximal among all principal ideals of $R$.
+\end{definition}
+
+\noindent To understand what it means for $a \in R$ irreducible:
+
+\begin{lemma}
+Let $R$ be ID. Then: \\
+($a \in R$ irreducible) $\Leftrightarrow$ (whenever $a = xy$, we have $a \sim x$ or $a \sim y$) \\
+(Recall $a \sim x \Leftrightarrow a = ux$ for unit $u$)
+\end{lemma}
+
+\noindent \textbf{Proof:} $\left( a \in R \text{ is irreducible } \Rightarrow (a = xy \Rightarrow a \sim x \text{ or } a \sim y) \right):$ \\
+Suppose $a = xy$. Then $a \in \langle x \rangle$ and $a \in \langle y \rangle$. $\Rightarrow \langle a \rangle \subseteq \langle x \rangle$ and $\langle a \rangle \subseteq \langle y \rangle$. By definition of ``a irreducible'', $\langle a \rangle = \langle x \rangle$ or $\langle x \rangle = R$.
+\begin{itemize}
+    \item $\langle a \rangle = \langle x \rangle \Leftrightarrow a \sim x$, then we're done
+    \item $\langle x \rangle = R \Rightarrow \exists x' \in R$, s.t.: $xx' = 1 \in \langle x \rangle = R \Rightarrow x$ is a unit $\Rightarrow a \sim y$.
+\end{itemize}
+
+\noindent $\left( (a = xy \Rightarrow a \sim x \text{ or } a \sim y) \Rightarrow (a \in R \text{ is irreducible}) \right):$ \\
+Suppose $\langle a \rangle \subseteq \langle b \rangle$ for some $b$. (WTS: $\langle b \rangle = \langle a \rangle$ or $\langle b \rangle = R$). \\
+$\Rightarrow a = b \cdot b'$ for some $b' \in R \Rightarrow a \sim b$ or $a \sim b'$. Then
+\begin{itemize}
+    \item $\langle a \rangle = \langle b \rangle$, then we're done
+    \item $a = u b'$ for some unit $u \Rightarrow u = b$ by cancellation $\Rightarrow \langle b \rangle = R$, then we're done. \hfill $\square$
+\end{itemize}
+
+\begin{remark}
+As a corollary of lemma, $a$ is irreducible $\Leftrightarrow \nexists b, c$ such that $a = bc$, and $b, c \notin U(R)$ (non-units). \\
+$\therefore$ we can ``factorize'' $a$ into ``smaller'' elements $b$ \& $c$. So we can factorize all $a \in R$ into product of irreducibles. \\
+$\therefore$ Irreducible elements are ``building blocks'' of $R$.
+\end{remark}
+
+\begin{proposition}
+Let $R$ be ID. If $0 \neq a \in R$ is prime, then $a$ is irreducible.
+\end{proposition}
+
+\noindent \textbf{Proof:} Suppose $a = xy$ (WTS: $a \sim x$ or $a \sim y$) \\
+Then $a \in \langle x \rangle$ and $a \in \langle y \rangle \Rightarrow \langle a \rangle \subseteq \langle x \rangle$ and $\langle a \rangle \subseteq \langle y \rangle$ \\
+On the other hand, we have $a \mid xy \xrightarrow{(a \text{ prime})} a \mid x$ or $a \mid y$ \\
+WLOG, assume $a \mid x$. Then $aa' = x \Rightarrow \langle x \rangle \subseteq \langle a \rangle \Rightarrow \langle a \rangle = \langle x \rangle$. \hfill $\square$
+
+\vspace{1em}
+\noindent \textbf{CONCLUSION: $R$ PID.} \\
+$\langle a \rangle$ maximal $\Leftrightarrow \langle a \rangle$ prime $\Leftrightarrow a$ is irreducible \\
+(e.g.: $\langle x \rangle$ in $\mathbb{Z}[x]$ is prime but \underline{NOT} maximal ; \\
+$3$ in $\mathbb{Z}[\sqrt{-5}]$ is irreducible but $\overset{\langle 3 \rangle}{\text{NOT}}$ prime )
+
+\vspace{1em}
+\noindent \textbf{WRAP-UP:}
+\begin{itemize}
+    \item All $a \in R$ can be factorized into irreducibles
+    \item Primes are irreducibles
+\end{itemize}
+\noindent If we want $a \in R$ to be factorized into primes, we need ``all irreducibles are primes'' instead.
+
+\begin{proposition}
+Let $R$ be PID. Then all irreducibles are primes.
+\end{proposition}
+
+\noindent \textbf{Proof:} Let $x \in R$ be irreducible. Then $\langle x \rangle$ is maximal among all ideals of the form $\langle b \rangle$. \\
+Since all ideals are of the form $\langle b \rangle$ in PID, then $\langle x \rangle$ is a maximal ideal. \\
+$\Leftrightarrow \langle x \rangle$ is prime ideal $\Rightarrow x$ is prime. \hfill $\square$
+
+\begin{definition}
+Let $R$ be ID. We say $R$ is a \textbf{factorization domain} if for all $0 \neq x \in R$, there exists irreducible elements $x_1, \dots, x_r$ such that $x \sim x_1 x_2 \dots x_r$ (or $x = u x_1 x_2 \dots x_r$ for some unit $u \in U(R)$), i.e.: one can factorize any $x$ into a \underline{finite} product of irreducibles.
+\end{definition}
+
+\begin{theorem}
+$R$ is PID $\Rightarrow R$ is factorization domain.
+\end{theorem}
+
+\begin{definition}
+Let $R$ be unital commutative. We say $R$ has the \textbf{ascending chain condition} on \textbf{principal ideals} (ACCP) if all $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots$ ($I_n \triangleleft R$ principal ideals), there exists $N$ such that $I_N = I_{N+1} = I_{N+2} = \dots$
+\end{definition}
+
+\begin{lemma}
+All PIDs satisfies (ACCP).
+\end{lemma}
+
+\noindent \textbf{Proof:} Suppose $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots$ principal ideals in $R$. Consider $I := \bigcup_{n=1}^{\infty} I_n$ (HW 10: $I \triangleleft R$). So $I = \langle r \rangle$ for some $r \in R$. \\
+Since $R$ is PID, then $r \in I_M$ for $M \in \mathbb{N} \Rightarrow r \in I_n \quad \forall n \geq M$. \\
+$\Rightarrow I = \langle r \rangle \subseteq I_n \quad \forall n \geq M$. \\
+Since $I_n \subseteq I$ by defn of $I$, then $I_n = I \quad \forall n \geq M$. \hfill $\square$
+
+\vspace{1em}
+\begin{lemma}
+If $R$ satisfies (ACCP), then $R$ is a factorization domain. \\
+(Consequently, all PIDs are factorization domains)
+\end{lemma}
+
+\noindent \textbf{Proof:} Let $F := \{ x \in R \mid x \sim x_1 \dots x_r, x_i \text{ irreducibles} \}$ (W.T.S.: $R = F$). \\
+Then: (a) $1 \in F$ (by convention); (b) all irreducibles $x \in R$ are in $F$ ($r=1$); (c) $F$ is closed under multiplication. \\
+Suppose on contrary, $\exists x_0 \in R \setminus F$. Then by (b), $x_0$ is reducible. \\
+Then $x_0 = y_0 z_0$ where $y_0, z_0$ are \underline{NOT} units. ($x_0 \nsim y_0$ \& $x_0 \nsim z_0$) \\
+$\Leftrightarrow \langle x_0 \rangle \neq \langle y_0 \rangle$ \\
+By (c), either $y_0 \in R \setminus F$ or $z_0 \in R \setminus F$ (or both). WLOG let $x_1 := y_0 \in R \setminus F$. Hence, $x_0 = x_1 z_0 \Rightarrow x_0 \in \langle x_1 \rangle \Rightarrow \langle x_0 \rangle \subsetneq \langle x_1 \rangle$ (and $\langle x_1 \rangle \neq R$, since $x_1$ is NOT unit). \\
+Continue same argument on $x_1$, we have $\langle x_0 \rangle \subsetneq \langle x_1 \rangle \subsetneq \langle x_2 \rangle \subsetneq \dots$ contradicting (ACCP) which says $\exists N$ s.t.: $\langle x_N \rangle = \langle x_{N+1} \rangle = \dots$ \\
+$\therefore$ There's no such $x_0 \in R \setminus F$ and hence $R = F$. \hfill $\square$
+
+\vspace{1em}
+\noindent \textbf{CONCLUSION:} In PID, one can factorize any $x \in R$ into finite product of irreducibles. \\
+\textbf{Q: Is the factorization unique?}
+
+\begin{proposition}
+Let $R$ be an ID. Then any factorizations of $x \in R$ into PRIME factors are unique (up to permutation and units), i.e.: if $x_1 \dots x_r \sim y_1 \dots y_s$ ($x_i, y_j$ nonunit PRIMES). Then: \\
+(1) $r = s$, and (2) $\exists \sigma \in S_r$ s.t.: $x_i \sim y_{\sigma(i)}$
+\end{proposition}
+
+\noindent (Consequently, if $R$ is PID, then we can factorize any $x \in R$ uniquely into (irreducibles $\Leftrightarrow$ primes).)
+
+\vspace{1em}
+\noindent \textbf{Proof: We'll prove the following stronger statement:} \\
+Let $x_1, \dots, x_r$ primes, $y_1, \dots, y_n$ irreducibles (e.g.: $y_j$ primes) s.t.: \\
+$(*): x_1 x_2 \dots x_r \sim y_1 y_2 \dots y_n$, then $r=n$ \& $\exists \sigma \in S_r$ s.t.: $x_i \sim y_{\sigma(i)}$
+
+\noindent \textit{Proof by induction on r.} \\
+\underline{Basic Case:} $r=0$, then the left-hand-side $= 1$. $\therefore y_1 y_2 \dots y_n \sim 1$ \\
+$\therefore y_j$ units $\forall j$. Since we assume $x_i, y_j$ nonunits, must have $n=0$.
+
+\noindent \underline{Inductive Step:} Suppose $(*)$ holds for $0 \leq r \leq s-1$. Consider $r=s$ and $u x_1 \dots x_{s-1} x_s = y_1 y_2 \dots y_n$ with $u$ unit. ($x_i$ primes, $y_j$ irreducible, nonunits) \\
+$\Rightarrow x_s \mid y_1 y_2 \dots y_n \Rightarrow x_s \mid y_j$ for some $j$. $\Rightarrow y_j = x_s \cdot a$ for some $a \in R$. \\
+$\Rightarrow y_j \sim x_s$ or $y_j \sim a \xleftrightarrow{y_j \text{ irreducible}} y_j \sim x_s \Rightarrow x_1 \dots x_{s-1} \sim y_1 \dots y_{j-1} y_{j+1} \dots y_n$ \\
+Then by inductive hypothesis, $s-1 = n-1$ and $\exists \sigma \in S_{s-1}$ s.t.: $x_i \sim y_{\sigma(i)} \forall i$ \\
+$\therefore$ Let $\sigma' \in S_s$ by $\sigma' := \begin{cases} \sigma(i), \text{if } i=1, \dots, s-1 \\ j, \text{if } i=s \end{cases}$ \\
+$\therefore x_1 \dots x_{s-1} x_s \sim y_1 \dots y_n$ implies $\exists \sigma' \in S_s$ s.t.: $x_i \sim y_{\sigma'(i)} \quad \forall i=1, \dots, s$. \hfill $\square$
+
+\vspace{1em}
+\begin{corollary}
+Let $R$ be PID. Then $\forall x \in R, x$ can be uniquely factorized into a finite product of irreducibles ($\Leftrightarrow$ primes). \\
+(This generalizes the fundamental thm of arithmetic from $R=\mathbb{Z}$ to any PID)
+\end{corollary}
+
+\begin{definition}(UFD)
+Let $R$ be ID. We say $R$ is a \textbf{\underline{unique factorization domain}} (UFD) if we have unique factorization into irreducible elements in $R$. \\
+(Of course: $R$ is PID $\Rightarrow R$ is UFD).
+\end{definition}
+
+\noindent \textbf{CONCLUSION:} \\
+ID $\supsetneq$ UFD $\supsetneq$ PID $\supsetneq$ ED (Euclidean domain) $\supsetneq$ Fields \\
+(eg.: $\mathbb{Z}[\sqrt{-5}]$ is an ID (HW9: $(2+\sqrt{-5})\cdot(2-\sqrt{-5}) = 3\cdot 3$ is a non-unique factorization into irreducibles) ; $\mathbb{Z}[x]$ is a \underline{UFD} (HW9: \underline{NOT} PID ; later: it's UFD (Gauss' Lemma)) ; $\mathbb{Q}[x]$ is an ED. )
+
+\vspace{1em}
+\noindent As in the case of PID, one has: \\
+\textbf{Proposition:} Let $R$ be UFD. Then $p$ is prime iff $p$ is irreducible. \\
+\textbf{Proof:} $p$ prime $\Rightarrow p$ irreducible $\forall$ ID. Now suppose $p$ is irreducible. Consider $p \mid ab$ i.e.: $pc = ab$ for some $c \in R$. Factorize $a = a_1 \dots a_x$ and $b = b_1 \dots b_y$ into irreducibles. Then UF implies that either $a_i$ or $b_j$ associates $p$. Thus $p \mid a$ or $p \mid b$. \hfill $\square$
+
+\vspace{1em}
+\begin{definition}(Euclidean Function)
+Let $R$ be ID. A \textbf{\underline{Euclidean function}} on $R$ is $N: R \setminus \{0\} \to \mathbb{N} \setminus \{0\}$ s.t.: $\forall a, b \in R$, either (i) $b \mid a$, or (ii) $\exists q \in R, r \in R \setminus \{0\}$, s.t.: $a = bq + r$ with $N(r) < N(b)$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $R = \mathbb{Z}$, $N(m) := |m|$. Then (ii) is simply the division algorithm for integers.
+    \item $R = \mathbb{F}[x]$, $N(p(x)) := \deg(p)$. Then (ii) is division algorithm for polynomials.
+\end{itemize}
+\end{example}
+
+\begin{definition}(Euclidean Domain)
+An ID $R$ is a \textbf{Euclidean Domain} if $R$ has (at least) one Euclidean function. \\
+So $\mathbb{Z}, \mathbb{F}[x]$ are EDs. \\
+If the Euclidean function (``norm function'') $N$ satisfies $N(ab) = N(a)N(b) \quad \forall a, b \in R$ we say $N$ is \textbf{multiplicative}. \\
+(eg.: $R = \mathbb{Z}, N(a) = |a|$ (multiplicative) ; $R = \mathbb{F}[x], N(p) = \deg(p)$ (\textbf{NOT} multiplicative) )
+\end{definition}
+
+\begin{proposition} $\mathbb{Z}[i]$ is a Euclidean domain with $N(a+bi) = a^2+b^2, \forall a, b \in \mathbb{Q}$. 
+($\mathbb{Z}[i] := \{a+bi \mid a, b \in \mathbb{Z}\}$ is called \textbf{Gaussian integers}) \\
+\textbf{Proof:} Let $\alpha, \beta \in \mathbb{Z}[i]$. Assume $\beta \neq 0$. Then consider $\alpha/\beta = c_1+c_2i, c_i \in \mathbb{Q}$. Let $n_1, n_2 \in \mathbb{Z}$ be the closest integers of $c_1, c_2 \in \mathbb{Q}$ (so that $|n_i - c_i| \leq \frac{1}{2}$), and let $q := n_1+n_2i$. Hence, $\alpha/\beta = q + ((c_1-n_1) + (c_2-n_2)i)$. \\
+$\Rightarrow \alpha = \beta q + ((c_1-n_1) + (c_2-n_2)i)\beta$. Then $N[((c_1-n_1) + (c_2-n_2)i)\beta] = N((c_1-n_1) + (c_2-n_2)i) \cdot N(\beta)$ \\
+$\leq [(\frac{1}{2})^2 + (\frac{1}{2})^2] N(\beta) = \frac{1}{2} N(\beta) < N(\beta)$. \hfill $\square$
+\end{proposition}
+
+
+\begin{theorem} If $R \in$ ED, then $R \in$ PID. 
+\end{theorem}
+\textbf{Therefore, $\mathbb{Z}[i]$ is PID.} \\
+\textbf{Q: What are the (primes $\Leftrightarrow$ irreducibles) in the Gaussian integer $\mathbb{Z}[i]$?} \\
+(eg. $5$ is prime in $\mathbb{Z}$, but $5 = (2+i)(2-i)$ not prime in $\mathbb{Z}[i]$ )
+
+\noindent \textbf{Simple Observations:}
+\begin{itemize}
+    \item If $n \in \mathbb{Z}$ is \textbf{NOT} prime in $\mathbb{Z}$, then $n$ is \underline{NOT} prime in $\mathbb{Z}[i]$.
+    \item $U(\mathbb{Z}[i]) = \{ \pm 1, \pm i \}$. Therefore, $\alpha \in U(\mathbb{Z}[i]) \Leftrightarrow N(\alpha) = 1$.
+    \item If $N(\beta) = p$ is prime in $\mathbb{Z}$, then $\beta$ is prime in $\mathbb{Z}[i]$. (e.g.: $\beta = 2+i$ is prime in $\mathbb{Z}[i]$, since $N(\beta) = 5$ in $\mathbb{Z}$) \\
+    $\Rightarrow p = N(\beta) = N(\gamma) N(\delta) \Rightarrow N(\gamma) = 1$ or $N(\delta) = 1$.
+    $\Rightarrow \gamma$ or $\delta$ is a unit in $\mathbb{Z}[i] \Rightarrow \beta \sim \gamma$ or $\beta \sim \delta$, i.e.: $\beta$ is irreducible $\Leftrightarrow$ prime.
+\end{itemize}
+
+\begin{lemma}
+Let $p$ be a prime integer. Then either (i) $p$ is a Gaussian prime in $\mathbb{Z}[i]$, or (ii) $p = (a+bi)(a-bi)$ for some $(a+bi), (a-bi)$ Gaussian primes.
+\end{lemma}
+
+\noindent \textbf{Proof:} Suppose $p$ is \textbf{NOT} a Gaussian prime. Then $p = \gamma \cdot \delta$ for nonunits $\gamma, \delta$. $\Rightarrow p^2 = N(p) = N(\gamma) N(\delta) \Rightarrow N(\gamma) = N(\delta) = p$ \\
+$\Rightarrow \gamma, \delta$ Gaussian primes. \\
+$p= (a+bi)(c+di) \Rightarrow \bar{p} = p = (a-bi)(c-di) \Rightarrow p = (a+bi)(a-bi)$. \hfill $\square$
+
+\vspace{1em}
+\noindent Now let's study Gaussian primes of the form $a+bi$ ($a, b \neq 0$).
+
+\begin{lemma}
+Let $a+bi \in \mathbb{Z}[i]$ with $a, b \neq 0$. Then ($a+bi$ is Gaussian prime) $\Leftrightarrow$ ($a^2+b^2 = p$, $p$ prime integer).
+\end{lemma}
+
+\noindent \textbf{Proof:} ($\Leftarrow$): is done in the simple observations. \\
+($\Rightarrow$): Suppose $a+bi$ Gaussian prime. Then $a-bi = \overline{a+bi}$ is also Gaussian prime. Consider $(a+bi)(a-bi) = p_1 \dots p_r$, $p_i$ prime in $\mathbb{Z}$, this is a factorization in $\mathbb{Z}[i]$. By $\mathbb{Z}[i]$ ED, $\mathbb{Z}[i]$ is PID $\Rightarrow$ UFD, $r \leq 2$. Suppose on contrary $r=2$. Then $(a+bi)(a-bi) = p_1 p_2$. \\
+By UFD again, $p_1, p_2$ must be (prime as irreducible) in $\mathbb{Z}[i]$. \\
+$\therefore$ By UFD again, $p_1 \sim (a \pm bi)$, $p_2 \sim (a \mp bi) \Rightarrow p_1 = u \cdot (a \pm bi)$ where $u \in U(\mathbb{Z}[i]) = \{ \pm 1, \pm i \}$, contradicting $a, b \neq 0$. \\
+$\therefore r=1 \Rightarrow (a+bi)(a-bi) = p_1 \Rightarrow a^2+b^2 = p_1$. \hfill $\square$
+
+\vspace{1em}
+\noindent \textbf{CONCLUSION:}
+\begin{enumerate}
+    \item[(i)] If $n \in \mathbb{Z}$ is \textbf{NOT} a prime number in $\mathbb{Z}$, then $n$ is \underline{NOT} Gaussian prime.
+    \item[(ii)] Prime $p \in \mathbb{Z}$ is either a Gaussian prime or $p = (a+bi)(a-bi)$, $a \pm bi$ Gaussian primes.
+    \item[(iii)] $a+bi \in \mathbb{Z}[i], a, b \neq 0$ is Gaussian prime $\Leftrightarrow a^2+b^2 = p$, $p \in \mathbb{Z}$ prime number.
+\end{enumerate}
+
+\begin{theorem}
+Let $p$ be a prime integer. Then $p$ is Gaussian prime $\Leftrightarrow p \equiv 3 \pmod 4$.
+\end{theorem}
+
+\noindent \textbf{Proof:} ($\Leftarrow$) contrapositive. If $p$ is \underline{NOT} Gaussian prime. Then (ii) says $p = (a+bi)(a-bi) = a^2+b^2 \equiv 0 \pmod 4$ or $1 \pmod 4$ or $2 \pmod 4$. \\
+$\Rightarrow p \not\equiv 3 \pmod 4$. \\
+($\Rightarrow$) Contrapositive. Suppose $p \equiv 1 \pmod 4$. Then by [Lagrange's Lemma], $p \mid m^2+1$ for some integer $m$. $\Rightarrow p \mid (m+i)(m-i)$. But $p \nmid m+i$, otherwise we have $p \cdot \gamma = m+i$ for $\gamma \in \mathbb{Z}[i] \Rightarrow \gamma = \frac{m}{p} + \frac{1}{p}i \notin \mathbb{Z}[i]$. Similarly $p \nmid m-i$. \\
+$\therefore p$ is \textbf{NOT} a prime in $\mathbb{Z}[i]$. \hfill $\square$
+
+\begin{corollary}
+The Gaussian primes in $\mathbb{Z}[i]$ must be of the form \\
+(i) $p \in \mathbb{Z}$ , $p \equiv 3 \pmod 4$ \quad or \quad (ii) $a+bi \in \mathbb{Z}[i]$ , $a, b \neq 0$ , $a^2+b^2=p$ \\
+(or $p \in \mathbb{Z}$ , $p \equiv 3 \pmod 4$) \\
+(This is classification of all primes in $\mathbb{Z}[i]$. )
+\end{corollary}
+
+\begin{corollary} (Fermat's Theorem of 2 squares). \\
+If $p = 4n+1$ is a prime , then $\exists$ $a,b \in \mathbb{Z}$ s.t.: $p=a^2+b^2$ \\
+(e.g.: $5 = 1^2+2^2$ , $13 = 2^2+3^2$ , $17 = 1^2+4^2$ , $1013 = ?^2+?^2$)
+\end{corollary}
+
+\noindent \textbf{Proof:} By above, $p$ is \textbf{NOT} a Gaussian prime, so $p=(a+bi)(a-bi)$ by (ii). $\therefore p=a^2+b^2$. \hfill $\square$
+
+\vspace{1em}
+\noindent \textbf{One other application:} (HW 10) \\
+The integer solutions $(x, y, z)$ of the equation $x^2+y^2=z^2$ are all of the form $x=(m^2-n^2)k$ , $y=(2mn)k$ , $z=(m^2+n^2)k$ for integers $m, n, k$.
+
+\vspace{1em}
+\begin{theorem}
+If $R$ is ED , then $R$ is PID .
+\end{theorem}
+
+\noindent \textbf{Proof:} Let $N$ be the ``norm function'' of $R$ . For any $I \triangleleft R$ , take any $a \in I \setminus \{0\}$ such that $N(a) > 0$ is minimal among all $r \in R$ . Now for any $i \in R$ , one has $a|i$ or $i=aq+r$ with $N(r) < N(a)$ . But $r=i-aq \in I$ with smaller norm than $a$. Contradict. \\
+$\therefore a|i \Rightarrow i=aq \in \langle a \rangle$ \quad Hence , $I = \langle a \rangle$. \hfill $\square$
+
+\section{Polynomial}
+
+In this section, we'll study ring of polynomials $R[x]$.
+A main reason why it is important is the following:
+
+\begin{theorem}
+Let $\mathbb{F}$ be a field. Suppose $f(x) \in \mathbb{F}[x]$ is irreducible, then $\mathbb{F}[x] / \langle f(x) \rangle$ is a field.
+\end{theorem}
+
+\noindent \textbf{Proof:} Since $\mathbb{F}[x]$ is ED, then PID. $I = \langle f(x) \rangle$ is prime, since $f(x)$ is irreducible $\Leftrightarrow$ prime. Therefore, $I = \langle f(x) \rangle$ is a maximal ideal, and the result follows from Section on max/prime ideals.
+
+\noindent As a consequence, one has an injective homomorphism of fields $\phi: \mathbb{F} \rightarrow \mathbb{F}[x] / \langle f(x) \rangle =: \mathbb{K}$ with $\phi(a) := a + \langle f(x) \rangle$, i.e.: we can "extend" $\mathbb{F}$ to a large field.
+
+\begin{quote}
+    \textbf{Galois theory}: Understand roots of (irreducible) polynomials $f(x) \in \mathbb{F}[x]$ \\
+    As before, we write $\overline{x} := x + \langle f(x) \rangle \in \mathbb{K}$. \\
+    Then in $\mathbb{K}$, $f(\overline{x}) = f(x) + \langle f(x) \rangle = 0_{\mathbb{K}}$. \\
+    So $\overline{x}$ is a root of $f(x)$ in $\mathbb{K}$!
+\end{quote}
+
+\noindent Now we know the importance of studying when a polynomial is irreducible. In this section, we'll offer ways to check whether $p \in \mathbb{Q}[x]$ (or $\mathbb{Z}[x]$) is irreducible.
+
+\noindent Although $\mathbb{Z}$ is \textbf{NOT} a field, it is useful in understanding whether $p(x) \in \mathbb{Q}[x]$ with $\mathbb{Z}$-coefficients in irreducible or not.
+
+\begin{lemma}
+Let $\phi : R \to S$ be unital ring homomorphism (e.g.: $\mathbb{Z} \hookrightarrow \mathbb{Q}$, $\mathbb{Z} \twoheadrightarrow \mathbb{Z}_p$). Then $\tilde{\phi} : R[x] \to S[x]$ with $\tilde{\phi}(a_0 + a_1x + \dots + a_n x^n) := \phi(a_0) + \phi(a_1)x + \dots + \phi(a_n)x^n$ is a unital ring homomorphism.
+\end{lemma}
+
+\begin{theorem}(Reduction Test)
+Let $f \in \mathbb{Z}[x]$ monic, $p$ prime such that $\tilde{\phi}(f) \in \mathbb{Z}_p[x]$ is irreducible. Then $f$ is irreducible.
+\end{theorem}
+
+\noindent \textbf{Proof:} Let $f = gh$ (WTS: $g$ or $h \in \mathbb{Z}[x]$ are constant) \\
+$\Rightarrow \tilde{f} = \tilde{g} \tilde{h}$ in $\mathbb{Z}_p[x]$ \\
+Since $f$ is monic, $g$ and $h$ are monic (up to units $\pm 1$) and hence $\tilde{f}, \tilde{g}, \tilde{h}$ monic with $\deg(\tilde{g}) = \deg(g)$, $\deg(\tilde{h}) = \deg(h)$. \\
+But since $\tilde{f}$ is irreducible, then $\deg(\tilde{g})$ or $\deg(\tilde{h}) = 0$. \\
+$\Rightarrow \deg(g)$ or $\deg(h) = 0$. \hfill $\square$
+
+\vspace{1em}
+\begin{example} $f(x) = x^3 + 3x + 7 \xlongrightarrow{p=2} \tilde{f} = \tilde{\phi}(f) = x^3 + x + 1$ \\
+$\tilde{f}$ cannot be factorized into $\tilde{g} \cdot \tilde{h}$, since if so either $\deg(\tilde{g})$ or $\deg(\tilde{h}) = 1$, i.e.: $\tilde{g}$ or $\tilde{h} = x$ or $x+1$. \\
+By factor theorem, this implies $\tilde{f}(0)$ or $\tilde{f}(1) = 0$ in $\mathbb{Z}_2$.
+\end{example}
+
+\begin{theorem}(Eisenstein's criterion)
+Suppose $f(x) = a_n x^n + \dots + a_1 x + a_0 \in \mathbb{Z}[x]$ is such that $\gcd(a_n, \dots, a_1) = 1$ ($f$ is primitive) and $p$ prime number such that: \\
+(1) $p \mid a_i \quad \forall 0 \le i < n$ ; (2) $p \nmid a_n$ ; (3) $p^2 \nmid a_0$. \\
+Then $f(x)$ is irreducible in $\mathbb{Z}[x]$.
+\end{theorem}
+
+(e.g.: $f(x) = x^4 + 4x + 6$ \quad ($p=2$) \quad is irreducible )
+
+\noindent \textbf{Proof:} Use $\sim : \mathbb{Z}[x] \to \mathbb{Z}_p[x]$ . Then consider $f = gh \in \mathbb{Z}[x]$ \\
+(WTS: $g$ or $h$ is constant) .
+
+\noindent $\tilde{f} = [a_n]x^n \in \mathbb{Z}_p[x]$ by (1) where $[a_n] \neq [0]$ in $\mathbb{Z}_p$ by (2) \\
+$\Rightarrow \tilde{g} \cdot \tilde{h} = \tilde{f} \sim x^n$ . Then $\tilde{g} \sim x^i$ ; $\tilde{h} \sim x^{n-i}$ \quad ($0 \le i \le n$) \\
+Suppose $i \neq 0, n$ . Then $\tilde{g} \sim x^i \Rightarrow$ constant term of $g$ is a multiple of $p$ . Similarly , $\tilde{h} \sim x^{n-i} \Rightarrow$ constant term of $h$ is also multiple of $p$ . \\
+$\Rightarrow$ constant term of $f=gh$ is a multiple of $p^2$ , which contradict (3) of Eisenstein's criterion .
+
+\noindent $\therefore \tilde{g}$ or $\tilde{h}$ is a constant function in $\mathbb{Z}_p[x]$ \quad —— (*)
+
+\noindent Now: \\
+$\bullet \quad \deg(g) + \deg(h) = \deg(f) = \deg(\tilde{f}) = \deg(\tilde{g}) + \deg(\tilde{h})$ . \\
+$\bullet \quad \deg(\tilde{g}) \le \deg(g)$ ; $\deg(\tilde{h}) \le \deg(h)$
+
+\noindent $\therefore \deg(\tilde{g}) = \deg(g)$ ; $\deg(\tilde{h}) = \deg(h)$
+
+\noindent $\therefore \deg(g)$ or $\deg(h) = 0$ by (*) , so either $g$ or $h$ is constant polynomial. \hfill $\square$
+
+\vspace{1em}
+\begin{example} $g(x) = x^4 + 1$ . Consider $f(x) = g(x+1) = (x+1)^4 + 1 = x^4 + 4x^3 + 6x^2 + 4x + 1 + 1 = x^4 + 4x^3 + 6x^2 + 4x + 2$ . Since $2 \mid 4, 6, 4, 2$ and $2^2 \nmid 2$ , then $f(x)$ (and $g(x)$) is irreducible.
+\end{example}
+
+\vspace{1em}
+\noindent \textbf{Q: How about irreducibility in $\mathbb{Q}[x]$?}
+
+\begin{theorem}(Gauss' Lemma)
+A nonconstant polynomial $f \in \mathbb{Z}[x]$ is irreducible $\Leftrightarrow f \in \mathbb{Q}[x]$ is irreducible and $f$ is primitive.
+\end{theorem}
+
+\noindent \textbf{Proof:} $(\Leftarrow)$ Suppose $f \in \mathbb{Z}[x]$ and $f = g \cdot h$, $g, h \in \mathbb{Z}[x]$. \\
+(WTS: $g$ or $h$ is a unit in $\mathbb{Z}[x]$) \\
+By hypothesis, $f$ is irreducible in $\mathbb{Q}[x]$ and $g, h \in \mathbb{Z}[x] \subseteq \mathbb{Q}[x]$, therefore, $\deg(g) = 0$ or $\deg(h) = 0$. \\
+$\Rightarrow g$ or $h$ must be a constant integer. \\
+By hypothesis again, since $f$ is primitive, this constant integer can only be $1$ or $-1$. $\Rightarrow g$ or $h$ is a unit in $\mathbb{Z}[x]$.
+
+\noindent $(\Rightarrow)$ If $f$ is irreducible in $\mathbb{Z}[x]$, then obviously $f$ is primitive. Otherwise $f = a_n x^n + \dots + a_0$ and $2 \le d = \gcd(a_n, \dots, a_0)$, then $f = d \cdot [\frac{a_n}{d} x^n + \dots + \frac{a_0}{d}]$ where $d$ and $[\frac{a_n}{d} x^n + \dots + \frac{a_0}{d}]$ are both NOT units in $\mathbb{Z}[x]$ contradicting $f$ irreducible in $\mathbb{Z}[x]$. \\
+To see why $f$ is irreducible in $\mathbb{Q}[x]$, suppose $f = g \cdot h$, $g, h \in \mathbb{Q}[x]$. \\
+(WTS: $g, h$ are units in $\mathbb{Q}[x]$, i.e.: $g, h \in \mathbb{Q} \setminus \{0\}$) \\
+Let $\lambda, \mu \in \mathbb{N}$ be the smallest positive integers such that $\lambda \cdot g$ and $\mu \cdot h \in \mathbb{Z}[x]$. Let $g' = \lambda \cdot g$, $h' = \mu \cdot h \in \mathbb{Z}[x]$. \\
+\noindent \underline{Claim:} $\lambda = 1$: Suppose on contrary, $\exists p \mid \lambda$. Then "$p \mid \lambda f$" (which means the coefficients of $\lambda f \in \mathbb{Z}[x]$ are multiples of $p$). \\
+$\Rightarrow p \mid (\lambda \alpha^{-1} g) \cdot (\alpha h) \Rightarrow$ "$p \mid g' h'$" in $\mathbb{Z}[x]$ \\
+Therefore, $\tilde{g}' \cdot \tilde{h}' \equiv 0$ in $\mathbb{Z}_p[x] \Rightarrow \tilde{g}' \equiv 0$ or $\tilde{h}' \equiv 0$ in $\mathbb{Z}_p[x]$ \\
+$\Rightarrow$ "$p \mid g'$" --- (*) or "$p \mid h'$" --- (**) in $\mathbb{Z}[x]$ \\
+In (*), "$p \mid g'$" $\Leftrightarrow$ "$p \mid \lambda \alpha^{-1} g$" $\Rightarrow (\frac{\lambda}{p}) \alpha^{-1} g$, $\alpha h \in \mathbb{Z}[x]$, contradicting the minimality of $\lambda$. \\
+In (**), "$p \mid \alpha h$" $\Rightarrow (\frac{\lambda}{p})(\frac{\alpha}{p})^{-1} g = \lambda \alpha^{-1} g \in \mathbb{Z}[x]$ and $(\frac{\alpha}{p}) h \in \mathbb{Z}[x]$, contradicting the minimality of $\lambda$. \\
+$\therefore p \nmid \lambda$ for any prime number, and $\lambda = 1$. \\
+Therefore, we have $\alpha \in \mathbb{Q} \setminus \{0\}$ s.t.: $f = gh$ in $\mathbb{Q}[x]$ and $f = (\alpha^{-1} g)(\alpha h)$ in $\mathbb{Z}[x]$, since we have $f$ irreducible in $\mathbb{Z}[x]$ by hypothesis, $\alpha^{-1} g$ or $\alpha h$ is a unit in $\mathbb{Z}[x] \Rightarrow \alpha^{-1} g = \pm 1$ or $\alpha h = \pm 1$. \\
+$\Rightarrow g = \alpha'$ where $\alpha' \in \mathbb{Q} \setminus \{0\}$ or $h = \alpha''$ where $\alpha'' \in \mathbb{Q} \setminus \{0\}$. \hfill $\square$
+
+\vspace{1em}
+\begin{theorem}
+$\mathbb{Z}[x]$ is a UFD (but not PID by HW).
+\end{theorem}
+
+Proof: Let $f \in \mathbb{Z}[x]$ be primitive.\\
+Claim: $f$ can be factorized into $f = g_1 \dots g_n$, $g_i \in \mathbb{Z}[x]$ primitive
+irreducible. To see why, use induction on $\deg(f)$.
+True for $\deg(f) = 0$ or $1$. So assume claim holds for $\deg(f) < k$
+Then for $f$ with $\deg(f) = k$ and primitive:\\
+$\bullet$ $f$ is irreducible ; $\bullet$ $f = h_1 h_2$, $h_1, h_2 \in \mathbb{Z}[x]$ NOT units.\\
+If $\deg(h_1)$ or $\deg(h_2) = 0$, then $h_1$ or $h_2$ equal to constant $\neq \pm 1$
+contradicting $f$ is primitive. Hence, $\deg(h_1) \& \deg(h_2) > 0$ by
+induction.
+To see why $\mathbb{Z}[x]$ is UFD, note that we can factorize any primitive
+$f \in \mathbb{Z}[x]$ into irreducibles (primitive). \\
+To see the
+factorization is unique, suppose $f = g_1 \dots g_n = h_1 \dots h_m$, $g_i, h_j \in \mathbb{Z}[x]$
+primitive irreducible. Then since $\mathbb{Z}[x] \subseteq (\mathbb{Q}[x] \text{ UFD})$ and by
+Gauss' Lemma $g_i, h_j \in \mathbb{Q}[x]$ irreducible by unique factorization
+of $\mathbb{Q}[x]$, we have $n = m$, and $\exists \sigma \in S_n$, s.t.: $g_i \sim h_{\sigma(i)}$ (in $\mathbb{Q}[x]$)
+$\Rightarrow g_i = h_{\sigma(i)} \cdot u$ where $u \in (\text{unit in } \mathbb{Q}[x])$
+Since $g_i, h_{\sigma(i)}$ primitive, $u \in \{\pm 1\} \Rightarrow g_i \sim h_{\sigma(i)}$ in $\mathbb{Z}[x]$. \hfill $\square$
+
+\vspace{1em}
+\noindent \textbf{Remark (more generally):} \\
+If $R$ is a UFD, then $R[x]$ is UFD. To prove it, use Field of Fractions (HW ?) $F = \text{Frac}(R)$ and the fact that $F[x]$ is a PID ($\Rightarrow$ UFD).

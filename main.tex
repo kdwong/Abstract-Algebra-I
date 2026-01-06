@@ -1,0 +1,109 @@
+\documentclass[11pt,openany]{book}
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{animate}
+
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, mathtools, bm}
+
+% Layout and spacing
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{setspace} 
+\onehalfspacing
+
+% Theorem environments with cleveref/aliascnt support
+\usepackage{aliascnt}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\providecommand*{\lemmaautorefname}{Lemma}
+
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\providecommand*{\propositionautorefname}{Proposition}
+
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\providecommand*{\corollaryautorefname}{Corollary}
+
+% Exercises: separate counter (per chapter)
+\newtheorem{exercise}{Exercise}[chapter]
+\providecommand*{\exerciseautorefname}{Exercise}
+
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\providecommand*{\definitionautorefname}{Definition}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\providecommand*{\exampleautorefname}{Example}
+
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\providecommand*{\remarkautorefname}{Remark}
+
+\theoremstyle{question}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+\providecommand*{\remarkautorefname}{Question}
+
+
+% Enumeration
+\usepackage{enumitem}
+\setlist{topsep=4pt,itemsep=2pt,parsep=2pt}
+
+% Graphics and diagrams
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{tikz-cd}
+
+% Header and footer
+\setlength{\headheight}{14pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+\raggedbottom
+
+% Colors and hyperlinks
+\usepackage{xcolor}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  citecolor=darkblue,
+  urlcolor=darkblue,
+  pdfborder={0 0 0}
+}
+
+% Title
+\title{MAT 3004 - Abstract Algebra I}
+\author{Daniel Wong}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+\input{weeks/wk0}
+\input{weeks/wk1}
+\input{weeks/wk2}
+\input{weeks/wk9}
+\end{document}

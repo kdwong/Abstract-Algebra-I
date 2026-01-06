@@ -1,0 +1,365 @@
+\chapter{Preliminaries}
+In this Chapter, we will recall some knowledge which will be assumed throughout the course.
+
+\section{Divisibility of Integers}
+We begin our studies on the integers $\mathbb{Z}$. We say a nonzero integer \(t \in \mathbb{Z}\) {\bf divides} (or {\bf is a factor of}) an integer \(s \in \mathbb{Z}\) if there exists \(u \in \mathbb{Z}\) such that \(s = {tu}\). In this case, we write 
+\[t \mid  s\] 
+If not, write \(t \nmid  s\). A prime $p \in\mathbb{Z}$ is a positive integer greater than $1$ whose only positive divisors are $1$ and $p$. 
+
+\begin{theorem}[Division Algorithm]
+Let \(a, b\in \mathbb{Z}\) with \(b > 0\). Then there exists unique integers \(q\) and \(r\) with the property that \(a = {bq} + r\), where \(0 \leq  r < b\).
+\end{theorem}
+
+\begin{proof} We begin with the existence portion of the theorem. Consider the set 
+\[S = \{ a - {bk} \mid  k \in \mathbb{Z},\ a - {bk} \geq  0\}.\] 
+Then \(S\) is obviously nonempty, since for \(a \geq 0\) then \(a = a - b \cdot  0 \in  S\), while for \(a < 0\), one has \(a - b\left( {2a}\right)  = a\left( {1 - {2b}}\right)  \in  S\). By the well-ordering property of $\mathbb{Z}_{\geq 0}$, there must be a minimal element $r \in S$.
+
+If \(r = 0 \in  S\), then \(b\mid a\), and we may take \(q = a/b\) and \(r = 0\). Otherwise, \(r = a - {bq} > 0\) and one has \(a = {bq} + r\), and it remains prove that \(r < b\): Suppose on contrary that \(r \geq  b\). Then 
+\[a - b\left( {q + 1}\right)  = a - {bq} - b = r - b \geq  0\]
+so that \(a - b\left( {q + 1}\right) < a - bq = r\) is in  \(S\), contradicting the minimality of \(r\).
+
+The proof of uniqueness of $q$ and $r$ is left as an exercise.
+\end{proof}
+
+
+
+\begin{definition}
+The {\bf greatest common divisor (gcd)} of two nonzero integers \(a\) and \(b\) is the largest of all common divisors of \(a\) and \(b\). We denote this integer by \(\gcd \left( {a,b}\right)\). 
+
+If \(\gcd \left( {a,b}\right)  = 1\), we say \(a\) and \(b\) are {\bf relatively prime}.
+\end{definition}
+
+\begin{remark} 
+One can also define the gcd of $a_1, a_2, \dots, a_k$ as the largest of common divisors of all $a_i$'s. Then one has
+$$\gcd(a_1, \dots, a_k) = \gcd(\gcd(a_1, a_2), a_3, \dots, a_k) = \gcd(\gcd(\gcd(a_1, a_2), a_3), \dots, a_k).$$
+Similarly, if $\gcd(a_1, \dots, a_k) = 1$, we say $a_1, \dots, a_k$ are \textbf{relatively prime}.
+Note that $a_1, \dots, a_k$ are relatively prime does not necessarily mean $\gcd(a_i, a_j) = 1$ for any $i \neq j$. For instance,
+$$\gcd(6,10,15) = 1$$
+but $\gcd(6,10)=2$, $\gcd(6,15)=3$, $\gcd(10,15)=5$.
+\end{remark}
+
+
+\section{Euclidean algorithm and Bézout's Theorem}
+To find the greatest common divisor of two integers, one can apply Euclidean algorithm:  
+
+\begin{example}
+To find $\gcd({\color{blue} 374},221)$, one can keep dividing the larger integer by the smaller integer:
+\[
+\begin{aligned}
+{\color{blue} 374} &= 1 \cdot {\color{purple} 221} + {\color{green} 153} \quad \\
+{\color{purple} 221} &= 1 \cdot {\color{green} 153} + {\color{yellow} 68} \quad\\
+{\color{green} 153} &= 2 \cdot {\color{yellow} 68} + {\color{red}17} \quad \\
+{\color{yellow} 68} &= 4 \cdot  {\color{red} 17} + 0
+\end{aligned}
+\]
+when the remainder is zero, the last remainder to it (colored in {\color{red} red}) is the greatest common divisor. Therefore,
+\[
+\gcd({\color{blue} 374}, {\color{purple} 221}) = 17
+\]
+\end{example}
+
+\begin{theorem}  [Bézout's Theorem] \label{thm:bezout}
+Suppose $\gcd(p,q) = m$. Then there exists integers $a, b \in \mathbb{Z}$ such that
+\[
+m = a \cdot p + b \cdot q \quad \text{for some integers } a,b
+\]
+\end{theorem}
+
+\begin{example}
+By Bezout's Theorem, there exists $a, b$ integers such that
+$$374a + 221b= 17$$
+To find these integers, one do backward induction from the bottom equality to the top: 
+
+From the bottom equality:
+\[
+17 = 153 - 2 \cdot 68 
+\]
+Substitute the second equality ($68 = 221 - 1 \cdot 153$) to the above equation:
+\[
+17 = 153 - 2(221 - 1 \cdot 153) = 3 \cdot 153 - 2 \cdot 221
+\]
+Now substitute the first equality ($153 = 374 - 1 \cdot 221$) to the above equation:
+\begin{align*}
+17 &= 3(374 - 221) - 2 \cdot 221 \\
+ &= 3 \cdot 374 - 3 \cdot 221 - 2 \cdot 221 \\
+17 &= 3 \cdot 374 - 5 \cdot 221
+\end{align*}
+Thus:
+\[
+a = 3, \quad b = -5
+\]
+\end{example}
+
+In the special case of when \(a\) and \(b\) are relatively prime, there exist integers \(s\) and \(t\) such that 
+\[as + bt = 1.\]
+This plays an important role in algebra. More generally, for $a_1, \dots, a_k \in \mathbb{Z}$, one has
+$$a_1s_1+\dots +a_ks_k = \gcd(a_1,\dots,a_k)$$
+for some integers $s_1, \dots, s_k$. This can be checked by using the fact that $\gcd(a_1,a_2,a_3\dots, a_k) = \gcd(\cdots \gcd(\gcd(a_1,a_2),a_3),\dots,a_k)$ and apply the above algorithms repeatedly.
+
+\bigskip
+
+Finally, we state a standard yet important theorem for natural numbers, and is slightly extended to all integers:
+\begin{theorem}[Fundamental Theorem of Airthmetic]
+Every nonzero integer $n \in \mathbb{Z}$ can be factorized into a product of primes up to $\pm 1$, i.e. \(n = {p}_{1}{p}_{2}\cdots {p}_{r}\) if $n > 0$ or \(n = -{p}_{1}{p}_{2}\cdots {p}_{r}\) if $n < 0$. Moreover,this product is unique up to $\pm 1$ and the ordering of factors. That is, if 
+\[n = {p}_{1}{p}_{2}\cdots {p}_{r} = {q}_{1}{q}_{2}\cdots {q}_{s},\] 
+where the $p$’s and $q$’s are primes, then \(r = s\) and, after renumbering the \(q\)’s, we have \({p}_{i} = \pm {q}_{i}\) for all $i$.
+\end{theorem}
+
+
+\section{Modular Arithmetic \texorpdfstring{$\mathbb{Z}_n$}{Zn}}
+Sometimes, we would like to study integers that has a certain `cycle'. For instance, days in a week has a cycle of $7$, months in a year has a cycle of $12$, hours in a day has a cycle of $24$ and so on. We define the {\it congruence numbers}:
+\[
+\mathbb{Z}_n := \{ 0 \ (\text{mod } n),\ 1 \ (\text{mod } n),\ \dots, (n-1) \ (\text{mod } n) \}
+= \{ [0]_n, [1]_n, \dots, [n-1]_n\}\]
+For example, when $n=7$, it corresponds to days in a week, and when $n=12$ it corresponds to months in a year.
+
+The addition and multiplication rule in $\mathbb{Z}_n$ is given by:
+\begin{align*}
+[a] + [b] &= [\text{remainder of } a+b \text{ in } n]
+\\
+[a] \cdot [b] &= [\text{remainder of } ab \text{ in } n]
+\end{align*}
+(we may sometimes omit the subscript $[\ ]_{n}$ if it is clear from the context). For instance, when $n = 7$:
+\[
+[4]_{7} \cdot [5]_{7} = [4\cdot 5]_{7} = [20]_{7} = [6]_{7}
+\]
+There are many applications on modular arithmetic - for instance, RSA cryptography, fast Fourier transform, etc. It can also be used to verify the validity of statements about divisibility regarding all positive integers by checking only finitely many cases.
+
+\begin{example}  
+To see
+\[[{{n}^{3} + {\left( n + 1\right) }^{3} + {\left( n + 2\right) }^{3}}]_9 \equiv [0]_9\]
+for all integers \(n \in \mathbb{Z}\), one only needs to check this holds for \(n = 0\), \(1,\ldots, 8\).
+\end{example}
+
+\section{Equivalence Relations}
+One has encountered the notion of `equivalence' in different contexts within or outside of mathematics. This allows us to relate different objects that are not necessarily identical to each other. 
+
+For instance, one studies `similar triangles' in middle school mathematics, where two non-identical triangles $\Delta_1 \sim \Delta_2$ are similar if one can resize one triangle to get another. Another example is the congruence numbers we studied in the previous relation, where $1 \neq 8 \neq 15 \neq 22 \neq 29$ but $[1] = [8] = [15] = [22] = [29]$ in $\mathbb{Z}_7$.
+
+Here is a precise definition of what it means for two elements to be equivalent:
+
+\begin{definition}[Equivalence Relation]
+
+An equivalence relation on a set \(S\) is a subset \(R \subseteq S \times S\) such that:
+\begin{itemize}
+    \item [1.] \(\left( {a,a}\right)  \in  R\) for all \(a \in  S\) (reflexivity).
+
+    \item[2.] \(\left( {a,b}\right)  \in  R\) implies \(\left( {b,a}\right)  \in  R\;\) (symmetry).
+
+    \item[3.] \(\left( {a,b}\right)  \in  R\) and \(\left( {b,c}\right)  \in  R\) imply \(\left( {a,c}\right)  \in  R\;\) (transitivity).
+\end{itemize}
+We will write \({a \sim b}\) instead of \(\left( {a,b}\right)  \in  R\). 
+
+If \(\sim\) is an equivalence relation on a set \(S\) and \(a \in  S\), then the {\bf equivalence class
+containing/with representative} $a$ is the subset:
+\[\left\lbrack  a\right\rbrack   = \{ x \in  S \mid  x \sim  a\}.\] 
+
+The collection of equivalence classes of $S$ is denoted as:
+$$S/\sim\ := \{[a]\ |\ a \in S\}$$
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+    \item Let \(S\) be the set of all triangles in a plane. If \(a,b \in  S\), define \(a \sim  b\) if \(a\) and \(b\) are similar-that is, if \(a\) and \(b\) have corresponding angles that are the same. Then \(\sim\) is an equivalence relation on \(S\).
+\end{enumerate}
+    \item Let $S = \mathbb{Z}$ be the set of integers. We define $a \sim b$ if $a \equiv b\ \mathrm{mod}\ 7$, or equivalently $[a]_7 = [b]_7$. Then one can show that $\sim$ is an equivalence relation, and the equivalence class
+    containing $1$ is
+    $$[1] = \{\cdots, -13,-6,1,8,15, \cdots\} = [8] = [15]$$
+    This justifies our notation of using $[\ ]_n$ for the elements in $\mathbb{Z}_7$. 
+\end{example} 
+
+One important aspect of equivalence relation on $S$ is that it gives a {\bf partition} of $S$. Namely, a partition of $S$ is a disjoint union of nonempty subsets \(P_i \subseteq S\) such that 
+$$\bigsqcup_{i \in I} P_i = S$$
+
+\begin{theorem}
+Let $\sim$ be an equivalence relation on a set $S$. Then the collection of equivalence classes constitute a partition of $S$. 
+
+Conversely, for any partition $P_i$ of $S$, there is an equivalence relation on \(S\) whose equivalence classes are precisely the elements of \(P_i\).
+\end{theorem}
+
+\begin{proof} Let \(\sim\) be an equivalence relation on a set \(S\). For any \(a \in  S\), \(a \in  \left\lbrack  a\right\rbrack\) since $a \sim a$. Therefore, \(\left\lbrack  a\right\rbrack\) is nonempty, and $\bigcup_{a \in S} \left\lbrack  a\right\rbrack = S$.
+
+There are repetitions in the union above. One therefore has to show that for $a, b \in S$, one either has $[a] = [b]$ or $[a] \cap [b] = \emptyset$ is disjoint.
+
+To do so, suppose \(c \in  \left\lbrack  a\right\rbrack   \cap  \left\lbrack  b\right\rbrack\), so that \(c \sim  a\) and \(c \sim  b\). By symmetry and transitivity, one therefore has $a \sim b$. Then for any \(x \in  \left\lbrack  a\right\rbrack\), one has \(x \sim  a\) (and \(a \sim  b\)). So \(x \sim  b\) and hence $x \in [b]$. In other words, 
+\[\left\lbrack  a\right\rbrack   \subseteq  \left\lbrack  b\right\rbrack.\] 
+The above argument can be reversed, so that one has \(\left\lbrack  b\right\rbrack   \subseteq  \left\lbrack  a\right\rbrack\) as well. Thus, \(\left\lbrack  a\right\rbrack   = \left\lbrack  b\right\rbrack\).
+
+To prove the converse, let \(\{P_i\ |\ i \in I\}\) be a partition of \(S\). Define \(a \sim  b\) if \(a, b \in P_i\) for some $i \in I$. One then can easily check that \(\sim\) is an equivalence relation on \(S\).
+\end{proof}
+
+
+\section{Functions}
+\begin{definition}
+A {\bf function} \(\phi: A \to B\) from a set \(A\) to a set \(B\) is a rule that assigns to each element \(a\in A\) exactly one element \(\phi(a)\in B\). The set \(A\) is called the {\bf domain} of \(\phi\), and \(B\) is called the {\bf codomain} of \(\phi\). 
+
+When we say $\phi$ is {\bf well-defined}, we need to show the following:
+\begin{itemize}
+    \item For all $a \in A$, $\phi(a) \in B$; and
+    \item If $a = a' \in A$, then $\phi(a) = \phi(a') \in B$.
+\end{itemize}
+\end{definition}
+The above definition of well-definedness may look trivial at the first sight, but this may become an issue when one has two or more `representatives' of the same element in $A$. For instance, a map $\phi: \mathbb{Z}_7 \to \mathbb{Z}$ given by $\phi([a]_7) = a$ is {\it not} well-defined, since $[1]_7 = [8]_7$ but $\phi([1]_7) = 1 \neq 8 = \phi([8]_7)$.
+
+
+\begin{definition}
+A function \(\phi: A \to B\) is called 
+\begin{itemize}
+    \item injective (or one-to-one) if for every \({a},{a'} \in  A\), \(\phi \left( {a}\right)  = \phi \left( {a'}\right)\) implies \({a} = {a'}.\)
+    \item surjective (or onto) if for any $b \in B$, there exists $a \in A$ such that $f(a) = b$.
+    \item bijective if it is both injective and surjective.
+\end{itemize}
+\end{definition}
+In the case when $\phi:A \to B$ is bijective, one says that $\phi$ is {\bf invertible}, and has an inverse $\psi^{-1}: B \to A$ (often denoted as $\phi^{-1}$) such that
+$$\psi \circ \phi = \mathrm{id}_A, \quad \phi \circ \psi = \mathrm{id}_B$$
+where $\mathrm{id}_S: S \to S$ is the identity map $\mathrm{id}_S(s) := s$ for all $s \in S$.
+
+
+
+
+\section{Polynomials}
+In this section, we will introduce some basic aspects of polynomials over a field $\mathbb{F}$. For beginners, it is safe to assume $\mathbb{F} = \mathbb{R}$ or $\mathbb{C}$.
+\begin{definition}
+\begin{enumerate}
+    \item A polynomial over $\mathbb{F}$ has the form
+    \[ p(z) = a_m z^m + \dots + a_1 z + a_0, \quad (a_m \neq 0). \]
+    Here $a_m z^m$ is called the \textbf{leading term} of $p(z)$; $m$ is called the degree; $a_m$ is called the \textbf{leading coefficient}; $a_m, \dots, a_0$ are called the coefficients of this polynomial.
+    \item A polynomial over $\mathbb{F}$ is \textbf{monic} if its leading coefficient is $1_{\mathbb{F}}$.
+    \item A polynomial $p(z) \in \mathbb{F}[z]$ is \textbf{irreducible} if for any $a(z), b(z) \in \mathbb{F}[z]$,
+    \[ p(z) = a(z)b(z) \implies \text{either } a(z) \text{ or } b(z) \text{ is a constant polynomial.} \]
+    Otherwise $p(z)$ is \textbf{reducible}.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+The polynomial $p(x) = x^2 + 1$ is irreducible over $\mathbb{R}[x]$; but $p(x) = (x-i)(x+i)$ is \textbf{reducible} in $\mathbb{C}[x]$.
+\end{example}
+
+\begin{theorem}{Division Algorithm}
+For all $p, q \in \mathbb{F}[z]$ such that $p \neq 0$, there exists unique $s, r \in \mathbb{F}[x]$ satisfying $\deg(r) < \deg(q)$, such that
+\[ p(z) = s(z) \cdot q(z) + r(z). \]
+Here $r(z)$ is called the \textbf{remainder}.
+\end{theorem}
+
+\begin{theorem}[Root Theorem]
+For $p(x) \in \mathbb{F}[x]$, and $\lambda \in \mathbb{F}$, $x - \lambda$ divides $p(x)$ if and only if $p(\lambda) = 0$.
+\end{theorem}
+
+\begin{proof}
+1. If $(x - \lambda)$ divides $p$, then $p(x) = (x - \lambda)q(x)$ for some $q(x) \in \mathbb{F}[x]$. Thus clearly $p(\lambda) = 0$.
+
+2. For the other direction, suppose that $p(\lambda) = 0$. By division theorem, there exists $q(x), r(x) \in \mathbb{F}[x]$ such that
+\begin{equation}
+    p(x) = (x - \lambda)q(x) + r(x) \quad \text{with } \deg(r(x)) < \deg(x - \lambda) = 1. 
+\end{equation}
+Therefore, $r(x) = r$ must be a constant polynomial. Substituting $\lambda$ into both sides in the above equation, we have
+\[ 0 = p(\lambda) = 0 \cdot q(x) + r \implies r = 0. \]
+Therefore, $p = (x - \lambda) \cdot q(x)$, i.e., $(x - \lambda)$ divides $p(x)$.
+\end{proof}
+
+\begin{corollary}
+A polynomial with degree $n$ has at most $n$ roots counting multiplicity.
+\end{corollary}
+
+
+\begin{definition}[Algebraically Closed]
+A field $\mathbb{F}$ is called \textbf{algebraically closed} if every non-constant polynomial $p(x) \in \mathbb{F}[x]$ has a root $\lambda \in \mathbb{F}$, or equivalently, all polynomials in $p(x) \in \mathbb{F}[x]$ can be factorized into linear terms:
+$$p(x) = c(x - \lambda_1) \cdots (x - \lambda_n)$$
+for $c, \lambda_1, \dots, \lambda_n \in \mathbb{F}$.
+\end{definition}
+
+We have seen before that $\mathbb{R}$ is not algebraically closed. Nevertheless, we have:
+\begin{theorem}[Fundamental Theorem of Algebra]
+$\mathbb{C}$ is algebraically closed.
+\end{theorem}
+We will skip the proof of the theorem. This can be proved using complex {\bf analysis} (MAT 3253); or {\bf topology} of $S^1$ (MAT 4002); or {\bf algebra}ic number theory (MAT 5210).
+
+\medskip
+
+In general,  $\mathbb{F}$ may not necessarily be factorized into linear terms. But the factorization is still unique. This can be seen as an analogue of the fundamental theory of arithmetic in $\mathbb{Z}$:
+\begin{theorem}[Unique Factorization]
+Every $f(x) = a_n x^n + \dots + a_0$ in $\mathbb{F}[x]$ can be factorized as
+\[ f(x) = a_n [p_1(x)]^{e_1} \cdots [p_k(x)]^{e_k} \]
+where $p_i$'s are \textbf{monic, irreducible, distinct}. Furthermore, this expression is unique up to the permutation of factors.
+\end{theorem}
+This will be proved in the chapter of Ring Theory. 
+Assuming its validity for the moment, we can now define:
+\begin{definition}[Factor]
+If $p(x) = q(x)s(x)$ with $p, q, s \in \mathbb{F}[x]$, then we say
+\begin{itemize}
+    \item $p(x)$ is \textbf{divisible} by $s(x)$;
+    \item $s(x)$ is a \textbf{factor} of $p(x)$;
+    \item $s(x) | p(x)$;
+    \item $s(x)$ \textbf{divides} $p(x)$;
+    \item $p(x)$ is \textbf{multiple} of $s(x)$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Common Factor]
+\begin{enumerate}
+    \item The polynomial $g(x)$ is said to be a \textbf{common factor} of $f_1, \dots, f_k \in \mathbb{F}[x]$ if
+    \[ g | f_i, \quad i = 1, \dots, k \]
+    \item The polynomial $g(x)$ is said to be a \textbf{greatest common divisor} of $f_1, \dots, f_k$ if
+    \begin{itemize}
+        \item $g$ is \textbf{monic}.
+        \item $g$ is common factor of $f_1, \dots, f_k$
+        \item $g$ is of largest possible (maximal) degree.
+    \end{itemize}
+\end{enumerate}
+\end{definition}
+
+The $\gcd(f_1, f_2)$ is easy to compute for factorized polynomials. For example, let $f_1(x) = (x^2 + x + 1)^3(x - 3)^2 x^4$ and $f_2(x) = (x^2 + 1)(x - 3)^4 x^2$ in $\mathbb{R}[x]$, then
+\[ \gcd(f_1, f_2) = (x-3)^2 x^2 \]
+As for general polynomials, the gcd can be computed using Euclidean algorithm: For example, given ${\color{red}x^3 + 6x + 7}$ and ${\color{blue}x^2 + 3x + 2}$, we imply
+\[ {\color{red}x^3 + 6x + 7} = (x-3)({\color{blue} x^2 + 3x + 2}) + ({\color{green}13x + 13}) \]
+and
+\[ {\color{blue} x^2 + 3x + 2} = \frac{x+2}{13}({\color{green} 13x + 13}) + 0 \]
+Therefore, $\gcd(x^2 + 3x + 2, 13x + 13)$ is equal to a scalar multiple of ${\color{green}13x+13}$ such that it is monic, namely
+$$\gcd({\color{red}x^3 + 6x + 7}, {\color{blue}x^2 + 3x + 2}) = x + 1.$$
+
+Similarly, one has Bezout's theorem for polynomials:
+\begin{theorem}[Bezout]
+Let $g = \gcd(f_1, f_2)$, then there exists $r_1, r_2 \in \mathbb{F}[x]$ such that
+\[ g(x) = r_1(x)f_1(x) + r_2(x)f_2(x) \]
+More generally, $g = \gcd(f_1, \dots, f_k)$ implies there exists $r_1, \dots, r_k$ such that
+\[ g = r_1 f_1 + \dots + r_k f_k \]
+\end{theorem}
+
+
+\section{Introduction to Abstract Algebra}
+We now give a brief introduction of abstract algebra - in a nutshell, abstract algebra is about generalization of number systems we studied in kindergarten, such as:
+\begin{align*}
+\mathbb{Z} &= \{ \dots, -1, 0, 1, \dots \}
+\\
+\mathbb{Q} &= \left\{ \frac{m}{n} \ \middle|\ m \in \mathbb{Z},\ n \in \mathbb{Z} \setminus \{0\} \right\}
+\\
+\mathbb{R} &= \text{real numbers (limits of Cauchy sequences in $\mathbb{Q}$)}
+\\
+\mathbb{C} &= \{ x + i y \mid x, y \in \mathbb{R} \}
+\end{align*}
+All these number systems have addition and multiplication, e.g. in $\mathbb{Q}$:
+\[
+\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}, \quad \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}
+\]
+And they all possess nice properties, e.g.,
+\begin{align}
+(a + b) + c &= a + (b + c) \tag{A1} \\
+(ab)c &= a(bc) \tag{A2} \\
+ab &= ba \tag{C1} \\
+a + b &= b + a \tag{C2} \\
+a(b + c) &= ab + ac \tag{D1} \\
+(a + b)c &= ac + bc \tag{D2}
+\end{align}
+One goal in abstract algebra is to study different number systems, and to find out their common features and obtain theorems that hold for all such generalized number systems.
+
+\begin{example}
+\[
+M_{2\times 2}(\mathbb{R}) = \left\{ \begin{pmatrix} a & b \\ c & d \end{pmatrix} \ \middle| \ a,b,c,d \in \mathbb{R} \right\}
+\]
+We can still do $+$ and $\times$ on $M_{2\times 2}(\mathbb{R})$, but we no longer have (C2) - in other words,
+\[
+AB \ne BA \quad \text{in general for matrices}.
+\]
+\end{example}
+
+

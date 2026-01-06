@@ -1,0 +1,1151 @@
+\chapter{Groups}
+\section{Basic Definitions}
+\begin{definition}
+Let $S$ be a set. A \textit{binary operation} on $S$ is a map:
+\[
+* : S \times S \to S
+\]
+Let $T \subseteq S$ be a subset. We say that the binary operation is \textit{closed} in $T$ if:
+\[
+\forall a, b \in T, \quad a * b \in T
+\]
+\end{definition}
+
+\begin{example} Let $S = \mathbb{Z}$. Then the following are binary operations:
+\begin{itemize}
+    \item $S = \mathbb{Z}, \quad * = +$ (addition)  
+    \item $S = \mathbb{Z}, \quad * = \times$ (multiplication)
+\end{itemize}
+Let 
+\[T = \{\text{all even integers}\} \subset \mathbb{Z}.
+\] 
+For $a, b \in T$, $a+b \in T$ (the sum of two even numbers is even).  
+Hence $(T, +)$ is closed in $(S, +)$. Also, if $a,b \in T$, $a \cdot b \in T$ (the product of two even numbers is even).  
+Therefore, $(T, \times)$ is also closed in $(S, \times)$.
+
+However, let 
+\[
+T' = \{\text{all odd integers}\}
+\]
+Then $(T', +)$ is \textbf{not} closed in $(S, +)$. But for any $(2p+1), (2q+1) \in T'$:
+\[
+(2p+1)\cdot(2q+1) = 4pq + 2p + 2q + 1
+= 2(2pq + p + q) + 1 \in T'
+\]
+Therefore, $(T', \times)$ is closed in $(S, \times)$.
+\end{example}
+
+\begin{example}
+\begin{enumerate}
+\item Let $S = \mathbb{R}^n$, and $* =$ be the vector addition operation.  
+If $W \leq \mathbb{R}^n$ is a vector subspace, then $(W, +)$ is closed in $(\mathbb{R}^n, +)$.
+
+\item Let $S = M_{n\times n}(\mathbb{R})$, and $* =$ multiplication of the ne matrix. Suppose $T = GL_n(\mathbb{R})$ is the subset of all invertible real matrices.  
+To check if $T$ is closed in $(S, \times)$:
+If $A, B \in T$ (invertible matrices), then  
+$A \cdot B$ is invertible since
+\[
+(AB)^{-1} = B^{-1}A^{-1}
+\]
+or alternatively:
+\[
+\det(AB) = \det(A)\det(B) \neq 0
+\]
+Hence, $T$ is closed in $(S, \times)$.
+\end{enumerate}
+\end{example}
+
+\begin{definition} [Group] \label{def:group}
+A \textbf{group} $G$ is a set along with a binary operation $* : G\times G \to G$ satisfying:
+\begin{enumerate}
+\item \((a*b)*c = a * (b * c) \quad \forall a,b,c \in G\) \quad (associativity)
+\item \(\exists \ e \in G \ \text{such that} \ e * a = a * e = a, \ \forall a \in G\) \quad (identity)
+\item \(\forall a \in G, \ \exists b \in G \ \text{s.t.} \ a * b = b * a = e\)  
+($b$ is often written as $a^{-1}$, called the inverse of $a$)
+\end{enumerate}
+\end{definition}
+\begin{example}
+\begin{itemize}
+\item[(a)] $(\mathbb{Z}, +)$ is a group. To see this, note that
+\[
+\begin{cases}
+(a + b) + c = a + (b + c) \quad  \\
+0 + a = a + 0 = a \quad \forall a \in \mathbb{Z} \quad (\text{i.e., $e = 0$}) \quad \\
+a + (-a) = (-a) + a = 0 \quad (\text{i.e., $a^{-1} = -a$})
+\end{cases}
+\]
+\item[(b)] Similarly $(\mathbb{Q}, +), (\mathbb{R}, +), (\mathbb{C}, +)$ as well as $(\mathbb{Z}_n,+)$ are groups.
+\item[(c)] $(\mathbb{Z}, -)$ is \textbf{not} a group, since
+\((a - b) - c \neq a - (b - c)\) and \(0 - a \neq a - 0 = a\)
+in general, i.e. it is not associative.
+\item[(d)] $(\mathbb{Z}, \times)$ is also \textbf{not} a group. Although $(a \times b) \times c = a \times (b \times c)$ is associative, and $a \times 1 = 1 \times a = a$ (so that the identity can be taken as $e = 1$), but there is {\it no} $a \in \mathbb{Z}$ such that
+$2 \times a = 1 = e$.)
+\item[(e)] $(\mathbb{Q}, \times)$ is \textbf{not} a group. Although now one can take $a = \frac{1}{2}$ such that $2 \times \frac{1}{2} = 1$, yet the element $0 \in \mathbb{Q}$ does not have a multiplicative inverse.
+\item[(f)] To resolve the issue, let $\mathbb{Q}^* = \{ q \in \mathbb{Q} \mid q \neq 0 \}$. Then $(\mathbb{Q}^*, \times)$ is a group.
+\item[(g)] Similarly, $(\mathbb{R}^*, \times)$ and $(\mathbb{C}^*, \times)$ are groups.
+\item[(h)] The set of $2 \times 2$ real matrices, denoted $M_2(\mathbb{R})$, under matrix multiplication $(M_2(\mathbb{R}), \times)$ is \textbf{not} a group, because not all matrices have a multiplicative inverse (namely, singular matrices do not have a multiplicative inverse).
+\item[(i)] Let $GL(2, \mathbb{R}) = \{ A \in M_2(\mathbb{R}) \mid \det(A) \neq 0 \}$ be the set of $2 \times 2$ invertible matrices with real entries. Then $(GL(2, \mathbb{R}), \times)$ is a group, known as the general linear group of degree 2 over $\mathbb{R}$.
+\end{itemize}
+\end{example}
+
+\begin{question}
+Given $n \in \mathbb{N}$, for which $a \in \mathbb{Z}$ does $[a]_n$ (the congruence class of $a$ modulo $n$) have a multiplicative inverse in $\mathbb{Z}_n$?
+\end{question}
+
+\noindent\textbf{Answer:} 
+An element $[a]_n \in \mathbb{Z}_n$ has a multiplicative inverse if and only if $\gcd(a, n) = 1$. For instance, when $n=6$, then:
+\begin{itemize}
+    \item For $a=3$, $\gcd(3, 6) = 3 \neq 1$. Therefore, $[3]_6$ does not have a multiplicative inverse in $\mathbb{Z}_6$.
+    \item For $a=5$, $\gcd(5, 6) = 1$. Therefore, $[5]_6$ has a multiplicative inverse in $\mathbb{Z}_6$. Indeed, $[5]_6 \cdot [5]_6 = [25]_6 \equiv [1]_6 \pmod{6}$, so $[5]_6^{-1} = [5]_6$.
+\end{itemize}
+
+\begin{remark}
+\begin{enumerate}
+    \item When there is no ambiguity, we often write $ab$ instead of $a \ast b$.
+    \item The group operation $\ast$ may not be commutative.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Abelian Group]
+A group $(G, \ast)$ is called \emph{abelian} if its operation is commutative; that is, for all $a, b \in G$, we have $a \ast b = b \ast a$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item Examples of abelian groups include: $(\mathbb{Z}, +)$, $(\mathbb{Q}, +)$, $(\mathbb{R}, +)$, $(\mathbb{C}, +)$, and $(\mathbb{Z}_n, +)$.
+    \item The group $(GL(2, \mathbb{R}), \times)$ is NOT abelian, as matrix multiplication is generally not commutative.
+\end{itemize}
+\end{example}
+
+\begin{proposition}
+Let $(G, \ast)$ be a group.
+\begin{enumerate}
+    \item \textbf{Uniqueness of Identity:} The identity element $e$ in $G$ is unique.
+    \item \textbf{Uniqueness of Inverses:} For each $a \in G$, its inverse $a^{-1}$ is unique.
+    \item \textbf{Cancellation Laws:} For $a, b, c \in G$:
+    \begin{itemize}
+        \item If $a \ast b = a \ast c$, then $b=c$ (Left Cancellation).
+        \item If $b \ast a = c \ast a$, then $b=c$ (Right Cancellation).
+    \end{itemize}
+\end{enumerate}
+\end{proposition}
+
+\subsection*{Finite Groupsﬁ and Cayley Tables}
+
+\begin{definition}[Order of a Group]
+The \emph{order} of a group $G$, denoted $|G|$, is the number of elements in the group. If $|G| < \infty$, the group is called a \emph{finite group}.
+\end{definition}
+
+\begin{definition}[Cayley Table]
+For a finite group $(G, \ast)$, a \emph{Cayley table} (or group table) is a square table where the rows and columns are labeled by the elements of the group. The entry in the row corresponding to $a$ and the column corresponding to $b$ is $a \ast b$.
+\end{definition}
+
+\begin{proposition}
+In a Cayley table for a finite group, each element of the group appears exactly once in each row and exactly once in each column.
+\end{proposition}
+
+\textit{Warning: If you have a table, you can check if it forms a group by verifying the group axioms.}
+
+\begin{example}
+Consider a group $G$ with $|G|=4$. For instance, $(\mathbb{Z}_4, +)$ would have a Cayley table where each row and column contains $\{[0]_4, [1]_4, [2]_4, [3]_4\}$ exactly once.
+\end{example}
+
+\subsection*{Subgroups}
+
+\begin{definition}[Subgroup]
+Let $(G, \ast)$ be a group and $H$ be a non-empty subset of $G$. We say that $H$ is a \emph{subgroup} of $G$, denoted $H \le G$, if $(H, \ast)$ is itself a group under the same operation $\ast$ restricted to $H$.
+\end{definition}
+
+\begin{proposition}[Subgroup Test]
+Let $(G, \ast)$ be a group and $H$ be a non-empty subset of $G$. Then $H$ is a subgroup of $G$ if and only if:
+\begin{enumerate}
+    \item For all $a, b \in H$, $a \ast b \in H$ (Closure).
+    \item For all $a \in H$, $a^{-1} \in H$ (Existence of Inverses).
+\end{enumerate}
+An equivalent, more concise test (the one-step subgroup test) is:
+\begin{itemize}
+    \item For all $a, b \in H$, $a \ast b^{-1} \in H$.
+\end{itemize}
+\end{proposition}
+
+\begin{example}
+\begin{itemize}
+    \item $(\mathbb{Z}, +)$ is a subgroup of $(\mathbb{Q}, +)$.
+    \item If $W$ is a vector subspace of $\mathbb{R}^n$, then $W$ is a subgroup of $(\mathbb{R}^n, +)$.
+    \item $(G, *) = (\mathbb{Z}, +)$. $H = \text{all even integers} = 2\mathbb{Z} \subseteq G$. \\
+    Take $2p, 2q \in H$ ($p, q \in \mathbb{Z}$). Then $2p + 2q = 2(p+q) \in H$ \& $-2p = 2(-p) \in H$. \\
+    Hence, $H \le G$ is a subgroup of $G$.
+    \item $(G, *) = (\mathbb{Z}, +)$. $K = \text{all odd integers} \subseteq G$. \\
+    $K$ is \textbf{NOT} a subgroup, since $1, 3 \in K$ but $1 + 3 \notin K$.
+    \item $(G, *) = (\mathbb{Z}, +)$. Then $k\mathbb{Z} := \{ \text{multiples of } k \} \le G$.
+    \item Let $(G, *)$ be any group. Then:
+    \begin{enumerate}
+        \item[(i)] $(G, *) \le (G, *)$ is a subgroup of $G$. \\
+        We'll say all $H \le G$ satisfying $H \neq G$ a \underline{proper subgroup} of $G$.
+        \item[(ii)] $\{e\} \le G$ is a subgroup. \\
+        We'll say all $H \le G$ with $H \neq \{e\}$ \underline{nontrivial subgroup} of $G$.
+    \end{enumerate}
+    \item $(G, *) = (GL(n, \mathbb{R}), \cdot)$. $SL(n, \mathbb{R}) := \{ A \in G \mid \det(A) = 1 \} \le G = GL(n, \mathbb{R})$. \\
+    $\begin{cases} 
+    \forall A, B \in SL(n, \mathbb{R}), & \det(AB) = \det(A) \cdot \det(B) = 1 \cdot 1 = 1 \Rightarrow AB \in SL(n, \mathbb{R}) \\
+    \forall A \in SL(n, \mathbb{R}), & \det(A^{-1}) = \frac{1}{\det(A)} = \frac{1}{1} = 1 \Rightarrow A^{-1} \in SL(n, \mathbb{R})
+    \end{cases}$
+    \item $(\mathbb{Z}, +) \le (\mathbb{Q}, +) \le (\mathbb{R}, +) \le (\mathbb{C}, +)$
+    \item $(G, *) = (\mathbb{Z}_8, +) \quad H = \{0, 4\}$ is a subgroup \\
+    \phantom{$(G, *) = (\mathbb{Z}_8, +) \quad$} $K = \{0, 3\}$ is \textbf{NOT} a subgroup.
+\end{itemize}
+\end{example}
+
+\subsection*{Cyclic}
+
+\begin{definition}[Cyclic Subgroup]
+Let $(G, *)$ be a group. A \textit{cyclic subgroup} generated by $g \in G$ is the subgroup $\langle g \rangle := \{ g^m \mid m \in \mathbb{Z} \}$.
+\end{definition}
+
+\noindent (Exercise: Check $\langle g \rangle \le G$ is a subgroup of $G$, i.e.: for any \\
+$g^a, g^b \in \langle g \rangle \quad \begin{cases} g^a * g^b \in \langle g \rangle \\ (g^a)^{-1} \in \langle g \rangle \end{cases}$
+
+\begin{example}
+\begin{itemize}
+    \item $(G, *) = (\mathbb{Z}, +)$. \\
+    $\langle 2 \rangle = \{ 2, 2+2, 2+2+2, \dots, 0, (-2), (-2)+(-2), (-2)+(-2)+(-2), \dots \} = 2\mathbb{Z}$
+    
+    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$. \\
+    $\left\langle \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \right\rangle = \left\{ \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^m \middle| m \in \mathbb{Z} \right\} = \left\{ \begin{pmatrix} 1 & m \\ 0 & 1 \end{pmatrix} \middle| m \in \mathbb{Z} \right\}$. \\
+    ( Check: $\begin{pmatrix} 1 & a \\ 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} 1 & b \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & a+b \\ 0 & 1 \end{pmatrix}$ )
+    
+    \item $(G, *) = (\mathbb{Z}_8, +)$. \\
+    $\langle 2 \rangle = \{ 0, 2, 4, 6, \dots \} = \{ 0, 2, 4, 6 \}$ \\
+    $\langle 3 \rangle = \{ 0, 3, 6, 9, 12, 15, 18, 21, 24, \dots \} = \{ 0, 3, 6, 1, 4, 7, 2, 5, 0, \dots \} = G$
+\end{itemize}
+\end{example}
+
+\begin{definition}[Cyclic Group]
+Let $(G, *)$ be a group. We say $G$ is \textbf{cyclic} if there is $g \in G$ such that $\langle g \rangle = G$.
+\end{definition}
+
+
+\begin{example}
+\begin{itemize}
+    \item $(G, *) = (\mathbb{Z}, +)$ is cyclic, since $G = \langle 1 \rangle$.
+    \item $(G, *) = (\mathbb{Z}_8, +)$ is cyclic, since $G = \langle 3 \rangle = \langle 1 \rangle$.
+    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$ is \textbf{NOT} cyclic, since for all $H = \langle g \rangle$, $H$ is countable but $G$ is uncountable. \\
+    Hence, $H$ can never be equal to $G$.
+    
+    \item $(G, *) = (\mathbb{Z}_8^*, \cdot) = \{ 1, 3, 5, 7 \}$. Then all the cyclic subgroups: \\
+    $\langle 1 \rangle = \{ 1 \}$, $\langle 3 \rangle = \{ 3^0=1, 3^1=3, 3^2=1, 3^3=3, \dots \} = \{ 1, 3 \}$, $\langle 5 \rangle = \{ 1, 5 \}$, \\
+    $\langle 7 \rangle = \{ 1, 7 \}$. None of them is equal to $G$. So $G$ is \textbf{not} cyclic.
+\end{itemize}
+\end{example}
+
+\noindent ( Exercise: $(\mathbb{Z}_5^*, \cdot)$ is cyclic )
+
+\vspace{1em}
+\noindent \textbf{Question:} $(G, *)$ group, $H = \langle g \rangle$. What's the order of $H$? \\
+e.g.: $(\mathbb{Z}_8, +) : |\langle 2 \rangle| = 4, \ |\langle 3 \rangle| = 8, \ |\langle 4 \rangle| = 2$.
+
+\vspace{1em}
+\begin{definition}[order] 
+Let $g \in G$. The \textit{order} of $g$ is equal to the smallest positive integer $k$ such that $g^k = e$. If no such $k$ exists, then we say the order of $g$ is $\infty$.
+\end{definition}
+\vspace{1em}
+\begin{proposition} 
+If $\text{ord}(g) = k$, then $|\langle g \rangle| = k$.
+\end{proposition}
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $(G, *) = (\mathbb{Z}_8, +)$. $\text{ord}(2) = 4 : 2^1=2, 2^2=4, 2^3=6, 2^4=8 \equiv 0$; \\
+    $\text{ord}(3) = 8 : 3^1=3, 3^2=6, 3^3=9 \equiv 1, 3^4=12 \equiv 4, 3^5=15 \equiv 7, 3^6=18 \equiv 2, 3^7=21 \equiv 5, 3^8=24 \equiv 0$.
+    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$. \\
+    $\text{ord}\left( \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \right) = \infty$, since $\begin{pmatrix} 1 & m \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^m \neq \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad \forall m \in \mathbb{N}$.
+\end{itemize}
+\end{example}
+\vspace{1em}
+\begin{remark} 
+If $|G| < \infty$ is finite, then $\langle g \rangle \le G$ is a finite subgroup with $|\langle g \rangle| \le |G|$. Indeed, all $H \le G$ has $|H| \mid |G|$ (Lagrange's Theorem). \\
+e.g.: If $|G|=12$, then there is \textbf{NO} $H \le G$ with $|H|=8$, can only be $1, 2, 3, 4, 6, 12$. \\
+Therefore, $\text{ord}(g) \mid |G|$ (take $H = \langle g \rangle$).
+\end{remark}
+
+\vspace{1em}
+\section{More examples of Groups}
+\subsection*{Permutation group / Symmetric group $S_n$}
+
+
+\begin{definition} 
+A \textit{permutation} of $X_n = \{1, 2, \dots, n\}$ is a bijection $\sigma : X_n \to X_n$. \\
+(e.g. $(n=3), \sigma(1)=2, \sigma(2)=3, \sigma(3)=1$)
+\end{definition}
+\vspace{1em}
+\begin{definition} 
+The \textbf{symmetric / permutation group} of $n$ elements is the collection of all permutations $\sigma : X_n \to X_n$.
+\[ S_n := \{ \sigma : X_n \to X_n \mid \sigma \text{ is bijective} \} \]
+e.g.: $S_3 = \left\{ \begin{pmatrix} 1 & 2 & 3 \\ 1 & 2 & 3 \end{pmatrix}, \begin{pmatrix} 1 & 2 & 3 \\ 2 & 1 & 3 \end{pmatrix}, \dots, \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 1 \end{pmatrix} \right\}$. Hence $|S_3|=6$. \\
+More generally, $|S_n| = n \cdot (n-1) \cdots 1 = n!$.
+\end{definition}
+\vspace{1em}
+\begin{proposition} 
+$(S_n, \circ)$ is a group, where $\circ$ is the composition of functions. \\
+Proof: 
+\begin{enumerate}
+    \item $(\sigma_1 \circ \sigma_2) \circ \sigma_3 = \sigma_1 \circ (\sigma_2 \circ \sigma_3)$ is true, since $\circ$ is associative.
+    \item Take $e = \text{id} : X_n \to X_n = \begin{pmatrix} 1 & 2 & \dots & n \\ 1 & 2 & \dots & n \end{pmatrix}$. Then $\sigma \circ e = e \circ \sigma = \sigma$.
+    \item Since $\sigma$ is bijective, then $\sigma^{-1} : X_n \to X_n$ exists with $\sigma \circ \sigma^{-1} = \sigma^{-1} \circ \sigma = e$.
+\end{enumerate}
+\end{proposition}
+\begin{remark} 
+Groups are often used to study "symmetry" of objects. For example, $S_n$ can be used to study symmetry of $n$ objects. As another example, to describe symmetries of $\mathbb{R}^n$, we study $\{ A : \mathbb{R}^n \to \mathbb{R}^n \mid A \text{ is a bijective linear transformation} \} = GL(n, \mathbb{R})$.
+\end{remark}
+
+\subsection*{Calculations on $S_n$}
+Let $\sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 4 & 3 & 1 & 2 \end{pmatrix}$, $\tau = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 2 & 3 & 1 & 4 \end{pmatrix}$. Then:
+\[ \sigma \circ \tau = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 4 & 1 & 2 & 3 \end{pmatrix} \quad \text{vs} \quad \tau \circ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 1 & 4 & 2 \end{pmatrix} \]
+\begin{remark}
+$\sigma \circ \tau \neq \tau \circ \sigma$ in general). \\
+The inverse of $\sigma$ is $\sigma^{-1} = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 4 & 2 & 1 \end{pmatrix}$.
+\end{remark}
+\vspace{1em}
+\begin{example}
+Let $\sigma = (1\,2\,3)$, $\tau = (1\,3\,4\,2)(7\,6)$ in $S_7$. Then:
+\begin{itemize}
+    \item $\sigma\tau = (1\,2\,3)(1\,3\,4\,2)(7\,6) = (1)(2)(3\,4)(7\,6) = (3\,4)(6\,7)$.
+    \item $\tau\sigma = (1\,3\,4\,2)(7\,6)(1\,2\,3) = (1)(2\,4)(3)(6\,7) = (2\,4)(6\,7)$.
+\end{itemize}
+\end{example}
+\vspace{1em}
+\begin{remark}
+\begin{itemize}
+    \item From now on, we'll express $\sigma \in S_n$ using (disjoint) product of $k$-cycles.
+    \item If $\alpha$ and $\beta$ are $k$-cycles with disjoint entries, then $\alpha\beta = \beta\alpha$. \\
+    (e.g.: $\alpha = (1\,3\,2)$, $\beta = (4\,7) \Rightarrow \alpha\beta = (1\,3\,2)(4\,7) = (4\,7)(1\,3\,2) = \beta\alpha$). \\
+    Otherwise, $\alpha\beta \neq \beta\alpha$ in general.
+    \item The inverse of a $k$-cycle is given by:
+    \[ (i_1\,i_2 \dots i_k)^{-1} = (i_1\,i_k\,i_{k-1} \dots i_2) \]
+    (Exercise: $(1\,2\,3\,4\,5)(1\,5\,4\,3\,2) = \text{identity}$)
+    \item More generally, for any $\sigma \in S_n$, $\sigma = (i_1 \dots i_k)(j_1 \dots j_\ell) \dots (m_1 \dots m_p)$ where the cycles are disjoint, then:
+    \[ \sigma^{-1} = (i_1\,i_k \dots i_2)(j_1\,j_\ell \dots j_2) \dots (m_1\,m_p \dots m_2) \]
+\end{itemize}
+\end{remark}
+\begin{definition}[Transposition]
+A 2-cycle $\tau = (i\,j) \in S_n$ is called a \textbf{transposition}.
+\end{definition}
+\vspace{1em}
+\begin{proposition}
+Every $\sigma \in S_n$ can be expressed as a product of (NOT necessarily disjoint) transpositions.
+\end{proposition}
+
+\begin{proof}
+$\sigma = (i_1 \dots i_k)(j_1 \dots j_\ell) \dots (m_1 \dots m_p)$ with each $i, j, \dots, m$ cycles are disjoint. Then for $(i_1 \dots i_k)$:
+\[ (i_1 \dots i_k) = (i_1\,i_k)(i_1\,i_{k-1}) \dots (i_1\,i_3)(i_1\,i_2) \]
+Do the same for $(j_1 \dots j_\ell), \dots, (m_1 \dots m_p)$. Then we're done. \hfill $\square$
+\end{proof}
+
+\begin{remark}
+The expression of $\sigma \in S_n$ into product of transpositions is \textbf{NOT} unique: \\
+e.g.: $\sigma = (2\,3) = (2\,3)(2\,3)(2\,3) = (1\,2)(2\,3)(1\,3)$. \\
+But the number of transpositions in each expression of $\sigma$ is always \textbf{even} or \textbf{odd}.
+\end{remark}
+\vspace{1em}
+\begin{lemma}
+If $e = \tau_1 \cdots \tau_k$, then $k \equiv 0 \pmod 2$ is even.
+\end{lemma}
+
+\begin{proof}
+Induction on $k$, i.e.: "If $e = \tau_1 \cdots \tau_k$, then $k$ is even" \hfill (*)
+
+$k=0$ is trivial; also, it's obvious that $k \neq 1$, so (*) holds for $k=1$. \\
+Suppose (*) holds for all expressions of $e = \tau'_1 \cdots \tau'_{k'}$ for $k' \le m$. \\
+Consider $e = \tau_1 \cdots \tau_m \tau_{m+1}$, an expression of $e$ with $(m+1)$ transpositions, with $\tau_{m+1} = (a\,b)$. Then:
+
+\textbf{Case 1:} $\tau_m = (a\,b)$. \\
+$\Rightarrow e = \tau_1 \cdots \tau_{m-1}(a\,b)(a\,b) = \tau_1 \cdots \tau_{m-1}$. \\
+By induction, $m-1 \equiv 0 \pmod 2$. Hence, $m+1 \equiv 0 \pmod 2$ is even.
+
+\textbf{Case 2:} $\tau_m \neq (a\,b)$. Then $\tau_m \tau_{m+1} = $
+$\begin{cases} 
+(a\,c)(a\,b) = (a\,b)(b\,c) \\
+(b\,d)(a\,b) = (a\,d)(d\,b) \\
+(i\,j)(a\,b) = (a\,b)(i\,j) 
+\end{cases}$ (where the left side has "no $a$")
+
+$\therefore e = \tau_1 \cdots \tau_{m-1} \tau_m \tau_{m+1} = \tau_1 \cdots \tau_{m-1} (a\,*)(*\,*)$. \\
+Then do the same Case 1, 2 for $\tau_{m-1}(a\,*)$. If $\tau_{m-1} = (a\,*)$, then $\tau_{m-1}(a\,*)$ goes away. Then induction. \\
+Otherwise, $\tau_{m-1} \neq (a\,*)$, move one more step to the left and get: \\
+$e = \tau_1 \cdots \tau_{m-2} (a\,*)(*\,*)(*\,*)$ (with "no $a$" on the right). \\
+Continue until Case 1 occurs, or: \\
+$e = (a\,$$\bigstar$$)(*\,*) \cdots (*\,*)$ (with "no $a$" on the right). \\
+But this \textbf{cannot} happen, since the expression on right-hand-side will permute "$a$" to $\bigstar$. Then contradict. \\
+Hence, Case 1 must occur somewhere. Then use induction. \hfill $\square$
+\end{proof}
+
+\begin{proposition}
+Let $\sigma = \tau_1 \cdots \tau_k = \tau'_1 \cdots \tau'_\ell$ be two expressions of $\sigma$ as product of transpositions. Then $k \equiv \ell \pmod 2$.
+\end{proposition}
+
+\begin{proof}
+$e = \sigma^{-1} \sigma = (\tau_1 \cdots \tau_k)^{-1} (\tau'_1 \cdots \tau'_\ell) = \tau_k^{-1} \cdots \tau_1^{-1} \tau'_1 \cdots \tau'_\ell = \tau_k \cdots \tau_1 \tau'_1 \cdots \tau'_\ell$. \\
+Then by Lemma 2.34, $k + \ell \equiv 0 \pmod 2$. \hfill $\square$
+\end{proof}
+
+\vspace{1em}
+\begin{definition}[(Even/Odd Permutation]
+$\sigma \in S_n$ is called an \textbf{even / odd permutation} if $\sigma$ is a product of an even / odd number of transpositions.
+\end{definition}
+\vspace{1em}
+\begin{definition}[Alternating Group]
+The \textbf{alternating group} $A_n$ is the subgroup of $S_n$ given by:
+\[ A_n := \{ \sigma \in S_n \mid \sigma \text{ is even} \} \]
+\end{definition}
+
+\noindent (Check: $A_n \le S_n$. Also, is the set $\{ \sigma \in S_n \mid \sigma \text{ is odd} \}$ a subgroup?)
+
+\vspace{1em}
+\begin{proposition}
+$|A_n| = \frac{1}{2} |S_n| = \frac{n!}{2}$
+\end{proposition}
+
+\begin{proof}
+Let $\tau \in S_n$ be a transposition and $f : A_n \to \{ \sigma \in S_n \mid \sigma \text{ odd} \}$ be defined as $f(\sigma) := \sigma \tau$, where $\sigma = \tau_1 \cdots \tau_{2m} \in A_n$. \\
+Note that $f$ is bijective with $f^{-1} = f$. Hence, $|A_n| = |\{ \sigma \in S_n \mid \sigma \text{ odd} \}|$. \\
+Since $A_n \cup \{ \sigma \in S_n \mid \sigma \text{ odd} \} = S_n$, therefore $|A_n| = |S_n| / 2 = n!/2$. \hfill $\square$
+\end{proof}
+
+\begin{example}[Applications]
+
+\begin{enumerate}
+    \item $A_4$ is the group of ``symmetries of a tetrahedron''.
+    \begin{itemize}
+        \item A rotation of the tetrahedron corresponds to a permutation of its 4 vertices. For example, a $120^\circ$ rotation about a vertex fixies one vertex and cyclically permutes the other three:
+        \[ (2\,3\,4) = (2\,4)(2\,3) \in A_4 \]
+        \item A $180^\circ$ rotation about the midpoints of opposite edges corresponds to:
+        \[ (1\,3)(2\,4) \in A_4 \]
+    \end{itemize}
+    \item[1'.] If we allow reflections (not just rotations), we get the full symmetric group:
+    \[ (2\,4) \in S_4 \setminus A_4 \]
+    
+    \item \textbf{Galois Theory}: $A_5$ is a simple group, so we can't solve a general degree-5 equation using  $ \sqrt[k]{*}, \frac{*}{*} $.
+\end{enumerate}
+\end{example}
+\subsection*{Dihedral Groups $D_n$}
+
+\begin{definition}[dihedral group]
+$D_n$ describes the rotational and reflectional symmetries of a regular $n$-gon.
+\end{definition}
+
+\begin{itemize}
+    \item \textbf{Example ($n=3$)}: Symmetries of an equilateral triangle.
+    \begin{itemize}
+        \item Rotations: $e$ (identity), $\sigma_{120^\circ} \leftrightarrow (1\,2\,3)$, $\sigma_{240^\circ} \leftrightarrow (1\,3\,2)$.
+        \item Reflections: 3 axes of symmetry, each fixing one vertex and swapping the other two, e.g., $\leftrightarrow (2\,3)$, $(1\,2)$, or $(1\,3)$.
+        \item Hence, $D_3$ has 6 elements.
+    \end{itemize}
+    \item \textbf{Example ($n=4$)}: Symmetries of a square. 
+    \begin{itemize}
+        \item Includes 4 rotations ($0^\circ, 90^\circ, 180^\circ, 270^\circ$) and 4 reflections.
+        \item Hence, $|D_4| = 8$.
+    \end{itemize}
+\end{itemize}
+
+\noindent More generally, $|D_n| = 2n$ for all $n \ge 3$.
+
+\subsection*{Algebraic Representation of $n$-gon Symmetries}
+Let $r$ be a rotation by $\left(\frac{360}{n}\right)^\circ$ anticlockwise, which corresponds to the $n$-cycle $(1\,2\,3 \dots n)$. \\
+Let $s$ be a reflection along the axis passing through vertex 1.
+
+\begin{itemize}
+    \item Then $r^n = e$ and $s^2 = e$.
+    \item Any other reflection in $D_n$ can be expressed as $r^k s$. This represents a reflection along an axis obtained by rotating the ``principal axis'' by $\left(\frac{k180}{n}\right)$ degrees anticlockwise.
+    \item \textbf{Example $D_4$}: 
+    \begin{itemize}
+        \item $r^3 s$ represents reflecting the square across a specific axis.
+        \item Reflecting about an axis at $\frac{3}{4}(180^\circ)$ results in a specific vertex permutation.
+    \end{itemize}
+\end{itemize}
+
+\begin{proposition}
+The dihedral group $D_n$ is given by the set:
+\[ D_n = \{ e, r, r^2, \dots, r^{n-1}, s, rs, r^2s, \dots, r^{n-1}s \} \]
+\noindent (Exercise: Show that $s r^l = r^{n-l} s$)
+\end{proposition}
+
+\noindent Hence, $D_n = \langle s, r \mid r^n = e, s^2 = e, sr^l = r^{n-l}s \text{ for all } l \rangle$. \\
+eg: $s^3 r^{14} s^5 r^{-3} s^{16}$ in $D_5$ \\
+$= s r^{10} r^4 s r^5 r^{-3} e = s r^4 s r^2 = s(s r^1) r^2 = s^2 r^3 = r^3$
+
+\subsection*{Product Groups (External Direct Product)}
+
+\begin{definition}[Product Group] 
+Let $G_1, \dots, G_n$ be groups. The \textbf{product group} $G := \prod_{i=1}^n G_i = G_1 \times \dots \times G_n$ (in Gallian, $G_1 \oplus G_2 \oplus \dots \oplus G_n$) is given by $G := \{ (g_1, \dots, g_n) \mid g_i \in G_i \}$ and multiplication is given by:
+\[ (g_1, \dots, g_n) * (h_1, \dots, h_n) := (g_1 h_1, g_2 h_2, \dots, g_n h_n) \]
+In particular, $|G| = |G_1| \times \dots \times |G_n|$ \& $e_G \in G$ is $(e_1, \dots, e_n)$ where $e_i = e_{G_i}$.
+\end{definition}
+
+\noindent e.g.: $\mathbb{Z}_2 \times \mathbb{Z}_3 = \{ (a, b) \mid a = 0, 1; b = 0, 1, 2 \}$ \\
+$(1, 2) * (0, 1) = (1+0, 2+1) = (1, 3) \equiv (1, 0)$.
+
+\begin{exercise}
+\begin{enumerate}
+    \item $\mathbb{Z}_2 \times \mathbb{Z}_3 = \langle (1, 1) \rangle$ is cyclic.
+    \item If $p_1, \dots, p_n$ are distinct primes, then $\mathbb{Z}_{p_1} \times \dots \times \mathbb{Z}_{p_n} = \langle (1, \dots, 1) \rangle$.
+\end{enumerate}
+\end{exercise}
+
+\noindent More examples: $S_3 \times D_4$ ; $\mathbb{Z} \times \mathbb{R}$ ; $GL(2, \mathbb{R}) \times S_5$ ; $\dots$
+
+\section{Homomorphism and Isomorphism}
+
+\noindent \textbf{Motivation:} Recall
+\begin{center}
+\begin{tabular}{c c c | c c c}
+$D_4$ & & $S_4$ & $D_4$ & & $S_4$ \\
+\hline
+$e$ & $\leftrightarrow$ & $e$ & $s$ & $\leftrightarrow$ & $(2\,4)$ \\
+$r$ & $\leftrightarrow$ & $(1\,2\,3\,4)$ & $rs$ & $\leftrightarrow$ & $(1\,2)(3\,4)$ \\
+$r^2$ & $\leftrightarrow$ & $(1\,3)(2\,4)$ & $r^2s$ & $\leftrightarrow$ & $(1\,3)$ \\
+$r^3$ & $\leftrightarrow$ & $(1\,4\,3\,2)$ & $r^3s$ & $\leftrightarrow$ & $(1\,4)(2\,3)$ \\
+\end{tabular}
+\end{center}
+
+\noindent To understand $D_4$, it's equally good to understand 8 elements in $S_4$.
+
+\vspace{1em}
+\begin{definition}[Homomorphism \& Isomorphism]
+Let $(G, \ast), (H, \circledast)$ be groups. A \textit{homomorphism} from $G$ to $H$ is a map $\phi : G \to H$ s.t.: $\phi(g_1 \ast g_2) = \phi(g_1) \circledast \phi(g_2)$. \\
+If $\phi$ is bijective, then $\phi$ is an \textit{isomorphism}. ($\phi$ ``preserves'' the multiplication rule of $G$ \& $H$)
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+    \item $\phi : D_4 \to S_4$ given by $\phi(r) = (1\,2\,3\,4)$, $\phi(s) = (2\,4)$, $\dots$ \\
+    is an \textit{injective homomorphism}, eg: $\phi(r^2s) = \phi(r^2)\phi(s)$
+    
+    \item $\phi : \mathbb{Z}_2 \times \mathbb{Z}_2 \to K$ given by $\phi(0,0)=e, \phi(1,0)=a, \phi(0,1)=b, \phi(1,1)=c$ \\
+    Then $\phi$ is an isomorphism, e.g., $\phi((1,0) \ast (0,1)) = \phi(1,1) = c$ \\
+    \phantom{Then $\phi$ is an isomorphism, e.g., } $\phi(1,0) \circledast \phi(0,1) = a \circledast b = c$ \\
+    $\therefore$ understanding (multiplication in $K$) $\Leftrightarrow$ understanding $\mathbb{Z}_2 \times \mathbb{Z}_2$.
+    
+    \item Let $(G, \ast) = (\mathbb{R}^n, +)$ \& $(H, \circledast) = (\mathbb{R}^m, +)$. Then any linear transformation $T : \mathbb{R}^n \to \mathbb{R}^m$ is a group homomorphism, i.e.: \\
+    $T(x_1 + x_2) = T(x_1) + T(x_2)$
+    
+    \item $\phi : (\mathbb{Z}_{12}, +) \to (\mathbb{Z}_4, +)$ given by $\phi(k) := k$ is \textbf{NOT} a homom. \\
+    $\phi(2 \cdot 4) = \phi(8) = 0 \neq 2 = 2 + 0 = \phi(2) + \phi(4)$
+    
+    \item $\exp : (\mathbb{R}, +) \to (\mathbb{R}^*, \cdot)$ given by $\exp(a) := e^a$ is a homom.: \\
+    $\exp(a+b) = e^{a+b} = e^a \cdot e^b = \phi(a) \cdot \phi(b)$
+    
+    \item Define $\phi : A_3 \to \mathbb{Z}_3$ by $\phi(e)=0, \phi(1\,2\,3)=1, \phi(1\,3\,2)=2$ \\
+    $\phi$ is a ``dictionary'', translating the ``$A_3$ language'' to ``$\mathbb{Z}_3$ language'' \\
+    $\begin{pmatrix} (1\,2\,3) \text{ in } A_3 \text{ language} \\ (1\,3\,2) \text{ in } A_3 \text{ language} \end{pmatrix} \xrightarrow{\phi} \begin{pmatrix} 1 \text{ in } \mathbb{Z}_3 \text{ language} \\ 2 \text{ in } \mathbb{Z}_3 \text{ language} \end{pmatrix}$ \\
+    The dictionary also translates multiplication in $A_3$ to mult. in $\mathbb{Z}_3$ \\
+    $(1\,2\,3) \ast (1\,2\,3) = (1\,3\,2) \text{ in } A_3 \leftrightarrow (1+1 = 2 \text{ in } \mathbb{Z}_3)$ \\
+    In other words, $\phi((1\,2\,3) \ast (1\,2\,3)) = \phi(1\,2\,3) + \phi(1\,2\,3)$ \\
+    $\therefore \phi : A_3 \cong \mathbb{Z}_3$ is an isomorphism. \\
+    (Question: $S_3$ and $\mathbb{Z}_6$ both have 6 elements, can $S_3 \cong \mathbb{Z}_6$?)
+    
+    \item $i : (\mathbb{Z}, +) \hookrightarrow (\mathbb{R}, +)$ is a homom. with $i(a) := a \ \forall a \in \mathbb{Z}$. \\
+    More generally, if $H \le G$, then $i : (H, \ast) \hookrightarrow (G, \ast)$ is a homom.
+    
+    \item $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$ with $\pi(a) := a \pmod n$ is a homom. \\
+    ($\pi(a+b) = \pi(a) + \pi(b)$)
+    
+    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$ is a homom. \\
+    $\det(A \cdot B) = \det(A) \cdot \det(B)$
+    
+    \item $\phi : S_n \to (\{ \pm 1 \}, \cdot)$ with $\phi(\sigma) := \begin{cases} +1, & \text{if } \sigma \text{ is even} \\ -1, & \text{if } \sigma \text{ is odd} \end{cases}$ \\
+    Then $\phi(\sigma \tau) = \phi(\sigma) \cdot \phi(\tau) \quad \forall \sigma, \tau \in S_n$, since: 
+    \begin{center}
+    \begin{tabular}{l l l c c c c}
+    & & & $\phi(\sigma \tau)$ & & $\phi(\sigma) \phi(\tau)$ & \\
+    \hline
+    $\sigma$ even, & $\tau$ even & $\Rightarrow \sigma \tau$ even & $1$ & $=$ & $1 \cdot 1$ & \\
+    $\sigma$ even, & $\tau$ odd & $\Rightarrow \sigma \tau$ odd & $-1$ & $=$ & $1 \cdot (-1)$ & \\
+    $\sigma$ odd, & $\tau$ even & $\Rightarrow \sigma \tau$ odd & $-1$ & $=$ & $(-1) \cdot 1$ & \\
+    $\sigma$ odd, & $\tau$ odd & $\Rightarrow \sigma \tau$ even & $1$ & $=$ & $(-1) \cdot (-1)$ & \\
+    \end{tabular}
+    \end{center}
+\end{itemize}
+\end{example}
+
+\begin{proposition} 
+Let $(G, \ast), (H, \circledast)$ and $(K, \star)$ be groups. Then:
+\begin{enumerate}
+    \item[(a)] If $\phi : G \to H, \psi : H \to K$ are homom., then $\psi \circ \phi : G \to K$ is homom.
+    \item[(b)] If $\phi : G \to H$ is homom., then $\phi(e_G) = e_H$, $\phi(a^{-1}) = (\phi(a))^{-1}$.
+    \item[(c)] If $\phi : G \cong H$ is isomorphism, then $\phi^{-1} : H \to G$ satisfies $\phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) \ast \phi^{-1}(h_2)$. (In other words, the inverse of isom. is an isom.)
+\end{enumerate}
+\end{proposition}
+\begin{proof} 
+(a) $(\psi \circ \phi)(g_1 * g_2) = \psi(\phi(g_1 * g_2)) = \psi(\phi(g_1) \circledast \phi(g_2)) = \psi(\phi(g_1)) \star \psi(\phi(g_2)) $ \\
+\phantom{(a) } $= (\psi \circ \phi)(g_1) \star (\psi \circ \phi)(g_2)$. \hfill $\square$
+
+(b) $\phi(g) = \phi(e_G * g) = \phi(e_G) \circledast \phi(g) \Rightarrow \phi(g)(\phi(g))^{-1} = \phi(e_G) \circledast (\phi(g) \circledast (\phi(g))^{-1})$ \\
+$\Rightarrow e_H = \phi(e_G)$. \\
+Similarly, $\phi(e_G) = \phi(a * a^{-1}) = \phi(a) \circledast \phi(a^{-1}) \Rightarrow e_H = \phi(a) \circledast \phi(a^{-1}) \Rightarrow \phi(a^{-1}) = (\phi(a))^{-1}$. \hfill $\square$
+
+(c) $\phi(\phi^{-1}(h_1 \circledast h_2)) = h_1 \circledast h_2 = (\phi \circ \phi^{-1}(h_1)) \circledast (\phi \circ \phi^{-1}(h_2)) = \phi(\phi^{-1}(h_1) * \phi^{-1}(h_2))$ \\
+$\Rightarrow \phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) * \phi^{-1}(h_2)$, since $\phi$ is bijective. \hfill $\square$
+\end{proof}
+
+\begin{definition}[Kernel and Image]
+Let $\phi : G \to H$ be a group homomorphism.
+\begin{itemize}
+    \item \textbf{kernel} of $\phi$: $\ker \phi := \{ g \in G \mid \phi(g) = e_H \}$
+    \item \textbf{image} of $\phi$: $\text{im} \phi := \{ \phi(g) \mid g \in G \}$
+\end{itemize}
+\end{definition}
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $A : (\mathbb{R}^n, +) \to (\mathbb{R}^m, +)$. Then $\ker(A) = \{ \mathbf{v} \in \mathbb{R}^n \mid A(\mathbf{v}) = \mathbf{0}_{\mathbb{R}^m} \} = \text{Null space of } A$. \\
+    $\text{im}(A) = \{ A(\mathbf{v}) \in \mathbb{R}^m \mid \mathbf{v} \in \mathbb{R}^n \} = \text{Column space of } A$.
+    
+    \item $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$. Then \\
+    $\ker(\pi) = \{ \text{multiples of } n \} = \langle n \rangle$, \quad $\text{im}(\pi) = (\mathbb{Z}_n, +)$.
+    
+    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$. Then \\
+    $\ker(\det) = \{ A \in GL(n, \mathbb{R}) \mid \det(A) = 1 \} =: SL(n, \mathbb{R})$, \quad $\text{im}(\det) = \mathbb{R}^*$.
+\end{itemize}
+\end{example}
+\vspace{1em}
+\begin{proposition}
+(a) $\ker \phi \le G$, $\text{im } \phi \le H$ are subgroups of $G$ and $H$ respectively. \\
+(b) $\phi$ is an isomorphism $\iff \ker \phi = \{e_G\}$ \& $\text{im } \phi = H$. \\
+(c) If $G$ is cyclic / abelian, then $\phi(G)$ is cyclic / abelian.
+\end{proposition}
+
+\begin{proof}
+(a) $\forall g_1, g_2 \in \ker \phi$:
+\begin{itemize}
+    \item[(i)] $\phi(g_1 g_2) = \phi(g_1) \phi(g_2) = e_H \cdot e_H = e_H \Rightarrow g_1 g_2 \in \ker \phi$
+    \item[(ii)] $\phi(g_1^{-1}) = (\phi(g_1))^{-1} \Rightarrow g_1^{-1} \in \ker \phi$
+\end{itemize}
+
+(b) Skipped. $\left( \ker \phi = \{e_G\} \iff \phi \text{ is injective}; \ \text{im } \phi = H \iff \phi \text{ is surjective} \right)$
+
+(c) 
+\begin{itemize}
+    \item[$\bullet$] If $G$ is abelian, i.e.: $ab = ba \ \forall a, b \in G$. Then $\forall \phi(a), \phi(b) \in \phi(G)$:
+    \[ \phi(a) \phi(b) = \phi(ab) = \phi(ba) = \phi(b) \phi(a) \]
+    \item[$\bullet$] If $G$ is cyclic, i.e.: $G = \langle g \rangle$ for some $g \in G$. Then $\forall \phi(a) \in \phi(G)$:
+    \[ \phi(a) = \phi(g \cdot g \cdots g) = \phi(g) \cdot \phi(g) \cdots \phi(g) = (\phi(g))^k \in \langle \phi(g) \rangle \]
+    $\Rightarrow \phi(G) \subseteq \langle \phi(g) \rangle$. Meanwhile, $\langle \phi(g) \rangle \subseteq \phi(G)$ since $\phi(g) \in \phi(G)$. \\
+    Therefore, $\phi(G) = \langle \phi(g) \rangle$ is cyclic. \hfill $\square$
+\end{itemize}
+\end{proof}
+
+\begin{example}
+\begin{itemize}
+    \item $S_3, \mathbb{Z}_6$ both have 6 elements. But $S_3 \not\cong \mathbb{Z}_6$. Why? Suppose by contrary, $\phi : \mathbb{Z}_6 \xrightarrow{\cong} S_3$. Then $\phi(\mathbb{Z}_6) = S_3$ \& $\phi(\mathbb{Z}_6)$ is abelian. \\
+    $\Rightarrow S_3$ is abelian, contradicting ``$S_3$ is NOT abelian''.
+    
+    \item $\mathbb{Z}_2 \times \mathbb{Z}_2 \not\cong \mathbb{Z}_4$. (Hint: Suppose on contrary, $\phi : \mathbb{Z}_4 \to \mathbb{Z}_2 \times \mathbb{Z}_2$ and study $\phi(x)$)
+\end{itemize}
+\end{example}
+
+\vspace{1em}
+From now on, we'll classify groups up to isomorphism, i.e.: we won't distinguish $A_3 \cong \mathbb{Z}_3$ but $\mathbb{Z}_2 \times \mathbb{Z}_2$ \& $\mathbb{Z}_4$ are different!
+
+
+\vspace{1em}
+\begin{theorem}[Classification of cyclic groups]
+Let $G = \langle g \rangle$ be a cyclic group. Then:
+\begin{enumerate}
+    \item[(a)] If $|G| = \infty$, then $G \cong (\mathbb{Z}, +)$.
+    \item[(b)] If $|G| = n < \infty$, then $G \cong (\mathbb{Z}_n, +)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(a) Consider $\phi : \mathbb{Z} \to \langle g \rangle = \{ g^i \mid i \in \mathbb{Z} \} = G$ with $\phi(a) := g^a$. \\
+Then $\phi(a+b) = g^{a+b} = g^a g^b = \phi(a) \phi(b) \Rightarrow \phi$ is a surjective homomorphism \\
+Suppose $\phi$ is \textbf{NOT} injective, i.e.: $\exists \ m \neq n$, s.t.: $\phi(m) = \phi(n)$. \\
+WLOG, assume $m > n$. Then: \\
+$\phi(m) = \phi(n) \Leftrightarrow g^m = g^n \Rightarrow g^{m-n} = e \Rightarrow \text{ord}(g) \le m-n$ (in fact, $\text{ord}(g) \mid m-n$). \\
+Then $\langle g \rangle = \{ g^0=e, g^1, \dots, g^{\text{ord}(g)-1} \}$. \\
+$\Rightarrow |G| = |\langle g \rangle| = \text{ord}(g) < \infty$, contradicting $|G| = \infty$. \hfill $\square$
+
+\vspace{1em}
+(b) Let $G = \{ g^0=e, g^1, \dots, g^{n-1} \}$ (i.e.: $|G|=n$). Consider $\psi : G \to \mathbb{Z}_n$ with $\psi(g^i) := i$. \\
+Then $\psi$ is a surjective homom., since $\psi(g^a g^b) = \psi(g^{a+b}) = a+b = \psi(g^a) + \psi(g^b)$. \\
+Since $|G| = |\mathbb{Z}_n| = n$, then any surjective map is injective also. \\
+Therefore, $\psi : G \xrightarrow{\cong} \mathbb{Z}_n$ is bijective. \hfill $\square$
+\end{proof}
+
+Question (from a student): Where is negative powers of $g$? \\
+Answer: $g^n = e$, so $g^{-1} = g^{-1} g^n = g^{n-1}$, $g^{-2} = g^{-2} g^n = g^{n-2} \dots$
+
+
+\section{Lagrange's Theorem}
+
+\noindent \textbf{Recall:} equivalence relation $\sim$ on $S$: \\
+when $x \sim y$, then $x, y$ are in one equivalence class (with respect to $\sim$). $S = \coprod_{\alpha \in I} C_{\alpha}$
+
+\vspace{0.5em}
+\noindent \textbf{e.g.:}
+\begin{itemize}
+    \item $G = \mathbb{Z}, \ H = 3\mathbb{Z}$ on $\mathbb{Z}$, let $a \sim b \pmod 3$.
+    \begin{itemize}
+        \item[(i)] $a \sim a \pmod 3 \Rightarrow 3 \mid (a-a)$.
+        \item[(ii)] $a \sim b \pmod 3 \Rightarrow b \sim a \pmod 3$ is obvious since $3 \mid (a-b)$.
+        \item[(iii)] $a \sim b \pmod 3, \ b \sim c \pmod 3 \Rightarrow a-b = 3k, \ b-c = 3l \Rightarrow a-c = 3(k+l) \in 3\mathbb{Z}$. \\
+        $\Rightarrow a \sim c \pmod 3$. $\therefore \sim$ is an equiv. relation.
+    \end{itemize}
+    $G = \{0+3\mathbb{Z}\} \cup \{1+3\mathbb{Z}\} \cup \{2+3\mathbb{Z}\} = C_0 \cup C_1 \cup C_2$.
+    
+    \item $G = GL(n, \mathbb{R}), \ H = SL(n, \mathbb{R})$. $A \sim B$ iff $\det(A) = \det(B)$. \\
+    (Exercise: check $\sim$ satisfies (i)-(iii)). \\
+    $C_{\alpha} = [A] = \{ B \in GL(n, \mathbb{R}) \mid \det(B) = \alpha \}$.
+\end{itemize}
+
+\noindent $\bullet$ If $a \sim a'$ in $S$, then $C_a = C_{a'}$. (e.g.: in the example above, $1 \sim 4$). \\
+Therefore, any element in an equivalence class $C$ is a representative of $C$.
+
+\noindent $\bullet$ If $a \not\sim a'$, then $C_a \cap C_{a'} = \emptyset$. (e.g.: in the example above, $1 \not\sim 2$, $C_1 \cap C_2 = \emptyset, \ C_0 \cap C_1 = \emptyset \dots$). \\
+Therefore, $S$ can be partitioned into disjoint equivalence classes $S = C_1 \cup C_2 \cup \dots$ where $\{C_{\alpha}\}_{\alpha \in I}$ are equivalence classes and $C_{\alpha} \cap C_{\beta} = \emptyset$ if $\alpha \neq \beta$.
+
+\vspace{1em}
+\noindent \textbf{e.g.:} $\mathbb{Z} = C_0 \cup C_1 \cup C_2 = (0+3\mathbb{Z}) \cup (1+3\mathbb{Z}) \cup (2+3\mathbb{Z})$ \\
+$GL(n, \mathbb{R}) = \coprod_{\alpha \in \mathbb{R}^*} \{ \begin{pmatrix} \alpha & 0 \\ 0 & I \end{pmatrix} SL(n, \mathbb{R}) \} = \coprod_{\alpha \in \mathbb{R}^*} \{ A \mid \det(A) = \alpha \}$.
+
+\vspace{1em}
+\begin{definition}[Equivalence Relation on Groups]
+Let $G$ be a group and $H \le G$. Define an equivalence relation on $G$ by $a \sim b$ iff $a^{-1}b \in H$.
+\end{definition}
+
+\noindent \textbf{(Check):}
+\begin{itemize}
+    \item[(i)] $a \sim a$, since $a^{-1}a = e \in H$.
+    \item[(ii)] $a \sim b \Rightarrow a^{-1}b \in H \Rightarrow (a^{-1}b)^{-1} \in H \Rightarrow b^{-1}a \in H \Rightarrow b \sim a$.
+    \item[(iii)] $a \sim b, \ b \sim c \Rightarrow a^{-1}b \in H, \ b^{-1}c \in H \Rightarrow (a^{-1}b)(b^{-1}c) \in H$ \\
+    $\Rightarrow a^{-1}c \in H \Rightarrow a \sim c$.
+\end{itemize}
+
+\vspace{1em}
+\begin{definition}[Left Coset]
+Let $G$ be a group and $H \le G$. Define the \textbf{left coset} of $H$ with representative $a$ as $aH := C_a = \{ b \in G \mid a \sim b \} = \{ b \in G \mid a^{-1}b \in H, \text{ for } b \in G \}$ \\
+$= \{ b \in G \mid b = ah, \ h \in H \}$.
+\end{definition}
+
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $G = \mathbb{Z}, \ H = 3\mathbb{Z} = \langle 3 \rangle$. The cosets of $3\mathbb{Z}$ in $\mathbb{Z}$ are (under addition): \\
+    The left cosets are: $0+3\mathbb{Z} = 3\mathbb{Z}, \ 1+3\mathbb{Z}, \ 2+3\mathbb{Z}$.
+    
+    \item $G = GL(n, \mathbb{R}), \ H = SL(n, \mathbb{R})$. $a \sim b$ iff $a^{-1}b \in SL(n, \mathbb{R}) \Leftrightarrow \det(a^{-1}b) = 1$ \\
+    $\Leftrightarrow \det(a) = \det(b)$. \\
+    The left cosets are: $C_{\begin{pmatrix} \alpha & 0 \\ 0 & I \end{pmatrix}} = \begin{pmatrix} \alpha & 0 \\ 0 & I \end{pmatrix} SL(n, \mathbb{R}) = \{ B \mid \det(B) = \alpha \} = \{ B \mid \det(B) = \det(\alpha) \}$.
+    
+    \item $G = S_3, \ H = \langle (1\,2) \rangle = \{e, (1\,2)\}$. \\
+    Left cosets: $C_e = eH = \{e, (1\,2)\}$. \\
+    $C_{(1\,2\,3)} = (1\,2\,3)H = \{(1\,2\,3), (1\,2\,3)(1\,2)\} = \{(1\,2\,3), (1\,3)\}$. \\
+    $C_{(1\,3\,2)} = (1\,3\,2)H = \{(1\,3\,2), (1\,3\,2)(1\,2)\} = \{(1\,3\,2), (2\,3)\}$.
+    
+    \item $G = D_4, \ H = \langle s \rangle = \{e, s\}$. \\
+    $eH = \{e, s\} = sH$. \\
+    $rH = \{r, rs\} = rsH$. \\
+    $r^2H = \{r^2, r^2s\} = r^2sH$. \\
+    $r^3H = \{r^3, r^3s\} = r^3sH$.
+\end{itemize}
+\end{example}
+
+\begin{remark} 
+We can also define $a \sim_R b$ by $ba^{-1} \in H$. Then the equivalence class of $a$ is called \textbf{right coset} $Ha = \{ ha \mid h \in H \}$.
+\end{remark}
+\vspace{1em}
+\begin{theorem}[Lagrange's Theorem]
+Let $G$ be a finite group and $H \le G$. Then $|H| \mid |G|$. \\
+(e.g.: all subgroups of $G = S_3$ have order 1, 2, 3, 6 only). \\
+More precisely, let $m = [G : H] :=$ the number of disjoint left cosets of $H$. \\
+Then $|H| = |G| / [G : H]$. \\
+e.g.: $\bullet \ G = S_3, \ H = \langle (1\,2) \rangle$. Then $m = 3 \Rightarrow |H| = |S_3| / 3 = 6 / 3 = 2$. \\
+\phantom{e.g.:} $\bullet \ G = D_n, \ H = \langle r \rangle$. Then $m = 2 \Rightarrow |H| = |D_n| / 2 = 2n / 2 = n$.
+\end{theorem}
+
+\begin{proof}
+Since (left cosets of $H$) = (equivalence classes of $G$), we can partition $G = eH \amalg a_2 H \amalg \dots \amalg a_m H$ (let $a_1 := e$) into disjoint union of equivalence classes. \\
+($m = [G : H] < \infty$, since $|G| < \infty$). \\
+So we just need to check each $a_i H$ have the same number of elements $|H| = r$ \hfill (*) \\
+$a_i H = \{ a_i h_1, a_i h_2, \dots, a_i h_r \}$ where $\{ h_1, \dots, h_r \} = H$. Then for each $a_i h_x, a_i h_y \in a_i H$: \\
+$a_i h_x = a_i h_y \Leftrightarrow a_i^{-1} a_i h_x = a_i^{-1} a_i h_y \Leftrightarrow h_x = h_y \Leftrightarrow x = y$. \\
+So the elements in $a_i H$ are distinct, and hence, $|a_i H| = |H| = r$. \\
+$\therefore$ By (*), $|G| = |H| + |H| + \dots + |H| = m|H|$. \hfill $\square$
+\end{proof}
+
+\vspace{1em}
+\begin{corollary}
+Let $|G| < \infty$. Then for all $g \in G, \ \text{ord}(g) \mid |G|$. \\
+e.g.: all elements in $G = D_5$ must have order 1, 2, 5, 10 only.
+\end{corollary}
+
+\begin{proof}
+Take $H := \langle g \rangle \le G$. Then $\text{ord}(g) = |\langle g \rangle| = | \{ e, g, \dots, g^{n-1} \} |$. \\
+Then by Lagrange's Thm, $\text{ord}(g) = |\langle g \rangle| \mid |G|$. \hfill $\square$
+\end{proof}
+
+\begin{example}[Fermat's Little Theorem] 
+Let $a \in G = \mathbb{Z}_p^*$. Then $a^{p-1} = e = 1$ in $\mathbb{Z}_p^*$. \\
+(e.g.: In $\mathbb{Z}_7$, $2^6 \equiv 3^6 \equiv \dots \equiv 6^6 \equiv 1 \pmod 7$)
+\end{example}
+\noindent (Proof): By corollary 2.55, for all $a \in \mathbb{Z}_p^* = G$, $d = \text{ord}(a) \mid p-1 = |\mathbb{Z}_p^*|$. \\
+Hence, $a^d = 1$ and $d \cdot \alpha = p-1$ for some integer $\alpha$. Then \\
+$a^{p-1} = a^{d\alpha} = (a^d)^\alpha = 1^\alpha = 1$.
+
+\vspace{0.5em}
+\noindent More generally, $G = \mathbb{Z}_n^*, \ |G| = \phi(n) = \# \{ r \mid 1 \le r \le n, \ \gcd(r, n) = 1 \}$ \\
+($\phi$ Euler's totient function). Then $a^{\phi(n)} \equiv 1 \pmod n$.
+
+\section{Normal Subgroups}
+
+\noindent \textbf{Motivations:} We have $G = (g_1 H) \amalg (g_2 H) \amalg \dots$ (left cosets). Also, \\
+$G = (H b_1) \amalg (H b_2) \amalg \dots$ (right cosets).
+
+\vspace{0.5em}
+\noindent \textbf{Question:} Do we have $\{ gh \mid h \in H \} = gH = Hg = \{ hg \mid h \in H \}$ in general?
+
+\vspace{0.5em}
+\noindent \textbf{Answer:} No. Let's try $G = S_3, \ H = \langle (1\,2) \rangle$. Then \\
+$(1\,3)H = \{ (1\,3), (1\,3)(1\,2) \} = \{ (1\,3), (1\,2\,3) \}$ \\
+$H(1\,3) = \{ (1\,3), (1\,2)(1\,3) \} = \{ (1\,3), (1\,3\,2) \} \neq (1\,3)H$.
+
+\vspace{1em}
+\noindent \textbf{Question:} What kind of $H \le G$ gives $gH = Hg$?
+
+\begin{definition}[Normal Subgroup]
+$H \le G$ is a \textbf{normal subgroup} if $gH = Hg \quad \forall g \in G$. (And we'll write $H \triangleleft G$ in such cases).
+\end{definition}
+
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $G = S_n, \ H = A_n$. Then $H \triangleleft G$.
+    \item If $G$ is abelian, then any subgroup $H \le G$ is normal. \\
+    Proof: $\forall g \in G, \forall h \in H$, $gh = hg$ (since $G$ is abelian). So $gH = Hg$ for all $g$.
+    
+    \item Similarly, $SL(n, \mathbb{R}) \triangleleft GL(n, \mathbb{R})$ is normal. \\
+    Proof: Let $A \in GL(n, \mathbb{R})$ and $H = SL(n, \mathbb{R})$. For any $h \in H$, 
+    \[ \det(A h A^{-1}) = \det(A) \det(h) \det(A)^{-1} = 1 \cdot \det(A) \cdot \frac{1}{\det(A)} = 1 \]
+    $\Rightarrow A h A^{-1} \in SL(n, \mathbb{R})$, so $AH = HA$.
+    
+    \item If $H \le G$ and $[G:H] = 2$, then $H \triangleleft G$. \\
+    Proof: In this case, $G = H \amalg (gH)$ and $G = H \amalg (Hg)$. \\
+    Since $H \cap gH = \emptyset$ and $H \cap Hg = \emptyset$, it must be $gH = Hg$.
+    
+    \item $\{e\} \triangleleft G$ and $G \triangleleft G$ are always normal subgroups.
+\end{itemize}
+\end{example}
+
+
+\vspace{1em}
+\begin{theorem} 
+Let $H \le G$ be a subgroup. The followings are equivalent: \\
+(i) $H \triangleleft G$; \quad (ii) $\forall h \in H, g \in G, \ g h g^{-1} \in H$; \quad (iii) $g H g^{-1} = H \quad \forall g \in G$.
+\end{theorem}
+\noindent (Proof): \\
+((i) $\Rightarrow$ (ii)): By assumption, $gH = Hg \quad \forall g \in G$. $\Rightarrow \forall h \in H, \ g h \in gH = Hg$ \\
+$\Rightarrow g h = h' g$ for some $h' \in H$. $\Rightarrow g h g^{-1} = h' \in H$.
+
+\vspace{0.5em}
+\noindent ((ii) $\Rightarrow$ (iii)): By (ii), $g H g^{-1} = \{ g h g^{-1} \mid h \in H \} \subseteq H$. $\bullet$ $g^{-1} g H g^{-1} g \subseteq g^{-1} H g \Rightarrow H \subseteq g^{-1} H g$. \\
+for all $g \in G$. Then $H \subseteq (g^{-1}) H (g^{-1})^{-1}$ (take ``$g = g^{-1}$''). $\Rightarrow H \subseteq g H g^{-1}$. \\
+Therefore, $H = g H g^{-1}$.
+
+\vspace{0.5em}
+\noindent ((iii) $\Rightarrow$ (i)): $g H g^{-1} g = H g \quad \forall g \in G \Rightarrow g H = H g \quad \forall g \in G \Rightarrow H \triangleleft G$. \hfill $\square$
+
+\vspace{1.5em}
+\begin{corollary} 
+Let $\phi : G \to H$ be a homomorphism. Then $\ker \phi \triangleleft G$.
+
+\vspace{0.5em}
+\noindent (Proof): By (ii) in theorem 2.59, we only need to show $\forall k \in \ker \phi, \ g \in G, \ g k g^{-1} \in \ker \phi$. \\
+Indeed, $\phi(g k g^{-1}) = \phi(g) \phi(k) \phi(g^{-1}) = \phi(g) e_H (\phi(g))^{-1} = \phi(g) (\phi(g))^{-1} = e_H$. \hfill $\square$
+\end{corollary}
+
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $\phi : GL(n, \mathbb{R}) \to \mathbb{R}^* \quad \text{with} \quad \phi(A) = \det(A)$. Then $\ker \phi = \{ A \mid \det(A) = 1 \} = SL(n, \mathbb{R})$. \\
+    $\therefore SL(n, \mathbb{R}) \triangleleft GL(n, \mathbb{R})$.
+    
+    \item $\psi : S_n \to (\{ \pm 1 \}, \times) \quad \text{with} \quad \psi(\sigma) := \text{parity of } \sigma$. Then $\ker \psi = A_n \triangleleft S_n$.
+\end{itemize}
+\end{example}
+
+
+\section{Quotient Groups}
+\noindent \textbf{Motivation:} Let $H \triangleleft G$. We want to define a group structure on the set of left cosets $G/H := \{ gH \mid g \in G \}$.
+
+\begin{definition}[Quotient Group]
+Let $G$ be a group and $H \triangleleft G$. Define the \textbf{quotient group} (or factor group) $G/H$ as the set of left cosets $\{ gH \mid g \in G \}$ with the multiplication:
+\[ (aH) * (bH) := (ab)H \]
+\end{definition}
+
+
+\noindent \textbf{(WARNING):} \\
+There are lots of repetitions in this set, i.e.: there can be $a_1 \neq a_2$, s.t.: $a_1H=a_2H$
+
+\vspace{0.5em}
+\noindent \textbf{(Check):}
+\begin{itemize}
+    \item $*$ is well-defined: Suppose $aH = a'H$ \& $bH = b'H$ --- (*). \\
+    By (*), $h_a := a^{-1} a' \in H$, $h_b := b^{-1} b' \in H$. Then $a'b' = (ah_a)(bh_b) = abh_a^h h_b$ \\
+    $\Rightarrow a'b' \in (ab)H \Rightarrow (a'b')H = (ab)H$
+\end{itemize}
+
+
+\begin{itemize}
+    \item $(G/H, *)$ is a group:
+    \begin{enumerate}
+        \item $((aH) * (bH)) * (cH) = (ab)H * (cH) = (abc)H = (aH) * (bc)H$ \\
+        \phantom{((aH) * (bH)) * (cH)} $= (aH) * ((bH) * (cH))$
+        
+        \item $(aH) * (eH) = aH = (eH) * (aH)$, i.e.: $e_{G/H} = eH$.
+        
+        \item $(aH) * (a^{-1}H) = eH = e_{G/H} = (a^{-1}H) * (aH)$, i.e.: $(aH)^{-1} = a^{-1}H$.
+    \end{enumerate}
+\end{itemize}
+
+
+
+
+
+\begin{example}
+\begin{itemize}
+    \item $G = \mathbb{Z} \ , \ H = \langle n \rangle = n\mathbb{Z} \triangleleft G \ . \ (\text{Exercise : All subgroups of abelian}$ \\
+    $\text{group } G \text{ are normal})$ \\
+    $G/H = \{ 0 + n\mathbb{Z} \ , \ 1 + n\mathbb{Z} \ , \ 2 + n\mathbb{Z} \ , \ \dots \ , \ (n-1) + n\mathbb{Z} \}$ \\
+    For $a + n\mathbb{Z} \ , \ b + n\mathbb{Z} \in G/H \ , \ (a + n\mathbb{Z}) * (b + n\mathbb{Z}) := (a+b) + n\mathbb{Z} = c + n\mathbb{Z}$ \\
+    where $c \equiv a+b \pmod n \ \& \ 0 \le c < n$ \\
+    $\therefore$ There's an isomorphism $\phi : G/H = \mathbb{Z}/n\mathbb{Z} \xrightarrow{\cong} \mathbb{Z}_n$ with $\phi(a + n\mathbb{Z}) := a \pmod n$ \\
+    Remark: From now on, I may interchange $\mathbb{Z}/n\mathbb{Z}$ and $\mathbb{Z}_n$.
+    
+    \item $A_n \triangleleft S_n \ , \ \text{then } S_n/A_n = \{ A_n \ , \ \tau A_n \} \quad (\tau \text{ is any transposition } \tau = (a \ b))$. \\
+    (Recall $|S_n| = n! \ , \ |A_n| = \frac{n!}{2} \ , \ \therefore |S_n/A_n| = 2$) \\
+    $\therefore S_n/A_n \cong \mathbb{Z}_2 \ (\cong \mathbb{Z}/2\mathbb{Z})$
+    
+    \item $SL(n, \mathbb{R}) \trianglelefteq GL(n, \mathbb{R})$.
+    \begin{align*}
+    GL(n, \mathbb{R})/SL(n, \mathbb{R}) &= \left\{ \begin{pmatrix} x & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} SL(n, \mathbb{R}) \mid x \in \mathbb{R}^* \right\} \\
+    &= \{ A \in GL(n, \mathbb{R}) \mid \det(A) = x \}
+    \end{align*}
+    \begin{align*}
+    & \left( \begin{pmatrix} x & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} SL(n, \mathbb{R}) \right) 
+    \left( \begin{pmatrix} y & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} SL(n, \mathbb{R}) \right) \\
+    &= \left( \begin{pmatrix} x & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} \begin{pmatrix} y & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} \right) SL(n, \mathbb{R}) \\
+    &= \begin{pmatrix} xy & \dots & 0 \\ \vdots & 1 & \dots \\ 0 & \dots & 1 \end{pmatrix} SL(n, \mathbb{R})
+    \end{align*}
+    $\therefore GL(nd, \mathbb{R})/SL(n, \mathbb{R}) \cong (\mathbb{R}^*, \times)$
+    
+    \item $K = \{ e, (12)(34), (13)(24), (14)(23) \} \triangleleft S_4$ \\
+    Then $|S_4/K| = |S_4|/|K| = 24/4 = 6 \quad$ Indeed, $S_4/K \cong S_3$
+    \end{itemize}
+    \end{example}
+
+\section{First Isomorphism Theorem}
+
+\begin{theorem}[First Isomorphism Theorem]
+Let $\phi : G \to H$ be a group homomorphism. Then $G/\ker \phi \cong \text{im } \phi$.
+\end{theorem}
+\vspace{1em}
+\begin{example}
+\begin{itemize}
+    \item $\phi : \mathbb{Z} \to \mathbb{Z}_n$ with $\phi(a) := a \pmod n$ is a homomorphism, with \\
+    $\ker \phi = n\mathbb{Z} \ , \ \text{im} \phi = \mathbb{Z}_n$. Then by 1st isomorphism, $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_n$.
+    
+    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \times)$ with $\ker(\det) = \{ A \mid \det(A) = 1 \} = SL(n, \mathbb{R})$, \\
+    $\text{im}(\det) = \mathbb{R}^*$. Hence, $GL(n, \mathbb{R})/SL(n, \mathbb{R}) \cong \mathbb{R}^*$.
+    
+    \item $\phi : \mathbb{R} \to GL(2, \mathbb{R})$ with $\phi(x) := \begin{pmatrix} \cos x & -\sin x \\ \sin x & \cos x \end{pmatrix}$. Then \\
+    $\ker \phi = 2\pi\mathbb{Z} \ , \ \text{and} \ \text{im} \phi = \left\{ \left. \begin{pmatrix} \cos x & -\sin x \\ \sin x & \cos x \end{pmatrix} \right| 0 \le x < 2\pi \right\} = SO(2)$. \\
+    $\therefore \mathbb{R}/2\pi\mathbb{Z} \cong SO(2)$.
+\end{itemize}
+\end{example}
+\vspace{1em}
+
+\noindent \textbf{Proof of 1st isomorphism theorem:} Define $\Psi : G/\ker \phi \to \text{im} \phi$ by \\
+$\Psi(g \ker \phi) := \phi(g)$.
+
+\begin{enumerate}
+    \item[(1)] $\Psi$ is well-defined: For $g \ker \phi = g' \ker \phi \ , \ g^{-1}g' \in \ker \phi \Leftrightarrow e_H = \phi(g^{-1}g')$ \\
+    $= \phi(g)^{-1} \phi(g') \Leftrightarrow \phi(g) e_H = \phi(g) \phi(g)^{-1} \phi(g') = \phi(g') \Leftrightarrow \phi(g) = \phi(g')$. \\
+    $\Leftrightarrow \Psi(g \ker \phi) = \Psi(g' \ker \phi)$.
+    
+    \item[(2)] $\Psi$ is a homomorphism: $\Psi((g \ker \phi)(g' \ker \phi)) = \Psi(gg' \ker \phi) := \phi(gg') = \phi(g)\phi(g')$ \\
+    $= \Psi(g \ker \phi) \Psi(g' \ker \phi)$.
+    
+    \item[(3)] $\Psi$ is surjective: Obvious from definition of $\Psi$.
+    
+    \item[(4)] $\Psi$ is injective: $\forall \ g \ker \phi \in \ker \Psi \ , \ \phi(g) = e_H \Rightarrow g \in \ker \phi$ \\
+    $\Rightarrow g \ker \phi = e_G \ker \phi = e_{G/\ker \phi} \Rightarrow \ker \Psi = \{ e_{G/\ker \phi} \}$. \hfill $\square$
+\end{enumerate}
+
+\vspace{1em}
+
+\subsection*{Applications of quotient groups}
+\begin{itemize}
+    \item We can construct new groups from old ones.
+    \item Cauchy's Theorem: Suppose $|G| < \infty$ is finite and $p \mid |G|$ for some prime $p$. Then $G$ must have an element $g$ of order $p$.
+    \item Classification of finite groups.
+\end{itemize}
+
+\section{Simple Groups}
+
+\begin{definition}[Simple group]
+A group $G$ is called \textbf{simple} if $G$ has no normal subgroups other than $\{e\}$ and $G$ itself.
+\end{definition}
+\vspace{0.5em}
+\noindent \textbf{Reason for this definition:} \\
+If $G$ is \textbf{NOT} simple, then we have $N \triangleleft G$. So we can ``decompose'' $G$ into $G/N$ and $N$, and study them individually.
+
+\vspace{0.5em}
+\noindent \textbf{Remark/WARNING:} If $|G| < \infty$ is NOT simple, then $|G/N| = |G| / |N|$. \\
+So $|G/N \times N| = |G/N| \times |N| = |G|/|N| \times |N| = |G|$. But $G \not\cong G/N \times N$ in general.
+
+\vspace{1.5em}
+\begin{example}
+\begin{itemize}
+    \item $S_n$ is \textbf{NOT} simple, since $A_n \triangleleft S_n$. So we can ``understand'' $S_n$ by understanding $A_n$ and $S_n/A_n \cong \mathbb{Z}_2$ individually. \\
+    But $S_n \not\cong A_n \times (S_n/A_n)$.
+    
+    \item $A_4$ is \textbf{NOT} simple, since $K = \{ e, (12)(34), (13)(24), (14)(23) \} \triangleleft A_4$. \\
+    However, $A_n$ is simple for $n \ge 5$ (very important in Galois theory: there're no radical solutions for quintic polynomial $x^5 + a_4x^4 + a_3x^3 + \dots + a_0 = 0$).
+\end{itemize}
+\end{example}
+
+\section{Fundamental Theorem of Finite Abelian Groups}
+
+\noindent \textbf{Observations:}
+\begin{enumerate}
+    \item[(1)] $\mathbb{Z}_n \ (\cong \mathbb{Z}/n\mathbb{Z} = \mathbb{Z}/\langle n \rangle)$ is abelian
+    \item[(2)] $G$ and $H$ are abelian $\iff G \times H$ is abelian
+    \item[(3)] If $\gcd(m, n) = 1$, then $\mathbb{Z}_{mn} \cong \mathbb{Z}_m \times \mathbb{Z}_n$
+\end{enumerate}
+
+\vspace{1em}
+\begin{theorem}
+All finite abelian groups are of the form $G \cong \mathbb{Z}_{p_1^{a_1}} \times \dots \times \mathbb{Z}_{p_k^{a_k}}$ where $p_1 \le \dots \le p_k$ are primes, $a_1, \dots, a_k \in \mathbb{N} \setminus \{0\}$ ($p_i$ NOT necessarily distinct).
+\end{theorem}
+\vspace{1em}
+\noindent \textbf{(Proof):} There are 2 main steps to prove theorem 2.68: \\
+\textbf{Step 1:} If $|G| = q_1^{a_1} \dots q_r^{a_r}$, $q_i$ distinct primes, then $G \cong G_1 \times \dots \times G_r, |G_i| = q_i^{a_i}$ \\
+\textbf{Step 2:} If $|G| = q^b$, then $G \cong \mathbb{Z}_{q^{b_1}} \times \dots \times \mathbb{Z}_{q^{b_r}}, \sum_{j=1}^r b_j = b$
+
+\vspace{1em}
+\noindent \textbf{Proof of step 1:} Suppose $|G| = p^a q^b$ ($p, q$ distinct primes). We want to show $G \cong G_1 \times G_2$, $|G_1| = p^a =: m$, $|G_2| = q^b =: n$, and the general case follows from induction on \# of prime powers.
+
+\vspace{0.5em}
+\noindent Let $G^m := \{ g^m \mid g \in G \} \le G$ \quad \& \quad $G^n := \{ g^n \mid g \in G \} \le G$.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 1:}} $G^m \cap G^n = \{e\}$. Indeed, suppose $x \in G^m \cap G^n$. Then $x = g^m = h^n$ for some $g, h \in G$. Then $x^n = g^{mn} = e$ \& $x^m = h^{nm} = e$ (by Lagrange's Theorem, $|G| = mn$). Note that $\gcd(m, n) = \gcd(p^a, q^b) = 1$ \\
+$\Rightarrow \alpha m + \beta n = \gcd(m, n) = 1$ for some $\alpha, \beta \in \mathbb{Z}$. $\Rightarrow x^{\alpha m + \beta n} = (x^m)^\alpha (x^n)^\beta = x^1$ \\
+$\Rightarrow e \cdot e = x^1 \Rightarrow x = e$. Then \underline{claim 1 holds}.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 2:}} $\phi: G^m \times G^n \to G$ with $\phi(g^m, h^n) := g^m(h^n)^{-1}$ is an isomorphism:
+\begin{itemize}
+    \item $\phi$ is a homomorphism. (exercise, need $G$ is abelian)
+    \item $\phi$ is injective: Suppose $\phi(g^m, h^n) = e$. Then $g^m(h^n)^{-1} = e \Rightarrow g^m = h^n$ \\
+    $\Rightarrow g^m, h^n \in G^m \cap G^n = \{e\} \Rightarrow g^m = h^n = e \Rightarrow \ker \phi = \{(e, e)\}$.
+    \item $\phi$ is surjective: Take $y \in G$. \\
+    $y = y^1 = y^{\alpha m + \beta n} = (y^\alpha)^m (y^\beta)^n = \phi((y^\alpha)^m, (y^{-\beta})^n)$ \\
+    Hence, $\phi$ is an isomorphism.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 3:}} $|G^m| = n = q^b$, $|G^n| = m = p^a$ \\
+Begin by showing $\gcd(|G^n|, q) = 1$. Suppose $q \mid |G^n|$. Then by Cauchy's Theorem, there exists $x = g^n$ in $G^n$ of order $q$. \\
+By Bezout, $\gcd(q, m) = 1$. So one has $\alpha q + \beta m = 1$, and $x^q = e$. Then $x^{\alpha q} = e \Rightarrow x^{1-\beta m} = e \Rightarrow x \cdot (x^m)^{-\beta} = e \Rightarrow x(g^{nm})^{-\beta} = e$ \\
+$\xrightarrow{\text{Lagrange's}} x \cdot e^{-1} = e \Rightarrow x = e$, contradicting order of $x$ is $q$. \\
+So $\gcd(|G^n|, q) = 1 \Rightarrow |G^n| = p^r$ \& $\gcd(|G^m|, p) = 1 \Rightarrow |G^m| = q^s$ \\
+But $G^m \times G^n \cong G$, so $p^r \cdot q^s = |G| = p^a q^b$. Then $a=r, b=s$. \\
+Therefore, \underline{claim 3 holds}.
+
+\vspace{1em}
+\noindent \textbf{Proof of step 2:} Suppose $|G| = p^a$. Then for all $x \in G$, $\text{ord}(x) = p^i$ for some $0 \le i \le a$ by Lagrange's Theorem. \\
+Let $m \in G$ be an element with maximum order $\text{ord}(m) = p^l$ in $G$.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Proposition:}} Let $G$ be an abelian group with $|G| = p^a$. Suppose $\mu \in G$ has maximum order $\text{ord}(\mu) = p^l$ in $G$, then $G \cong \langle \mu \rangle \times K \cong \mathbb{Z}_{p^l} \times K$.
+
+\vspace{0.5em}
+\noindent \textbf{Proof of Proposition:} Induction on $p^a = |G|$. If $a=1$, then $|G| = p \Rightarrow G \cong \mathbb{Z}_p$. \\
+Then suppose the Proposition holds for all abelian $G$ with $|G| = p^r, r < a$. \\
+Now let $|G| = p^a$. Suppose $\text{ord}(\mu) = p^m$ is maximal:
+\begin{itemize}
+    \item If $m=a$, then $\langle \mu \rangle = G$ and then we're done.
+    \item If $m < a$, then let $\nu \in G$ be such that $\nu$ is non-identity element NOT in $\langle \mu \rangle$ with smallest possible order $p^k$.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 4:}} $\text{ord}(\nu) = p$. $\because \text{ord}(\nu^p) < p^k$, so $\nu^p \in \langle \mu \rangle$ and $\nu^p = \mu^i$ for some $i \in \mathbb{Z}$. Then $(\mu^i)^{p^{m-1}} = (\nu^p)^{p^{m-1}} = \nu^{p^m} = e$, since every $g \in G$ has order $\le p^m$. \\
+$\Rightarrow \text{ord}(\mu^i) \mid p^{m-1} \Rightarrow |\langle \mu^i \rangle| < p^m \Rightarrow \langle \mu^i \rangle \neq \langle \mu \rangle \Rightarrow \gcd(i, p^m) > 1$ \\
+$\therefore i = pj$ for some $j \in \mathbb{Z}$. Hence, $\nu^p = \mu^{pj}$ for some $j \in \mathbb{Z}$. \\
+Let $c := \nu \mu^{-j}$. Then $c \notin \langle \mu \rangle$ and $c^p = e$, since $\nu \notin \langle \mu \rangle$ is chosen to have smallest order. Therefore, $\text{ord}(\nu) = p$. $\Rightarrow$ \underline{claim 4 holds}.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 5:}} $\langle \mu \rangle \cap \langle \nu \rangle = \{e\}$. Let $\nu^l \in \langle \mu \rangle \cap \langle \nu \rangle$. Then $0 \le l < p$, since $\text{ord}(\nu) = p$. Suppose $l \neq 0$, then $\gcd(l, p) = 1 \Rightarrow \alpha l + \beta p = 1$ \\
+$\Rightarrow \langle \mu \rangle \cap \langle \nu \rangle \ni (\nu^l)^\alpha = \nu \cdot \nu^{-\beta p} = \nu \Rightarrow \nu \in \langle \mu \rangle$. Contradiction. \\
+Therefore, $\langle \mu \rangle \cap \langle \nu \rangle = \{e\}$, i.e.: \underline{claim 5 holds}.
+
+\vspace{0.5em}
+\noindent Let $\bar{G} := G/\langle \nu \rangle$, s.t.: $|\bar{G}| = \frac{|G|}{|\langle \nu \rangle|} = \frac{p^a}{p} = p^{a-1}$ \& write $\bar{g} := g\langle \nu \rangle \in \bar{G}$.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 6:}} $\bar{\mu} \in \bar{G}$ has order $p^m$ (maximal order). Obviously, $\bar{\mu}^{p^m} = (\mu\langle \nu \rangle)^{p^m} = \mu^{p^m}\langle \nu \rangle = e\langle \nu \rangle = e_{\bar{G}} \Rightarrow \text{ord}(\bar{\mu}) \mid p^m$ \\
+Suppose by contrary, $\text{ord}(\bar{\mu}) = p^u$ for $u < m$. Then $\mu^{p^u}\langle \nu \rangle = e_{\bar{G}} = e\langle \nu \rangle$ \\
+$\Rightarrow \mu^{p^u} \in \langle \nu \rangle \Rightarrow \mu^{p^u} \in \langle \mu \rangle \cap \langle \nu \rangle \xrightarrow{\text{claim 5}} \{e\} \Rightarrow \mu^{p^u} = e$, contradicting $\text{ord}(\mu) = p^m$. Therefore, \underline{claim 6 holds}.
+
+\vspace{0.5em}
+\noindent By induction, there is another subgroup $\bar{K} \le \bar{G}$ s.t.: $\langle \bar{\mu} \rangle \times \bar{K} \cong \bar{G} \ (*)$. \\
+That is, every element in $\bar{G}$ can be written \underline{uniquely} as $\bar{\mu}^i \bar{k} \in \bar{G}$ for some $\bar{\mu}^i \in \langle \bar{\mu} \rangle, \bar{k} \in \bar{K}$. Let $\pi: G \to \bar{G}$ be given by $\pi(g) := \bar{g}$. Then $K := \pi^{-1}(\bar{K}) = \{ k \in G \mid \pi(k) \in \bar{K} \} \le G$.
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 7:}} $\pi|_K: K \to \bar{K}$ has $\ker(\pi|_K) = \langle \nu \rangle$. $x \in \ker(\pi|_K) \iff \pi(x) = x\langle \nu \rangle = e_{\bar{G}} = \langle \nu \rangle \iff x \in \langle \nu \rangle$. Therefore, \underline{claim 7 holds}.
+
+\vspace{0.5em}
+\noindent Hence, by 1st isomorphism theorem, $|K/\langle \nu \rangle| = |\bar{K}|. \Rightarrow |K|/p \overset{(*)}{=} \frac{|G|}{|\langle \mu \rangle|} \Rightarrow |K| = \frac{p \cdot p^{a-1}}{p^m} \Rightarrow |K| = p^{a-m}$
+
+\vspace{0.5em}
+\noindent \underline{\textbf{Claim 8:}} $\langle \mu \rangle \cap K = \{e\}$ in $G$. Let $\mu^i \in \langle \mu \rangle \cap K$, then $\pi(\mu^i) = \bar{\mu}^i \cdot e_{\bar{K}} = e_{\langle \bar{\mu} \rangle} \cdot \bar{k}$. By uniqueness, $\bar{\mu}^i = e_{\langle \bar{\mu} \rangle}$ \& $\bar{k} = e_{\bar{K}}$ \\
+$\Rightarrow \mu^i \in \langle \nu \rangle \Rightarrow \mu^i \in \langle \mu \rangle \cap \langle \nu \rangle = e$. Then \underline{claim 8 holds}.
+
+\vspace{0.5em}
+\noindent Finally, consider the homomorphism $\theta: \langle \mu \rangle \times K \to G$ with $\theta(\mu^i, k) := \mu^i k$ \\
+Then by claim 8, $\theta$ is injective. By claim 7, $|\langle \mu \rangle \times K| = |\langle \mu \rangle| |K| = p^m \cdot p^{a-m} = p^a = |G|$. Hence, $\theta$ is surjective as well, and hence: \\
+$\langle \mu \rangle \times K \cong G$ \hfill $\square$
+
+
+\vspace{1.5em}
+\begin{example}
+$|G|=4$. Then all elements of $G$ have order $1, 2, 4$.
+\begin{enumerate}
+    \item[(i)] If $G$ has an element $m$ of order $4$, then $G = \langle m \rangle \cong \mathbb{Z}_4$.
+    \item[(ii)] Suppose all elements of $G$ has order $1$ or $2$. Take any $m \in G$ of order $2$, $G \cong \langle m \rangle \times K \cong \mathbb{Z}_2 \times \mathbb{Z}_2$.
+\end{enumerate}
+\end{example}
+
+\vspace{1.5em}
+\begin{corollary}[of proposition in the proof of Theorem 2.69]
+If $|G| = p^a$, abelian, then $G \cong \mathbb{Z}_{p^{b_1}} \times \mathbb{Z}_{p^{b_2}} \times \dots \times \mathbb{Z}_{p^{b_\ell}}$, where $\sum_{j=1}^{\ell} b_j = a$. \\
+(Proof): Induction on $|G| = p^a$.
+\end{corollary}
+\vspace{1em}
+\begin{example}
+How does an abelian $G$ with $|G| = 360 = 2^3 \times 3^2 \times 5$ look like? \\
+\textbf{By Step 1:} $G \cong G_8 \times G_9 \times G_5$ \quad where $|G_i| = i$ for $i=5, 8, 9$. \\
+\textbf{By Step 2:} $G_8$ can be $\mathbb{Z}_8$ or $\mathbb{Z}_2 \times \mathbb{Z}_4 \cong \mathbb{Z}_4 \times \mathbb{Z}_2$ or $\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2$. \\
+\phantom{\textbf{By Step 2:}} $G_9$ can be $\mathbb{Z}_9$ or $\mathbb{Z}_3 \times \mathbb{Z}_3$. \\
+\phantom{\textbf{By Step 2:}} $G_5$ can be $\mathbb{Z}_5$ only.
+
+\noindent $\therefore G \cong \begin{pmatrix} \mathbb{Z}_8 \\ \mathbb{Z}_4 \times \mathbb{Z}_2 \\ \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \end{pmatrix} \times \begin{pmatrix} \mathbb{Z}_9 \\ \mathbb{Z}_3 \times \mathbb{Z}_3 \end{pmatrix} \times \mathbb{Z}_5$ \quad (with 6 possibilities)
+\end{example}
+\vspace{2em}
+\begin{corollary}[Smith Normal Form]
+All finite abelian group $G$ is isomorphic to $G \cong \mathbb{Z}_{d_1} \times \dots \times \mathbb{Z}_{d_k}$ where $d_i > 1$ integers, and $d_i \mid d_{i+1}$ \quad $\forall i=1, \dots, k-1$.
+\end{corollary}
+
+\noindent Moreover, if $H \cong \mathbb{Z}_{e_1} \times \dots \times \mathbb{Z}_{e_\ell}$ for $e_i>1$ integers, $e_i \mid e_{i+1}$ $\forall i=1, \dots, \ell-1$. Then: \\
+$(G \cong H) \iff (\ell = k \text{ and } d_i = e_i \ \forall i)$
