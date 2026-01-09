@@ -93,19 +93,26 @@ Given $n \in \mathbb{N}$, for which $a \in \mathbb{Z}$ does $[a]_n$ (the congrue
 \end{question}
 
 \noindent\textbf{Answer:} 
-An element $[a]_n \in \mathbb{Z}_n$ has a multiplicative inverse if and only if $\gcd(a, n) = 1$. For instance, when $n=6$, then:
+An element $[a]_n \in \mathbb{Z}_n$ has a multiplicative inverse if and only if $\gcd(a, n) = 1$. 
+%{\color{red} add proof using Bezout's theorem. Use \texttt{label} $\backslash \{\ \}$ and \texttt{ref} $\backslash \{\ \}$ to refer to the previously stated theorem}
+For instance, when $n=6$, then:
 \begin{itemize}
     \item For $a=3$, $\gcd(3, 6) = 3 \neq 1$. Therefore, $[3]_6$ does not have a multiplicative inverse in $\mathbb{Z}_6$.
     \item For $a=5$, $\gcd(5, 6) = 1$. Therefore, $[5]_6$ has a multiplicative inverse in $\mathbb{Z}_6$. Indeed, $[5]_6 \cdot [5]_6 = [25]_6 \equiv [1]_6 \pmod{6}$, so $[5]_6^{-1} = [5]_6$.
 \end{itemize}
 
 \begin{remark}
-\begin{enumerate}
-    \item When there is no ambiguity, we often write $ab$ instead of $a \ast b$.
-    \item The group operation $\ast$ may not be commutative.
-\end{enumerate}
+When there is no ambiguity, we often write $ab$ instead of $a \ast b$. Also, for all $m \in \mathbb{Z}$, we denote
+    $$a^m := \begin{cases}
+        \overbrace{a \ast a \ast \dots \ast a}^{m\ times} &\text{if}\ m > 0 \\
+        e &\text{if}\ m = 0 \\
+        \overbrace{a^{-1} \ast a^{-1} \ast \dots \ast a^{-1}}^{-m\ times} &\text{if}\ m < 0
+    \end{cases}$$
+    
 \end{remark}
 
+
+The order of multiplication matters, namely for $b \in G$, multiplying $a \in G$ on the left or on the right may result in different elements. In the case when they are the same, we have:
 \begin{definition}[Abelian Group]
 A group $(G, \ast)$ is called \emph{abelian} if its operation is commutative; that is, for all $a, b \in G$, we have $a \ast b = b \ast a$.
 \end{definition}
@@ -120,17 +127,17 @@ A group $(G, \ast)$ is called \emph{abelian} if its operation is commutative; th
 \begin{proposition}
 Let $(G, \ast)$ be a group.
 \begin{enumerate}
-    \item \textbf{Uniqueness of Identity:} The identity element $e$ in $G$ is unique.
-    \item \textbf{Uniqueness of Inverses:} For each $a \in G$, its inverse $a^{-1}$ is unique.
-    \item \textbf{Cancellation Laws:} For $a, b, c \in G$:
+    \item (Uniqueness of Identity) The identity element $e$ in $G$ is unique.
+    \item (Uniqueness of Inverses) For each $a \in G$, its inverse $a^{-1}$ is unique.
+    \item (Cancellation Laws) For $a, b, c \in G$:
     \begin{itemize}
-        \item If $a \ast b = a \ast c$, then $b=c$ (Left Cancellation).
-        \item If $b \ast a = c \ast a$, then $b=c$ (Right Cancellation).
+        \item If $a \ast b = a \ast c$, then $b=c$.
+        \item If $b \ast a = c \ast a$, then $b=c$.
     \end{itemize}
 \end{enumerate}
 \end{proposition}
 
-\subsection*{Finite Groupsﬁ and Cayley Tables}
+\section{Cayley Table}
 
 \begin{definition}[Order of a Group]
 The \emph{order} of a group $G$, denoted $|G|$, is the number of elements in the group. If $|G| < \infty$, the group is called a \emph{finite group}.
@@ -140,17 +147,42 @@ The \emph{order} of a group $G$, denoted $|G|$, is the number of elements in the
 For a finite group $(G, \ast)$, a \emph{Cayley table} (or group table) is a square table where the rows and columns are labeled by the elements of the group. The entry in the row corresponding to $a$ and the column corresponding to $b$ is $a \ast b$.
 \end{definition}
 
-\begin{proposition}
-In a Cayley table for a finite group, each element of the group appears exactly once in each row and exactly once in each column.
-\end{proposition}
-
-\textit{Warning: If you have a table, you can check if it forms a group by verifying the group axioms.}
-
 \begin{example}
-Consider a group $G$ with $|G|=4$. For instance, $(\mathbb{Z}_4, +)$ would have a Cayley table where each row and column contains $\{[0]_4, [1]_4, [2]_4, [3]_4\}$ exactly once.
+The Cayley table for \(\mathbb{Z}_9^*\) is:
+\[
+\begin{array}{|c||c | c|c|c|c|c|}
+\hline
+\times & [1]_9 & [2]_9 & [4]_9 & [5]_9 & [7]_9 & [8]_9 \\
+\hline \hline
+[1]_9 & [1]_9 & [2]_9 & [4]_9 & [5]_9 & [7]_9 & [8]_9 \\
+\hline
+[2]_9 & [2]_9 & [4]_9 & [8]_9 & [1]_9 & [5]_9 & [7]_9 \\
+\hline
+[4]_9 & [4]_9 & [8]_9 & [7]_9 & [2]_9 & [1]_9 & [5]_9 \\
+\hline
+[5]_9 & [5]_9 & [1]_9 & [2]_9 & [7]_9 & [8]_9 & [4]_9 \\
+\hline
+[7]_9 & [7]_9 & [5]_9 & [1]_9 & [8]_9 & [4]_9 & [2]_9 \\
+\hline
+[8]_9 & [8]_9 & [7]_9 & [5]_9 & [4]_9 & [2]_9 & [1]_9 \\
+\hline
+\end{array}
+\]
 \end{example}
 
-\subsection*{Subgroups}
+
+\begin{proposition}
+In a Cayley table for a finite group, each element of the group appears exactly once in each row and exactly once in each column. In other words, for all $a \in G$, the sets
+$$\{a \ast g\ |\ g \in G\}$$
+and 
+$$\{g \ast a\ |\ g \in G\}$$
+contains all elements of $G$ exactly once, with no repetitions.
+\end{proposition}
+
+
+%\begin{example} Consider a group $G$ with $|G|=4$. For instance, $(\mathbb{Z}_4, +)$ would have a Cayley table where each row and column contains $\{[0]_4, [1]_4, [2]_4, [3]_4\}$ exactly once. \end{example}
+
+\section{Subgroups}
 
 \begin{definition}[Subgroup]
 Let $(G, \ast)$ be a group and $H$ be a non-empty subset of $G$. We say that $H$ is a \emph{subgroup} of $G$, denoted $H \le G$, if $(H, \ast)$ is itself a group under the same operation $\ast$ restricted to $H$.
@@ -159,51 +191,52 @@ Let $(G, \ast)$ be a group and $H$ be a non-empty subset of $G$. We say that $H$
 \begin{proposition}[Subgroup Test]
 Let $(G, \ast)$ be a group and $H$ be a non-empty subset of $G$. Then $H$ is a subgroup of $G$ if and only if:
 \begin{enumerate}
-    \item For all $a, b \in H$, $a \ast b \in H$ (Closure).
-    \item For all $a \in H$, $a^{-1} \in H$ (Existence of Inverses).
+    \item For all $a, b \in H$, $a \ast b \in H$, i.e. $\ast$ is closed in $H$.
+    \item For all $a \in H$, $a^{-1} \in H$ .
 \end{enumerate}
-An equivalent, more concise test (the one-step subgroup test) is:
-\begin{itemize}
-    \item For all $a, b \in H$, $a \ast b^{-1} \in H$.
-\end{itemize}
+Equivalently, one can check the following:
+\begin{center}
+    For all $a, b \in H$, $a \ast b^{-1} \in H$.
+\end{center}
 \end{proposition}
 
 \begin{example}
-\begin{itemize}
-    \item $(\mathbb{Z}, +)$ is a subgroup of $(\mathbb{Q}, +)$.
-    \item If $W$ is a vector subspace of $\mathbb{R}^n$, then $W$ is a subgroup of $(\mathbb{R}^n, +)$.
-    \item $(G, *) = (\mathbb{Z}, +)$. $H = \text{all even integers} = 2\mathbb{Z} \subseteq G$. \\
-    Take $2p, 2q \in H$ ($p, q \in \mathbb{Z}$). Then $2p + 2q = 2(p+q) \in H$ \& $-2p = 2(-p) \in H$. \\
-    Hence, $H \le G$ is a subgroup of $G$.
-    \item $(G, *) = (\mathbb{Z}, +)$. $K = \text{all odd integers} \subseteq G$. \\
-    $K$ is \textbf{NOT} a subgroup, since $1, 3 \in K$ but $1 + 3 \notin K$.
-    \item $(G, *) = (\mathbb{Z}, +)$. Then $k\mathbb{Z} := \{ \text{multiples of } k \} \le G$.
-    \item Let $(G, *)$ be any group. Then:
-    \begin{enumerate}
-        \item[(i)] $(G, *) \le (G, *)$ is a subgroup of $G$. \\
-        We'll say all $H \le G$ satisfying $H \neq G$ a \underline{proper subgroup} of $G$.
-        \item[(ii)] $\{e\} \le G$ is a subgroup. \\
-        We'll say all $H \le G$ with $H \neq \{e\}$ \underline{nontrivial subgroup} of $G$.
-    \end{enumerate}
-    \item $(G, *) = (GL(n, \mathbb{R}), \cdot)$. $SL(n, \mathbb{R}) := \{ A \in G \mid \det(A) = 1 \} \le G = GL(n, \mathbb{R})$. \\
-    $\begin{cases} 
-    \forall A, B \in SL(n, \mathbb{R}), & \det(AB) = \det(A) \cdot \det(B) = 1 \cdot 1 = 1 \Rightarrow AB \in SL(n, \mathbb{R}) \\
-    \forall A \in SL(n, \mathbb{R}), & \det(A^{-1}) = \frac{1}{\det(A)} = \frac{1}{1} = 1 \Rightarrow A^{-1} \in SL(n, \mathbb{R})
-    \end{cases}$
-    \item $(\mathbb{Z}, +) \le (\mathbb{Q}, +) \le (\mathbb{R}, +) \le (\mathbb{C}, +)$
-    \item $(G, *) = (\mathbb{Z}_8, +) \quad H = \{0, 4\}$ is a subgroup \\
-    \phantom{$(G, *) = (\mathbb{Z}_8, +) \quad$} $K = \{0, 3\}$ is \textbf{NOT} a subgroup.
-\end{itemize}
+\begin{enumerate}
+    \item $(\mathbb{Z}, +) \le (\mathbb{Q}, +) \le (\mathbb{R}, +) \le (\mathbb{C}, +)$.
+    \item If $W \leq \mathbb{R}^n$ is a vector subspace, then $(W, +) \leq (\mathbb{R}^n, +)$ is a subgroup.
+    \item Let $(G, *) = (\mathbb{Z}, +)$, and $H = \text{all even integers} = 2\mathbb{Z} \subseteq G$. Take $2p, 2q \in H$ ($p, q \in \mathbb{Z}$). Then $2p + 2q = 2(p+q) \in H$ and $-2p = 2(-p) \in H$. Hence, $H \le G$ is a subgroup of $G$.
+    More generally, for all $k \in \mathbb{Z}$, $(k\mathbb{Z},+) \le (\mathbb{Z},+)$.
+    
+    Meanwhile, if $K = \text{all odd integers} \subseteq G$, then $K$ is \textbf{NOT} a subgroup of $G$, since $1, 3 \in K$ but $1 + 3 \notin K$.
+    
+    \item Let $(G, *) = (GL(n, \mathbb{R}), \cdot)$, and 
+    $$SL(n, \mathbb{R}) := \{ A \in G \mid \det(A) = 1 \}$$ 
+    Then $SL(n,\mathbb{R}) \leq GL(n, \mathbb{R})$:
+    \begin{itemize} 
+    \item For all $A, B \in SL(n, \mathbb{R})$,  $\det(AB) = \det(A) \cdot \det(B) = 1 \cdot 1 = 1$. Therefore, $AB \in SL(n, \mathbb{R})$ 
+    for all $A, B \in SL(n, \mathbb{R})$ 
+    \item For all $A \in SL(n, \mathbb{R})$, $\det(A^{-1}) = \frac{1}{\det(A)} = \frac{1}{1} = 1$. Therefore, $A^{-1} \in SL(n, \mathbb{R})$ as well.
+    \end{itemize}
+    \item Let $(G, *) = (\mathbb{Z}_8, +)$. Then $ H = \{0, 4\}$ is a subgroup of $G$, while $K = \{0, 3\}$ is \textbf{NOT} a subgroup.
+\end{enumerate}
 \end{example}
 
-\subsection*{Cyclic}
-
-\begin{definition}[Cyclic Subgroup]
-Let $(G, *)$ be a group. A \textit{cyclic subgroup} generated by $g \in G$ is the subgroup $\langle g \rangle := \{ g^m \mid m \in \mathbb{Z} \}$.
+\begin{definition}
+Let $(G, *)$ be a group. Then:
+    \begin{enumerate}
+        \item $(G, *) \le (G, *)$ is a subgroup of $G$. We say all $H \le G$ satisfying $H \neq G$ a {\bf proper subgroup} of $G$.
+        \item $\{e\} \le G$ is a subgroup. We say all $H \le G$ with $H \neq \{e\}$ a {\bf nontrivial subgroup} of $G$.
+    \end{enumerate}
 \end{definition}
 
-\noindent (Exercise: Check $\langle g \rangle \le G$ is a subgroup of $G$, i.e.: for any \\
-$g^a, g^b \in \langle g \rangle \quad \begin{cases} g^a * g^b \in \langle g \rangle \\ (g^a)^{-1} \in \langle g \rangle \end{cases}$
+
+\section{Cyclic Groups}
+
+\begin{definition}[Cyclic Subgroup]
+Let $(G, *)$ be a group. A {\bf cyclic subgroup} generated by $g \in G$ is the subgroup $$\langle g \rangle := \{ g^m \mid m \in \mathbb{Z} \}.$$
+\end{definition}
+\noindent (Exercise: Check $\langle g \rangle \le G$ is a subgroup of $G$, i.e.: for any
+$g^a, g^b \in \langle g \rangle \quad \begin{cases} g^a * g^b \in \langle g \rangle \\ (g^a)^{-1} \in \langle g \rangle \end{cases}$.)
 
 \begin{example}
 \begin{itemize}
