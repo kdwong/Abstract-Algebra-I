@@ -108,7 +108,9 @@ When there is no ambiguity, we often write $ab$ instead of $a \ast b$. Also, for
         e &\text{if}\ m = 0 \\
         \overbrace{a^{-1} \ast a^{-1} \ast \dots \ast a^{-1}}^{-m\ times} &\text{if}\ m < 0
     \end{cases}$$
-    
+
+In the case when the operation $\ast$ is the `usual' addition $+$, we call $(G,+)$ {\bf additive group}, and write
+$$0 := e, \quad -a := a^{-1}, \quad m \cdot a := a^m.$$
 \end{remark}
 
 
@@ -262,41 +264,40 @@ Let $(G, *)$ be a group. We say $G$ is \textbf{cyclic} if there is $g \in G$ suc
 \begin{itemize}
     \item $(G, *) = (\mathbb{Z}, +)$ is cyclic, since $G = \langle 1 \rangle$.
     \item $(G, *) = (\mathbb{Z}_8, +)$ is cyclic, since $G = \langle 3 \rangle = \langle 1 \rangle$.
-    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$ is \textbf{NOT} cyclic, since for all $H = \langle g \rangle$, $H$ is countable but $G$ is uncountable. \\
+    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$ is \textbf{NOT} cyclic, since for all $H = \langle g \rangle$, $H$ is countable but $G$ is uncountable. 
     Hence, $H$ can never be equal to $G$.
     
-    \item $(G, *) = (\mathbb{Z}_8^*, \cdot) = \{ 1, 3, 5, 7 \}$. Then all the cyclic subgroups: \\
-    $\langle 1 \rangle = \{ 1 \}$, $\langle 3 \rangle = \{ 3^0=1, 3^1=3, 3^2=1, 3^3=3, \dots \} = \{ 1, 3 \}$, $\langle 5 \rangle = \{ 1, 5 \}$, \\
-    $\langle 7 \rangle = \{ 1, 7 \}$. None of them is equal to $G$. So $G$ is \textbf{not} cyclic.
+    \item $(G, *) = (\mathbb{Z}_8^*, \cdot) = \{ 1, 3, 5, 7 \}$. Then the cyclic subgroups of $G$ are: \\
+    $\langle 1 \rangle = \{ 1 \}$,\\ 
+    $\langle 3 \rangle = \{ 3^0=1, 3^1=3, 3^2=1, 3^3=3, \dots \} = \{ 1, 3 \}$;\\
+    $\langle 5 \rangle = \{ 1, 5 \}$; \\
+    $\langle 7 \rangle = \{ 1, 7 \}$. 
+    
+    Note that none of them is equal to $G$. So $G$ is \textbf{not} cyclic.
 \end{itemize}
 \end{example}
 
-\noindent ( Exercise: $(\mathbb{Z}_5^*, \cdot)$ is cyclic )
-
-\vspace{1em}
-\noindent \textbf{Question:} $(G, *)$ group, $H = \langle g \rangle$. What's the order of $H$? \\
-e.g.: $(\mathbb{Z}_8, +) : |\langle 2 \rangle| = 4, \ |\langle 3 \rangle| = 8, \ |\langle 4 \rangle| = 2$.
-
-\vspace{1em}
-\begin{definition}[order] 
+\noindent \textbf{Question:} $(G, *)$ group, $H = \langle g \rangle$. What's the order of $H$? For instance, if $G = (\mathbb{Z}_8, +)$, then $ |\langle [2] \rangle| = 4, \ |\langle [3] \rangle| = 8, \ |\langle [4] \rangle| = 2$.
+\begin{definition}[Order] 
 Let $g \in G$. The \textit{order} of $g$ is equal to the smallest positive integer $k$ such that $g^k = e$. If no such $k$ exists, then we say the order of $g$ is $\infty$.
 \end{definition}
-\vspace{1em}
-\begin{proposition} 
-If $\text{ord}(g) = k$, then $|\langle g \rangle| = k$.
+
+\begin{proposition} \label{prop:ordg}
+If $\mathrm{ord}(g) = k$, then $|\langle g \rangle| = k$.
 \end{proposition}
-\vspace{1em}
+
 \begin{example}
 \begin{itemize}
-    \item $(G, *) = (\mathbb{Z}_8, +)$. $\text{ord}(2) = 4 : 2^1=2, 2^2=4, 2^3=6, 2^4=8 \equiv 0$; \\
-    $\text{ord}(3) = 8 : 3^1=3, 3^2=6, 3^3=9 \equiv 1, 3^4=12 \equiv 4, 3^5=15 \equiv 7, 3^6=18 \equiv 2, 3^7=21 \equiv 5, 3^8=24 \equiv 0$.
-    \item $(G, *) = (GL(2, \mathbb{R}), \cdot)$. \\
-    $\text{ord}\left( \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \right) = \infty$, since $\begin{pmatrix} 1 & m \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^m \neq \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad \forall m \in \mathbb{N}$.
+    \item $(G, *) = (\mathbb{Z}_8, +)$. $\text{ord}([2]) = 4$ since $$[2]=[2], [2]+[2]=[4], [2]+[2]+[2]=[6], [2]+[2]+[2]+[2]=[8] = [0].$$
+    Also, $\text{ord}([3]) = 8$, since 
+    $$1 \cdot [3]=[3],\ 2 \cdot [3] =[6],\ 3 \cdot [3]=[9] = [1],\ 4 \cdot [3]=[12] = [4],$$ $$5 \cdot [3]=[15] = [7],\ 6 \cdot [3]=[18] = [2],\ 7 \cdot [3]=[21] = [5],\ 8 \cdot [3] =[24] = [0].$$
+    \item Let $(G, *) = (GL(2, \mathbb{R}), \cdot)$. Then 
+    $\text{ord}\left( \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \right) = \infty$, since $$\begin{pmatrix} 1 & m \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^m \neq \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad \forall m \in \mathbb{N}.$$
 \end{itemize}
 \end{example}
 \vspace{1em}
 \begin{remark} 
-If $|G| < \infty$ is finite, then $\langle g \rangle \le G$ is a finite subgroup with $|\langle g \rangle| \le |G|$. Indeed, all $H \le G$ has $|H| \mid |G|$ (Lagrange's Theorem). \\
+If $|G| < \infty$ is finite, then $\langle g \rangle \le G$ is a finite subgroup with $|\langle g \rangle| \le |G|$. Indeed, all $H \le G$ has $|H| \mid |G|$ (see Section \ref{sec:Lagrange} - Lagrange's Theorem below). \\
 e.g.: If $|G|=12$, then there is \textbf{NO} $H \le G$ with $|H|=8$, can only be $1, 2, 3, 4, 6, 12$. \\
 Therefore, $\text{ord}(g) \mid |G|$ (take $H = \langle g \rangle$).
 \end{remark}
@@ -315,8 +316,46 @@ For example, when $n=3$, $\sigma(1)=2, \sigma(2)=3, \sigma(3)=1$ is a permutatio
 The \textbf{symmetric / permutation group} of $n$ elements is the collection of all permutations $\sigma : X_n \to X_n$.
 \[ S_n := \{ \sigma : X_n \to X_n \mid \sigma \text{ is bijective} \} \]
 \end{definition}
-For instance, $S_3 = \left\{ \begin{pmatrix} 1 & 2 & 3 \\ 1 & 2 & 3 \end{pmatrix}, \begin{pmatrix} 1 & 2 & 3 \\ 2 & 1 & 3 \end{pmatrix}, \dots, \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 1 \end{pmatrix} \right\}$. Hence $|S_3|=6$. More generally, 
+For instance, when $n = 3$, one has:
+\begin{center}
+\usetikzlibrary{arrows.meta, bending}
+\begin{tikzpicture}[
+    ball/.style={circle, draw=black, thick, minimum size=6mm, font=\small},
+    arrow/.style={-{Stealth}, thick, blue!70!black, shorten >=2pt, shorten <=2pt},
+    scale=0.8
+]
 
+    \newcommand{\drawpermutation}[7]{
+        \begin{scope}[shift={(#2, #3)}]
+            % Top Row
+            \foreach \i in {1,2,3} {
+                \node[ball] (T\i) at (\i*1.2, 2) {\i};
+            }
+            % Bottom Row
+            \foreach \i in {1,2,3} {
+                \node[ball] (B\i) at (\i*1.2, 0) {\i};
+            }
+            % Arrows
+            \draw[arrow] (T1) -- (B#4);
+            \draw[arrow] (T2) -- (B#5);
+            \draw[arrow] (T3) -- (B#6);
+            % Label
+            \node at (2.4, -1) {\textbf{#7}};
+        \end{scope}
+    }
+
+    % --- ROW 1: Identity and 3-Cycles ---
+    \drawpermutation{id}{0}{0}{1}{2}{3}{}
+    \drawpermutation{c123}{5}{0}{2}{3}{1}{}
+    \drawpermutation{c132}{10}{0}{3}{1}{2}{}
+
+    % --- ROW 2: Transpositions (Swaps) ---
+    \drawpermutation{t12}{0}{-5}{2}{1}{3}{}
+    \drawpermutation{t23}{5}{-5}{1}{3}{2}{}
+    \drawpermutation{t13}{10}{-5}{3}{2}{1}{}
+\end{tikzpicture}
+\end{center}
+Hence $|S_3|=6$. More generally, 
 $$|S_n| = n \cdot (n-1) \cdots 1 = n!.$$
 \begin{proposition} 
 $(S_n, \circ)$ is a group, where $\circ$ is the composition of functions. 
@@ -695,82 +734,341 @@ $A_n \sqcup \{ \sigma \in S_n \mid \sigma \text{ odd} \} = S_n$, therefore $$|A_
 
 \end{tikzpicture}
 \end{center}
-
-
     
     
-    \item \textbf{Galois Theory}: $A_5$ is a simple group (we will define simple group later), so we can't solve a general degree-5 equation using  $ \sqrt[k]{*}, \frac{*}{*} $.
+    \item \textbf{Galois Theory}: $A_5$ is a simple group (we will define simple group later). This is a purely group theoretic observation, but it is used by Galois to showing that a general quintic (degree-$5$) equation {\bf cannot} be solved using radicals, i.e. $+, \times, \frac{*}{*}, \sqrt[k]{*}$.
 \end{enumerate}
 \end{example}
 \subsection*{Dihedral Groups $D_n$}
+We begin by giving an informal definition of the dihedral group $D_n$: 
+\begin{center}
+The dihedral group $D_n$ describes the rotational and reflectional symmetries of a regular $n$-gon. Here are the pictures for $n = 3, 4, 5$:
+\end{center}
 
-\begin{definition}[dihedral group]
-$D_n$ describes the rotational and reflectional symmetries of a regular $n$-gon.
-\end{definition}
+\begin{tikzpicture}[scale=1.2,
+    polygon/.style={thick},
+    axis/.style={blue,dashed,thick},
+    rot/.style={red,thick,-{Stealth[length=3mm]}}
+]
 
-\begin{itemize}
-    \item \textbf{Example ($n=3$)}: Symmetries of an equilateral triangle.
+% =========================
+% Regular 3-gon (Triangle)
+% =========================
+\begin{scope}[shift={(0,0)}]
+    \node at (0,2.3) {\textbf{Regular 3-gon}};
+    
+    % vertices
+    \foreach \i in {0,1,2}
+        \coordinate (T\i) at ({90+120*\i}:1.2);
+    
+    % polygon
+    \draw[polygon] (T0)--(T1)--(T2)--cycle;
+    
+    % reflection axes (FULL lines)
+    \foreach \i in {0,1,2}
+        \draw[axis]
+            ({90+120*\i}:1.8) -- ({90+120*\i+180}:1.8);
+    
+    % rotation arrow
+    \draw[rot] (0.6,0) arc (0:110:0.6);
+    \node[red] at (0.9,0.5) {$120^\circ$};
+\end{scope}
+
+% =========================
+% Regular 4-gon (Square)
+% =========================
+\begin{scope}[shift={(5,0)}]
+    \node at (0,2.3) {\textbf{Regular 4-gon}};
+    
+    % vertices
+    \foreach \i in {0,1,2,3}
+        \coordinate (S\i) at ({45+90*\i}:1.2);
+    
+    % polygon
+    \draw[polygon] (S0)--(S1)--(S2)--(S3)--cycle;
+    
+    % reflection axes
+    \draw[axis] (-1.8,0)--(1.8,0);
+    \draw[axis] (0,-1.8)--(0,1.8);
+    \draw[axis] (-1.6,-1.6)--(1.6,1.6);
+    \draw[axis] (-1.6,1.6)--(1.6,-1.6);
+    
+    % rotation arrow
+    \draw[rot] (0.6,0) arc (0:90:0.6);
+    \node[red] at (0.9,0.4) {$90^\circ$};
+\end{scope}
+
+% =========================
+% Regular 5-gon (Pentagon)
+% =========================
+\begin{scope}[shift={(10,0)}]
+    \node at (0,2.3) {\textbf{Regular 5-gon}};
+    
+    % vertices
+    \foreach \i in {0,...,4}
+        \coordinate (P\i) at ({90+72*\i}:1.2);
+    
+    % polygon
+    \draw[polygon]
+        (P0)--(P1)--(P2)--(P3)--(P4)--cycle;
+    
+    % reflection axes (FULL lines)
+    \foreach \i in {0,...,4}
+        \draw[axis]
+            ({90+72*\i}:1.8) -- ({90+72*\i+180}:1.8);
+    
+    % rotation arrow
+    \draw[rot] (0.6,0) arc (0:70:0.6);
+    \node[red] at (0.95,0.35) {$72^\circ$};
+\end{scope}
+
+\end{tikzpicture}
+
+For example, when $n=3$, $D_3$ describes the symmetries of an equilateral triangle:
     \begin{itemize}
-        \item Rotations: $e$ (identity), $\sigma_{120^\circ} \leftrightarrow (1\,2\,3)$, $\sigma_{240^\circ} \leftrightarrow (1\,3\,2)$.
-        \item Reflections: 3 axes of symmetry, each fixing one vertex and swapping the other two, e.g., $\leftrightarrow (2\,3)$, $(1\,2)$, or $(1\,3)$.
-        \item Hence, $D_3$ has 6 elements.
+        \item Rotations: $e$, $\sigma_{120^\circ}$, $\sigma_{240^\circ}$.
+        \item Reflections: 3 axes of symmetry, each fixing one vertex and swapping the other two.
     \end{itemize}
-    \item \textbf{Example ($n=4$)}: Symmetries of a square. 
+Hence, $D_3$ has 6 elements.
+As for $n=4$, $D_4$ describes the symmetries of a square, namely:
     \begin{itemize}
-        \item Includes 4 rotations ($0^\circ, 90^\circ, 180^\circ, 270^\circ$) and 4 reflections.
-        \item Hence, $|D_4| = 8$.
+        \item There are 4 rotations $e$, $\sigma_{90^\circ}$, $\sigma_{180^\circ}$, $\sigma_{270^\circ}$
+        \item There are also 4 reflections - 2 reflections on along the diagonals, and 2 reflections along the midpoints of the parallel sides.
     \end{itemize}
-\end{itemize}
+Hence, $|D_4| = 8$, and more generally, $|D_n| = 2n$ for all $n \ge 3$.
 
-\noindent More generally, $|D_n| = 2n$ for all $n \ge 3$.
+We now give an algebraic representation of $n$-gon symmetries. Label the vertices of the $n$-gon by $1, 2, \dots, n$. Let $r$ be a rotation by $\left(\frac{360}{n}\right)^\circ$ anticlockwise, , and $s$ be a reflection along the axis passing through vertex $1$. For $n = 9$, it looks like:
+\begin{center}
+\begin{tikzpicture}[
+    scale=2,
+    polygon/.style={thick},
+    axis/.style={blue,dashed,thick},
+    rot/.style={red,thick,-{Stealth[length=2mm]}}
+]
 
-\subsection*{Algebraic Representation of $n$-gon Symmetries}
-Let $r$ be a rotation by $\left(\frac{360}{n}\right)^\circ$ anticlockwise, which corresponds to the $n$-cycle $(1\,2\,3 \dots n)$. \\
-Let $s$ be a reflection along the axis passing through vertex 1.
+% Center
+\coordinate (O) at (0,0);
 
-\begin{itemize}
-    \item Then $r^n = e$ and $s^2 = e$.
-    \item Any other reflection in $D_n$ can be expressed as $r^k s$. This represents a reflection along an axis obtained by rotating the ``principal axis'' by $\left(\frac{k180}{n}\right)$ degrees anticlockwise.
-    \item \textbf{Example $D_4$}: 
-    \begin{itemize}
-        \item $r^3 s$ represents reflecting the square across a specific axis.
-        \item Reflecting about an axis at $\frac{3}{4}(180^\circ)$ results in a specific vertex permutation.
-    \end{itemize}
-\end{itemize}
+% =========================
+% Regular 9-gon
+% =========================
+\foreach \i in {1,...,9}
+{
+    % vertices (vertex 1 at the top)
+    \coordinate (V\i) at ({90+40*(\i-1)}:1);
+}
 
-\begin{proposition}
+% Draw polygon
+\draw[polygon]
+    (V1)--(V2)--(V3)--(V4)--(V5)--(V6)--(V7)--(V8)--(V9)--cycle;
+
+% Label vertices
+\foreach \i in {1,...,9}
+{
+    \node at ({90+40*(\i-1)}:1.15) {\small \i};
+}
+
+% =========================
+% Reflection s
+% =========================
+% Axis through vertex 1 and center
+\draw[axis] (90:1.4) -- (270:1.4);
+\node[blue] at (0,1.55) {$s$};
+
+% =========================
+% Rotation r
+% =========================
+\draw[rot] (0.45,0) arc (0:40:0.45);
+\node[red] at (0.65,0.25) {$r$};
+
+\end{tikzpicture}
+\end{center}
+Then $r^n = e$ and $s^2 = e$. Moreover, if we trace how the vertices are moved along under $r$ and $s$, we have 
+$$r\ \longleftrightarrow \ (1\ 2\ 3 \dots n),\quad \quad s\ \longleftrightarrow\ (2\ \ (n-1))(3\ \ (n-2)) \cdots$$
+
+Obviously, all $n$ rotations can be expressed as 
+$$r^i,\quad 0 \leq i < n.$$
+Indeed, the $n$ reflections in $D_n$ can be expressed as 
+$$r^i s\quad 0 \leq i < n.$$ 
+As an example, for $n = 9$, the picture of $r^2s$ looks like:
+
+\begin{tikzpicture}[
+    scale=1.6,
+    polygon/.style={thick},
+    axis/.style={blue,dashed,thick},
+    rot/.style={red,thick,-{Stealth[length=2mm]}},
+    map/.style={thick,-{Stealth[length=2mm]}}
+]
+
+% radius (slightly shrunk)
+\def\r{0.8}
+
+% =========================
+% INITIAL 9-GON
+% =========================
+\begin{scope}[shift={(0,0)}]
+    ;
+    \coordinate (O) at (0,0);
+
+    \foreach \i in {1,...,9}
+        \coordinate (A\i) at ({90+40*(\i-1)}:\r);
+
+    \draw[polygon]
+        (A1)--(A2)--(A3)--(A4)--(A5)--(A6)--(A7)--(A8)--(A9)--cycle;
+
+    \foreach \i in {1,...,9}
+        \node at ({90+40*(\i-1)}:1.05*\r) {\small \i};
+
+    \draw[axis] (90:1.2*\r) -- (270:1.2*\r);
+\end{scope}
+
+% =========================
+% ARROW: s
+% =========================
+\draw[map] (1.6,0) -- (2.3,0) node[midway,above] {$s$};
+
+% =========================
+% AFTER REFLECTION s
+% =========================
+\begin{scope}[shift={(3.9,0)}]
+    ;
+    \coordinate (O) at (0,0);
+
+    \foreach \i in {1,...,9}
+        \coordinate (B\i) at ({90-40*(\i-1)}:\r);
+
+    \draw[polygon]
+        (B1)--(B2)--(B3)--(B4)--(B5)--(B6)--(B7)--(B8)--(B9)--cycle;
+
+    \foreach \i in {1,...,9}
+        \node at ({90-40*(\i-1)}:1.05*\r) {\small \i};
+
+    \draw[rot] (0.4,0) arc (0:80:0.4);
+\end{scope}
+
+% =========================
+% ARROW: r^2
+% =========================
+\draw[map] (5.5,0) -- (6.2,0) node[midway,above] {$r^2$};
+
+% =========================
+% AFTER ROTATION r^2
+% =========================
+\begin{scope}[shift={(7.8,0)}]
+  ;
+    \coordinate (O) at (0,0);
+
+    \foreach \i in {1,...,9}
+        \coordinate (C\i) at ({90-40*(\i-1)+80}:\r);
+
+    \draw[polygon]
+        (C1)--(C2)--(C3)--(C4)--(C5)--(C6)--(C7)--(C8)--(C9)--cycle;
+
+    \foreach \i in {1,...,9}
+        \node at ({90-40*(\i-1)+80}:1.05*\r) {\small \i};
+\end{scope}
+\end{tikzpicture}
+
+This has the same effect as doing the reflection:
+
+\begin{center}
+\begin{tikzpicture}[
+    scale=1.7,
+    polygon/.style={thick},
+    axis/.style={blue,dashed,thick},
+    map/.style={thick,-{Stealth[length=2mm]}}
+]
+
+% radius
+\def\r{0.8}
+
+% =========================
+% ORIGINAL 9-GON
+% =========================
+\begin{scope}[shift={(0,0)}];
+    \coordinate (O) at (0,0);
+
+    % vertices (vertex 1 at top)
+    \foreach \i in {1,...,9}
+        \coordinate (A\i) at ({90+40*(\i-1)}:\r);
+
+    % polygon
+    \draw[polygon]
+        (A1)--(A2)--(A3)--(A4)--(A5)--(A6)--(A7)--(A8)--(A9)--cycle;
+
+    % labels
+    \foreach \i in {1,...,9}
+        \node at ({90+40*(\i-1)}:1.05*\r) {\small \i};
+
+    % reflection axis through vertex 2
+    \draw[axis]
+        ({90+40}:1.2*\r) -- ({90+40+180}:1.2*\r);
+    \node[green] at ({90+40}:1.35*\r){} ;
+\end{scope}
+
+% =========================
+% ARROW
+% =========================
+\draw[map] (1.7,0) -- (2.6,0) node[midway,above] {};
+
+% =========================
+% REFLECTED 9-GON
+% =========================
+\begin{scope}[shift={(4.3,0)}];
+    \coordinate (O) at (0,0);
+
+    % reflected vertices (mirror across axis through vertex 2)
+    \foreach \i in {1,...,9}
+        \coordinate (B\i) at ({130-40*(\i-2)}:\r);
+
+    % polygon
+    \draw[polygon]
+        (B1)--(B2)--(B3)--(B4)--(B5)--(B6)--(B7)--(B8)--(B9)--cycle;
+
+    % labels
+    \foreach \i in {1,...,9}
+        \node at ({130-40*(\i-2)}:1.05*\r) {\small \i};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+In terms of movement of vertices,
+$$r^2s \longleftrightarrow (1\ 3)(4\ 9)(5\ 8)(6\ 7).$$
+More generally, $r^ks$ represents a reflection along an axis obtained by rotating the ``axis passing through vertex $1$'' by $180 \times \left(\frac{k}{n}\right)^{\circ}$ anticlockwise.
+
+\begin{definition}
 The dihedral group $D_n$ is given by the set:
 \[ D_n = \{ e, r, r^2, \dots, r^{n-1}, s, rs, r^2s, \dots, r^{n-1}s \} \]
-\noindent (Exercise: Show that $s r^l = r^{n-l} s$)
-\end{proposition}
+such that $r^n = e, s^2 = e$ and $s r^l = r^{n-l} s$ for all $0 \leq l \leq n$. In terms of {\it generators and relations} (not to be defined precisely in this course), $D_n$ can be written as
+$$D_n = \langle s, r \mid r^n = e, s^2 = e, sr^l = r^{n-l}s \text{ for all } l \rangle.$$
+\end{definition}
 
-\noindent Hence, $D_n = \langle s, r \mid r^n = e, s^2 = e, sr^l = r^{n-l}s \text{ for all } l \rangle$. \\
-eg: $s^3 r^{14} s^5 r^{-3} s^{16}$ in $D_5$ \\
-$= s r^{10} r^4 s r^5 r^{-3} e = s r^4 s r^2 = s(s r^1) r^2 = s^2 r^3 = r^3$
+For example, in $D_5$, one can write 
+ $$s^3 r^{14} s^5 r^{-3} s^{16} = s r^{10} r^4 s r^5 r^{-3} e = s r^4 s r^2 = s(s r^1) r^2 = s^2 r^3 = r^3.$$
 
 \subsection*{Product Groups (External Direct Product)}
 
 \begin{definition}[Product Group] 
-Let $G_1, \dots, G_n$ be groups. The \textbf{product group} $G := \prod_{i=1}^n G_i = G_1 \times \dots \times G_n$ (in Gallian, $G_1 \oplus G_2 \oplus \dots \oplus G_n$) is given by $G := \{ (g_1, \dots, g_n) \mid g_i \in G_i \}$ and multiplication is given by:
+Let $G_1, \dots, G_n$ be groups. The \textbf{product group} $G := \prod_{i=1}^n G_i = G_1 \times \dots \times G_n$ is given by 
+$$G := \{ (g_1, \dots, g_n) \mid g_i \in G_i \}$$ 
+whose multiplication is given by:
 \[ (g_1, \dots, g_n) * (h_1, \dots, h_n) := (g_1 h_1, g_2 h_2, \dots, g_n h_n) \]
-In particular, $|G| = |G_1| \times \dots \times |G_n|$ \& $e_G \in G$ is $(e_1, \dots, e_n)$ where $e_i = e_{G_i}$.
+In particular, $|G| = |G_1| \times \dots \times |G_n|$ and $e_G := (e_1, \dots, e_n) \in G$, where $e_i = e_{G_i}$ is the identity element of $G_i$.
 \end{definition}
 
-\noindent e.g.: $\mathbb{Z}_2 \times \mathbb{Z}_3 = \{ (a, b) \mid a = 0, 1; b = 0, 1, 2 \}$ \\
-$(1, 2) * (0, 1) = (1+0, 2+1) = (1, 3) \equiv (1, 0)$.
+\begin{example} The product group $\mathbb{Z}_2 \times \mathbb{Z}_3$ 
+is given by 
+$$\mathbb{Z}_2 \times \mathbb{Z}_3 = \{ ([a], [b]) \mid a = 0, 1;\ b = 0, 1, 2 \}$$
+with $(1, 2) * (0, 1) = (1+0, 2+1) = (1, 3) \equiv (1, 0)$.
+(Exercise: $\mathbb{Z}_2 \times \mathbb{Z}_3 = \langle (1, 1) \rangle$ is cyclic.)
+\end{example}
 
-\begin{exercise}
-\begin{enumerate}
-    \item $\mathbb{Z}_2 \times \mathbb{Z}_3 = \langle (1, 1) \rangle$ is cyclic.
-    \item If $p_1, \dots, p_n$ are distinct primes, then $\mathbb{Z}_{p_1} \times \dots \times \mathbb{Z}_{p_n} = \langle (1, \dots, 1) \rangle$.
-\end{enumerate}
-\end{exercise}
-
-\noindent More examples: $S_3 \times D_4$ ; $\mathbb{Z} \times \mathbb{R}$ ; $GL(2, \mathbb{R}) \times S_5$ ; $\dots$
+One can construct many other groups using products, for instance: 
+$$S_3 \times D_4;\quad \mathbb{Z} \times \mathbb{R} ;\quad GL(2, \mathbb{R}) \times S_5 \times \mathbb{Z}_7;\quad \dots$$
 
 \section{Homomorphism and Isomorphism}
 
-\noindent \textbf{Motivation:} Recall
+\noindent \textbf{Motivation:} Recall that in understanding $D_4$, one can look at how the vertices of the squares are permuted. This gives the following `dictionary' between elements of $D_4$ and $S_4$:
 \begin{center}
 \begin{tabular}{c c c | c c c}
 $D_4$ & & $S_4$ & $D_4$ & & $S_4$ \\
@@ -781,54 +1079,55 @@ $r^2$ & $\leftrightarrow$ & $(1\,3)(2\,4)$ & $r^2s$ & $\leftrightarrow$ & $(1\,3
 $r^3$ & $\leftrightarrow$ & $(1\,4\,3\,2)$ & $r^3s$ & $\leftrightarrow$ & $(1\,4)(2\,3)$ \\
 \end{tabular}
 \end{center}
+To understand $D_4$, it is equally good to understand the 8 elements in $S_4$ in the above dictionary.
 
-\noindent To understand $D_4$, it's equally good to understand 8 elements in $S_4$.
-
-\vspace{1em}
 \begin{definition}[Homomorphism \& Isomorphism]
-Let $(G, \ast), (H, \circledast)$ be groups. A \textit{homomorphism} from $G$ to $H$ is a map $\phi : G \to H$ s.t.: $\phi(g_1 \ast g_2) = \phi(g_1) \circledast \phi(g_2)$. \\
-If $\phi$ is bijective, then $\phi$ is an \textit{isomorphism}. ($\phi$ ``preserves'' the multiplication rule of $G$ \& $H$)
+Let $(G, \ast), (H, \circledast)$ be groups. A \textit{homomorphism} from $G$ to $H$ is a map $\phi : G \to H$ such that 
+$$\phi(g_1 \ast g_2) = \phi(g_1) \circledast \phi(g_2).$$ 
+If $\phi$ is bijective, then $\phi$ is an \textit{isomorphism}. 
 \end{definition}
 
 \begin{example}
+Here is a long list of (non-)examples of group homomorphisms:
 \begin{itemize}
-    \item $\phi : D_4 \to S_4$ given by $\phi(r) = (1\,2\,3\,4)$, $\phi(s) = (2\,4)$, $\dots$ \\
-    is an \textit{injective homomorphism}, eg: $\phi(r^2s) = \phi(r^2)\phi(s)$
+    \item $\phi : D_4 \to S_4$ given by $\phi(r) = (1\,2\,3\,4)$, $\phi(s) = (2\,4)$ and so on, as in the above dictionary. Then $\phi$ is an \textit{injective} homomorphism. For instance, 
+    $$\phi({\color{red} r^2} {\color{blue} s}) = (1\ 3) = {\color{red} (1\ 3)(2\ 4)} {\color{blue} (2\ 4)} = {\color{red} \phi(r^2)} {\color{blue} \phi(s)}$$
     
-    \item $\phi : \mathbb{Z}_2 \times \mathbb{Z}_2 \to K$ given by $\phi(0,0)=e, \phi(1,0)=a, \phi(0,1)=b, \phi(1,1)=c$ \\
-    Then $\phi$ is an isomorphism, e.g., $\phi((1,0) \ast (0,1)) = \phi(1,1) = c$ \\
-    \phantom{Then $\phi$ is an isomorphism, e.g., } $\phi(1,0) \circledast \phi(0,1) = a \circledast b = c$ \\
-    $\therefore$ understanding (multiplication in $K$) $\Leftrightarrow$ understanding $\mathbb{Z}_2 \times \mathbb{Z}_2$.
+    \item $\phi : \mathbb{Z}_3  \to S_4$ given by 
+    $$\phi([0])=e,\quad \phi([1]) := (1\ 2 \ 4),\quad \phi([2]) :=(1\ 4\ 2),$$
+    then $\phi$ is a homomorphism. For instance, 
+    $$\phi([1] + [1]) = \phi([2]) = (1\ 4\ 2) = (1\ 2\ 4) \ast (1\ 2\ 4) = \phi([1]) \ast \phi([1])$$
     
-    \item Let $(G, \ast) = (\mathbb{R}^n, +)$ \& $(H, \circledast) = (\mathbb{R}^m, +)$. Then any linear transformation $T : \mathbb{R}^n \to \mathbb{R}^m$ is a group homomorphism, i.e.: \\
-    $T(x_1 + x_2) = T(x_1) + T(x_2)$
+    \item Let $(G, \ast) = (\mathbb{R}^n, +)$ and $(H, \circledast) = (\mathbb{R}^m, +)$. Then any linear transformation 
+    $$T : \mathbb{R}^n \to \mathbb{R}^m$$ 
+    is a group homomorphism, since
+    $$T(x_1 + x_2) = T(x_1) + T(x_2)$$
     
-    \item $\phi : (\mathbb{Z}_{12}, +) \to (\mathbb{Z}_4, +)$ given by $\phi(k) := k$ is \textbf{NOT} a homom. \\
-    $\phi(2 \cdot 4) = \phi(8) = 0 \neq 2 = 2 + 0 = \phi(2) + \phi(4)$
+    \item $\phi : (\mathbb{Z}_{15}^*, \times) \to (\mathbb{Z}_{15}, +)$ given by 
+    $$\phi([k]) := [k]$$ 
+    is \textbf{NOT} a homomorphism, since
+    $$\phi([2] \cdot [4]) = \phi([8]) = [8] \neq [6] =[2] + [4] = \phi(2) + \phi(4)$$
     
-    \item $\exp : (\mathbb{R}, +) \to (\mathbb{R}^*, \cdot)$ given by $\exp(a) := e^a$ is a homom.: \\
-    $\exp(a+b) = e^{a+b} = e^a \cdot e^b = \phi(a) \cdot \phi(b)$
+    \item $\exp : (\mathbb{R}, +) \to (\mathbb{R}_{> 0}, \cdot)$ given by $\exp(a) := e^a$ is a homomorphism (here $\mathbb{R}_{> 0}$ is the set of all positive real numbers), since:
+    $$\exp(a+b) = e^{a+b} = e^a \cdot e^b = \phi(a) \cdot \phi(b)$$
+    Indeed, it is an isomorphism since $\exp: \mathbb{R} \to \mathbb{R}_{>0}$ is bijective.
     
-    \item Define $\phi : A_3 \to \mathbb{Z}_3$ by $\phi(e)=0, \phi(1\,2\,3)=1, \phi(1\,3\,2)=2$ \\
-    $\phi$ is a ``dictionary'', translating the ``$A_3$ language'' to ``$\mathbb{Z}_3$ language'' \\
-    $\begin{pmatrix} (1\,2\,3) \text{ in } A_3 \text{ language} \\ (1\,3\,2) \text{ in } A_3 \text{ language} \end{pmatrix} \xrightarrow{\phi} \begin{pmatrix} 1 \text{ in } \mathbb{Z}_3 \text{ language} \\ 2 \text{ in } \mathbb{Z}_3 \text{ language} \end{pmatrix}$ \\
-    The dictionary also translates multiplication in $A_3$ to mult. in $\mathbb{Z}_3$ \\
-    $(1\,2\,3) \ast (1\,2\,3) = (1\,3\,2) \text{ in } A_3 \leftrightarrow (1+1 = 2 \text{ in } \mathbb{Z}_3)$ \\
-    In other words, $\phi((1\,2\,3) \ast (1\,2\,3)) = \phi(1\,2\,3) + \phi(1\,2\,3)$ \\
-    $\therefore \phi : A_3 \cong \mathbb{Z}_3$ is an isomorphism. \\
-    (Question: $S_3$ and $\mathbb{Z}_6$ both have 6 elements, can $S_3 \cong \mathbb{Z}_6$?)
+    \item $S_3$ and $\mathbb{Z}_6$ both have 6 elements, but there are no bijective homomorphism $\phi: S_3 \to \mathbb{Z}_6$ (see below). Similarly, there are not bijective homomorphism from $D_4$ to $\mathbb{Z}_8$.
     
-    \item $i : (\mathbb{Z}, +) \hookrightarrow (\mathbb{R}, +)$ is a homom. with $i(a) := a \ \forall a \in \mathbb{Z}$. \\
-    More generally, if $H \le G$, then $i : (H, \ast) \hookrightarrow (G, \ast)$ is a homom.
+    \item $i : (\mathbb{Z}, +) \hookrightarrow (\mathbb{R}, +)$ defined by $i(a) := a$ for all $a \in \mathbb{Z}$ is a homomorphism. More generally, if $H \le G$, then $i : (H, \ast) \hookrightarrow (G, \ast)$ is a homomorphism.
     
-    \item $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$ with $\pi(a) := a \pmod n$ is a homom. \\
-    ($\pi(a+b) = \pi(a) + \pi(b)$)
+    \item $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$ with 
+    $$\pi(a) := [a]_n$$ 
+    is a homomorphism, since
+    $$\pi(a+b) = [a+b]_n = [a]_n + [b]_n = \pi(a) + \pi(b).$$
     
-    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$ is a homom. \\
-    $\det(A \cdot B) = \det(A) \cdot \det(B)$
+    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$ is a homomorpism, since
+    $$\det(A \cdot B) = \det(A) \cdot \det(B).$$
     
-    \item $\phi : S_n \to (\{ \pm 1 \}, \cdot)$ with $\phi(\sigma) := \begin{cases} +1, & \text{if } \sigma \text{ is even} \\ -1, & \text{if } \sigma \text{ is odd} \end{cases}$ \\
-    Then $\phi(\sigma \tau) = \phi(\sigma) \cdot \phi(\tau) \quad \forall \sigma, \tau \in S_n$, since: 
+    \item Let $\phi : S_n \to (\{ \pm 1 \}, \cdot)$ by $$\phi(\sigma) := \begin{cases} +1, & \text{if } \sigma \text{ is even} \\ -1, & \text{if } \sigma \text{ is odd} \end{cases}$$
+    Then $\phi$ is a surjective homomorphism, i.e.
+    $$\phi(\sigma \tau) = \phi(\sigma) \cdot \phi(\tau) \quad \forall \sigma, \tau \in S_n,$$ 
+    since: 
     \begin{center}
     \begin{tabular}{l l l c c c c}
     & & & $\phi(\sigma \tau)$ & & $\phi(\sigma) \phi(\tau)$ & \\
@@ -842,51 +1141,67 @@ If $\phi$ is bijective, then $\phi$ is an \textit{isomorphism}. ($\phi$ ``preser
 \end{itemize}
 \end{example}
 
-\begin{proposition} 
+\begin{proposition} \label{prop:gphomomproperty}
 Let $(G, \ast), (H, \circledast)$ and $(K, \star)$ be groups. Then:
 \begin{enumerate}
-    \item[(a)] If $\phi : G \to H, \psi : H \to K$ are homom., then $\psi \circ \phi : G \to K$ is homom.
-    \item[(b)] If $\phi : G \to H$ is homom., then $\phi(e_G) = e_H$, $\phi(a^{-1}) = (\phi(a))^{-1}$.
-    \item[(c)] If $\phi : G \cong H$ is isomorphism, then $\phi^{-1} : H \to G$ satisfies $\phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) \ast \phi^{-1}(h_2)$. (In other words, the inverse of isom. is an isom.)
+    \item[(a)] If $\phi : G \to H, \psi : H \to K$ are homomorphism, then $\psi \circ \phi : G \to K$ is homomorphism
+    \item[(b)] If $\phi : G \to H$ is homomorphism, then $\phi(e_G) = e_H$, $\phi(a^{-1}) = (\phi(a))^{-1}$.
+    \item[(c)] If $\phi : G \cong H$ is isomorphism, then $\phi^{-1} : H \to G$ satisfies 
+    $$\phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) \ast \phi^{-1}(h_2).$$ 
+    In other words, the inverse of isomorphism is an isomorphism.
 \end{enumerate}
 \end{proposition}
 \begin{proof} 
-(a) $(\psi \circ \phi)(g_1 * g_2) = \psi(\phi(g_1 * g_2)) = \psi(\phi(g_1) \circledast \phi(g_2)) = \psi(\phi(g_1)) \star \psi(\phi(g_2)) $ \\
-\phantom{(a) } $= (\psi \circ \phi)(g_1) \star (\psi \circ \phi)(g_2)$. \hfill $\square$
+\begin{itemize}
+    \item[(a)] Since $\phi$ and $\psi$ are homomorphisms, $\phi(g_1 * g_2) = \phi(g_1) \circledast \phi(g_2)$ and $\phi(h_1 \circledast h_2) = \phi(h_1) \star \phi(h_2)$. Hence we have:
+    \begin{align*}
+        (\psi \circ \phi)(g_1 * g_2) = \psi(\phi(g_1 * g_2)) &= \psi(\phi(g_1) \circledast \phi(g_2))\\ 
+        &= \psi(\phi(g_1)) \star \psi(\phi(g_2))\\
+        &= (\psi \circ \phi)(g_1) \star (\psi \circ \phi)(g_2). 
+    \end{align*}
 
-(b) $\phi(g) = \phi(e_G * g) = \phi(e_G) \circledast \phi(g) \Rightarrow \phi(g)(\phi(g))^{-1} = \phi(e_G) \circledast (\phi(g) \circledast (\phi(g))^{-1})$ \\
-$\Rightarrow e_H = \phi(e_G)$. \\
-Similarly, $\phi(e_G) = \phi(a * a^{-1}) = \phi(a) \circledast \phi(a^{-1}) \Rightarrow e_H = \phi(a) \circledast \phi(a^{-1}) \Rightarrow \phi(a^{-1}) = (\phi(a))^{-1}$. \hfill $\square$
+\item[(b)] Since
+$\phi(g) = \phi(e_G * g) = \phi(e_G) \circledast \phi(g)$, one has
+\begin{align*} \phi(g)(\phi(g))^{-1} &= \phi(e_G) \circledast (\phi(g) \circledast (\phi(g))^{-1}) \\
+e_H &= \phi(e_G). \end{align*}
+Similarly, since
+$\phi(e_G) = \phi(a * a^{-1}) = \phi(a) \circledast \phi(a^{-1})$, therefore 
+$$e_H = \phi(a) \circledast \phi(a^{-1}) \Rightarrow \phi(a^{-1}) = (\phi(a))^{-1}$$
 
-(c) $\phi(\phi^{-1}(h_1 \circledast h_2)) = h_1 \circledast h_2 = (\phi \circ \phi^{-1}(h_1)) \circledast (\phi \circ \phi^{-1}(h_2)) = \phi(\phi^{-1}(h_1) * \phi^{-1}(h_2))$ \\
-$\Rightarrow \phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) * \phi^{-1}(h_2)$, since $\phi$ is bijective. \hfill $\square$
+\item[(c)] Note that 
+$$\phi(\phi^{-1}(h_1 \circledast h_2)) = h_1 \circledast h_2 = (\phi \circ \phi^{-1}(h_1)) \circledast (\phi \circ \phi^{-1}(h_2)) = \phi(\phi^{-1}(h_1) * \phi^{-1}(h_2))$$
+Since $\phi$ is bijective, one can apply $\phi^{-1}$ on both sides of the equation and get
+$$\phi^{-1}(h_1 \circledast h_2) = \phi^{-1}(h_1) * \phi^{-1}(h_2).$$
+\end{itemize}
 \end{proof}
 
 \begin{definition}[Kernel and Image]
 Let $\phi : G \to H$ be a group homomorphism.
 \begin{itemize}
-    \item \textbf{kernel} of $\phi$: $\ker \phi := \{ g \in G \mid \phi(g) = e_H \}$
-    \item \textbf{image} of $\phi$: $\text{im} \phi := \{ \phi(g) \mid g \in G \}$
+    \item The \textbf{kernel} of $\phi$ is: 
+    $$\ker \phi := \{ g \in G \mid \phi(g) = e_H \}.$$
+    \item The \textbf{image} of $\phi$ is: 
+    $$\text{im } \phi := \phi(G) = \{ \phi(g) \mid g \in G \}.$$
 \end{itemize}
 \end{definition}
-\vspace{1em}
 \begin{example}
 \begin{itemize}
-    \item $A : (\mathbb{R}^n, +) \to (\mathbb{R}^m, +)$. Then $\ker(A) = \{ \mathbf{v} \in \mathbb{R}^n \mid A(\mathbf{v}) = \mathbf{0}_{\mathbb{R}^m} \} = \text{Null space of } A$. \\
-    $\text{im}(A) = \{ A(\mathbf{v}) \in \mathbb{R}^m \mid \mathbf{v} \in \mathbb{R}^n \} = \text{Column space of } A$.
+    \item Let $A$ be an $m \times n$ real matrix, which defines a linear transformation  $A: (\mathbb{R}^n, +) \to (\mathbb{R}^m, +)$. Then $$\ker(A) = \{ \mathbf{v} \in \mathbb{R}^n \mid A(\mathbf{v}) = \mathbf{0}_{\mathbb{R}^m} \} = \text{Null space of } A.$$
+    $$\text{im}(A) = \{ A(\mathbf{v}) \in \mathbb{R}^m \mid \mathbf{v} \in \mathbb{R}^n \} = \text{Column space of } A.$$
     
-    \item $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$. Then \\
-    $\ker(\pi) = \{ \text{multiples of } n \} = \langle n \rangle$, \quad $\text{im}(\pi) = (\mathbb{Z}_n, +)$.
+    \item Let $\pi : (\mathbb{Z}, +) \to (\mathbb{Z}_n, +)$. Then 
+    $$\ker(\pi) = \{ \text{multiples of } n \} = \langle n \rangle, \quad \text{im}(\pi) = (\mathbb{Z}_n, +).$$
     
-    \item $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$. Then \\
-    $\ker(\det) = \{ A \in GL(n, \mathbb{R}) \mid \det(A) = 1 \} =: SL(n, \mathbb{R})$, \quad $\text{im}(\det) = \mathbb{R}^*$.
+    \item Let $\det : GL(n, \mathbb{R}) \to (\mathbb{R}^*, \cdot)$. Then
+    $$\ker(\det) = \{ A \in GL(n, \mathbb{R}) \mid \det(A) = 1 \} =: SL(n, \mathbb{R}), \quad \text{im}(\det) = \mathbb{R}^*.$$
 \end{itemize}
 \end{example}
-\vspace{1em}
 \begin{proposition}
-(a) $\ker \phi \le G$, $\text{im } \phi \le H$ are subgroups of $G$ and $H$ respectively. \\
-(b) $\phi$ is an isomorphism $\iff \ker \phi = \{e_G\}$ \& $\text{im } \phi = H$. \\
-(c) If $G$ is cyclic / abelian, then $\phi(G)$ is cyclic / abelian.
+\begin{itemize}
+\item[(a)] $\ker \phi \le G$, $\text{im } \phi \le H$ are subgroups of $G$ and $H$ respectively.
+\item[(b)] $\phi$ is an isomorphism if and only if $\ker \phi = \{e_G\}$ and $\text{im } \phi = H$.
+\item[(c)] If $G$ is cyclic / abelian, then $\phi(G)$ is cyclic / abelian.
+\end{itemize}
 \end{proposition}
 
 \begin{proof}
@@ -898,31 +1213,27 @@ Let $\phi : G \to H$ be a group homomorphism.
 
 (b) Skipped. $\left( \ker \phi = \{e_G\} \iff \phi \text{ is injective}; \ \text{im } \phi = H \iff \phi \text{ is surjective} \right)$
 
-(c) 
-\begin{itemize}
-    \item[$\bullet$] If $G$ is abelian, i.e.: $ab = ba \ \forall a, b \in G$. Then $\forall \phi(a), \phi(b) \in \phi(G)$:
+(c) If $G$ is abelian, i.e.: $ab = ba \ \forall a, b \in G$. Then $\forall \phi(a), \phi(b) \in \phi(G)$:
     \[ \phi(a) \phi(b) = \phi(ab) = \phi(ba) = \phi(b) \phi(a) \]
-    \item[$\bullet$] If $G$ is cyclic, i.e.: $G = \langle g \rangle$ for some $g \in G$. Then $\forall \phi(a) \in \phi(G)$:
-    \[ \phi(a) = \phi(g \cdot g \cdots g) = \phi(g) \cdot \phi(g) \cdots \phi(g) = (\phi(g))^k \in \langle \phi(g) \rangle \]
-    $\Rightarrow \phi(G) \subseteq \langle \phi(g) \rangle$. Meanwhile, $\langle \phi(g) \rangle \subseteq \phi(G)$ since $\phi(g) \in \phi(G)$. \\
-    Therefore, $\phi(G) = \langle \phi(g) \rangle$ is cyclic. \hfill $\square$
-\end{itemize}
+    
+    
+If $G = \langle g \rangle$ is cyclic, then for all $\phi(a) \in \phi(G)$, $a = g^k$ for some $k \in \mathbb{Z}$, and:
+    \[ \phi(a) = \phi(g^k) = (\phi(g))^k \in \langle \phi(g) \rangle \]
+    (when $k < 0$ is negative,  Proposition \ref{prop:gphomomproperty}(b) is needed to prove the second equality). Therefore, $\phi(G) \subseteq \langle \phi(g) \rangle$. Meanwhile, $\langle \phi(g) \rangle \subseteq \phi(G)$ since $\phi(g) \in \phi(G)$. Therefore, $\phi(G) = \langle \phi(g) \rangle$ is cyclic.
 \end{proof}
 
 \begin{example}
 \begin{itemize}
-    \item $S_3, \mathbb{Z}_6$ both have 6 elements. But $S_3 \not\cong \mathbb{Z}_6$. Why? Suppose by contrary, $\phi : \mathbb{Z}_6 \xrightarrow{\cong} S_3$. Then $\phi(\mathbb{Z}_6) = S_3$ \& $\phi(\mathbb{Z}_6)$ is abelian. \\
-    $\Rightarrow S_3$ is abelian, contradicting ``$S_3$ is NOT abelian''.
+    \item $S_3, \mathbb{Z}_6$ both have 6 elements. But $S_3 \not\cong \mathbb{Z}_6$ -- Suppose by contrary that 
+    $$\phi : \mathbb{Z}_6 \xrightarrow{\cong} S_3.$$ Then $\phi(\mathbb{Z}_6) = S_3$ and hence $\phi(\mathbb{Z}_6)$ is abelian by the above proposition. However, we already know that $S_3$ is not abelian, so this is impossible.
     
-    \item $\mathbb{Z}_2 \times \mathbb{Z}_2 \not\cong \mathbb{Z}_4$. (Hint: Suppose on contrary, $\phi : \mathbb{Z}_4 \to \mathbb{Z}_2 \times \mathbb{Z}_2$ and study $\phi(x)$)
+    \item Similarly, $\mathbb{Z}_2 \times \mathbb{Z}_2 \not\cong \mathbb{Z}_4$. (Hint: Suppose on contrary, $\phi : \mathbb{Z}_4 \to \mathbb{Z}_2 \times \mathbb{Z}_2$ and study $\phi(x)$)
 \end{itemize}
 \end{example}
 
-\vspace{1em}
-From now on, we'll classify groups up to isomorphism, i.e.: we won't distinguish $A_3 \cong \mathbb{Z}_3$ but $\mathbb{Z}_2 \times \mathbb{Z}_2$ \& $\mathbb{Z}_4$ are different!
+From now on, we will classify groups up to isomorphism, i.e. we will not distinguish $A_3 \cong \mathbb{Z}_3$ but $\mathbb{Z}_2 \times \mathbb{Z}_2$ and $\mathbb{Z}_4$ are different!
 
 
-\vspace{1em}
 \begin{theorem}[Classification of cyclic groups]
 Let $G = \langle g \rangle$ be a cyclic group. Then:
 \begin{enumerate}
@@ -932,29 +1243,25 @@ Let $G = \langle g \rangle$ be a cyclic group. Then:
 \end{theorem}
 
 \begin{proof}
-(a) Consider $\phi : \mathbb{Z} \to \langle g \rangle = \{ g^i \mid i \in \mathbb{Z} \} = G$ with $\phi(a) := g^a$. \\
-Then $\phi(a+b) = g^{a+b} = g^a g^b = \phi(a) \phi(b) \Rightarrow \phi$ is a surjective homomorphism \\
-Suppose $\phi$ is \textbf{NOT} injective, i.e.: $\exists \ m \neq n$, s.t.: $\phi(m) = \phi(n)$. \\
-WLOG, assume $m > n$. Then: \\
-$\phi(m) = \phi(n) \Leftrightarrow g^m = g^n \Rightarrow g^{m-n} = e \Rightarrow \text{ord}(g) \le m-n$ (in fact, $\text{ord}(g) \mid m-n$). \\
-Then $\langle g \rangle = \{ g^0=e, g^1, \dots, g^{\text{ord}(g)-1} \}$. \\
-$\Rightarrow |G| = |\langle g \rangle| = \text{ord}(g) < \infty$, contradicting $|G| = \infty$. \hfill $\square$
+(a) Consider the map $\phi : \mathbb{Z} \to G = \langle g$ by $\phi(a) := g^a$.
+Then 
+$$\phi(a+b) = g^{a+b} = g^a g^b = \phi(a) \phi(b).$$ 
+Therefore, $\phi$ is a surjective homomorphism. Suppose on contrary that $\phi$ is \textbf{NOT} injective, i.e. there exists $m > n$ such that $\phi(m) = \phi(n)$. Then: 
+$$\phi(m) = \phi(n) \ \Rightarrow\ g^m = g^n \Rightarrow\ g^{m-n} = e \Rightarrow\ \text{ord}(g) \le m-n$$ 
+(Exercise: $g^k = e\ \Leftrightarrow\ \text{ord}(g) \mid k$). Therefore, $\text{ord}(g) < \infty$ and hence $|G| = |\langle g \rangle| = |\text{ord}(g)| < \infty$ (c.f. Proposition \ref{prop:ordg}), contradicting $|G| = \infty$. Therefore, $\phi$ must be injective, and is an isomorphism between $\mathbb{Z} \cong G$.
 
 \vspace{1em}
-(b) Let $G = \{ g^0=e, g^1, \dots, g^{n-1} \}$ (i.e.: $|G|=n$). Consider $\psi : G \to \mathbb{Z}_n$ with $\psi(g^i) := i$. \\
-Then $\psi$ is a surjective homom., since $\psi(g^a g^b) = \psi(g^{a+b}) = a+b = \psi(g^a) + \psi(g^b)$. \\
-Since $|G| = |\mathbb{Z}_n| = n$, then any surjective map is injective also. \\
-Therefore, $\psi : G \xrightarrow{\cong} \mathbb{Z}_n$ is bijective. \hfill $\square$
+\noindent (b) Let $|G| = |\langle g \rangle| = n < \infty$. Then $\text{ord}(g) = n$ by Proposition \ref{prop:ordg} again, with
+$$G = \{e =g^0, g^1, \dots, g^{n-1}\}.$$
+Consider $\psi : G \to \mathbb{Z}_n$ with $\psi(g^i) := i$ for $0 \leq i \leq n-1$.
+Then $\psi$ is a surjective homomorphism, since 
+$$\psi(g^a g^b) = \psi(g^{a+b}) = a+b = \psi(g^a) + \psi(g^b).$$ 
+Since $|G| = |\mathbb{Z}_n| = n$, then any surjective map is also injective. Therefore, $\psi : G \xrightarrow{\cong} \mathbb{Z}_n$ is bijective.
 \end{proof}
 
-Question (from a student): Where is negative powers of $g$? \\
-Answer: $g^n = e$, so $g^{-1} = g^{-1} g^n = g^{n-1}$, $g^{-2} = g^{-2} g^n = g^{n-2} \dots$
 
-
-\section{Lagrange's Theorem}
-
-\noindent \textbf{Recall:} equivalence relation $\sim$ on $S$: \\
-when $x \sim y$, then $x, y$ are in one equivalence class (with respect to $\sim$). $S = \coprod_{\alpha \in I} C_{\alpha}$
+\section{Lagrange's Theorem} \label{sec:Lagrange}
+\textbf{Recall:} equivalence relation $\sim$ on $S$: If $x \sim y$ in $S$, then $x, y$ are in one equivalence class (with respect to $\sim$). $S = \coprod_{\alpha \in I} C_{\alpha}$
 
 \vspace{0.5em}
 \noindent \textbf{e.g.:}
