@@ -427,72 +427,92 @@ Any element of $F(a,b)$ is algebraic over $F$. This includes $a+b, a-b, ab,$ and
 As a final application of the Tower Law:
 What can we do with a ruler (with no markings) and a compass?
 \begin{itemize}
-    \item \textbf{Bisect an angle}
+    \item \textbf{Bisect an angle}: One can bisect an angle by the following steps:
 \end{itemize}
 
 \begin{center}
-\begin{tikzpicture}[rotate=25,scale=.75]
-\tkzDefPoints{0/0/C, 2/-3/A, 4/0/B}
-\tkzDefLine[bisector,normed](B,A,C) \tkzGetPoint{a}
-\tkzDrawLines[add= 0 and .5](A,B A,C)
-\tkzShowLine[bisector,gap=4,size=2,color=red](B,A,C)
-\tkzDrawLines[add= 0 and 3](A,a)
-\end{tikzpicture}
+\begin{tikzpicture}[>=stealth, scale=1.5]
 
+    % 1. Define base points
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (4.5,0);
+    \coordinate (B) at (35:4.5); % 35 degree angle
+
+    % Draw the initial angle rays
+    \draw[thick] (O) -- (A) node[right] {$A$};
+    \draw[thick] (O) -- (B) node[above right] {$B$};
+    \node[left] at (O) {$O$};
+    \fill (O) circle (1.5pt);
+
+    % 2. First Arc: Intersect rays at X and Y
+    % Radius = 3
+    \def\r{3}
+    \draw[blue, dashed] (45:\r) arc (45:-10:\r);
+    
+    \coordinate (X) at (\r,0);
+    \coordinate (Y) at (35:\r);
+    
+    \fill[blue] (X) circle (1pt) node[below] {$X$};
+    \fill[blue] (Y) circle (1pt) node[above left] {$Y$};
+
+    % 3. Corrected Arcs from X and Y
+    % To find P, we use the same radius \r from X and Y.
+    % The intersection point P will be at (X + Y).
+    
+    % Arc centered at X: Sweeping near the 35 degree mark relative to X
+    \draw[red, dashed] (X) ++(25:\r) arc (25:45:\r); 
+    
+    % Arc centered at Y: Sweeping near the 0 degree mark relative to Y
+    \draw[red, dashed] (Y) ++(-10:\r) arc (-10:10:\r);
+
+    % 4. Find the intersection point P
+    % Mathematically: P = (r + r*cos(35), r*sin(35))
+    \coordinate (P) at ($(X) + (35:\r)$);
+    \fill[red] (P) circle (1.5pt) node[right, black, xshift=2pt] {$P$};
+
+    % 5. Draw the bisector
+    \draw[thick, magenta] (O) -- (P);
+
+    % Label the steps
+    \node[anchor=north west, font=\small, draw, fill=white] at (0,-0.8) {
+        \begin{tabular}{l}
+        \textbf{Construction Steps:}\\
+        1. Arc from $O$ marks $X$ and $Y$ at equal distances.\\
+        2. Arc from $X$ into the angle interior.\\
+        3. Arc from $Y$ (same radius) intersects at $P$.\\
+        4. Line $OP$ is the angle bisector.
+        \end{tabular}
+    };
+
+\end{tikzpicture}
 \end{center}
 
-\textbf{Q:} Can we \textbf{tri-sect} any angle??
+\textbf{Question:} Can we \textbf{tri-sect} any angle?
 
 \begin{itemize}
-    \item \textbf{Double a square}
+    \item \textbf{Double a square}: It is easy to draw a square whose area is twice as big as the original one:
 \end{itemize}
 
 \begin{center}
-\begin{tikzpicture}[
-    % Set a good scale for the drawing
-    scale=2.5,
-    % Define styles for the elements
-    square_style/.style={draw=blue, thick, pattern=north west lines, pattern color=blue!30},
-    line_style/.style={draw=black, thick},
-    point/.style={circle, fill=black, inner sep=1.5pt}
-  ]
+\begin{tikzpicture}[scale=2]
+    % Original Square
+    \draw[thick, fill=blue!20] (0,0) rectangle (1,1);
+    \node at (0.5, 0.5) {Area $= A$};
 
-  % --- Step 1: Define the vertices of the main bounding box ---
-  % This box contains the entire construction.
-  \coordinate (A) at (0,1);
-  \coordinate (B) at (1,1);
-  \coordinate (C) at (1,0);
-  \coordinate (D) at (0,0);
+    % The Diagonal (Side of the new square)
+    \draw[thick, red] (0,0) -- (1,1) node[midway, sloped, above] {};
 
-  % --- Step 2: Draw the two squares ---
-  % They are actually just four triangles, which can be perceived
-  % as two different squares.
+    % The Doubled Square (Constructed on the diagonal)
+    \draw[thick, red, fill=red!10, fill opacity=0.5] 
+        (0,0) -- (1,1) -- (0,2) -- (-1,1) -- cycle;
+    
+    \node[red] at (0, 1.3) {Area $= 2A$};
 
-  % Define the center point
-  \coordinate (M) at (0.5, 0.5);
-
-  
-
-  % --- Step 3: Draw the outlines to distinguish the squares ---
-  
-  % Outline 1: The axis-aligned square (let's call it the 'doubled' one)
-  % This square is formed by the outer boundary. Area = 1*1 = 1.
-  \draw[line_style] (A) -- (B) -- (C) -- (D) -- cycle;
-
-  % Outline 2: The rotated square (the 'original' one)
-  % This square has the center of the edges as its vertices.
-  % Its area is half of the larger one.
-  \coordinate (p_top) at (0.5, 1);
-  \coordinate (p_right) at (1, 0.5);
-  \coordinate (p_bottom) at (0.5, 0);
-  \coordinate (p_left) at (0, 0.5);
-
-  \draw[line_style, thick, blue] (p_top) -- (p_right) -- (p_bottom) -- (p_left) -- cycle;
-  
-  \node at (0.5, 0.5) [font=\bf, text=blue] {Area = X};
-  \node at (0.5, -0.1) [font=\bf] {Area = 2X};
+    % Optional: helper lines to show the 4 "half-squares"
+    \draw[gray, dotted] (0,0) -- (0,2);
+    \draw[gray, dotted] (-1,1) -- (1,1);
 
 \end{tikzpicture}
 \end{center}
 
-\textbf{Q:} Can you \textbf{double a cube}?
+\textbf{Question:} Can we \textbf{double the volume of a cube}?

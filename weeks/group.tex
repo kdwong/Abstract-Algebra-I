@@ -1377,7 +1377,7 @@ often denoted by $\phi(g, x) = g \cdot x$, such that the following are satisfied
 
 A more intuitive way to understand the group action of $G$ on $X$ is to define 
 $$\sigma_g: X \to X$$ 
-by $\sigma_g(x) := g \cdot x.$ In other words, each $g \in G$ defines how $X$ is move around.
+by $\sigma_g(x) := g \cdot x.$ In other words, each $g \in G$ defines how $X$ is moved around.
 \begin{proposition}
 Let $\phi: G \times X \to X$ be a group action. Then the map
 $$\sigma : G \to \mathrm{Aut}(X), \quad \quad g \mapsto \sigma_g$$
@@ -1399,20 +1399,18 @@ To see $\sigma$ is well-defined, one needs to show $\sigma_g \in \mathrm{Aut}(X)
     i.e. $\sigma$ is a homomorphism.
 \end{proof}
 From now on, we will use
-$$\sigma_g(x) \longleftrightarrow g \cdot x$$
+$$\sigma(g)(x) \longleftrightarrow \sigma_g(x) \longleftrightarrow g \cdot x$$
 interchangeably to denote the action of $g \in G$ on $x \in X$.
 \begin{example}
 \begin{itemize}
     \item   By definition of symmetric group, one automatically has a bijective map
     $$\sigma: S_n \to \mathrm{Aut}(X_n),$$
-    which is an $S_n$-action on $X_n := \{1,2, \dots, n\}$. \item Similarly, one also has a $D_n$-action
+    which is an $S_n$-action on $X_n := \{1,2, \dots, n\}$. \item Similarly, one also has an injective $D_n$-action
     $$\gamma: D_n \to \mathrm{Aut}(X_n).$$
     \item Let $G = SO(2) := \left\{\begin{pmatrix} \cos\theta & -\sin\theta  \\ \sin\theta & \cos\theta \end{pmatrix} \ {\Bigg|}\ \theta \in \mathbb{R} \right\}$ be the group of 
-    rotations on $\mathbb{R}^2$. Define a group action
-    $$\sigma : SO(2) \to \mathrm{Aut}(S^2)$$
-    (where $S^2 = \{ (x,y,z) \in \mathbb{R}^3 : x^2 + y^2 + z^2 = 1 \}\subseteq \mathbb{R}^3$ is the unit sphere) by:
-\[ \begin{pmatrix} \cos\theta & -\sin\theta  \\ \sin\theta & \cos \theta \end{pmatrix}  \quad \mapsto  \quad R_\theta: S^2 \to S^2, \quad \text{where}\ R_{\theta}({\bf x}) := \begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}{\bf x} \]
-for ${\bf x} \in S^2$. So the $SO(2)$-action is precisely the rotation on the sphere along the polar axis:
+    rotations on $\mathbb{R}^2$. Define a $G$-action on the unit sphere $X =S^2 := \{ (x,y,z) \in \mathbb{R}^3 : x^2 + y^2 + z^2 = 1 \}$ by:
+    $$\sigma : SO(2) \to \mathrm{Aut}(S^2), \quad \quad \sigma\begin{pmatrix} \cos\theta & -\sin\theta  \\ \sin\theta & \cos \theta \end{pmatrix} := R_\theta,$$
+ where $R_{\theta}({\bf x}) := \begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}{\bf x}$ for ${\bf x} \in S^2$. So the $SO(2)$-action is precisely the rotation on the sphere along the polar axis:
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
     % Draw the sphere outline
@@ -1463,7 +1461,7 @@ on the sphere (marked in blue). Obviously, lines of different latitudes give a p
 \end{example}
 
 As for the stabilizer, one can check that $G_x$ is always a subgroup of $G$ (Exercise). Therefore, if $G$ is finite, one always has
-$$|G_x|\ |\ |G|$$
+$$|G_x|\ \Big|\ |G|$$
 by Lagrange's theorem. Indeed, one has a more refined result in terms of the size of the orbit:
 \begin{theorem}[Orbit-Stabilizer Theorem]
 Let $G$ be a finite group acting on a set $X$. For any $x \in X$:
@@ -1522,7 +1520,7 @@ By the orbit-stabilizer theorem, the size of a conjugacy class must divide the o
 
 We end this section with Burnside's Lemma, which provides a way to count the number of distinct orbits in $X$ for any finite group action. 
 \begin{theorem}[\textbf{Burnside's Lemma}]
-Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits, denoted $|X/G| := |\{\mathcal{O}_x\ |\ x \in X\}|$, is the average number of points fixed by the elements of $G$:
+Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits, denoted $|X/G| := |\{\mathcal{O}_x\ |\ x \in X\}|$, is equal to:
 \[ |X/G| = \frac{1}{|G|} \sum_{g \in G} |X^g|, \]
 where $X^g = \{ x \in X \mid g \cdot x = x \}$ be the set of points fixed by $g$.
 \end{theorem}
@@ -1674,12 +1672,11 @@ A subgroup $H \le G$ is called a \textbf{normal subgroup} if $gH = Hg$ for all $
 
 \begin{example}
 \begin{itemize}
-    \item $A_n \triangleleft S_n$ for all $n$.
+    \item $A_n \triangleleft S_n$ for all $n$. Indeed, for all $g \in G$, if $g \in A_n$ is even, then $gh, hg \in A_n$ for all $h \in A_n$ and $gA_n = A_n = A_ng$. Otherwise, if
+    $g$ is odd, then one can easily check that $gA_n = A_ng$ is the collection of all odd permutations.
+    \item More generally, if $H \le G$ and $[G:H] = 2$, then $H \triangleleft G$ (Homework).
+    %. In this case, $G$ is the disjoint union $H \sqcup gH$ and also $H \sqcup Hg$ for any $g \notin H$. It follows that $gH = G \setminus H = Hg$.
     \item If $G$ is abelian, then any subgroup $H \le G$ is normal. For any $g \in G$ and $h \in H$, $gh = hg$, so $gH = Hg$.
-    \item $SL(n, \mathbb{R}) \triangleleft GL(n, \mathbb{R})$. Let $A \in GL(n, \mathbb{R})$ and $h \in SL(n, \mathbb{R})$. Then:
-    \[ \det(A h A^{-1}) = \det(A) \det(h) \det(A)^{-1} = \det(A) \cdot 1 \cdot \frac{1}{\det(A)} = 1 \]
-    Thus $A h A^{-1} \in SL(n, \mathbb{R})$, which implies $A H A^{-1} = H$, or $AH = HA$.
-    \item If $H \le G$ and $[G:H] = 2$, then $H \triangleleft G$. In this case, $G$ is the disjoint union $H \sqcup gH$ and also $H \sqcup Hg$ for any $g \notin H$. It follows that $gH = G \setminus H = Hg$.
     \item The trivial subgroup $\{e\}$ and the group $G$ itself are always normal in $G$.
 \end{itemize}
 \end{example}
@@ -1700,6 +1697,13 @@ Let $H \le G$ be a subgroup. The following are equivalent:
     \item \textbf{(iii) $\Rightarrow$ (i):} If $gHg^{-1} = H$, then multiplying by $g$ on the right gives $(gHg^{-1})g = Hg$, so $gH = Hg$.
 \end{itemize}
 \end{proof}
+
+\begin{example}
+    We have $SL(n, \mathbb{R}) \triangleleft GL(n, \mathbb{R})$. Indeed, let $a \in GL(n, \mathbb{R})$ and $h \in SL(n, \mathbb{R})$. Then:
+    \[ \det(a h a^{-1}) = \det(a) \det(h) \det(a)^{-1} = \det(a) \cdot 1 \cdot \frac{1}{\det(a)} = 1 \]
+    Thus $a h a^{-1} \in SL(n, \mathbb{R})$, and the result follows from (ii) above.
+\end{example}
+
 
 \begin{corollary}
 Let $\phi : G \to H$ be a group homomorphism. Then $\ker \phi \triangleleft G$.

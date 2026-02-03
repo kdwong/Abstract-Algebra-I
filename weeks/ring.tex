@@ -1,421 +1,436 @@
 \chapter{Rings}
 \section{Basic Definition}
-\subsection*{Rings}
+
+
+The concept of a ring generalizes the arithmetic properties we observe in the integers, allowing us to study structures with both addition and multiplication.
 
 \begin{definition}[Ring]
-A ring $(R, +, \cdot)$ is a set equipped with 2 binary operations $+, \cdot : R \times R \to R$ such that
-\begin{enumerate} 
-    \item $(R, +)$ is an abelian group with additive identity $0_R \in R$.
-    \item $(R, \cdot)$ is associative: $(a \cdot b) \cdot c = a \cdot (b \cdot c) \quad \forall a, b, c \in R$.
-    \item $(R, +, \cdot)$ is distributive:
-    \[
-    \left\{ 
-    \begin{aligned} 
-        a \cdot (b+c) &= a \cdot b + a \cdot c \\ 
-        (a+b) \cdot c &= a \cdot c + b \cdot c
-    \end{aligned}
-    \right. 
-    \quad \forall a, b, c \in R.
-    \]
+A \textbf{ring} $(R, +, \cdot)$ is a set $R$ equipped with two binary operations, addition ($+$) and multiplication ($\cdot$), such that:
+\begin{enumerate}
+    \item $(R, +)$ is an \textbf{abelian group} with additive identity $0_R$.
+    \item Multiplication is \textbf{associative}: $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ for all $a, b, c \in R$.
+    \item The \textbf{distributive laws} hold for all $a, b, c \in R$:
+    \[ a \cdot (b + c) = a \cdot b + a \cdot c \quad \text{and} \quad (a + b) \cdot c = a \cdot c + b \cdot c \]
 \end{enumerate}
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ are rings.
-    \item $\mathbb{Z}[i] = \{a + bi \mid a, b \in \mathbb{Z}\}$ where $i =  \sqrt{-1}$ (Gaussian integers)\\
-    $(a+bi) \cdot (c+di) := (ac-bd) + (ad+bc)i$ \\
-    $(a+bi) + (c+di) := (a+c) + (b+d)i$
-    \item More generally, $\mathbb{Z}[e^{\frac{2\pi i}{n}}] = \{a_0 + a_1e^{\frac{2\pi i}{n}} + \cdots + a_ke^{\frac{2\pi ki}{n}} + \cdots + a_{n-1}e^{\frac{2\pi (n-1)i}{n}} \mid a^i \in \mathbb{Z}\}$\\
-    Since $e^{\frac{2\pi i}{n}} := cos\frac{2\pi i}{n} + i(sin\frac{2\pi i}{n})$, then $n=4$, $e^{\frac{2\pi i}{4}}=i$.
-    \item $2\mathbb{Z}=\{2a\mid a \in \mathbb{Z}\}$ is a ring, \\
-    but $(\{\cdots, -3, -1, 1, 3,\cdots\}, +, \cdot)$ is \textbf{NOT} a ring.
-    \item $n\mathbb{Z}=\{na \mid a \in \mathbb{Z}\}$ is a ring
-    \item $M_{n\times n}(\mathbb{Z})$ is a ring
-    \item $\mathbb{Z}[x]=$ \{all polynomials with integer coefficients\}\\
-    For $f(x)=a_mx^m+\cdots +a_1x+a_0$ and $g(x)=b_nx^n+\cdots +b_1x+b_0$ $\in \mathbb{Z}[x]$, \\
-    $(f\cdot g)(x):=a_mb_nx^{n+m}+\cdots +\sum_{\substack{p \ge 0 \\ q \ge 0 \\ p+q=i}}a_p b_qx^i+ \cdots + a_0b_0$.
+    \item The sets $\mathbb{Z}, \mathbb{Q}, \mathbb{R},$ and $\mathbb{C}$ with standard addition and multiplication are rings.
+    \item \textbf{Gaussian Integers:} $\mathbb{Z}[i] = \{ a + bi \mid a, b \in \mathbb{Z} \}$. Addition and multiplication follow the rules of complex numbers.
+    \item \textbf{Cyclotomic Integers:} Let $\zeta_n = e^{2\pi i/n}$. Then $\mathbb{Z}[\zeta_n] = \{ a_0 + a_1\zeta_n + \dots + a_{n-1}\zeta_n^{n-1} \mid a_j \in \mathbb{Z} \}$ is a ring. For $n=4$, $\zeta_4 = i$, we recover the Gaussian integers.
+    \item \textbf{Polynomial Rings:} $\mathbb{Z}[x]$ is the set of all polynomials with integer coefficients. Multiplication is defined by the Cauchy product:
+    \[ \left( \sum a_p x^p \right) \left( \sum b_q x^q \right) = \sum_{i} \left( \sum_{p+q=i} a_p b_q \right) x^i \]
+    \item \textbf{Matrix Rings:} $M_{n \times n}(\mathbb{Z})$, the set of $n \times n$ matrices with integer entries, is a ring under matrix addition and multiplication.
+    \item \textbf{Multiple Integers:} $n\mathbb{Z} = \{ nk \mid k \in \mathbb{Z} \}$ is a ring for any $n \in \mathbb{Z}$.
+    \item \textbf{Non-example:} The set of odd integers $\{\dots, -3, -1, 1, 3, \dots\}$ is \textbf{not} a ring because it is not closed under addition (the sum of two odd integers is even).
 \end{itemize}
 \end{example}
 
-\noindent \textbf{Mativation}\\
-Solve $x^2+y^2=z^2$ for integers x, y, z.
-$\Rightarrow (x+iy)(x-iy)=z^2$ in $\mathbb{Z}[i]$,\\
-so we wish to study more about properties of the Gaussian integers $\mathbb{Z}[i]$, e.g.: does the \textbf{fundamental theorem of arithmetic} hold for $\mathbb{Z}[i]$, i.e.: can every element in $\mathbb{Z}[i]$ be factorized into product of prime numbers uniquely?
+\begin{remark}[Motivation]
+The study of rings like $\mathbb{Z}[i]$ or $\mathbb{Z}[\zeta_n]$ is motivated by number theory.
+\begin{itemize}
+    \item To find integer solutions to $x^2 + y^2 = z^2$, we can factor the left side in $\mathbb{Z}[i]$ as $(x+iy)(x-iy) = z^2$. This leads to the question: does the \textbf{Fundamental Theorem of Arithmetic} hold in $\mathbb{Z}[i]$? (i.e., is there unique factorization into primes?)
+    \item In Fermat's Last Theorem, we want to study integer solutions of 
+    $$x^n + y^n = z^n,$$ 
+    In the ring $\mathbb{Z}[\zeta_n]$, one can factor the sum as $x^n + y^n = \prod_{k=0}^{n-1} (x + \zeta_n^k y)$.
+\end{itemize}
+\end{remark}
 
-\vspace{0.5em}
-\noindent \textbf{Fermat's Last Theorem:}
-$x^n+y^n=z^n$ for $n\geq3$, $x^n+y^n=(x-e^{\frac{2\pi i}{n}}y) \cdots (x-e^{\frac{2\pi (n-1)i}{n}}y)$ in $\mathbb{Z}[e^{\frac{2\pi i}{n}}]$
 
-\begin{definition}[Unital Rings and Commutative Rings]
-Let $(R, +, \cdot)$ be a ring. We say:
+While all rings satisfy the basic axioms, we often focus on rings with additional properties.
+\begin{definition}[Unital and Commutative Rings]
+Let $R$ be a ring.
 \begin{enumerate}
-    \item R is \textbf{unital} if $\exists$ $1_R \in R$ such that\\
-    $1_R \cdot r=r\cdot 1_R=r$ $\forall$ $r \in R$\\
-    ($1_R$ is the multiplication identity of R)\\
-    (non-example: $R=2\mathbb{Z}$ or $n\mathbb{Z}$)
-    \item If R is unital, then the \textbf{units} of R are the elements\\
-    $U(R)=\{a \in R \mid \exists a^{-1} \in R$ s.t. $aa^{-1}=a^{-1}a=1_R\}$\\
-    (e.g.: $U(\mathbb{Z})=\{\pm 1\}$, $U(M_{n \times n}(R))=GL(n,\mathbb{R})$), and $U(\mathbb{Z}[i])=\{\pm 1,\pm i\}$, why they are the only units?)
-    \item R is \textbf{commutative} if $a\cdot b=b\cdot a$ $\forall a,b \in R$\\
-    (non-example: $R=M_{n\times n}(\mathbb{Z})$)
+    \item $R$ is \textbf{unital} if there exists a multiplicative identity $1_R \in R$ such that $1_R \cdot r = r \cdot 1_R = r$ for all $r \in R$.
+    \item If $R$ is unital, an element $u \in R$ is called a \textbf{unit} if it has a multiplicative inverse; that is, there exists $u^{-1} \in R$ such that $u u^{-1} = u^{-1} u = 1_R$. The set of all units is denoted $U(R)$.
+    \item $R$ is \textbf{commutative} if $a \cdot b = b \cdot a$ for all $a, b \in R$.
 \end{enumerate}
 \end{definition}
 
 \begin{example}
-$(\mathbb{Z}_n,+,\cdot)$ is a commutative and unital ring with the multiplication identity $1_R=[1]$. The units of $\mathbb{Z}_n$ are $U(\mathbb{Z})=\mathbb{Z}_n^*=\{a\mid gcd(a,n)=1\}$
+\begin{itemize}
+    \item $\mathbb{Z}_n$ is a commutative unital ring. Its units are $U(\mathbb{Z}_n) = \{ [a] \in \mathbb{Z}_n \mid \gcd(a, n) = 1 \}$.
+    \item $M_{n \times n}(\mathbb{R})$ is unital but \textbf{not} commutative for $n \ge 2$. Its units are $U(M_{n \times n}(\mathbb{R})) = GL(n, \mathbb{R})$.
+    \item $(\mathbb{Z}_n,+,\cdot)$ is a commutative and unital ring with the multiplication identity $1_R=[1]$. The units of $\mathbb{Z}_n$ are $U(\mathbb{Z})=\mathbb{Z}_n^*=\{a\mid gcd(a,n)=1\}$
+    \item $R = \mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$ are commutative unital, with $U(R) = \{ \pm 1 \}$.
+    \item $R = \mathbb{C}$, $\mathbb{Z}[i]$ are commutative unital, with $U(R) = \{ \pm 1, \pm i \}$.
+    \item $n\mathbb{Z}$ for $n > 1$ is a commutative ring that is \textbf{not} unital.
+\end{itemize}
 \end{example}
+
 
 \begin{remark}
 \begin{itemize}
-    \item The additive identity $0_R \in R$ is unique in R. If R is unital, then the multiplication ifentity $1_R\in R$ is also unique 
+    \item The additive identity $0_R \in R$ is unique in $R$. If $R$ is unital, then the multiplication identity $1_R\in R$ is also unique.
     \item We write $-r\in R $ to be the additive inverse of $r\in R$, i.e.: $(-r)+r=r+(-r)=0_R$
-    \item If $r\in U(R)$ is a unit in a (commutative) unital ring, then we write $r^{-1}$ to be the multiplication inverse of r, i.e.: $r^{-1}r=rr^{-1}=1_R$
-    \item We write $nr:=r+\cdots + r$ (n terms of r) for $n\in \mathbb{N}$ and $r\in R$.
-    \item For $a,b\in R$, we write $a\mid b$ if $\exists c\in R$ s.t.: $ac=b$
+    \item If $r\in U(R)$ is a unit in a (commutative) unital ring, then we write $r^{-1}$ to be the multiplication inverse of $r$, i.e.: $r^{-1}r=rr^{-1}=1_R$
+    \item We write $nr:=r+\cdots + r$ ($n$ terms of $r$) for $n\in \mathbb{N}$ and $r\in R$.
+    \item For $a,b\in R$, we write 
+$$a\mid b$$ if there exists $c\in R$ such that $ac=b$
 \end{itemize}
 \end{remark}
 
 \begin{proposition}
+In any unital ring $R$:
 \begin{enumerate}
-    \item $0_R\cdot r=r\cdot 0_R=0_R$
-    \item $(-1_R)\cdot r=r\cdot (-1_R)=-r$
-    \item $(-1_R)\cdot(-r)=(-r)\cdot(-1_R)=r$
+    \item $0_R \cdot r = r \cdot 0_R = 0_R$ for all $r \in R$.
+    \item $(-1_R) \cdot r = -r$ (if $R$ is unital).
+    \item $(-r) \cdot (-s) = r \cdot s$.
 \end{enumerate}
 \end{proposition}
 
-\noindent {Proof:}
+\begin{proof}
+(1) Since $0_R = 0_R + 0_R$, we have $0_R \cdot r = (0_R + 0_R) \cdot r = 0_R \cdot r + 0_R \cdot r$. By the cancellation law in the additive group $(R, +)$, we obtain $0_R \cdot r = 0_R$.
+
+(2) $0_R = (1_R + (-1_R)) \cdot r = 1_R \cdot r + (-1_R) \cdot r = r + (-1_R) \cdot r$. Thus, $(-1_R) \cdot r$ is the additive inverse of $r$, so $(-1_R) \cdot r = -r$. 
+
+(3) Exercise.
+\end{proof}
+
+\begin{definition}[Subring]
+A subset $S \leq R$ is a \textbf{subring} if $S$ itself is a ring under the operations of $R$.
+\end{definition}
+
+\begin{proposition}[Subring Test]
+A non-empty subset $S \subseteq R$ is a subring if and only if for all $a, b \in S$:
 \begin{enumerate}
-    \item For any $a\in R$, $a\cdot r=(0_R+a)\cdot r=0_R\cdot r+a\cdot r$\\
-    By the uniqueness of $0_R$, $0_R\cdot r=0_R$
-    \item $0_R=0_R\cdot r=(1_R+(-1_R))\cdot r=1_R\cdot r+(-1_R)\cdot r=r+(-1_R)\cdot r$\\
-    $\Rightarrow -r=(-r)+0_R=(-r)+(r+(-1_R)\cdot r)=(-1_R)\cdot r$\\
-    Similarly for $r\cdot(-1_R)=-r$, by taking $0_R\cdot r=((-1_R)+1_R)\cdot r$
-    \item Directly proved by proposition 3.5(2).\hfill$\square$
+    \item $a - b \in S$
+    \item $a \cdot b \in S$
 \end{enumerate}
+\end{proposition}
 
-\begin{definition}[Product Rings]
-Let $(R_1,+_1, \cdot_1)$ and $(R_2,+_2,\cdot_2)$ be two rings. Then $R_1\times R_2$ is called a \textbf{product ring} with\\
-$(r_1,r_2)+_{R_1\times R_2}(r_1^\prime +r_2^\prime):=(r_1+_1r_1^\prime,r_2+_2r_2^\prime)$\\
-$(r_1,r_2)\cdot_{R_1\times R_2}(r_1\cdot_1r_1^\prime,r_2\cdot_2r_2^\prime)$
-\end{definition}
-
-\begin{definition}[Subrings]
-Let $(R,+,\cdot)$ be a ring. A subset $S\subset R$ is a subring if\\
-$+\mid_{S\times S}$: $S\times S\rightarrow S$ and $\cdot\mid_{S\times S}$: $S\times S\rightarrow S$ give a ring substructure of S.
-\end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item $\mathbb{Z}[i]\subset \mathbb{C}$ is a subring
-    \item $n\mathbb{Z}\subset \mathbb{Z}$ is a subring
-    \item $\{\cdots,-3,-1,1,3,\cdots\}\subset\mathbb{Z}$ is \textbf{NOT} a subring
+    \item $\mathbb{Z}[i]\leq \mathbb{C}$ is a subring.
+    \item $n\mathbb{Z}\leq \mathbb{Z}$ is a subring.
+    \item $\{\cdots,-3,-1,1,3,\cdots\}\subset\mathbb{Z}$ is \textbf{NOT} a subring.
 \end{itemize}
 \end{example}
 
-\begin{proposition}
-S$\subset$R is a subring $\Leftrightarrow$ $\forall a,b\in S$: $a+b\in S$, $-a\in S$, and $a\cdot b \in S$
-\end{proposition}
+
+\begin{definition}[Product Ring]
+Given rings $R_1$ and $R_2$, the Cartesian product $R_1 \times R_2$ is a ring under component-wise operations:
+\[ (r_1, r_2) + (s_1, s_2) = (r_1 + s_1, r_2 + s_2) \]
+\[ (r_1, r_2) \cdot (s_1, s_2) = (r_1 \cdot s_1, r_2 \cdot s_2) \]
+\end{definition}
 
 \begin{definition}[Field]
-Let R be a commutative unital ring. We say R is a \textbf{field} if all nonzero elemens of R are in the units U(R) of R.\\
-(Field is a very special kind of ring)
+A \textbf{field} $F$ is a commutative unital ring in which every non-zero element is a unit. That is, 
+$$U(F) = F \setminus \{0_{F}\}.$$
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item $\mathbb{Q}$ is a field, since all nonzero elements $\frac{a}{b}$ of $\mathbb{Q}$ has a multiplication inverse $(\frac{a}{b})^{-1}=\frac{b}{a}$
-    \item $\mathbb{R}$ and $\mathbb{C}$ are fields
-    \item $\mathbb{Z}$ is \textbf{NOT} a field: $u(\mathbb{Z})=\{\pm 1\}\neq\mathbb{Z}\setminus\{0\}$
-    \item $\mathbb{Z}_p$ is a field for all p prime
+    \item $\mathbb{Q}, \mathbb{R},$ and $\mathbb{C}$ are fields.
+    \item $\mathbb{Z}$ is \textbf{not} a field (the only units are $\pm 1$).
+    \item $\mathbb{Z}_n$ is a field if and only if $n$ is prime. If $p$ is prime, we often denote this field as $\mathbb{F}_p$.
+    \item $M_{n \times n}(\mathbb{R})$ is \textbf{not} a field (it is not commutative, and not every non-zero matrix is invertible).
 \end{itemize}
 \end{example}
 
-\noindent \textbf{More examples:}
-\begin{itemize}
-    \item $n\mathbb{Z}$(\textbf{NOT} unital) $\subset$ $\mathbb{Z}$(\textbf{NOT} field) $\subset$ $\mathbb{Q}$(field) $\subset$ $\mathbb{R}$(field) $\subset$ $\mathbb{C}$(field)
-    \item $R[x]=\{\sum_ia_ix^i\mid a_i\in R\}$ is commutative if R is commutative, and is unital if R is unital
-    \item $M_{n\times n}(R)=\{(a_{ij})\mid a_{ij}\in R\}$ is \textbf{NOT} commutative for $n\geq2$
-\end{itemize}
 
-\section{Ring Homomorphism}
+\section{Ring Homomorphisms}
+Just as group homomorphisms preserve the group structure, ring homomorphisms are maps between rings that preserve both addition and multiplication.
 \begin{definition}[Ring Homomorphism]
-Let R and S be rings. A map $\phi$: $R\rightarrow S$ is a \textbf{homomorphism of rings} if\\
-$\phi (a+_Rb)=\phi(a)+_S\phi(b)$ and $\phi(a\cdot_Rb)=\phi(a)\cdot_S\phi(b)$
+Let $R$ and $S$ be rings. A map $\phi: R \to S$ is a \textbf{ring homomorphism} if for all $a, b \in R$:
+\begin{enumerate}
+    \item $\phi(a +_R b) = \phi(a) +_S \phi(b)$
+    \item $\phi(a \cdot_R b) = \phi(a) \cdot_S \phi(b)$
+\end{enumerate}
+Furthermore:
 \begin{itemize}
-    \item If R and S are unital, we say a homomorphism $\phi:R\rightarrow S$ is \textbf{unital} if $\phi(1_R)=1_S$
-    \item If $\phi$ is bijective,then $\phi$ is called a \textbf{ring isomorphism}
+    \item If $R$ and $S$ are unital, $\phi$ is \textbf{unital} if $\phi(1_R) = 1_S$.
+    \item If $\phi$ is bijective, it is called a \textbf{ring isomorphism}, denoted $R \cong S$.
 \end{itemize}
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item $\phi:\mathbb{Z}\rightarrow\mathbb{Z}$, $\phi(n):=2n$. Then:
+    \item Consider $\phi: \mathbb{Z} \to \mathbb{Z}$ given by $\phi(n) := 2n$.
     \begin{enumerate}
-        \item $\phi:(\mathbb{Z},+)\rightarrow(\mathbb{Z},+)$ is a group homomorphism, \textbf{BUT}
-        \item $\phi:(\mathbb{Z},+,\cdot)\rightarrow(\mathbb{Z},+,\cdot)$ is \textbf{NOT} a ring homomorphism, since $\phi(a\cdot b)=2ab\neq 4ab=(2a)\cdot(2b)=\phi(a)\cdot\phi(b)$ for $a,b\neq0$
+        \item $\phi$ is a group homomorphism on $(\mathbb{Z}, +)$.
+        \item However, $\phi$ is \textbf{not} a ring homomorphism because for $a, b \neq 0$:
+        \[ \phi(a \cdot b) = 2ab \neq 4ab = (2a) \cdot (2b) = \phi(a) \cdot \phi(b) \]
     \end{enumerate} 
-    \item Similarly, $\phi:\mathbb{Z}_{10}\rightarrow\mathbb{Z}_{10}$ with $\phi(n)=2n$ is a group homomorphism, but \textbf{NOT} a ring homomorphism.\\
-    But $\phi(n):=5n$ is a ring homomorphism.
-    \item $\phi:\mathbb{Z}\rightarrow\mathbb{Z}_m$ with $\phi(n)$:=n(mod m) is a ring homomorphism
-    \item Let R be a commutative unital ring. $\phi:R[x]\rightarrow R$ with $\phi(p(x)):=p(1_R)$\\
-    Check $\phi(p+q)=(p+q)(1_R)=p(1_R)+q(1_R)=\phi(p)+\phi(q)$ and $\phi(p\cdot_{R[x]}q)=\phi(p)\cdot_R\phi(q)$
-    \item $\mathbb{Z}\mapsto\mathbb{Q}$, $\mathbb{Q}\mapsto\mathbb{R}$, $\mathbb{R}\mapsto\mathbb{C}$
+    
+    \item In $\mathbb{Z}_{10}$, the map $\phi(n) = 2n$ is not a ring homomorphism, but $\phi(n) := 5n$ \textbf{is} a ring homomorphism.
+    \begin{itemize}
+        \item Addition: $5(a+b) \equiv 5a + 5b \pmod{10}$.
+        \item Multiplication: $\phi(ab) = 5ab$ and $\phi(a)\phi(b) = 25ab$. Since $25 \equiv 5 \pmod{10}$, $\phi(ab) = \phi(a)\phi(b)$.
+    \end{itemize}
+
+    \item The natural projection $\pi: \mathbb{Z} \to \mathbb{Z}_m$ where $\pi(n) = [n]_m$ is a ring homomorphism.
+
+    \item \textbf{Evaluation Homomorphism:} Let $R$ be a commutative unital ring. Define $\phi: R[x] \to R$ by $\phi(p(x)) := p(1_R)$. This map evaluates a polynomial at the multiplicative identity.
+    
+    \item The inclusion maps $\mathbb{Z} \hookrightarrow \mathbb{Q}$, $\mathbb{Q} \hookrightarrow \mathbb{R}$, and $\mathbb{R} \hookrightarrow \mathbb{C}$ are ring homomorphisms.
 \end{itemize}
 \end{example}
 
 \begin{proposition}
-Let $\phi:R\rightarrow S$ be a ring homomorphism.
+Let $\phi: R \to S$ be a ring homomorphism.
 \begin{enumerate}
-    \item $\phi(0_R)=0_S$
-    \item $\phi(-a)=-\phi(a)$
-    \item If $\phi$ is unital and a $\in U(R)$, then $\phi(a)\in U(S)$ with $\phi(a)^{-1}=\phi(a^{-1})$
-    \item If $\phi:R\xrightarrow{\cong} S$ is an isomorphism, then $\phi^{-1}:S\rightarrow R$ is a ring isomorphism as well
+    \item $\phi(0_R) = 0_S$.
+    \item $\phi(-a) = -\phi(a)$ for all $a \in R$.
+    \item If $\phi$ is unital and $a \in U(R)$, then $\phi(a) \in U(S)$ with $\phi(a)^{-1} = \phi(a^{-1})$.
+    \item If $\phi: R \to S$ is an isomorphism, then $\phi^{-1}: S \to R$ is also a ring isomorphism.
 \end{enumerate}
 \end{proposition}
 
-\textbf{Proof:}
+\begin{proof}
 \begin{enumerate}
-    \item $\phi(r)=\phi(0_R+r)=\phi(0_R)+\phi(r)$. By uniqueness of additive identity $\phi(0_r)=0_S$
-    \item Same as group homomorphism
-    \item $\phi(a^{-1})\cdot\phi(a)=\phi(a^{-1}a)=\phi(1_R)=1_S$ and similarly we have $\phi(a)\phi(a^{-1})=1_S$. Hence, $\phi(a)$ is a unit with $\phi(a)^{-1}=\phi(a^{-1})$
-    \item Let $\alpha$ and $\beta$ $\in S$. Then $\exists a,b\in R,s.t.:\phi(a)=\alpha$ and $\phi(b)=\beta$——(*)\\
-    (WTS: $\phi^{-1}(\alpha\beta)=\phi^{-1}(\alpha)\phi^{-1}(\beta)$)\\
-    $\phi^{-1}(\alpha)\cdot\phi^{-1}(\beta)=a\cdot b=\phi^{-1}(\phi(ab))=\phi^{-1}(\phi(a)\cdot\phi(b))=\phi^{-1}(\alpha\cdot\beta)$\\
-    (HW: Check $\phi^{-1}(\alpha+\beta)=\phi^{-1}(\alpha)+\phi^{-1}(\beta)$)\hfill $\square$
+    \item $\phi(r) = \phi(0_R + r) = \phi(0_R) + \phi(r)$. By the uniqueness of the additive identity in $S$, $\phi(0_R) = 0_S$.
+    \item This follows from the properties of group homomorphisms under addition.
+    \item $\phi(a^{-1}) \cdot \phi(a) = \phi(a^{-1} a) = \phi(1_R) = 1_S$. Similarly, $\phi(a) \phi(a^{-1}) = 1_S$. Thus, $\phi(a)$ is a unit with inverse $\phi(a^{-1})$.
+    \item Since $\phi$ is a bijection, $\phi^{-1}$ exists as a set-theoretic map. Let $\alpha, \beta \in S$. Then there exist unique $a, b \in R$ such that $\phi(a) = \alpha$ and $\phi(b) = \beta$. Then:
+    \[ \phi^{-1}(\alpha \cdot \beta) = \phi^{-1}(\phi(a) \cdot \phi(b)) = \phi^{-1}(\phi(ab)) = ab = \phi^{-1}(\alpha) \cdot \phi^{-1}(\beta) \]
+    The proof for addition follows the same logic.
 \end{enumerate}
+\end{proof}
 
 \begin{proposition}
-Let $\phi:R\rightarrow S$ be a ring homomorphism. Then $ker\phi:=\{r\in R\mid \phi(r)=0_S\}\leq R$ and $im\phi:=\{\phi(r)\mid r\in R\}\leq S$ are sunrings.
+Let $\phi: R \to S$ be a ring homomorphism. Then $\ker \phi := \{ r \in R \mid \phi(r) = 0_S \}$ is a subring of $R$, and $\text{im } \phi := \{ \phi(r) \mid r \in R \}$ is a subring of $S$.
 \end{proposition}
 
-\textbf{Proof:}
-Let a,b$\in ker\phi$, i.e.: $\phi(a)=\phi(b)=0_S$. (WTS: a+b, -a, $a\cdot b$ $\in ker\phi$)
+\begin{proof}
+Let $a, b \in \ker \phi$, so $\phi(a) = \phi(b) = 0_S$. We check the subring criteria for $\ker \phi$:
 \begin{itemize}
-    \item $\phi(a+b)=\phi(a)+\phi(b)=0_S+0_S=0_S$
-    \item $\phi(-a)=-\phi(a)=-0_S=0_S$
-    \item $\phi(a\cdot b)=\phi(a)\cdot\phi(b)=0_S\cdot0_S=0_S$ (the last equality is left to check in the last lecture)
+    \item $\phi(a+b) = \phi(a) + \phi(b) = 0_S + 0_S = 0_S$, so $a+b \in \ker \phi$.
+    \item $\phi(-a) = -\phi(a) = -0_S = 0_S$, so $-a \in \ker \phi$.
+    \item $\phi(a \cdot b) = \phi(a) \cdot \phi(b) = 0_S \cdot 0_S = 0_S$, so $ab \in \ker \phi$.
 \end{itemize}
+The proof for $\text{im } \phi$ is similar.
+\end{proof}
 
 \begin{remark}
-In groups, we know $ker\phi$ is a \textbf{normal} subroup of R. How about rings, are there any notion of "normal subring"?\\
-\textbf{Answer}: We'll study \textbf{ideals}, which is the ring analogue of normal subgroups.
+In group theory, we know $\ker \phi$ is a \textbf{normal} subgroup. For rings, we seek a similar structural property. It turns out that $\ker \phi$ satisfies an "absorption" property: for any $r \in R$ and $k \in \ker \phi$, $rk \in \ker \phi$. This leads us to the study of \textbf{ideals}, which are the ring-theoretic analogue of normal subgroups.
 \end{remark}
 
-\section{Integral Domain}
+This is the brushed-up LaTeX version of your notes on **Integral Domains**. I have corrected the example of zero-divisors (fixing the $\mathbb{Z}_6$ notation), refined the proofs for clarity, and maintained the professional formatting.
+
+```latex
+\section{Integral Domains}
+
+In many rings, the product of two non-zero elements can be zero. Integral domains are a class of rings where this "pathological" behavior does not occur, much like in the integers.
 
 \begin{definition}[Zero-divisor]
-Let R be a ring. A nonzero element r$\in R$ is a \textbf{zero-divisor} if $\exists 0\neq s\in R,s.t.:r\cdot s=0$ or $s\cdot r=0$.
+Let $R$ be a ring. A non-zero element $r \in R$ is called a \textbf{zero-divisor} if there exists a non-zero element $s \in R$ such that $r \cdot s = 0$ or $s \cdot r = 0$.
 \end{definition}
 
 \begin{example}
-R=$\mathbb{Z}$. Then $2\in R$ is a zerodivisor, since $2\cdot 3=6=0$ in R.
+In the ring $R = \mathbb{Z}_6$, the element $[2]$ is a zero-divisor because $[2] \cdot [3] = [6] = [0]$, and both $[2], [3] \neq [0]$. 
 \end{example}
 
 \begin{definition}[Integral Domain]
-If R has no zerodivisors, then R is a \textbf{domain}.\\
-Moreover, if R is commutative ring with no zerodivisors, then R is an \textbf{integral domain (ID)}.
+A ring $R$ is a \textbf{domain} if it has no zero-divisors. A commutative ring with no zero-divisors is called an \textbf{integral domain} (ID).
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item $\mathbb{Z}_6$ is \textbf{NOT} ID. More generally, $\mathbb{Z}_m$ is ID $\Leftrightarrow$ m is prime.
-    \item $\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C},\mathbb{Z}[i]$ are IDs.
-    \item If R is ID, then so is R[x].
+    \item $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C},$ and the Gaussian integers $\mathbb{Z}[i]$ are all integral domains.
+    \item $\mathbb{Z}_n$ is an integral domain if and only if $n$ is prime. If $n$ is composite, say $n = ab$ with $1 < a, b < n$, then $[a][b] = [0]$ in $\mathbb{Z}_n$, so it has zero-divisors.
+    \item If $R$ is an integral domain, then the polynomial ring $R[x]$ is also an integral domain.
+    \item The matrix ring $M_{n \times n}(\mathbb{R})$ for $n \ge 2$ is \textbf{not} an integral domain, as it is non-commutative and contains zero-divisors (e.g., matrices with only one non-zero entry in different positions).
 \end{itemize}
 \end{example}
 
 \begin{proposition}[Cancellation Property]
-Let R be commutative ring. Then R is ID $\Leftrightarrow$ whenever ca=cb for some $c\neq 0$, then a=b.
+Let $R$ be a commutative ring. Then $R$ is an integral domain if and only if for all $a, b, c \in R$ with $c \neq 0$:
+\[ ca = cb \implies a = b \]
 \end{proposition}
 
-\noindent\textbf{Proof:}
-ca=cb $\Leftrightarrow$ ca+c(-b)=0 $\Leftrightarrow$ c(a+(-b))=0 $\Leftrightarrow$ c(a-b)=0 $\Leftarrow$(R is ID)$\Rightarrow$ c=0 OR a-b=0 $\Leftrightarrow$ a-b=0 $\Leftrightarrow$ a=b.\hfill$\square$
+\begin{proof}
+$(\Rightarrow)$ Suppose $R$ is an integral domain and $ca = cb$ with $c \neq 0$. Then $ca - cb = 0$, which implies $c(a - b) = 0$. Since $R$ has no zero-divisors and $c \neq 0$, we must have $a - b = 0$, hence $a = b$.
+
+$(\Leftarrow)$ Suppose the cancellation property holds. Let $c, x \in R$ such that $cx = 0$ and $c \neq 0$. We can write this as $cx = c \cdot 0$. By cancellation, $x = 0$. Thus, $R$ has no zero-divisors.
+\end{proof}
 
 \begin{remark}
-One can cancel the common factor on both sides of equation \textbf{exactly} when R is an ID.
+The cancellation property is the primary reason integral domains are "well-behaved." It allows us to solve algebraic equations similarly to how we do in the integers or fields.
 \end{remark}
 
-\noindent\textbf{Overview}
-Fields $\subsetneq$ Euclidean Domain (ED) $\subsetneq$ Principal Ideal Domain (PID) $\subsetneq$ Unique Factorization Domain (UFD) $\subsetneq$ Itegral Domain (ID) \\
-(HW: If R is a field, then R is integral domain.)
+\noindent\textbf{Hierarchy of Rings:} \\
+One of the main goals of ring theory is to understand the following inclusions:
+\begin{align*} \text{Fields} &\subsetneq \text{Euclidean Domains (ED)}\\ &\subsetneq \text{Principal Ideal Domains (PID)} \\ &\subsetneq \text{Unique Factorization Domain (UFD)} \\ &\subsetneq \text{Integral Domains (ID)} \end{align*}
+We will define and study the intermediate rings for the rest of this chapter.
 
 \begin{lemma}
-Let R be ID with $\mid R\mid < \infty$. Then R is unital.
+Let $R$ be a finite integral domain. Then $R$ is unital.
 \end{lemma}
 
-\textbf{Proof:}
-Let a $\in R$ be nonzero. Then $\{a,a^2,\cdots\}(\subset R)$ must repeat, since $\mid R\mid < \infty$. Say $a^m=a^n$ for some m>n.\\
-\textbf{Claim:} $1_R=a^{m-n}$.\\
-\textbf{Proof of claim:} $\forall x \in R$, let $xa^{m-n}=y$. Then $xa^m=xa^{m-n}a^n=ya^n=ya^m$. Then, by cancellation property, we have: x=y. Again by cancellation property and $xa^{m-n}=y$, $a^{m-n}=1_R$.\\
-Hence, by the claim, $1_R=a^{m-n}\in R$. Therefore, R is unital.\hfill $\square$
+\begin{proof}
+Let $a \in R$ be a non-zero element. Consider the set of powers $\{a, a^2, a^3, \dots\}$. Since $R$ is finite, there must be repetitions: $a^m = a^n$ for some $m > n > 0$. By the cancellation property, $a^{m-n} a^n = 1 \cdot a^n$, so $a^{m-n}$ acts as the identity for powers of $a$. 
 
-\vspace{1em}
+Specifically, for any $x \in R$, consider $x a^n$. We have $x a^m = x a^n a^{m-n}$. Since $a^m = a^n$, this implies $x a^n = (x a^{m-n}) a^n$. By cancellation of $a^n$, we get $x = x a^{m-n}$. Thus $a^{m-n}$ is the multiplicative identity $1_R$.
+\end{proof}
+
 \begin{proposition}
-Let R be an ID with $\mid R\mid < \infty$. Then R is a field.
+Every finite integral domain is a field.
 \end{proposition}
 
-\textbf{Proof:}
-Let $R\setminus\{0_R\}=\{r_1=1_R,r_2,\cdots,r_m\}$. Then for all a$\neq 0$ in R, consider 
-\[S:=\{ar_1,ar_2,\cdots,ar_m\}\]
-Suppose this set has repetitions, i.e.: $\exists i\neq j, s.t.: ar_i=ar_j$. Then by cancellation property, $r_i=r_j$. Then i=j. 
+\begin{proof}
+Let $R$ be a finite integral domain and let $R \setminus \{0\} = \{r_1, r_2, \dots, r_m\}$. To show $R$ is a field, we must show every non-zero $a \in R$ has a multiplicative inverse. 
 
-Hence, S has no repetitions. Then S=$R\setminus\{0_R\}$. In particular, $\exists r_l,s.t.:ar_l=r_1=1_R$, and hence, a$\in U(R)$.\hfill$\square$
+Consider the set $S = \{ar_1, ar_2, \dots, ar_m\}$. If $ar_i = ar_j$, then by the cancellation property $r_i = r_j$, so $i = j$. Thus, all $m$ elements in $S$ are distinct and non-zero. Since $S \subseteq R \setminus \{0\}$ and $|S| = |R \setminus \{0\}|$, it must be that $S = R \setminus \{0\}$. 
 
-\section{ideal}
-\noindent\textbf{Motivation}
-A ring analogue of normal subgroup.
+Since the identity $1_R$ is in $R \setminus \{0\}$, there must exist some $r_k$ such that $ar_k = 1_R$. Thus $a$ is a unit, and $R$ is a field.
+\end{proof}
 
+
+\section{Ideals}
+The concept of an ideal is the ring-theoretic analogue of a normal subgroup:
 \begin{definition}[Ideal]
-Let R be a ring. We say I $\subset R$ an \textbf{ideal} if
-\begin{itemize}
-    \item I is an additive subgroup of (R,+)
-    \item For all x $\in R$, i $\in I$, we have xi,ix $\in I$.
-\end{itemize}
+Let $R$ be a ring. A subset $I \subseteq R$ is an \textbf{ideal} if:
+\begin{enumerate}
+    \item $I$ is an additive subgroup of $(R, +)$.
+    \item For all $x \in R$ and $i \in I$, we have $xi \in I$ and $ix \in I$.
+\end{enumerate}
 \end{definition}
 
 \begin{remark}
 \begin{itemize}
-    \item We write I $\triangleleft$ R if I is an ideal
-    \item If I $\triangleleft$ R, then I $\leq$ R automatically. (REASON: Take x $\in$ I, then ax=xa$\in I$)
+    \item We denote an ideal by $I \triangleleft R$.
+    \item If $I \triangleleft R$, then $I$ is automatically a subring of $R$. This is because for any $a, b \in I$, the second condition (absorption) implies that $ab \in I$ since $a \in R$ and $b \in I$.
 \end{itemize}
 \end{remark}
 
 \begin{example}
 \begin{itemize}
-    \item (Nonexample:)$\mathbb{Z}\leq \mathbb{Q}$ is \textbf{NOT} an ideal, since 2$\in\mathbb{Z}$ and $\frac{1}{3}\in \mathbb{Q}$, \textbf{BUT} $2\cdot \frac{1}{3}=\frac{2}{3}\notin \mathbb{Z}$
-    \item R=$\mathbb{Z}$, I=$n\mathbb{Z}$. Take na$\in I$, m$\in R$. Then $(na)m=n(am)\in I$
-    \item R=$\mathbb{Z}[x]$, I=$\{p(x)\in R\mid p(0)=0\}$(=$\{$polynomials with no constant term$\}$)\\
-    (HW: Check I is subring.)\\
-    Now take $p(x)=a_nx^n+\cdots+a_1x\in I$ and $q(x)=b_mx^m+\cdots+b_1x+b_0\in R$. Then $p(x)q(x)=a_nb_mx^{n+m}+\cdots+a_1b_0x\in I$.\\
-    (Alternatingly, $p(0)q(0)=0\cdot q(0)=0$, and hence p(x)q(x)$\in I$)
-    \item $R=\mathbb{Z}[x]$, $I=\{p(x)\in R\mid$constant term is an even integer$\}$\\
-    e.g.: $1+x\notin I, 10002+x^2\notin I, (0+)x^3+15x^5\in I$\\
-    (HW: Check that this is an ideal)
+    \item \textbf{Non-example:} $\mathbb{Z} \leq \mathbb{Q}$ is a subring but \textbf{not} an ideal. For instance, $2 \in \mathbb{Z}$ and $\frac{1}{3} \in \mathbb{Q}$, but $2 \cdot \frac{1}{3} = \frac{2}{3} \notin \mathbb{Z}$.
+    \item For $R = \mathbb{Z}$, the subset $I = n\mathbb{Z}$ is an ideal. For any $na \in I$ and $m \in \mathbb{Z}$, $(na)m = n(am) \in I$.
+    \item Let $R = \mathbb{Z}[x]$ and $I = \{ p(x) \in R \mid p(0) = 0 \}$, the set of polynomials with no constant term. For any $p(x) \in I$ and $q(x) \in R$, the product $p(x)q(x)$ satisfies $p(0)q(0) = 0 \cdot q(0) = 0$, so $p(x)q(x) \in I$.
+    \item Let $R = \mathbb{Z}[x]$ and $I = \{ p(x) \in R \mid p(0) \in 2\mathbb{Z} \}$, the set of polynomials where the constant term is an even integer. This is an ideal of $\mathbb{Z}[x]$.
 \end{itemize}
 \end{example}
 
-\noindent\textbf{Question:}
-For any R, how to construct I?
+\noindent\textbf{Question:}\\
+For any ring $R$, how do we construct an ideal $I$?
 
-\begin{definition}
-Let R be a ring, V $\subset$ R subset. Then the \textbf{ideal generated by V} is <V>, which is the smallest ideal in R containing all elements in V.
+\begin{definition}[Ideal Generated by $V$]
+Let $R$ be a ring and $V \subseteq R$ be a subset. The \textbf{ideal generated by V}, denoted $\langle V \rangle$, is the smallest ideal in $R$ containing all elements of $V$.
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item R=$\mathbb{Z}$, V={n}. What's <V>=<n>?\\
-    For any ideal I s.t.: $n \in I$, then $n+\cdots+n$ and $(-n)+\cdots+(-n)$ $\in S$, since I is a subgroup of (R,+). Then $n\mathbb{Z}\subset I$. But $n\mathbb{Z}$ itself is an ideal. So <n>=$n\mathbb{Z}$
-    \item How about general case? Let R be a unital commutative ring, and let $V=\{a_1,\cdots,a_n\}$ is a finite set. Then <V>=<$a_1,\cdots,a_n$>=$\{r_1a_1+\cdots+r_na_n\mid r_1,\cdots,r_n\in R\}$=:S
+    \item Let $R = \mathbb{Z}$ and $V = \{n\}$. Any ideal $I$ containing $n$ must contain all its additive multiples $nk$ for $k \in \mathbb{Z}$ because $I$ is a subgroup. Thus $n\mathbb{Z} \subseteq I$. Since $n\mathbb{Z}$ is itself an ideal, we have $\langle n \rangle = n\mathbb{Z}$.
+    \item In the general case, let $R$ be a unital commutative ring and $V = \{a_1, \dots, a_n\}$. Then:
+    \[ \langle a_1, \dots, a_n \rangle = \{ r_1a_1 + \dots + r_na_n \mid r_i \in R \} \]
+    To verify this:
     \begin{enumerate}
-        \item Check S contains $a_1,\cdots,a_n$, e.g.: $a_2=0a_1+1a_2+0a_3+\cdots+0a_n\in S$
-        \item Check S $\triangleleft$ R. (Check $s\in S$, $r\in R$, then $s\cdot r\in S$)
-        \item For any ideal I satisfying: $a_1,\cdots,a_n$ $\in I$, check $S\subset I$\\
-        (\textbf{Proof:} $a_1,\cdots,a_n\in S$. Then by the definition of ideal, $a_1r_1,\cdots,a_nr_n\in I$. Since I is an additive subgroup, then $a_1r_1+\cdots+a_nr_n\in I$)
+        \item This set $S$ contains each $a_i$ (e.g., $a_1 = 1 a_1 + 0 a_2 + \dots$).
+        \item $S$ is an ideal: the sum of two such linear combinations is another linear combination, and multiplying by $r \in R$ distributes over the terms.
+        \item Any ideal $I$ containing $\{a_1, \dots, a_n\}$ must contain $r_i a_i$ by absorption, and their sum by the subgroup property. Thus $S \subseteq I$.
     \end{enumerate}
-    \item R$=\mathbb{Z}[x]$, $I=<2,x>=\{2p(x)+xq(x)\mid p(x),q(x)\in R\}=\{$all polynomials with even constant term$\}$.
+    \item Let $R = \mathbb{Z}[x]$. The ideal $\langle 2, x \rangle = \{ 2p(x) + xq(x) \mid p(x), q(x) \in R \}$ is exactly the set of polynomials with an even constant term.
 \end{itemize}
 \end{example}
 
 \begin{lemma}
-Suppose $I_1,\cdots,I_k\triangleleft R$, then 
+Suppose $I_1, \dots, I_k \triangleleft R$. Then:
 \begin{enumerate}
-    \item $I_1+\cdots+I_k:=\{i_1+\cdots+i_k\mid i_r\in I_r\}\triangleleft R$
-    \item $\bigcap_{i=1}^{k} I_i\triangleleft R$
+    \item $I_1 + \dots + I_k := \{ i_1 + \dots + i_k \mid i_r \in I_r \}$ is an ideal of $R$.
+    \item $\bigcap_{i=1}^k I_i$ is an ideal of $R$.
 \end{enumerate}
 \end{lemma}
 
-\textbf{Proof:}
+\begin{proof}
 \begin{enumerate}
-    \item Let $(i_1+\cdots+i_k)$ and $(i_1^\prime+\cdots+i_k^\prime)\in I_1+\cdots+I_k$.Then $(-i_r)\in I_r$ $\forall r=1,\cdots,k$.\\
-    $\Rightarrow$ $-(i_1+\cdots+i_k)=(-i_1)+\cdots+(-i_k)\in I_1+\cdots+I_k$\\
-    Also, $(i_1+\cdots+i_k)+(i_1^\prime+\cdots+i_k^\prime)=(i_1+i_1^\prime)+\cdots+(i_k+i_k^\prime)\in I_1+\cdots+I_k$\\
-    Hence, $I_1+\cdots+I_k$ is an additive subgroup.\\
-    Now, take any $r\in R$, then $r\cdot(i_1+\cdots+i_k)=ri_1+\cdots+ri_k\in I_1+\cdots+I_k$. Similarly, $(i_1+\cdots+i_k)\cdot r\in I_1+\cdots+I_k$
-    \item Left to the readers.\hfill$\square$
+    \item Let $x = (i_1 + \dots + i_k)$ and $y = (i_1' + \dots + i_k')$ be elements of the sum. 
+    Then $x - y = (i_1 - i_1') + \dots + (i_k - i_k')$. Since each $I_r$ is an additive subgroup, $i_r - i_r' \in I_r$, so $x - y \in I_1 + \dots + I_k$.
+    For any $r \in R$, $r(i_1 + \dots + i_k) = ri_1 + \dots + ri_k$. Since $ri_j \in I_j$, the sum is in $I_1 + \dots + I_k$.
+    \item Let $x, y \in \bigcap I_i$. Then for all $i$, $x, y \in I_i$. Since each $I_i$ is an ideal, $x-y \in I_i$ and $rx \in I_i$ for all $i$. Therefore, $x-y \in \bigcap I_i$ and $rx \in \bigcap I_i$.
 \end{enumerate}
+\end{proof}
 
 \begin{example}
-$R=\mathbb{Z}$, $I_r=a_r\mathbb{Z}$ where $a_r\in \mathbb{N}$\\
-Then $I_1+\cdots+I_k=gcd(a_1,\cdots,a_k)\mathbb{Z}$ and $I_1\bigcap\cdots\bigcap I_k=lcm(a_1,\cdots,a_k)\mathbb{Z}$
+In $R = \mathbb{Z}$, let $I_r = a_r \mathbb{Z}$ for $a_r \in \mathbb{N}$. Then:
+\begin{itemize}
+    \item $I_1 + \dots + I_k = \gcd(a_1, \dots, a_k) \mathbb{Z}$
+    \item $I_1 \cap \dots \cap I_k = \text{lcm}(a_1, \dots, a_k) \mathbb{Z}$
+\end{itemize}
 \end{example}
 
-\begin{definition}[Principle Ideal Domain]
+\begin{definition}[Principal Ideal Domain]
 \begin{enumerate}
-    \item Let R be a commutative ring. An ideal I $\triangleleft$ R is called \textbf{principal} if I=<a> for some a$\in R$.
-    \item Let R be an ID. We say r is a \textbf{principal ideal domain(PID)} if all ideals in R are principal.
+    \item Let $R$ be a commutative ring. An ideal $I \triangleleft R$ is called \textbf{principal} if $I = \langle a \rangle$ for some $a \in R$.
+    \item Let $R$ be an integral domain (ID). We say $R$ is a \textbf{principal ideal domain (PID)} if every ideal in $R$ is principal.
 \end{enumerate}
 \end{definition}
 
 \begin{proposition}
-Let $\phi:R\rightarrow S$ be a ring homomorphism. Then $ker\phi$ $\triangleleft$ R.
+Let $\phi: R \to S$ be a ring homomorphism. Then $\ker \phi \triangleleft R$.
 \end{proposition}
 
-\textbf{Proof:}
-We only need to show that $\forall r\in R,i\in ker\phi\Rightarrow ri,ir\in ker\phi$, since we know $ker\phi\leq R$ already.\\
-Indeed, $\phi(ri)=\phi(r)\phi(i)=\phi(r)\cdot 0_S=0_S$. Hence, $ri\in ker\phi$. Similarly for ir.\hfill$\square$
+\begin{proof}
+From previous results, we know that $\ker \phi$ is a subring of $R$. It remains to show the absorption property: for all $r \in R$ and $i \in \ker \phi$, $ri \in \ker \phi$ and $ir \in \ker \phi$.
+Indeed, $\phi(ri) = \phi(r)\phi(i) = \phi(r) \cdot 0_S = 0_S$. Hence, $ri \in \ker \phi$. Similarly, $\phi(ir) = \phi(i)\phi(r) = 0_S \cdot \phi(r) = 0_S$, so $ir \in \ker \phi$. \qedhere
+\end{proof}
 
 \section{Quotient Ring}
+
 \begin{definition}[Quotient Ring]
-Let R be a ring, and I $\triangleleft$ R ideal. Consider the collection of left cosets of (R,+), $R/I:=\{r+I\mid r\in R\}$ (Then (R/I,+) has a group structure) with the operations:\\
-$(r_1+I)+_{R/I}(r_2+I):=(r_1+r_2)+I$\\
-$(r_1+I)\cdot_{R/I}(r_2+I):=(r_1\cdot r_1)+I$.\\
-Then $(R/I,+_{R/I},\cdot_{R/I})$ is a ring, and it's called the \textbf{quotient ring of R} by I.
+Let $R$ be a ring and $I \triangleleft R$ an ideal. The \textbf{quotient ring} $R/I$ is the set of additive cosets $R/I := \{ r + I \mid r \in R \}$ equipped with the operations:
+\begin{align*}
+(r_1 + I) + (r_2 + I) &:= (r_1 + r_2) + I \\
+(r_1 + I) \cdot (r_2 + I) &:= (r_1 \cdot r_2) + I
+\end{align*}
 \end{definition}
-
-\textbf{Check:}
+We need to check the above definition is well-defined, and satisfies the axioms of a ring.
 \begin{itemize}
-    \item $\cdot_{R/I}$ is well-defined:\\
-    Take $r_1+I=r_1^\prime+I$ and $r_2+I=r_2^\prime+I$ (*). \\
-    (*) $\Leftrightarrow$ $r_1-r_1^\prime\in I$ and $r_2-r_2^\prime\in I$ $\Rightarrow$ $r_1^\prime=r_1+i_1$ and $r_2^\prime=r_2+i_2$ for some $i_1,i_2\in I$ $\Rightarrow$ $r_1^\prime r_2^\prime=r_1r_2+r_1i_2+i_1r_2+i_1i_2$ $\Rightarrow$ $r_1^\prime r_2^\prime-r_1r_2\in I$ $\Leftrightarrow$  $r_1^\prime r_2^\prime+I=r_1r_2+I$ $\Leftrightarrow$ $(r_1^\prime+I)\cdot_{R/I}(r_2^\prime+I)=(r_1+I)\cdot_{R/I}(r_2+I)$
-    \item $+_{R/I}$ is well-defined by quotient theory
-    \item Check $(R/I, +_{R/I}, \cdot_{R/I})$ is associative:\\
-    $(r_1+I)\cdot_{R/I}((r_2+I)\cdot_{R/I}(r_3+I))=((r_1+I)\cdot_{R/I}(r_2+I))\cdot_{R/I}(r_3+I)$
-    \item Check $(R/I,+_{R/I},\cdot_{R/I})$ is distributive, e.g.:\\
-    $(r_1+I)\cdot_{R/I}((r_2+I)+_{R/I}(r_3+I))=(r_1+I)\cdot_{R/I}(r_2+I)+_{R/I}(r_1+I)\cdot_{R/I}(r_3+I)$ \hfill $\square$
+    \item \textbf{Multiplication is well-defined:} 
+    Suppose $r_1 + I = r_1' + I$ and $r_2 + I = r_2' + I$. This implies $r_1' = r_1 + i_1$ and $r_2' = r_2 + i_2$ for some $i_1, i_2 \in I$. Then:
+    \[ r_1'r_2' = (r_1 + i_1)(r_2 + i_2) = r_1r_2 + r_1i_2 + i_1r_2 + i_1i_2 \]
+    Since $I$ is an ideal, $r_1i_2, i_1r_2,$ and $i_1i_2$ are all in $I$. Thus $r_1'r_2' - r_1r_2 \in I$, which means $r_1'r_2' + I = r_1r_2 + I$.
+    \item \textbf{Addition is well-defined:} This follows directly from the fact that $(I, +)$ is a normal subgroup of $(R, +)$.
+    \item \textbf{Ring Axioms:} Associativity and Distributivity in $R/I$ are inherited from the properties of $R$. For example:
+    \[ (r_1+I)((r_2+I) + (r_3+I)) = r_1(r_2+r_3) + I = (r_1r_2 + r_1r_3) + I = (r_1+I)(r_2+I) + (r_1+I)(r_3+I) \]
 \end{itemize}
 
-\noindent \textbf{Easy Exercise}
+It is easy to see that the following holds for quotient rings:
 \begin{itemize}
-    \item If R is commutative, then R/I is commutative.
-    \item If $1_R\in R$ unital, then $1_{R/I}:=1_R+I$ unital.
+    \item If $R$ is commutative, then $R/I$ is commutative.
+    \item If $R$ is unital, then $R/I$ is unital with identity $1_{R/I} = 1_R + I$.
 \end{itemize}
+We will leave it to the reader to verify these statements.
 
 \begin{example}
-    \begin{itemize}
-        \item $\mathbb{R}[x]/\langle x^2-1\rangle=\{p(x)+\langle x^2-1\rangle \mid p(x)\in \mathbb{R} [x]\}=\{(ax+b)+\langle x^2-1\rangle \mid a,b\in \mathbb{R}\}$\\
-        (shorthand: $\overline{p(x)}:=p(x)+\langle x^2-1\rangle$)
-        $$\overline{x-1},\overline{x+1}\in \mathbb{R}[x]/\langle x^2-1\rangle \quad and \quad (x-1)\cdot(x+1)=x^2-1\in \langle x^2-1\rangle$$ $\Rightarrow$ 
-        $$\overline{x-1}\cdot\overline{x+1}=\overline{0}\in \mathbb{R}[x]/\langle x^2-1\rangle$$\\
-        $\therefore \overline{x-1},\overline{x+1}$ are zerodivisors of $\mathbb{R}[x]/\langle x^2-1\rangle$ and hence it is \textbf{NOT integral domain (ID)}\\
-        (issue: $x^2-1=(x+1)(x-1)$ is not irreducible in $\mathbb{R}[x]$)
-        \item $\mathbb{R}[x]/\langle x^2+1\rangle$. Then 
-        $$\overline{x}\cdot\overline{x}=\overline{x^2}=\overline{x^2-(x^2+1)}=\overline{-1} \, \Rightarrow \, (\overline{x})^2=\overline{-1}$$
-        \item $\mathbb{Z}/\langle 2,x\rangle=\{(a_nx^n+\cdots+a_1x+a_0)+\langle 2,x\rangle\}=\{a_0+\langle2,x\rangle\}=\{0+\langle2,x\rangle,1+\langle2,x\rangle\}\cong\mathbb{Z}_2$
-    \end{itemize}
+\begin{itemize}
+    \item Consider $\mathbb{R}[x]/\langle x^2 - 1 \rangle$. Let $\overline{p(x)} = p(x) + \langle x^2 - 1 \rangle$. 
+    In this ring, 
+    $$\overline{x-1} \cdot \overline{x+1} = \overline{x^2-1} = \overline{0}.$$ 
+    Since the product of two non-zero elements is zero, this ring has zero-divisors and is \textbf{not} an integral domain. This occurs because $x^2-1$ is reducible in $\mathbb{R}[x]$.
+    
+    \item In $\mathbb{R}[x]/\langle x^2 + 1 \rangle$, we have $\overline{x} \cdot \overline{x} = \overline{x^2}$. Since $x^2 \equiv -1 \pmod{x^2+1}$, we have $\overline{x}^2 = \overline{-1}$. This construction behaves like the complex numbers where $i^2 = -1$.
+    
+    \item Consider $\mathbb{Z}[x]/\langle 2, x \rangle$. Any polynomial $p(x) = a_nx^n + \dots + a_1x + a_0$ is congruent to its constant term $a_0$ modulo the ideal $\langle 2, x \rangle$. Furthermore, $a_0 \equiv 0 \text{ or } 1 \pmod 2$. Thus, 
+    $$\mathbb{Z}[x]/\langle 2, x \rangle \cong \mathbb{Z}_2.$$
+\end{itemize}
 \end{example}
 
 \begin{theorem}[First Isomorphism Theorem of Rings]
-Let $\Phi:R\rightarrow S$ be a ring homomorphism. Then the map $\phi:R/ker\Phi\rightarrow im\Phi$ defined by $\phi(r+ker\Phi):=\Phi(r)$ is a well-defined ring isomorphism.
+Let $\Phi: R \to S$ be a ring homomorphism. Then the map 
+$$\psi: R/\ker \Phi \to \text{im } \Phi$$ 
+defined by $\psi(r + \ker \Phi) := \Phi(r)$ is a ring isomorphism.
 \end{theorem}
 
-\textbf{Proof:}
+\begin{proof}
 \begin{itemize}
-    \item $\phi$ is well-defined, i.e.: if (*)"$r+ker\Phi=r^\prime+ker\Phi$", then $\Phi(r)=\Phi(r^\prime)$.\\
-    (Exercise: recall (*) $\Leftrightarrow$ $r-r^\prime\in ker\Phi$)
-    \item $\phi$ is a ring homomorphism: only need to check $\phi(rr^\prime)=\phi(r)\phi(r^\prime)$, since we know $\phi$ is group homomorphism already by the $1_{st}$ isomorphism theorem of groups.
-    \item $\phi$ is bijective as in the $1_{st}$ isomorphism theorem of groups.\hfill $\square$
+    \item \textbf{Well-defined and Bijective:} From the First Isomorphism Theorem for Groups, we know $\psi$ is a well-defined bijection for the additive structure.
+    \item \textbf{Homomorphism:} We check the multiplicative property:
+    \[ \psi((r + \ker \Phi)(r' + \ker \Phi)) = \psi(rr' + \ker \Phi) = \Phi(rr') = \Phi(r)\Phi(r') = \psi(r + \ker \Phi)\psi(r' + \ker \Phi) \]
+    Since $\psi$ preserves both addition and multiplication and is a bijection, it is a ring isomorphism. \qedhere
 \end{itemize}
+\end{proof}
 
 \begin{example}
 \begin{itemize}
-    \item Let $\Phi:\mathbb{R}[x]\rightarrow \mathbb{C}$ be defined by $\Phi(p(x)):=p(i)$ where $(i=\sqrt{}{-1})$. Then $\phi$ is a homomorphism. (Exercise: $\phi(pq)=\phi(p)\phi(q)$)\\
-    Now, $im\phi=\mathbb{C}$, e.g.: $\Phi(bx+a):=a+bi\in \mathbb{C}$ and
-    $$p(x)\in ker\Phi$$ $$\Leftrightarrow p(i)=0$$ $$\Leftrightarrow \overline{p(i)}=p(i)=0$$ $$\Leftrightarrow p(-i)=p(i)=0$$ $$\Leftarrow(Factor\; theorem\; on\; \mathbb{C}[x])\Rightarrow(x-i),(x-(-i))\mid p(x)$$ $$\Leftrightarrow(x-i)(x+i)=x^2+1\mid p(x) \; in\; \mathbb{R}[x]$$
-    $\therefore\; ker\Phi=\{(x^2+1)q(x)\mid q(x)\in\mathbb{R}[x]\}=\langle x^2+1\rangle$.\\
-    $\therefore$ $1_{st}$ isomorphism theorem says $$\mathbb{R}[x]/\langle x^2+1\rangle\cong\mathbb{C}$$
-    \item Let $\Phi:\mathbb{Z}[x]\rightarrow\mathbb{Z}_2$ with $\Phi:=p(0)$(mod 2).\\
-    Check that $im\Phi=\mathbb{Z}_2,\; ker\Phi=\langle2,x\rangle$. (Exercise)$$\Rightarrow\; \mathbb{Z}[x]/\langle2,x\rangle\cong\mathbb{Z}_2$$
+    \item Define $\Phi: \mathbb{R}[x] \to \mathbb{C}$ by $\Phi(p(x)) = p(i)$. This is a surjective homomorphism. The kernel consists of polynomials $p(x)$ such that $p(i) = 0$. By the Factor Theorem, $(x-i) \mid p(x)$. Since $p(x)$ has real coefficients, its complex roots come in pairs, so $(x+i) \mid p(x)$. Thus $(x^2+1) \mid p(x)$, meaning $\ker \Phi = \langle x^2+1 \rangle$. By the First Isomorphism Theorem:
+    \[ \mathbb{R}[x]/\langle x^2 + 1 \rangle \cong \mathbb{C} \]
+    
+    \item Define $\Phi: \mathbb{Z}[x] \to \mathbb{Z}_2$ by $\Phi(p(x)) = p(0) \pmod 2$. The kernel is the set of polynomials with an even constant term, which is the ideal $\langle 2, x \rangle$. By the First Isomorphism Theorem:
+    \[ \mathbb{Z}[x]/\langle 2, x \rangle \cong \mathbb{Z}_2 \]
 \end{itemize}
 \end{example}
 
