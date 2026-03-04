@@ -424,7 +424,9 @@ Since $F(a,b)$ is a finite extension of $F$, it is an algebraic extension.
 Any element of $F(a,b)$ is algebraic over $F$. This includes $a+b, a-b, ab,$ and $a/b$.
 \end{proof}
 
-As a final application of the Tower Law:
+
+\section{Ruler-And-Compass Constructions}
+As a final application of the Tower Law, we present two problems raised by the ancient Greek more than 2000 years ago -- 
 What can we do with a ruler (with no markings) and a compass?
 \begin{itemize}
     \item \textbf{Bisect an angle}: One can bisect an angle by the following steps:
@@ -516,3 +518,69 @@ What can we do with a ruler (with no markings) and a compass?
 \end{center}
 
 \textbf{Question:} Can we \textbf{double the volume of a cube}?
+
+\bigskip
+To address these ancient Greek problems, we translate geometric constructions into the language of field theory.
+
+\begin{definition}
+A real number $\alpha$ is \textbf{constructible} if we can construct a line segment of length $|\alpha|$ using only a ruler and compass, starting from a segment of length 1.
+\end{definition}
+
+\begin{theorem}
+If $\alpha \in \mathbb{R}$ is constructible, then the degree of the extension $[\mathbb{Q}(\alpha) : \mathbb{Q}]$ must be a power of $2$. 
+\end{theorem}
+
+\begin{proof}[Sketch]
+Every point created by a ruler and compass is the intersection of two lines, a line and a circle, or two circles. Algebraically, these intersections involve solving linear or quadratic equations. Thus, every new point lies in a field $K_{i+1}$ obtained by a quadratic extension of the previous field $K_i$:
+\[ \mathbb{Q} = K_0 \subset K_1 \subset K_2 \subset \dots \subset K_m \]
+where $[K_{i+1} : K_i] = 2$ for all $i$. By the \textbf{Tower Law}:
+\[ [K_m : \mathbb{Q}] = [K_m : K_{m-1}] \dots [K_1 : K_0] = 2^m \]
+If $\alpha$ is constructed, then $\alpha \in K_m$. Since $\mathbb{Q} \subseteq \mathbb{Q}(\alpha) \subseteq K_m$, the Tower Law again tells us that $[\mathbb{Q}(\alpha) : \mathbb{Q}]$ must divide $2^m$. Therefore, $[\mathbb{Q}(\alpha) : \mathbb{Q}] = 2^k$ for some $k \le m$.
+\end{proof}
+
+
+\subsection{Application 1: Trisecting the Angle}
+
+We showed earlier that bisecting an angle is always possible. However, the Greeks could not find a way to divide an arbitrary angle into three equal parts. We show this is impossible by focusing on a specific angle: $60^\circ$.
+
+\begin{proposition}
+It is impossible to trisect an angle of $60^\circ$ using a ruler and compass.
+\end{proposition}
+
+\begin{proof}
+Trisecting $60^\circ$ is equivalent to constructing the angle $20^\circ$. Constructing an angle $\theta$ is equivalent to constructing the number $\cos \theta$ on the $x$-axis. 
+Recall the triple-angle formula for cosine:
+\[ \cos(3\theta) = 4\cos^3 \theta - 3\cos \theta \]
+Let $\theta = 20^\circ$, so $3\theta = 60^\circ$. Since $\cos 60^\circ = 1/2$, let $\alpha = \cos 20^\circ$. We have:
+\[ \frac{1}{2} = 4\alpha^3 - 3\alpha \implies 8\alpha^3 - 6\alpha - 1 = 0 \]
+To simplify, let $u = 2\alpha$. Substituting $\alpha = u/2$:
+\[ 8\left(\frac{u}{2}\right)^3 - 6\left(\frac{u}{2}\right) - 1 = 0 \implies u^3 - 3u - 1 = 0 \]
+Let $f(u) = u^3 - 3u - 1$. By the Rational Root Theorem, the only possible rational roots are $\pm 1$. 
+Checking them: $f(1) = -3 \neq 0$ and $f(-1) = 1 \neq 0$. 
+Since $f(u)$ is a cubic polynomial with no rational roots, it is irreducible over $\mathbb{Q}$.
+Thus:
+\[ [\mathbb{Q}(\alpha) : \mathbb{Q}] = [\mathbb{Q}(u) : \mathbb{Q}] = 3 \]
+Because $3$ is not a power of $2$, $\cos 20^\circ$ is not constructible. Therefore, the angle $60^\circ$ cannot be trisected.
+\end{proof}
+
+This does not mean \textit{no} angle can be trisected (for example, a $90^\circ$ angle can be trisected because $30^\circ$ is constructible). It means there is no \textbf{general} method that works for any given angle.
+
+
+
+
+\subsection{Application 2: Doubling the Cube}
+
+The problem of doubling the cube (the Delian problem) asks if we can construct a cube with volume $2V$, given a cube of volume $V$. 
+
+Suppose the original cube has side length $1$. Its volume is $1^3 = 1$. The side length $x$ of a cube with volume $2$ must satisfy $x^3 = 2$, so $x = \sqrt[3]{2}$.
+
+\begin{proposition}
+It is impossible to double the volume of a cube using a ruler and compass.
+\end{proposition}
+
+\begin{proof}
+Let $x = \sqrt[3]{2}$. The polynomial $p(t) = t^3 - 2$ is irreducible over $\mathbb{Q}$ by Eisenstein's Criterion (with $p=2$). 
+Since $p(t)$ is the minimal polynomial of $x$ over $\mathbb{Q}$, we have:
+\[ [\mathbb{Q}(\sqrt[3]{2}) : \mathbb{Q}] = \deg(t^3 - 2) = 3 \]
+Since $3$ is not a power of $2$, the number $\sqrt[3]{2}$ is not constructible. Thus, the side of the doubled cube cannot be constructed.
+\end{proof}

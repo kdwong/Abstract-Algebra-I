@@ -1862,31 +1862,45 @@ The proof consists of two main steps:
 
 
 \paragraph{Proof of Step 1}:
-We only deal with the case when $r = 2$, and the general case follows by repeatedly using this case. 
+We deal with the case when $r = 2$, and the general case follows by inductively from this case. 
 
-Suppose $|G| = p^a q^b$ for distinct primes $p, q$. Let $m = p^a$ and $n = q^b$. We want to show $G \cong G_1 \times G_2$ with $|G_1| = m$ and $|G_2| = n$. Let 
-
-$$G^m := \{ g^m \mid g \in G \}, \quad G^n := \{ g^n \mid g \in G \}.$$
-
+Suppose $|G| = m n$
+where $\gcd(m,n) = 1$ are coprime (e.g. $m = p_1^{a_1}$ and $n = p_2^{a_2}$). We want to show $G \cong G_1 \times G_2$ with $|G_1| = m$ and $|G_2| = n$. Let 
+$$G^m := \{ g \mid g^m = e\}, \quad G^n := \{ g \mid g^n =e \},$$
+then it is obvious that $G^m$ and $G^n$ are subgroups of $G$ (exercise).
 \begin{itemize}
     \item \textbf{Claim 1 -} $G^m \cap G^n = \{e\}$: 
     
-    Suppose $x \in G^m \cap G^n$. Then $x = g^m = h^n$. By Lagrange's Theorem, 
-    $$x^n = g^{mn} = e \quad \quad x^m = h^{nm} = e.$$ 
-    Since $\gcd(m, n) = 1$, there exist $\alpha, \beta \in \mathbb{Z}$ such that $\alpha m + \beta n = 1$ by Bezout's Theorem. Then 
+    Suppose $x \in G^m \cap G^n$. Then $x^m = x^n = e$. Since $\gcd(m, n) = 1$, there exist $\alpha, \beta \in \mathbb{Z}$ such that $\alpha m + \beta n = 1$ by Bezout's Theorem. Then 
     $$x^1 = x^{\alpha m + \beta n} = (x^m)^\alpha (x^n)^\beta = e \cdot e = e.$$
     
-    \item \textbf{Claim 2 -} $\phi: G^m \times G^n \to G$ given by $\phi(g^m, h^n) := g^m(h^n)^{-1}$ is an isomorphism:
+    \item \textbf{Claim 2 -} $\phi: G^m \times G^n \to G$ given by $\phi(x, y) := xy$ is an isomorphism:
     
-    Note that $\phi$ is a homomorphism because $G$ is abelian. For injectivity, if $g^m(h^n)^{-1} = e$, then $g^m = h^n \in G^m \cap G^n = \{e\}$, so $\ker \phi = \{(e, e)\}$. For surjectivity, for any $y \in G$, $y = y^{\alpha m + \beta n} = (y^\alpha)^m (y^\beta)^n = \phi((y^\alpha)^m, (y^{-\beta})^n)$.
+    Note that 
+    $$\phi((x,y)*(x',y')) = \phi(xx',yy')=xx'yy'=xyx'y' = \phi(x,y)\phi(x',y')$$ 
+    is a homomorphism, where the third equality uses that fact that $G$ is abelian. 
     
-    \item \textbf{Claim 3 -} $|G^m| = n$ and $|G^n| = m$:
+    For injectivity, if $\phi(x,y) =xy = e$, then $x = y^{-1} \in G^m \cap G^n = \{e\}$ by Claim 1, so $\ker \phi = \{(e, e)\}$. For surjectivity, for any $g \in G$, 
+    $$g = g^{\alpha m + \beta n} =  g^{\beta n} g^{\alpha m}.$$
+    But $x := g^{\beta n}$ satisfies $x^m = g^{
+    \beta mn} = g^{\beta|G|} = e$ and similarly $y := g^{\alpha m}$ satisfies $y^n = e$. Therefore, $x \in G^m$ and $y \in G^n$, with
+    $$\phi(x,y)=xy = g^{\beta n}g^{\alpha m} = g.$$
     
-    Suppose $q \mid |G^n|$. By Cauchy's Theorem (proved in Homework), there exists $x = g^n \in G^n$ of order $q$. By Bezout's Theorem, $\alpha q + \beta m = 1$ for some $\alpha, \beta \in \mathbb{Z}$. Then 
-    $$x = x^{\alpha q + \beta m} = (x^q)^\alpha (x^m)^\beta = e \cdot (g^{nm})^\beta = e,$$ 
+    \item \textbf{Claim 3 -} $|G^m| = m$ and $|G^n| = n$:
+
+    We first show that $\gcd(|G^m|, n) = 1$: 
+    Suppose on contrary that there exists a prime factor $q | n$ such that $q \mid |G^m|$. By Cauchy's Theorem (proved in Homework), there exists $x \in G^m$ of order $q$. By Bezout's Theorem, $\gamma q + \delta m = 1$ for some $\gamma, \delta \in \mathbb{Z}$. Then 
+    $$x = x^{\gamma q + \delta m} = (x^q)^\gamma (x^m)^\delta = e \cdot e = e,$$ 
     contradicting $\text{ord}(x)=q$. Thus 
-    $$\gcd(|G^n|, q) = 1 \Rightarrow |G^n| = p^r.$$
-    Similarly $|G^m| = q^s$. Since $G^m \times G^n \cong G$, we have $p^r q^s = p^a q^b$, so $r=a, s=b$.
+    $|G^m|$ is coprime with all prime factors of $n$.
+    Analogously, $|G^n|$ is coprime with all prime factors of $m$. 
+    
+    Since $G^m \times G^n \cong G$, we have 
+    \begin{center}
+    $|G^m| \times |G^n| = mn \quad \Rightarrow \quad \begin{cases} |G^m|\ |\ mn \\ 
+    |G^n|\ |\ mn \end{cases} \quad \Rightarrow \quad \begin{cases} |G^m|\ |\ m\\ |G^n|\ |\ n \end{cases}$,    
+    \end{center}
+    where the last $\Rightarrow$ follows from the coprime properties. This forces $|G^m| = m$, $|G^n| = n$ to be the largest possible values.
 \end{itemize}
 
 \paragraph{Proof of Step 2}:
@@ -1930,14 +1944,17 @@ If $m=a$, then $\langle \mu \rangle = G$ and the result is trivial. Otherwise, i
     \[ \mu^{p^u} \in \langle \mu \rangle \cap \langle \nu \rangle = \{e\} \]
     which contradicts $\text{ord}(\mu) = p^m$. Thus, $\bar{\mu}$ retains the maximal order $p^m$ in $\bar{G}$.
 
-    \item \textbf{Claim 7 -} The map $\pi|_K: K \to \bar{K}$ has $\ker(\pi|_K) = \langle \nu \rangle$: 
-    
-    Since $|\bar{G}| = p^{a-1}$, by the inductive hypothesis, there exists a subgroup $\bar{K} \le \bar{G}$ such that $\bar{G} \cong \langle \bar{\mu} \rangle \times \bar{K}$. Let $\pi: G \to \bar{G}$ be the natural projection and define $K := \pi^{-1}(\bar{K})$. Then:
+    Since 
+    $$|\bar{G}| = |G/\langle \nu \rangle|= |G|/|\langle \nu \rangle| = p^a/p =  p^{a-1},$$ 
+    and $\overline{\mu} \in \overline{G}$ has maximal order $p^m$, one can apply  inductive hypothesis to obtain a subgroup $\bar{K} \le \bar{G}$ such that 
+    $$\bar{G} \cong \langle \bar{\mu} \rangle \times \bar{K}.$$
+    Let $\pi: G \to \overline{G}$ be defined by $\pi(g) := g\langle \nu\rangle$ (Exercise: Show that $\pi$ is a homomorphism), and $K := \pi^{-1}(\overline{K})$ (here we abuse notations and treat $\langle \overline{\mu}\rangle$, $\overline{K} \leq \overline{G}$ as subgroups). 
+    \item \textbf{Claim 7 -} The map $\pi|_K: K \to \bar{K}$ has $\ker(\pi|_K) = \langle \nu \rangle$:
     \[ x \in \ker(\pi|_K) \iff \pi(x) = e_{\bar{G}} \iff x \in \langle \nu \rangle. \]
 
     \item \textbf{Claim 8 -} $\langle \mu \rangle \cap K = \{e\}$ in $G$: 
     
-    Let $\mu^i \in \langle \mu \rangle \cap K$. Then $\pi(\mu^i) = \bar{\mu}^i \in \bar{K}$. Since $\bar{G} = \langle \bar{\mu} \rangle \times \bar{K}$, every element is uniquely represented. Thus:
+    Let $\mu^i \in \langle \mu \rangle \cap K$. Then $\pi(\mu^i) = \bar{\mu}^i \in \langle \bar{\mu}\rangle \cap \bar{K}$. Since $\bar{G} \cong \langle \bar{\mu} \rangle \times \bar{K}$ is an external direct product, $\langle\bar{\mu} \rangle \cap \bar{K} = \{e_{\overline{G}}\}$ and:
     \[ \bar{\mu}^i = e_{\bar{G}} \implies \mu^i \in \langle \nu \rangle. \]
     By Claim 5, $\mu^i \in \langle \mu \rangle \cap \langle \nu \rangle = \{e\}$.
 \end{itemize}
@@ -1969,9 +1986,9 @@ The proof follows by induction on $|G| = p^a$, using the proposition that $G \co
 \begin{example}
 To classify all abelian groups of order $|G| = 360 = 2^3 \times 3^2 \times 5$:
 \begin{itemize}
-    \item \textbf{By Step 1:} The group decomposes into its Sylow $p$-subgroups:
+    \item \textbf{By Step 1:} The group decomposes into:
     \[ G \cong G_8 \times G_9 \times G_5 \]
-    where $|G_8| = 2^3$, $|G_9| = 3^2$, and $|G_5| = 5$.
+    where $|G_8| = 2^3$, $|G_9| = 3^2$, and $|G_5| = 5$ (these are called {\bf Sylow $p$-subgroups} ($p = 2,3,5$) of $G$).
     \item \textbf{By Step 2:} We find all possible structures for each $p$-group:
     \begin{itemize}
         \item $G_8$ can be $\mathbb{Z}_8$, $\mathbb{Z}_4 \times \mathbb{Z}_2$, or $\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2$.
@@ -1983,7 +2000,7 @@ Thus, the total number of non-isomorphic abelian groups of order 360 is $3 \time
 \[ G \cong \left\{ \begin{matrix} \mathbb{Z}_8 \\ \mathbb{Z}_4 \times \mathbb{Z}_2 \\ \mathbb{Z}_2^3 \end{matrix} \right\} \times \left\{ \begin{matrix} \mathbb{Z}_9 \\ \mathbb{Z}_3 \times \mathbb{Z}_3 \end{matrix} \right\} \times \mathbb{Z}_5 \]
 \end{example}
 
-\begin{corollary}[Smith Normal Form / Invariant Factors]
+\begin{corollary}[Smith Normal Form]
 Every finite abelian group $G$ is isomorphic to a group of the form:
 \[ G \cong \mathbb{Z}_{d_1} \times \mathbb{Z}_{d_2} \times \dots \times \mathbb{Z}_{d_k} \]
 where each $d_i > 1$ is an integer and $d_i \mid d_{i+1}$ for all $i = 1, \dots, k-1$. 
