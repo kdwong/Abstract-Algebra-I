@@ -66,9 +66,9 @@ Let $R$ be a ring.
     \item The additive identity $0_R \in R$ is unique in $R$. If $R$ is unital, then the multiplication identity $1_R\in R$ is also unique.
     \item We write $-r\in R $ to be the additive inverse of $r\in R$, i.e.: $(-r)+r=r+(-r)=0_R$
     \item If $r\in U(R)$ is a unit in a (commutative) unital ring, then we write $r^{-1}$ to be the multiplication inverse of $r$, i.e.: $r^{-1}r=rr^{-1}=1_R$
-    \item We write $nr:=r+\cdots + r$ ($n$ terms of $r$) for $n\in \mathbb{N}$ and $r\in R$.
+    \item For $n\in \mathbb{N}$ and $r\in R$, we write $n\cdot r:=r+\cdots + r$, and $-n\cdot r := (-r) + \dots + (-r)$ ($n$ terms in both sums).
     \item For $a,b\in R$, we write 
-$$a\mid b$$ if there exists $c\in R$ such that $ac=b$
+$$a\mid b$$ if there exists $c\in R$ such that $ac=b$.
 \end{itemize}
 \end{remark}
 
@@ -110,12 +110,6 @@ A non-empty subset $S \subseteq R$ is a subring if and only if for all $a, b \in
 \end{itemize}
 \end{example}
 
-
-\begin{definition}[Product Ring]
-Given rings $R_1$ and $R_2$, the Cartesian product $R_1 \times R_2$ is a ring under component-wise operations:
-\[ (r_1, r_2) + (s_1, s_2) = (r_1 + s_1, r_2 + s_2) \]
-\[ (r_1, r_2) \cdot (s_1, s_2) = (r_1 \cdot s_1, r_2 \cdot s_2) \]
-\end{definition}
 
 \begin{definition}[Field]
 A \textbf{field} $F$ is a commutative unital ring in which every non-zero element is a unit. That is, 
@@ -202,88 +196,14 @@ Let $a, b \in \ker \phi$, so $\phi(a) = \phi(b) = 0_S$. We check the subring cri
     \item $\phi(-a) = -\phi(a) = -0_S = 0_S$, so $-a \in \ker \phi$.
     \item $\phi(a \cdot b) = \phi(a) \cdot \phi(b) = 0_S \cdot 0_S = 0_S$, so $ab \in \ker \phi$.
 \end{itemize}
-The proof for $\text{im } \phi$ is similar.
-\end{proof}
-
-\begin{remark}
-In group theory, we know $\ker \phi$ is a \textbf{normal} subgroup. For rings, we seek a similar structural property. It turns out that $\ker \phi$ satisfies an "absorption" property: for any $r \in R$ and $k \in \ker \phi$, $rk \in \ker \phi$. This leads us to the study of \textbf{ideals}, which are the ring-theoretic analogue of normal subgroups.
-\end{remark}
-
-This is the brushed-up LaTeX version of your notes on **Integral Domains**. I have corrected the example of zero-divisors (fixing the $\mathbb{Z}_6$ notation), refined the proofs for clarity, and maintained the professional formatting.
-
-```latex
-\section{Integral Domains}
-
-In many rings, the product of two non-zero elements can be zero. Integral domains are a class of rings where this "pathological" behavior does not occur, much like in the integers.
-
-\begin{definition}[Zero-divisor]
-Let $R$ be a ring. A non-zero element $r \in R$ is called a \textbf{zero-divisor} if there exists a non-zero element $s \in R$ such that $r \cdot s = 0$ or $s \cdot r = 0$.
-\end{definition}
-
-\begin{example}
-In the ring $R = \mathbb{Z}_6$, the element $[2]$ is a zero-divisor because $[2] \cdot [3] = [6] = [0]$, and both $[2], [3] \neq [0]$. 
-\end{example}
-
-\begin{definition}[Integral Domain]
-A ring $R$ is a \textbf{domain} if it has no zero-divisors. A commutative ring with no zero-divisors is called an \textbf{integral domain} (ID).
-\end{definition}
-
-\begin{example}
-\begin{itemize}
-    \item $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C},$ and the Gaussian integers $\mathbb{Z}[i]$ are all integral domains.
-    \item $\mathbb{Z}_n$ is an integral domain if and only if $n$ is prime. If $n$ is composite, say $n = ab$ with $1 < a, b < n$, then $[a][b] = [0]$ in $\mathbb{Z}_n$, so it has zero-divisors.
-    \item If $R$ is an integral domain, then the polynomial ring $R[x]$ is also an integral domain.
-    \item The matrix ring $M_{n \times n}(\mathbb{R})$ for $n \ge 2$ is \textbf{not} an integral domain, as it is non-commutative and contains zero-divisors (e.g., matrices with only one non-zero entry in different positions).
-\end{itemize}
-\end{example}
-
-\begin{proposition}[Cancellation Property]
-Let $R$ be a commutative ring. Then $R$ is an integral domain if and only if for all $a, b, c \in R$ with $c \neq 0$:
-\[ ca = cb \implies a = b \]
-\end{proposition}
-
-\begin{proof}
-$(\Rightarrow)$ Suppose $R$ is an integral domain and $ca = cb$ with $c \neq 0$. Then $ca - cb = 0$, which implies $c(a - b) = 0$. Since $R$ has no zero-divisors and $c \neq 0$, we must have $a - b = 0$, hence $a = b$.
-
-$(\Leftarrow)$ Suppose the cancellation property holds. Let $c, x \in R$ such that $cx = 0$ and $c \neq 0$. We can write this as $cx = c \cdot 0$. By cancellation, $x = 0$. Thus, $R$ has no zero-divisors.
-\end{proof}
-
-\begin{remark}
-The cancellation property is the primary reason integral domains are "well-behaved." It allows us to solve algebraic equations similarly to how we do in the integers or fields.
-\end{remark}
-
-\noindent\textbf{Hierarchy of Rings:} \\
-One of the main goals of ring theory is to understand the following inclusions:
-\begin{align*} \text{Fields} &\subsetneq \text{Euclidean Domains (ED)}\\ &\subsetneq \text{Principal Ideal Domains (PID)} \\ &\subsetneq \text{Unique Factorization Domain (UFD)} \\ &\subsetneq \text{Integral Domains (ID)} \end{align*}
-We will define and study the intermediate rings for the rest of this chapter.
-
-\begin{lemma}
-Let $R$ be a finite integral domain. Then $R$ is unital.
-\end{lemma}
-
-\begin{proof}
-Let $a \in R$ be a non-zero element. Consider the set of powers $\{a, a^2, a^3, \dots\}$. Since $R$ is finite, there must be repetitions: $a^m = a^n$ for some $m > n > 0$. By the cancellation property, $a^{m-n} a^n = 1 \cdot a^n$, so $a^{m-n}$ acts as the identity for powers of $a$. 
-
-Specifically, for any $x \in R$, consider $x a^n$. We have $x a^m = x a^n a^{m-n}$. Since $a^m = a^n$, this implies $x a^n = (x a^{m-n}) a^n$. By cancellation of $a^n$, we get $x = x a^{m-n}$. Thus $a^{m-n}$ is the multiplicative identity $1_R$.
-\end{proof}
-
-\begin{proposition}
-Every finite integral domain is a field.
-\end{proposition}
-
-\begin{proof}
-Let $R$ be a finite integral domain and let $R \setminus \{0\} = \{r_1, r_2, \dots, r_m\}$. To show $R$ is a field, we must show every non-zero $a \in R$ has a multiplicative inverse. 
-
-Consider the set $S = \{ar_1, ar_2, \dots, ar_m\}$. If $ar_i = ar_j$, then by the cancellation property $r_i = r_j$, so $i = j$. Thus, all $m$ elements in $S$ are distinct and non-zero. Since $S \subseteq R \setminus \{0\}$ and $|S| = |R \setminus \{0\}|$, it must be that $S = R \setminus \{0\}$. 
-
-Since the identity $1_R$ is in $R \setminus \{0\}$, there must exist some $r_k$ such that $ar_k = 1_R$. Thus $a$ is a unit, and $R$ is a field.
+The proof for $\mathrm{im }\ \phi$ is similar.
 \end{proof}
 
 
 \section{Ideals}
-The concept of an ideal is the ring-theoretic analogue of a normal subgroup:
+The concept of an ideal is the ring-theoretic analogue of a normal subgroup. Indeed, we are using the same notation $\lhd$ to denote an ideal of a ring:
 \begin{definition}[Ideal]
-Let $R$ be a ring. A subset $I \subseteq R$ is an \textbf{ideal} if:
+Let $R$ be a ring. A subset $I \lhd R$ is an \textbf{ideal} if:
 \begin{enumerate}
     \item $I$ is an additive subgroup of $(R, +)$.
     \item For all $x \in R$ and $i \in I$, we have $xi \in I$ and $ix \in I$.
@@ -291,15 +211,14 @@ Let $R$ be a ring. A subset $I \subseteq R$ is an \textbf{ideal} if:
 \end{definition}
 
 \begin{remark}
-\begin{itemize}
-    \item We denote an ideal by $I \triangleleft R$.
-    \item If $I \triangleleft R$, then $I$ is automatically a subring of $R$. This is because for any $a, b \in I$, the second condition (absorption) implies that $ab \in I$ since $a \in R$ and $b \in I$.
-\end{itemize}
+If $I \triangleleft R$, then $I$ is automatically a subring of $R$. This is because for any $a, b \in I$, the second condition (absorption) implies that $ab \in I$ since $a \in R$ and $b \in I$.
+
+However, not all subrings are ideals. For instance, $\mathbb{Z} \leq \mathbb{Q}$ is a subring but \textbf{not} an ideal, since $2 \in \mathbb{Z}$ and $\frac{1}{3} \in \mathbb{Q}$, but $2 \cdot \frac{1}{3} = \frac{2}{3} \notin \mathbb{Z}$.
 \end{remark}
 
 \begin{example}
 \begin{itemize}
-    \item \textbf{Non-example:} $\mathbb{Z} \leq \mathbb{Q}$ is a subring but \textbf{not} an ideal. For instance, $2 \in \mathbb{Z}$ and $\frac{1}{3} \in \mathbb{Q}$, but $2 \cdot \frac{1}{3} = \frac{2}{3} \notin \mathbb{Z}$.
+    
     \item For $R = \mathbb{Z}$, the subset $I = n\mathbb{Z}$ is an ideal. For any $na \in I$ and $m \in \mathbb{Z}$, $(na)m = n(am) \in I$.
     \item Let $R = \mathbb{Z}[x]$ and $I = \{ p(x) \in R \mid p(0) = 0 \}$, the set of polynomials with no constant term. For any $p(x) \in I$ and $q(x) \in R$, the product $p(x)q(x)$ satisfies $p(0)q(0) = 0 \cdot q(0) = 0$, so $p(x)q(x) \in I$.
     \item Let $R = \mathbb{Z}[x]$ and $I = \{ p(x) \in R \mid p(0) \in 2\mathbb{Z} \}$, the set of polynomials where the constant term is an even integer. This is an ideal of $\mathbb{Z}[x]$.
@@ -310,7 +229,7 @@ Let $R$ be a ring. A subset $I \subseteq R$ is an \textbf{ideal} if:
 For any ring $R$, how do we construct an ideal $I$?
 
 \begin{definition}[Ideal Generated by $V$]
-Let $R$ be a ring and $V \subseteq R$ be a subset. The \textbf{ideal generated by V}, denoted $\langle V \rangle$, is the smallest ideal in $R$ containing all elements of $V$.
+Let $R$ be a ring and $V \subseteq R$ be a subset. The \textbf{ideal generated by $V$}, denoted $\langle V \rangle$, is the smallest ideal in $R$ containing all elements of $V$.
 \end{definition}
 
 \begin{example}
@@ -320,7 +239,7 @@ Let $R$ be a ring and $V \subseteq R$ be a subset. The \textbf{ideal generated b
     \[ \langle a_1, \dots, a_n \rangle = \{ r_1a_1 + \dots + r_na_n \mid r_i \in R \} \]
     To verify this:
     \begin{enumerate}
-        \item This set $S$ contains each $a_i$ (e.g., $a_1 = 1 a_1 + 0 a_2 + \dots$).
+        \item This set $S$ contains each $a_i$ (e.g., $a_1 = 1_R\cdot a_1 + 0_R \cdot a_2 + \dots$).
         \item $S$ is an ideal: the sum of two such linear combinations is another linear combination, and multiplying by $r \in R$ distributes over the terms.
         \item Any ideal $I$ containing $\{a_1, \dots, a_n\}$ must contain $r_i a_i$ by absorption, and their sum by the subgroup property. Thus $S \subseteq I$.
     \end{enumerate}
@@ -346,19 +265,19 @@ Suppose $I_1, \dots, I_k \triangleleft R$. Then:
 \end{proof}
 
 \begin{example}
-In $R = \mathbb{Z}$, let $I_r = a_r \mathbb{Z}$ for $a_r \in \mathbb{N}$. Then:
+In $R = \mathbb{Z}$, let $I_r = \langle a_r \rangle = a_r \mathbb{Z}$ for $a_r \in \mathbb{N}$. Then:
 \begin{itemize}
-    \item $I_1 + \dots + I_k = \gcd(a_1, \dots, a_k) \mathbb{Z}$
-    \item $I_1 \cap \dots \cap I_k = \text{lcm}(a_1, \dots, a_k) \mathbb{Z}$
+    \item $I_1 + \dots + I_k = \langle \gcd(a_1, \dots, a_k) \rangle = \gcd(a_1, \dots, a_k) \mathbb{Z}$
+    \item $I_1 \cap \dots \cap I_k = \langle \text{lcm}(a_1, \dots, a_k) \rangle =\text{lcm}(a_1, \dots, a_k) \mathbb{Z}$
 \end{itemize}
+Indeed, one can show that if $I \lhd \mathbb{Z}$ is an ideal, then $I = \langle i \rangle$ for some $i \in \mathbb{Z}$ (Homework).
 \end{example}
 
-\begin{definition}[Principal Ideal Domain]
-\begin{enumerate}
-    \item Let $R$ be a commutative ring. An ideal $I \triangleleft R$ is called \textbf{principal} if $I = \langle a \rangle$ for some $a \in R$.
-    \item Let $R$ be an integral domain (ID). We say $R$ is a \textbf{principal ideal domain (PID)} if every ideal in $R$ is principal.
-\end{enumerate}
+\begin{definition}[Principal Ideal]
+Let $R$ be a unital commutative ring. An ideal $I \triangleleft R$ is called \textbf{principal} if $I = \langle a \rangle = \{ar\ |\ r \in R\}$ for some $a \in R$.
 \end{definition}
+For instance, all ideals in $\mathbb{Z}$ are principal. However, the ideal $\langle 2, x \rangle \lhd \mathbb{Z}[x]$ is not principal - one cannot find any $p(x) \in \mathbb{Z}[x]$ such that $\langle 2,x \rangle = \langle p(x) \rangle$ (Homework).
+
 
 \begin{proposition}
 Let $\phi: R \to S$ be a ring homomorphism. Then $\ker \phi \triangleleft R$.
@@ -396,14 +315,16 @@ It is easy to see that the following holds for quotient rings:
 \end{itemize}
 We will leave it to the reader to verify these statements.
 
-\begin{example}
+\begin{example} \label{eg-zerodiv}
 \begin{itemize}
     \item Consider $\mathbb{R}[x]/\langle x^2 - 1 \rangle$. Let $\overline{p(x)} = p(x) + \langle x^2 - 1 \rangle$. 
     In this ring, 
     $$\overline{x-1} \cdot \overline{x+1} = \overline{x^2-1} = \overline{0}.$$ 
-    Since the product of two non-zero elements is zero, this ring has zero-divisors and is \textbf{not} an integral domain. This occurs because $x^2-1$ is reducible in $\mathbb{R}[x]$.
+    So there exists two nonzero elements such that its product is zero (these elements are called {\bf zerodivisors}, which will be discussed in greater detail in Section \ref{sec-ID} below).
+    %Since the product of two non-zero elements is zero, this ring has zero-divisors and is \textbf{not} an integral domain. 
+    This occurs because $x^2-1$ is reducible in $\mathbb{R}[x]$.
     
-    \item In $\mathbb{R}[x]/\langle x^2 + 1 \rangle$, we have $\overline{x} \cdot \overline{x} = \overline{x^2}$. Since $x^2 \equiv -1 \pmod{x^2+1}$, we have $\overline{x}^2 = \overline{-1}$. This construction behaves like the complex numbers where $i^2 = -1$.
+    \item In $\mathbb{R}[x]/\langle x^2 + 1 \rangle$, we have $\overline{x} \cdot \overline{x} = \overline{x^2}$. Since $x^2 \equiv -1 \pmod{x^2+1}$, we have $\overline{x}^2 = \overline{-1}$. This construction behaves like the complex numbers, where $\overline{x}$ plays the role of `square root of $-1$'.
     
     \item Consider $\mathbb{Z}[x]/\langle 2, x \rangle$. Any polynomial $p(x) = a_nx^n + \dots + a_1x + a_0$ is congruent to its constant term $a_0$ modulo the ideal $\langle 2, x \rangle$. Furthermore, $a_0 \equiv 0 \text{ or } 1 \pmod 2$. Thus, 
     $$\mathbb{Z}[x]/\langle 2, x \rangle \cong \mathbb{Z}_2.$$
@@ -412,7 +333,7 @@ We will leave it to the reader to verify these statements.
 
 \begin{theorem}[First Isomorphism Theorem of Rings]
 Let $\Phi: R \to S$ be a ring homomorphism. Then the map 
-$$\psi: R/\ker \Phi \to \text{im } \Phi$$ 
+$$\psi: R/\ker \Phi \to \mathrm{im}\ \Phi$$ 
 defined by $\psi(r + \ker \Phi) := \Phi(r)$ is a ring isomorphism.
 \end{theorem}
 
@@ -420,14 +341,16 @@ defined by $\psi(r + \ker \Phi) := \Phi(r)$ is a ring isomorphism.
 \begin{itemize}
     \item \textbf{Well-defined and Bijective:} From the First Isomorphism Theorem for Groups, we know $\psi$ is a well-defined bijection for the additive structure.
     \item \textbf{Homomorphism:} We check the multiplicative property:
-    \[ \psi((r + \ker \Phi)(r' + \ker \Phi)) = \psi(rr' + \ker \Phi) = \Phi(rr') = \Phi(r)\Phi(r') = \psi(r + \ker \Phi)\psi(r' + \ker \Phi) \]
+    \[ \psi((r + \ker \Phi)(r' + \ker \Phi)) = \psi(rr' + \ker \Phi) = \Phi(rr') = \Phi(r)\Phi(r') = \psi(r + \ker \Phi)\psi(r' + \ker \Phi). \]
     Since $\psi$ preserves both addition and multiplication and is a bijection, it is a ring isomorphism. \qedhere
 \end{itemize}
 \end{proof}
 
 \begin{example}
 \begin{itemize}
-    \item Define $\Phi: \mathbb{R}[x] \to \mathbb{C}$ by $\Phi(p(x)) = p(i)$. This is a surjective homomorphism. The kernel consists of polynomials $p(x)$ such that $p(i) = 0$. By the Factor Theorem, $(x-i) \mid p(x)$. Since $p(x)$ has real coefficients, its complex roots come in pairs, so $(x+i) \mid p(x)$. Thus $(x^2+1) \mid p(x)$, meaning $\ker \Phi = \langle x^2+1 \rangle$. By the First Isomorphism Theorem:
+    \item Define $\Phi: \mathbb{R}[x] \to \mathbb{C}$ by $\Phi(p(x)) = p(i)$. This is a surjective homomorphism. The kernel consists of polynomials $p(x)$ such that $p(i) = 0$. By the Factor Theorem, 
+    $$(x-i) \mid p(x).$$ 
+    Since $p(x) \in \mathbb{R}[x]$ has real coefficients, the complex roots come in pairs, so one also has $(x+i) \mid p(x)$. Thus $(x^2+1) \mid p(x)$, meaning $\ker \Phi = \langle x^2+1 \rangle$. By the First Isomorphism Theorem:
     \[ \mathbb{R}[x]/\langle x^2 + 1 \rangle \cong \mathbb{C} \]
     
     \item Define $\Phi: \mathbb{Z}[x] \to \mathbb{Z}_2$ by $\Phi(p(x)) = p(0) \pmod 2$. The kernel is the set of polynomials with an even constant term, which is the ideal $\langle 2, x \rangle$. By the First Isomorphism Theorem:
@@ -435,177 +358,506 @@ defined by $\psi(r + \ker \Phi) := \Phi(r)$ is a ring isomorphism.
 \end{itemize}
 \end{example}
 
-\section{Chinese Remainder Theorem}
-
+\section{Product Ring and Chinese Remainder Theorem}
 \begin{definition}[Product Ring]
-Let $R_i$ be rings. Then the \textbf{product ring} $\Pi_iR_i(=R_1\times\cdots \times R_k)$ has a ring structure given by $$(r_1,\cdots,r_k)+_{\Pi_iR_i}(r_1^\prime,\cdots,r_k^\prime):=(r_1+r_1^\prime,\cdots,r_k+r_k^\prime)$$ $$(r_1,\cdots,r_k)\cdot_{\Pi_iR_i}(r_1^\prime,\cdots,r_k^\prime):=(r_1r_1^\prime,\cdots,r_kr_k^\prime)$$
+Given rings $R_1$ and $R_2$, the Cartesian product $R_1 \times R_2$ is a ring under component-wise operations:
+\[ (r_1, r_2) + (s_1, s_2) = (r_1 + s_1, r_2 + s_2) \]
+\[ (r_1, r_2) \cdot (s_1, s_2) = (r_1 \cdot s_1, r_2 \cdot s_2). \]
+We can generalize the above definition to $\prod_{i=1}^n R_i = R_1 \times R_2 \times \dots \times R_n.$
 \end{definition}
 
-\begin{remark}
-If $R_1$, $R_2$ are ID, then $R_1\times R_2$ is \textbf{NOT} an ID: $$(r_1,0)\cdot(0,r_2)=(0,0)=0_{R_1\times R_2}$$
-\end{remark}
 
 \begin{definition}
-Let R be a commutative ring. We say $I_1,I_2\triangleleft R$ \textbf{coprime} if $I_1+I_2=R$.
+Let $R$ be a unital commutative ring. We say $I_1,I_2\triangleleft R$ \textbf{coprime} if $I_1+I_2=R$.
 \end{definition}
 
 \begin{example}
-Let $R=\mathbb{Z}$ and $I_1=\langle m\rangle=m\mathbb{Z}$, $I_2=\langle n\rangle=n\mathbb{Z}$.\\
-Then $I_1+I_2:=\{mp+nq\mid p,q\in\mathbb{Z}\}=\langle gcd(m,n)\rangle$. (Exercise: prove the second equality.)\\
-$\therefore \; I_1 \; \& \; I_2$ are coprime $\Leftrightarrow$ $I_1+I_2=\mathbb{Z}$ $\Leftrightarrow$ $\langle gcd(m,n)\rangle=\mathbb{Z}$ $\Leftrightarrow$ $gcd(m,n)=1$ $\Leftrightarrow$ m,n coprime as integers.
+Let $R=\mathbb{Z}$ and $I_1=\langle m\rangle=m\mathbb{Z}$, $I_2=\langle n\rangle=n\mathbb{Z}$. We have seen before that $I_1+I_2:=\{mp+nq\mid p,q\in\mathbb{Z}\}=\langle gcd(m,n)\rangle$. Therefore, 
+\begin{center}
+$I_1 , I_2$ are coprime $\Leftrightarrow$ $I_1+I_2=\mathbb{Z}$ $\Leftrightarrow$ $\langle \gcd(m,n)\rangle=\mathbb{Z}$ $\Leftrightarrow$ $\gcd(m,n)=1$ are coprime as integers.
+\end{center}
 \end{example}
 
-The above example generalizes our understanding of "coprime" frome $\mathbb{Z}$ to any commutative ring R: 
-Two elements $r_1,r_2$ are coprime in R means $\langle r_1\rangle+\langle r_2\rangle=R$.
+The above example generalizes our understanding of "coprime" from $\mathbb{Z}$ to any $R$: 
+Two elements $r_1,r_2$ are coprime in $R$ means $\langle r_1\rangle+\langle r_2\rangle=R$.
 
-\begin{theorem}
-Let R be commutative unital, and $I_1,\cdots ,I_k\triangleleft R,s.t.:I_i,I_j$ are pairwise coprime. Then we have a ring isomorphism $$\phi:R/I_1\cap\cdots\cap I_k\rightarrow R/I_1\times\cdots\times R/I_k \quad defined\; by \quad \phi(r+I_1\cap\cdots\cap I_k):=(r+I_1,\cdots,r+I_k).$$
+\begin{theorem}[Chinese Remainder Theorem]
+Let $R$ be a commutative unital ring, and let $I_1, \ldots, I_k \triangleleft R$ be ideals such that $I_i$ and $I_j$ are pairwise coprime for $i \neq j$. Then we have a ring isomorphism 
+$$\phi: R/(I_1 \cap \cdots \cap I_k) \rightarrow R/I_1 \times \cdots \times R/I_k$$ 
+defined by $\phi(r + I_1 \cap \cdots \cap I_k) := (r + I_1, \ldots, r + I_k)$.
 \end{theorem}
 
-\textbf{Proof:}
-Let $\Phi:R\rightarrow R/I_1\times\cdots\times R/I_k$ be a ring homomorphism with $\Phi(r):=(r+I_1,\cdots,r+I_k).$ By the first isomorphism theorem, we need to show:
-\begin{enumerate}
-    \item $ker\Phi=I_1\cap\cdots\cap I_k$ and 
-    \item $im\Phi=R/I_1\times\cdots\times R/I_k$
-\end{enumerate}
-\begin{enumerate}
-    \item $r\in ker\Phi\Leftrightarrow r+I_l=0+I_l \:\forall l\Leftrightarrow r-0\in I_l\: \forall l=1,\cdots,k\Leftrightarrow r\in I_1\cap\cdots\cap I_k$
-    \item Fix $j\in\{1,\cdots,k\}$. Since R is unital and $I_j$, $I_i$ coprime for all $i\neq j$, so we have $z_i\in I_j\quad w_i\in I_i$, s.t.: $$(*): z_i+w_i=1\;\; (1\in I_i+I_j=R)\;\forall i\neq j$$
-    Consider $1=(1-\Pi_{i\neq j}w_i)+(\Pi_{i\neq j}w_i)$. $$Set\;\;\;x_j:=1-\Pi_{i\neq j}w_i=1-\Pi_{i\neq j}(1-z_i)=sum\; of\; products\; of \;z_i's\;with\; no\; constants\in I_j$$ $$Set\;\;\;y_j:=\Pi_{i\neq j}w_i\in \bigcap_{i\neq j}I_i,\; since\; I_i\; ideals$$
-    $\therefore$ For each fixed j, we have $$(**):\;\;1=x_j(\in I_j)+y_j(\in \bigcap_{i\neq j}I_i)$$ We already to check $\Phi$ is surjective:\\
-    For each $(u_1+I_1,\cdots,u_k+I_k)\in R/I_1\times\cdots\times R/I_k$, we \textbf{CLAIM} that $\Phi(u_1y_1+\cdots+u_ky_k)=(u_1+I_1,\cdots,u_k+I_k)$:\\
-    \textbf{REASON}: $\Phi(u_1y_1+\cdots+u_ky_k)=(\cdots,u_1y_1+\cdots+u_ky_k+I_l,\cdots)=(u_1+I_1,\cdots,u_k+I_k)$, since $$(u_1y_1+\cdots+u_ly_l+\cdots+u_ky_k+I_l)=u_ly_l+I_l\overset{(**)}{=}u_l(1-x_l)+I_l=u_l-u_lx_l+I_l=u_l+I_l$$ \hfill $\square$
-\end{enumerate}
+\begin{proof}
+Let $\Phi: R \rightarrow R/I_1 \times \cdots \times R/I_k$ be the ring homomorphism defined by 
+$$\Phi(r) := (r + I_1, \ldots, r + I_k).$$
+By the First Isomorphism Theorem, we need to show:
+\begin{itemize}
+\item[(i)] $\ker\Phi = I_1 \cap \cdots \cap I_k$, and 
+\item[(ii)] $\operatorname{im}\Phi = R/I_1 \times \cdots \times R/I_k$.
+\end{itemize}
+
+\textbf{Part (i):} We have
+\begin{align*}
+r \in \ker\Phi 
+&\Leftrightarrow \Phi(r) = (0 + I_1, \ldots, 0 + I_k) \\
+&\Leftrightarrow r + I_\ell = 0 + I_\ell \text{ for all } \ell = 1, \ldots, k \\
+&\Leftrightarrow r \in I_\ell \text{ for all } \ell = 1, \ldots, k \\
+&\Leftrightarrow r \in I_1 \cap \cdots \cap I_k.
+\end{align*}
+
+\textbf{Part (ii):} Fix $j \in \{1, \ldots, k\}$. Since $R$ is unital and $I_j$ and $I_i$ are coprime for all $i \neq j$, we have $I_i + I_j = R$. Thus there exist $z_i \in I_j$ and $w_i \in I_i$ such that 
+$$z_i + w_i = 1 \quad \text{for all } i \neq j.$$
+
+Consider the identity $1 = (1 - \prod_{i \neq j} w_i) + \prod_{i \neq j} w_i$. Define
+$$x_j := 1 - \prod_{i \neq j} w_i = 1 - \prod_{i \neq j} (1 - z_i).$$
+Expanding the product, we see that $x_j$ is a sum of products of the $z_i$'s with no constant term, hence $x_j \in I_j$. Also, define
+$$y_j := \prod_{i \neq j} w_i \in \bigcap_{i \neq j} I_i,$$
+since each $w_i \in I_i$ and ideals are closed under multiplication.
+
+Therefore, for each fixed $j$, we have 
+$$1 = x_j + y_j, \quad \text{where } x_j \in I_j \text{ and } y_j \in \bigcap_{i \neq j} I_i.$$
+
+We now verify that $\Phi$ is surjective. Let $(u_1 + I_1, \ldots, u_k + I_k) \in R/I_1 \times \cdots \times R/I_k$ be arbitrary. 
+
+\textbf{Claim:} $\Phi(u_1 y_1 + \cdots + u_k y_k) = (u_1 + I_1, \ldots, u_k + I_k)$.
+
+\textbf{Proof of Claim:} We have 
+$$\Phi(u_1 y_1 + \cdots + u_k y_k) = (u_1 y_1 + \cdots + u_k y_k + I_1, \ldots, u_1 y_1 + \cdots + u_k y_k + I_k).$$
+For the $\ell$-th component, note that $y_j \in I_\ell$ for all $j \neq \ell$ (by definition of $y_j$), so 
+\begin{align*}
+u_1 y_1 + \cdots + u_k y_k + I_\ell 
+&= u_\ell y_\ell + I_\ell \\
+&= u_\ell(1 - x_\ell) + I_\ell \\
+&= u_\ell - u_\ell x_\ell + I_\ell \\
+&= u_\ell + I_\ell,
+\end{align*}
+where the last equality holds because $x_\ell \in I_\ell$.
+
+Thus $\Phi$ is surjective, completing the proof.
+\end{proof}
 
 \begin{corollary}
 Let $p_1,\cdots,p_n$ be distinct prime numbers. Then $$\mathbb{Z}/\langle p_1^{a_1}\cdots p_n^{a_n}\rangle\cong\mathbb{Z}/\langle p_1^{a_1}\rangle\times\cdots\times\mathbb{Z}/\langle p_n^{a_n}\rangle.$$
 \end{corollary}
 
-Therefore, for each $b_i\in \mathbb{Z}/\langle p_i^{a_i}\rangle\cong \mathbb{Z}_{p_i^{a_i}}$, there exists $x\in \mathbb{Z},s.t.:\Phi(x)=(b_1+\langle p_1^{a_1}\rangle,\cdots,b_n+\langle p_n^{a_n}\rangle)\quad x\equiv b_i \pmod{\mathbb{Z}_{p_i^{a_i}}}$ for all i.
+Therefore, for each $b_i\in \mathbb{Z}/\langle p_i^{a_i}\rangle\cong \mathbb{Z}_{p_i^{a_i}}$, there exists $x\in \mathbb{Z}$ such that 
+$\Phi(x)=(b_1+\langle p_1^{a_1}\rangle,\cdots,b_n+\langle p_n^{a_n}\rangle)$, i.e. 
+$$x\equiv b_i \pmod{\mathbb{Z}_{p_i^{a_i}}}$$
+for all $i$.
+
+
+
+\section{Integral Domains} \label{sec-ID}
+
+In many rings, the product of two non-zero elements can be zero. Integral domains are a class of rings where this "pathological" behavior does not occur, much like in the integers.
+
+\begin{definition}[Zero-divisor]
+Let $R$ be a ring. A non-zero element $r \in R$ is called a \textbf{zero-divisor} if there exists a non-zero element $s \in R$ such that $r \cdot s = 0$ or $s \cdot r = 0$.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+\item In the ring $R = \mathbb{Z}_6$, the element $[2]$ is a zero-divisor because $[2] \cdot [3] = [6] = [0]$, and both $[2], [3] \neq [0]$. 
+
+\item Let $R$ be unital commutative ring with polynomial ring $R[x]$, and let $p(x) = a(x)b(x) \in R[x]$ be a reducible polynomial. Then
+$$\overline{a(x)} := a(x) + \langle p(x) \rangle, \quad \overline{b(x)} := b(x) + \langle p(x) \rangle$$
+are zerodivisors of the quotient ring $R[x]/\langle p(x) \rangle$ (c.f. Example \ref{eg-zerodiv}).
+
+\item Finally, if $R_1, R_2$ are not zero rings, then the product ring $R_1 \times R_2$ has zerodivisors. Namely, $$(r_1,0_{R_2}) \cdot (0_{R_1},r_2) = (0_{R_1},0_{R_2}) = 0_{R_1 \times R_2}$$
+for $r_1 \neq 0$, $r_2 \neq 0$. So they are both zerodivisors.
+\end{itemize}
+\end{example}
+
+\begin{definition}[Integral Domain]
+A ring $R$ is a \textbf{domain} if it has no zero-divisors. A {\it unital, commutative} ring with no zero-divisors is called an \textbf{integral domain} (ID).
+\end{definition}
+
+As one noticed in the construction of ideal $\langle a_1, \dots, a_r \rangle \lhd R$ generated by $a_1, \dots, a_r \in R$ and the Chinese Remainder Theorem, unital commutative rings have a much nicer structure than general rings. 
+
+{\bf Unless stated otherwise, we will assume $R$ is unital commutative from now on, and $R$ is automatically an integral domain if it has no zerodivisors}.
+
+\begin{example}
+\begin{itemize}
+    \item $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C},$ and the Gaussian integers $\mathbb{Z}[i]$ are all integral domains.
+    \item $\mathbb{Z}_n$ is an integral domain if and only if $n$ is prime. If $n$ is composite, say $n = ab$ with $1 < a, b < n$, then $[a][b] = [0]$ in $\mathbb{Z}_n$, so it has zero-divisors.
+    \item If $R$ is an integral domain, then the polynomial ring $R[x]$ is also an integral domain.
+    %\item The matrix ring $M_{n \times n}(\mathbb{R})$ for $n \ge 2$ is \textbf{not} an integral domain, as it is non-commutative and contains zero-divisors (e.g., matrices with only one non-zero entry in different positions).
+\end{itemize}
+\end{example}
+
+\begin{proposition}[Cancellation Property]
+Let $R$ be a (unital, commutative) ring. Then $R$ is a(n integral) domain if and only if for all $a, b, c \in R$ with $c \neq 0$:
+\[ ca = cb \implies a = b \]
+\end{proposition}
+
+\begin{proof}
+$(\Rightarrow)$ Suppose $R$ is an integral domain and $ca = cb$ with $c \neq 0$. Then $ca - cb = 0$, which implies $c(a - b) = 0$. Since $R$ has no zero-divisors and $c \neq 0$, we must have $a - b = 0$, hence $a = b$.
+
+$(\Leftarrow)$ Suppose the cancellation property holds. Let $c, x \in R$ such that $cx = 0$ and $c \neq 0$. We can write this as $cx = c \cdot 0$. By cancellation, $x = 0$. Thus, $R$ has no zero-divisors.
+\end{proof}
+
+\begin{remark}
+The cancellation property is the primary reason integral domains are `well-behaved'. It allows us to solve algebraic equations similarly to how we do in the integers or fields.
+\end{remark}
+
+\noindent\textbf{Hierarchy of Rings:} \\
+One of the main goals of ring theory is to understand the following inclusions:
+\begin{align*} \text{Fields} &\subsetneq \text{Euclidean Domains (ED)}\\ &\subsetneq \text{Principal Ideal Domains (PID)} \\ &\subsetneq \text{Unique Factorization Domain (UFD)} \\ &\subsetneq \text{Integral Domains (ID)} \end{align*}
+
+Indeed, one can easily see the coarsest inclusion holds:
+\begin{proposition}
+If $R$ is a field, then $R$ is an integral domain.
+\end{proposition}
+
+\begin{proof}
+Since $R$ is a field, it is a commutative ring with unit $1_R$. Suppose on contrary that there exist $a,b \in R$ such that $ab = 0_R$ with $a, b \neq 0_R$. Since $R$ is a field and $a \neq 0_R$, the element $a$ has a multiplicative inverse $a^{-1}$. Multiplying both sides of the equation $ab = 0$ by $a^{-1}$ gives
+\[
+a^{-1}(ab) = a^{-1}0_R.
+\]
+By associativity,
+\[
+(a^{-1}a)b = 0_R.
+\]
+Since $a^{-1}a = 1_R$, we obtain
+\[
+1_R \cdot b = 0_R,
+\]
+which implies $b = 0_R$, contradicting the assumption that $ab = 0_R$ with $a, b \neq 0_R$. Therefore, $R$ has no zero divisors, and $R$ is an integral domain.
+\end{proof}
+
+In the case when $R$ is a finite ring, the converse holds:
+\begin{lemma}
+Let $R$ be a finite domain. Then $R$ is unital.
+\end{lemma}
+
+\begin{proof}
+Let $a \in R$ be a non-zero element. Consider the set of powers $\{a, a^2, a^3, \dots\}$. Since $R$ is finite, there must be repetitions: $a^m = a^n$ for some $m > n > 0$. By the cancellation property, $a^{m-n} a^n = 1 \cdot a^n$, so $a^{m-n}$ acts as the identity for powers of $a$. 
+
+Specifically, for any $x \in R$, consider $x a^n$. We have $x a^m = x a^n a^{m-n}$. Since $a^m = a^n$, this implies $x a^n = (x a^{m-n}) a^n$. By cancellation of $a^n$, we get $x = x a^{m-n}$. Thus $a^{m-n}$ is the multiplicative identity $1_R$.
+\end{proof}
+
+\begin{proposition}
+Every finite commutative domain $R$ is a field.
+\end{proposition}
+
+\begin{proof}
+Let $R$ be a finite commutative domain, and let $R \setminus \{0_R\} = \{r_1, r_2, \dots, r_m\}$. By the Lemma above, we have seen that $R$ is unital.
+To further show $R$ is a field, we must show every non-zero $a \in R$ has a multiplicative inverse. 
+
+Consider the set $S = \{ar_1, ar_2, \dots, ar_m\}$. If $ar_i = ar_j$, then by the cancellation property $r_i = r_j$, so $i = j$. Thus, all $m$ elements in $S$ are distinct and non-zero. Since $S \subseteq R \setminus \{0_R\}$ and $|S| = |R \setminus \{0_R\}|$, it must be that $S = R \setminus \{0_R\}$. 
+
+Since the identity $1_R$ is in $R \setminus \{0\}$, there must exist some $r_k$ such that $ar_k = 1_R$. Thus $a$ is a unit, and $R$ is a field.
+\end{proof}
+
+
+For the rest of this chapter, we will further focus on the case when {\bf $R$ is an (infinite) integral domain}, and study the intermediate rings in the above inclusions.
+
+
+
+
+
+
+
+
 
 \section{Prime and Maximal Ideals}
 
-\noindent\textbf{Motivation:}
-Define "prime" in any commutative unital R.\\
-(Kummer, mid 1800's): Rather thaan studying $r\in R$, study ideals $I\triangleleft R$.\\
-\textbf{Basic case:} $R=\mathbb{Z}$\\
-All ideals $I\triangleleft\mathbb{Z}$ are of the form $I=\langle n \rangle$. So study $\langle n\rangle$ instead of n. \\
-e.g.: in $R=\mathbb{Z}$, $$(\langle p\rangle,\langle q\rangle \;coprime\;(as\; ideals))\Leftrightarrow(p,q\; are\; coprime\;(as\; integers))$$
+As hinted in the previous section, one would like to study various algebraic properties for integral domain $R$. We begin with defining what `prime' really means for $R$.
+
+Rather than studying whether an element $r\in R$ is prime, it is better to define what it means for an ideal $I\triangleleft R$ to be prime. Indeed, we will define various properties on {\bf ideals of $R$}, rather than {\bf elements of $R$}. 
+
+To better understand these new notions in terms of ideals, it is recommended to go to the basic case when $R=\mathbb{Z}$. For instance, to understand the statement
+\begin{center}
+$I_1, I_2, \dots \triangleleft R$\quad satisfy property $(*)$
+\end{center}
+(here $(*)$ can be prime, irreducible, coprime, $\dots$), try to understand the property in the special case:
+\begin{center}
+$I_1 = \langle n_1 \rangle ,\ I_2 = \langle n_2 \rangle,\ \dots \triangleleft \mathbb{Z}$\quad satisfy property $(*)$
+\end{center}
+and further convert the definition of the property to relations between the elements $n_1, n_2, \dots$ in $\mathbb{Z}$. As an example, recall we defined
+\begin{center}
+    $I_1$, $I_2$ is coprime if $I_1 + I_2 = R$
+\end{center}
+which, in the prototype case when $R=\mathbb{Z}$, is translated into
+\begin{center}
+$\langle p\rangle,\langle q\rangle$ are coprime (as ideals) $\Leftrightarrow$ $\gcd(p,q)=1$ (as elements in $\mathbb{Z}$),
+\end{center}
+which gives us back our usual definition of what coprime means in $\mathbb{Z}$.
 
 \begin{definition}
-Let R be a commutative, unital ring. We say a proper ($I\neq R$) ideal $I\triangleleft R$ is 
+Let $R$ be an integral domain. We say a {\it proper} ideal (i.e. $I\neq R$) $I\triangleleft R$ is 
 \begin{enumerate}
-    \item \textbf{prime} if for all a,b $\in$ R such that ab $\in$ R, then we must have $a\in I\; or\; b\in R$;
-    \item \textbf{maximal} if for all ideals $J\triangleleft R$ s.t. $I\subset J\subset R$, then J=I or J=R.
+    \item \textbf{prime} if for all $a,b \in R$ such that $ab \in R$, then we must have $a\in I$ or $b\in I$;
+    \item \textbf{maximal} if for all ideals $J\triangleleft R$ s.t. $I\subset J\subset R$, then $J=I$ or $J=R$.
 \end{enumerate}
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item R=$\mathbb{Z}$. Let's check $$(p\in \mathbb{Z},\; prime)\Leftrightarrow(I=\langle p\rangle \; is\; a \; prime\; ideal)$$
-    \textbf{Proof:} Let $a,b\in \mathbb{Z}$ s.t. $$ab\in \langle p\rangle\Leftrightarrow ab=pk\; for \; some\; k\in \mathbb{Z}\Leftrightarrow p\mid ab\Leftrightarrow p\mid a\; or\; p\mid b\Leftrightarrow a\in \mathbb{Z}\; or\; b\in \mathbb{Z}$$
-    (\textbf{Exercise:} $\langle n\rangle$ is a maximal ideal $\Leftrightarrow$ n is prime $\Leftrightarrow$ $\langle n\rangle$ is prime)\\
-    (\textbf{Nonexample:} $\langle 6\rangle$ is \textbf{NOT} maximal since $\langle 6\rangle \subsetneq \langle 2\rangle\subsetneq \mathbb{Z}$)
-    \item R=$\mathbb{Z}_{12}$. All the ideals of R are:$$I_0=\{0\},\; I_1=\{0,2,4,6,8,10\}(maximal\; and\; prime),\; I_2=\{0,3,6,9\}(maximal\; and\; prime),$$$$I_3=\{0,4,8\}(\textbf{NOT\; }prime,\; since\; 2\cdot 2=4),\; I_4=\{0,6\}(\textbf{NOT\; }prime,\; since\; 2\cdot 3=6),\; I_5=R$$
-    \item $R=\mathbb{Z}[x].$ $I=\langle x\rangle$=polynomials with 0 constant term is a prime ideal:\\
-    Take $p(x)=a_0+a_1x+\cdots+a_mx^m$, $q(x)=b_0+b_1x+\cdots+b_nx^n$ $\in I$. Then $$pq\in I\Leftrightarrow a_0b_0=0 \Leftrightarrow a_0=0\; or \; b_0=0\Leftrightarrow p(x)\in I\;or\; q(x)\in I$$
-    But I is \textbf{NOT} maximal:$$I\subsetneq \langle 2,x\rangle\subsetneq R$$
+    \item Back into our prototype $R=\mathbb{Z}$. We would expect 
+    \begin{center}
+    $p \in \mathbb{Z}$ is a prime number if and only if $I = \langle p \rangle$ is a prime ideal. 
+    \end{center}
+    To see so, let $a,b\in \mathbb{Z}$. Then 
+    $$ab\in \langle p\rangle\ \Leftrightarrow\  ab=pk\ (k\in \mathbb{Z})\ \Leftrightarrow p\mid ab\ \Leftrightarrow \ p\mid a\ or\; p\mid b\ \Leftrightarrow a\in \langle p \rangle\ or\ b\in \langle p \rangle,$$
+    where $p\mid ab\ \Leftrightarrow \ p\mid a\ or\; p\mid b$ comes from the property that $p \in \mathbb{Z}$ is a prime number.
+    
+    (\textbf{Exercise:} $\langle n\rangle$ is a maximal ideal $\Leftrightarrow$ $n$ is prime $\Leftrightarrow$ $\langle n\rangle$ is prime ideal)\\
+    %(\textbf{Nonexample:} $\langle 6\rangle$ is \textbf{NOT} maximal since $\langle 6\rangle \subsetneq \langle 2\rangle\subsetneq \mathbb{Z}$)
+    \item Let $R=\mathbb{Z}_{12}$. All the ideals of $R$ are:
+    \begin{itemize}
+        \item $I_0=\{0\}$ (neither maximal nor prime by definition);
+        \item $\langle 2\rangle =\{0,2,4,6,8,10\}$ (maximal and prime);
+        \item $\langle 3 \rangle=\{0,3,6,9\}$ (maximal and prime);
+        \item $\langle 4 \rangle=\{0,4,8\}$ (neither maximal nor prime);
+        \item $\langle 6 \rangle=\{0,6\}$ (neither maximal nor prime);
+        \item $R$ (neither maximal nor prime by definition) 
+    \end{itemize}
+    
+    \item Let $R=\mathbb{Z}[x]$, and $I=\langle x\rangle$ be all polynomials with $0$ constant term is a prime ideal -- 
+    take 
+    $$p(x)=a_0+a_1x+\cdots+a_mx^m,\quad  q(x)=b_0+b_1x+\cdots+b_nx^n$$ 
+    Then 
+    $$p(x)q(x)\in I\ \Leftrightarrow\ a_0b_0=0\ \Leftrightarrow a_0=0\; or \; b_0=0\Leftrightarrow\ p(x)\in I\;or\; q(x)\in I$$
+    However, $I$ is \textbf{NOT} maximal, since
+    $$I\subsetneq \langle 2,x\rangle\subsetneq R.$$
 \end{itemize}
 \end{example}
 
 \begin{proposition}
-Let R be commutative unital, and $I\triangleleft R$. Then
+Let $R$ be a commutative ring with unity and let $I \triangleleft R$. Then:
 \begin{enumerate}
-    \item I is prime $\Leftrightarrow$ R/I is ID
-    \item I is maximal $\Leftrightarrow$ R/I is a field
+    \item $I$ is prime $\Longleftrightarrow R/I$ is an integral domain.
+    \item $I$ is maximal $\Longleftrightarrow R/I$ is a field.
 \end{enumerate}
 \end{proposition}
 
-\textbf{Example 3.46.(3) revisited:} Consider $\langle x\rangle\subset \mathbb{Z}[x]$. Then$$R/I=\mathbb{Z}[x]/\langle x\rangle\cong\mathbb{Z}.$$
-$\mathbb{Z}$ is ID $\Leftrightarrow$ $\langle x\rangle$ is prime\\
-$\mathbb{Z}$ is \textbf{NOT} a field $\Leftrightarrow$ $\langle x \rangle$ is \textbf{NOT} maximal
+\begin{example}
+Consider the ideal $\langle x \rangle \subset \mathbb{Z}[x]$. Then
+\[
+\mathbb{Z}[x]/\langle x \rangle \cong \mathbb{Z}.
+\]
+Since $\mathbb{Z}$ is an integral domain, it follows that $\langle x \rangle$ is prime.
 
-\textbf{Proof:}
-\begin{enumerate}
-    \item Let (a+I), (b+I) $\in R/I$. Then (*): $(a+I)\cdot(b+I)=0+I\Leftrightarrow ab\in I$.\\
-    If I is prime, then (*) says $$(a+I)(b+I)=0_{R/I}\Leftrightarrow ab\in I\Leftrightarrow a\in I\; or\; b\in I\Leftrightarrow a+I=0_{R/I}\; or\; b+I=0_{R/I}\Leftrightarrow R/I \; is \;ID$$
-    \item Suppose $I\subset J\subset R$ for some $J\triangleleft R$. Then $I/I\subset J/I\subset R/I$. (HW9: J/I $\triangleleft$ R/I)\\
-    Recall: $\mathbb{F}$ is a field $\Leftrightarrow$ the only ideals of $\mathbb{F}$ are {0} and $\mathbb{F}$\\
-    (\textbf{Proof} of "Recall": Let $I\triangleleft \mathbb{F}$ be nonzero. Take $0\neq a \in I$. Then $1=a\cdot a^{-1}\in I$ $\Rightarrow$ $\forall x \in \mathbb{F}$, $x=x\cdot1\in I$)\\
-    Therefore, $$\mathbb{F}=R/I\; is\; a\; field\Leftrightarrow J/I\triangleleft R/I \;must\; be\; \{0\}\;or\;R/I\Leftrightarrow J=\{0\}\;or\;J=R$$ \hfill$\square$
-\end{enumerate}
-
-\begin{corollary}
-Let $R$ be commutative unital. Then $I \triangleleft R$ is maximal $\Rightarrow I \triangleleft R$ is prime.
-\end{corollary}
+However, $\mathbb{Z}$ is \emph{not} a field, hence $\langle x \rangle$ is not maximal.
+\end{example}
 
 \begin{proof}
-All fields are IDs.
+\begin{enumerate}
+    \item 
+    Let $a+I, b+I \in R/I$. Then
+    \[
+    (a+I)(b+I) = 0+I
+    \quad \Longleftrightarrow \quad
+    ab \in I.
+    \]
+
+    Suppose $I$ is prime. Then
+    \[
+    ab \in I \Longrightarrow a \in I \text{ or } b \in I.
+    \]
+    Hence
+    \[
+    (a+I)(b+I)=0
+    \Longrightarrow
+    a+I=0 \text{ or } b+I=0.
+    \]
+    Therefore $R/I$ has no zero divisors and is an integral domain.
+
+    Conversely, suppose $R/I$ is an integral domain and $ab \in I$. Then
+    \[
+    (a+I)(b+I)=0.
+    \]
+    Since $R/I$ has no zero divisors,
+    \[
+    a+I=0 \text{ or } b+I=0,
+    \]
+    hence $a \in I$ or $b \in I$. Thus $I$ is prime.
+
+    \item 
+    Suppose $I$ is maximal and let $J$ be an ideal such that
+    \[
+    I \subseteq J \subseteq R.
+    \]
+    Then $J = I$ or $J = R$.
+
+    By the Correspondence Theorem (Homework), ideals $J$ with $I \subseteq J \subseteq R$ correspond bijectively to ideals of $R/I$ via
+    \[
+    J \longmapsto J/I.
+    \]
+    Hence the only ideals of $R/I$ are $\{0\}$ and $R/I$. 
+
+    Recall (from Homework) that a ring $\mathbb{F}$ is a field if and only if its only ideals are $\{0\}$ and $\mathbb{F}$. Therefore $R/I$ is a field. Conversely, if $R/I$ is a field, then its only ideals are $\{0\}$ and $R/I$. By correspondence theorem again, the only ideals of $R$ containing $I$ are $I$ and $R$. Hence $I$ is maximal.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+Let $R$ be an integral domain. If $I \triangleleft R$ is maximal, then $I$ is prime.
+\end{corollary}
+\begin{proof}
+If $I$ is maximal, then $R/I$ is a field. Since every field is an integral domain, $R/I$ is an integral domain.  
+Hence $I$ is prime.
 \end{proof}
 
 \begin{definition}
-Let $R$ be commutative unital. We say $a \in R$ is \textbf{prime} if $\langle a \rangle$ is a prime ideal.\\
-(Generalization of ``prime number'' in $R = \mathbb{Z}$)
+Let $R$ be a commutative ring with unity. An element $p \in R$ is called 
+\textbf{prime} if the ideal $\langle p \rangle$ is a prime ideal.
+
+Equivalently, $p$ is prime if and only if
+\[
+p \mid ab \;\Longrightarrow\; p \mid a \text{ or } p \mid b
+\]
+for all $a,b \in R$.
 \end{definition}
 
 \begin{definition}
-Let $a, b \in R$ (commutative unital). We say $a$ \textbf{divides} $b$ (or $a \mid b$ in short) if $\langle b \rangle \subseteq \langle a \rangle$. (or equivalently, $b \in \langle a \rangle$, or $\exists x \in R$, s.t.: $ax = b$.)
-\end{definition}
+Let $a,b \in R$, where $R$ is a commutative ring with unity.  
+We say that $a$ \textbf{divides} $b$ (written $a \mid b$) if
+\[
+\langle b \rangle \subseteq \langle a \rangle.
+\]
+(or equivalently \( b \in \langle a \rangle\). 
 
-\noindent We say $a$ and $b$ are \textbf{associates} ($a \sim b$) if ($a \mid b$ \& $b \mid a$), (or $\langle a \rangle = \langle b \rangle$).
+We say that $a$ and $b$ are \textbf{associates}, written $a \sim b$, if \(a \mid b \ \text{and} \ b \mid a\). Or equivalently,
+\[
+\langle a \rangle = \langle b \rangle.
+\]
+\end{definition}
 
 \begin{lemma}
-Suppose $R$ is an integral domain. Then $(a \sim b) \Leftrightarrow \exists \text{ unit } x \in U(R) \text{ s.t.: } a = xb$.
+Let $R$ be an integral domain and let $a,b \in R$. Then
+\begin{center}
+$a \sim b$
+if and only if there exists $u \in U(R)$ such that $a = ub$.
+\end{center}
 \end{lemma}
 
-\noindent \textbf{Proof:} \\
-($\Leftarrow$): $a = xb \Rightarrow a \in \langle b \rangle \Rightarrow \langle a \rangle \subseteq \langle b \rangle$, \\
-AND $x^{-1}a = b \Rightarrow \langle b \rangle \subseteq \langle a \rangle$ Similarly. \\
-$\therefore \langle a \rangle = \langle b \rangle$
+\begin{proof}
+($\Leftarrow$) Suppose $a = ub$ for some unit $u \in U(R)$.  
+Then $a \in \langle b \rangle$, so $\langle a \rangle \subseteq \langle b \rangle$. Since $u$ is a unit, $u^{-1}$ exists, and
+\[
+b = u^{-1}a,
+\]
+so $b \in \langle a \rangle$, hence $\langle b \rangle \subseteq \langle a \rangle$ and therefore $\langle a \rangle = \langle b \rangle$. In other words, $a \sim b$.
 
-\noindent ($\Rightarrow$): Suppose $a \sim b$, i.e.: $\langle a \rangle = \langle b \rangle$. Then we have $a \in \langle b \rangle$. \\
-$\Rightarrow a = p \cdot b$ for $p \in R$. Similarly, $b \in \langle a \rangle \Rightarrow b = q \cdot a$ ($q \in R$) \\
-$\Rightarrow a = p \cdot q \cdot a \xrightarrow{\text{cancellation property}} 1_R = p \cdot q \Rightarrow p, q \in U(R)$. \hfill $\square$
+\medskip
 
-\section{Principal Ideal Domain}
+($\Rightarrow$) Suppose $a \sim b$, i.e. $\langle a \rangle = \langle b \rangle$. Then $a \in \langle b \rangle$, so there exists $p \in R$ such that
+\(
+a = pb.
+\) Similarly, since $b \in \langle a \rangle$, there exists $q \in R$ such that
+\(
+b = qa.
+\)
 
-\noindent Recall: $I$ maximal $\Rightarrow I$ prime for $R$ unital commutative. \\
-Converse NOT holds in general (e.g. $\mathbb{Z}[x] = R$). \\
-Goal: Study $R$ s.t.: ($I$ maximal) $\Leftrightarrow$ ($I$ prime).
+Substituting gives
+\[
+a = p(qa) = (pq)a.
+\]
 
-\begin{definition}[Principal Integral Domain]
-Let $R$ be ID. We call $R$ a \textbf{principal ideal domain (PID)} if all ideals $I \triangleleft R$ are principal, i.e.: all $I$ are of the form $I = \langle a \rangle$.
+Since $R$ is an integral domain and $a \neq 0$, we may cancel $a$ to obtain
+\[
+1 = pq.
+\]
+
+Thus $p$ is a unit (with inverse $q$), and
+\[
+a = pb
+\]
+with $p \in U(R)$. Hence $a = ub$ for some unit $u$.
+\end{proof}
+
+\section{Principal Ideal Domains}
+
+\noindent Recall: in any commutative ring with unity,
+\[
+I \text{ maximal } \Longrightarrow I \text{ prime}.
+\]
+The converse is \emph{false} in general (for example, $\langle x\rangle \subset \mathbb{Z}[x]$ is prime but not maximal).
+
+\medskip
+A natural goal is to find classes of integral domains $R$ where prime ideals are ``as close as possible'' to maximal ideals.
+One particularly important class is when \emph{every} ideal is generated by one element.
+
+\begin{definition}[Principal Ideal Domain (PID)]
+Let $R$ be an integral domain. We say that $R$ is a \textbf{principal ideal domain (PID)} if every ideal
+$I \triangleleft R$ is principal, i.e. there exists $a\in R$ such that
+\[
+I = \langle a \rangle.
+\]
 \end{definition}
 
-\begin{example}
-\begin{itemize}
-    \item $\mathbb{Z}$ is PID. \\
-    \textbf{Proof:} Let $I$ be a nonzero ideal of $\mathbb{Z}$. (Otherwise $I = \{0\} = \langle 0 \rangle$) \\
-    Let $\mu > 0$ be the smallest positive integer in $I$. \\
-    \underline{Claim:} $I = \langle \mu \rangle$. \\
-    Suppose on contrary that $I \setminus \langle \mu \rangle$ is nonempty. Take $\lambda > 0$ be the smallest integer in $I \setminus \langle \mu \rangle$. By minimality of $\mu$, we have $\lambda > \mu$. Then $\lambda - \mu \in I$ and $\lambda - \mu \notin \langle \mu \rangle$, since otherwise $(\lambda - \mu) + \mu = \lambda \in \langle \mu \rangle$, contradicting the choice of $\lambda$. \\
-    Hence, $(\lambda - \mu)$ is an element in $I \setminus \langle \mu \rangle$, which is smaller than $\lambda$, contradicting the minimality of $\lambda$ in $I \setminus \langle \mu \rangle$. \\
-    $\therefore I = \langle \mu \rangle$ and hence $\mathbb{Z}$ is PID.
-    
-    \item $\mathbb{Z}[x]$ is \underline{NOT} PID, since $I = \langle 2, x \rangle \neq \langle p \rangle$ for any $p \in \mathbb{Z}[x]$ which could be proven in HW9.
+\begin{example}\hfill
+\begin{enumerate}
+    \item \textbf{$\mathbb{Z}$ is a PID} -- Let $I \triangleleft \mathbb{Z}$ be a nonzero ideal. Choose $d>0$ to be the smallest positive integer in $I$. \\
+    \underline{Claim:} $I=\langle d\rangle$. \\
+    Clearly $\langle d\rangle \subseteq I$ since $d\in I$. For the other inclusion, let $n\in I$.
+    By the division algorithm in $\mathbb{Z}$, write $n=qd+r$ with $0\le r<d$.
+    Then $r=n-qd\in I$. By minimality of $d$, we must have $r=0$, hence $n\in \langle d\rangle$.
+    Therefore $I\subseteq \langle d\rangle$, so $I=\langle d\rangle$.
 
-    \item For any field $\mathbb{F}$ (e.g. $\mathbb{F} = \mathbb{Q}, \mathbb{R}, \mathbb{C}$), $\mathbb{F}[x]$ is PID. \\
-    \textbf{Proof:} Let $I$ be an ideal of $\mathbb{F}$ which is nonzero. For any elements $p(x) \in I$, we can multiply unit $u \in \mathbb{F}$ st.: $u \cdot p(x) \in I$ is a \textbf{monic} polynomial (leading power coefficient is 1). Take a monic polynomial $p(x) \in I$ of smallest possible degree in $I$. \\
-    \textbf{Claim:} $I = \langle p(x) \rangle$. \\
-    \textbf{Proof of claim:} Suppose on contrary. Take monic $q(x) \in I \setminus \langle p(x) \rangle$ such that $q$ is of smallest positive degree in $I \setminus \langle p \rangle$. Then $\deg(p) \leq \deg(q)$ by the minimality of $\deg(p)$ in $I$. \\
-    Let $h(x) := q(x) - x^{\deg(q)-\deg(p)} \cdot p(x)$. Then:
-    \begin{itemize}
-        \item $h(x) \in I$
-        \item $h(x) \notin \langle p(x) \rangle$
-        \item $\deg(h) < \deg(q)$
-    \end{itemize}
-    Then $h \in I \setminus \langle p \rangle$ with $\text{degree} < \deg(q)$. Contradict! \hfill $\square$
-\end{itemize}
+    \item \textbf{If $\mathbb{F}$ is a field, then $\mathbb{F}[x]$ is a PID} -- Let $I\triangleleft \mathbb{F}[x]$ be a nonzero ideal. Choose a nonzero polynomial $f(x)\in I$ of \emph{minimal degree}.
+    (Multiplying by a unit in $\mathbb{F}$ if necessary, we may assume $f$ is monic.) \\
+    \underline{Claim:} $I=\langle f(x)\rangle$. \\
+    Clearly $\langle f\rangle\subseteq I$. For the other inclusion, let $g(x)\in I$.
+    By the division algorithm in $\mathbb{F}[x]$, write
+    \[
+    g(x)=q(x)f(x)+r(x),\qquad \deg r < \deg f.
+    \]
+    Then $r(x)=g(x)-q(x)f(x)\in I$. By minimality of $\deg f$, we must have $r(x)=0$.
+    Hence $g(x)\in \langle f\rangle$, so $I\subseteq \langle f\rangle$ and therefore $I=\langle f\rangle$.
+
+    \item \textbf{$\mathbb{Z}[x]$ is \underline{not} a PID.} \\
+    Consider the ideal $J=\langle 2,x\rangle \triangleleft \mathbb{Z}[x]$.
+    If $J=\langle f(x)\rangle$ were principal, then $f(x)\mid 2$, hence $f(x)$ must be a constant $\pm 1,\pm 2$.
+    But $x\in J$ forces $f(x)\mid x$, which is impossible for $f(x)=\pm 2$, and if $f(x)=\pm 1$ then $J=\mathbb{Z}[x]$,
+    contradicting that $J$ is proper. Thus $J$ is not principal.
+\end{enumerate}
 \end{example}
 
-\noindent \textbf{Note:} We have division algorithm for $\mathbb{F}[x]$ just like the case of $\mathbb{Z}$: 
-\[p(x) = q(x)a(x) + r(x) \quad (\deg(r) < \deg(q))\] 
-and so we have Euclidean algorithm to find $\gcd(p(x), q(x))$ in $\mathbb{F}[x]$
+\begin{remark}
+The proofs that $\mathbb{Z}$ and $\mathbb{F}[x]$ are PIDs are the same pattern:
+choose an element of \emph{minimal size} (smallest positive integer / smallest degree polynomial) and use the division algorithm to show it generates the entire ideal.
+
+Indeed, these rings belong to a more restrictive class of Integral Domains, called {\bf Euclidean domains (EDs)}. We will study EDs in full detail later, and will show that all EDs are PIDs.
+\end{remark}
+
+In a PID, prime and maximal ideals are very close.  Note that since a PID is an integral domain, the zero ideal $\langle 0\rangle$
+is always prime (because $R/\langle 0\rangle \cong R$ is an integral domain).  Therefore ``prime $\Leftrightarrow$ maximal'' cannot hold for
+\emph{all} ideals unless $R$ is a field.  The correct statement is for \emph{nonzero} prime ideals.
+
+\begin{proposition}[Prime ideals are maximal in a PID]
+Let $R$ be a PID and let $I\triangleleft R$ be a nonzero proper ideal. Then
+\[
+I \text{ is prime } \Longleftrightarrow I \text{ is maximal}.
+\]
+Equivalently, for $0\neq p\in R$ nonunit,
+\[
+\langle p\rangle \text{ is prime } \Longleftrightarrow \langle p\rangle \text{ is maximal}.
+\]
+\end{proposition}
+
+\begin{proof}
+($\Leftarrow$) Maximal $\Rightarrow$ prime holds in every unital commutative ring.
+
+\medskip
+($\Rightarrow$) Assume $I$ is a nonzero prime ideal. Since $R$ is a PID, $I=\langle p\rangle$ for some $0\neq p\in R$.
+To show $\langle p\rangle$ is maximal, let $J$ be any ideal with
+\[
+\langle p\rangle \subseteq J \subseteq R.
+\]
+Again using that $R$ is a PID, write $J=\langle a\rangle$ for some $a\in R$.
+The inclusion $\langle p\rangle \subseteq \langle a\rangle$ means $p\in \langle a\rangle$, i.e. $p=ab$ for some $b\in R$.
+
+Since $\langle p\rangle$ is prime, the element $p$ is \emph{prime} (i.e. $p\mid uv \Rightarrow p\mid u$ or $p\mid v$).
+In an integral domain, prime elements are irreducible, hence from $p=ab$ we conclude that $a$ is a unit or $b$ is a unit.
+If $a$ is a unit then $\langle a\rangle=R$, so $J=R$.
+If $b$ is a unit then $a\sim p$, so $\langle a\rangle=\langle p\rangle$, i.e. $J=I$.
+
+Thus there is no ideal strictly between $I$ and $R$, so $I$ is maximal.
+\end{proof}
+
+
 
 \section{Irreducible Elements and Unique Factorization Domain}
 
@@ -863,7 +1115,7 @@ If $R$ is ED , then $R$ is PID .
 \noindent \textbf{Proof:} Let $N$ be the ``norm function'' of $R$ . For any $I \triangleleft R$ , take any $a \in I \setminus \{0\}$ such that $N(a) > 0$ is minimal among all $r \in R$ . Now for any $i \in R$ , one has $a|i$ or $i=aq+r$ with $N(r) < N(a)$ . But $r=i-aq \in I$ with smaller norm than $a$. Contradict. \\
 $\therefore a|i \Rightarrow i=aq \in \langle a \rangle$ \quad Hence , $I = \langle a \rangle$. \hfill $\square$
 
-\section{Polynomial}
+\section{Polynomial Rings}
 
 In this section, we'll study ring of polynomials $R[x]$.
 A main reason why it is important is the following:
