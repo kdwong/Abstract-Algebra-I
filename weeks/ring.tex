@@ -641,18 +641,24 @@ Rather than studying whether an element $r\in R$ is prime directly, we define wh
 
 
 \begin{center}
-    $I_1$, $I_2$ is coprime if $I_1 + I_2 = R$ \quad \quad (coprime - ideal edition)
+    $I_1$, $I_2$ is coprime if $I_1 + I_2 = R$ \quad \quad (coprime ideals)
 \end{center}
 And we define:
-\begin{definition}[Coprime - element edition]
+\begin{definition}[Coprime elements]
     Let $R$ be a unital commutative ring. Two elements $a$, $b$ are {\bf coprime} if the principal ideals $\langle a\rangle$, $\langle b \rangle \lhd R$ are coprime, i,e,
     $$\langle a \rangle + \langle b \rangle = R.$$
 \end{definition}
-To make sense out of it, go back to the prototype case when $R=\mathbb{Z}$. This implies
+To better comprehend the above definition, the above condition is equivalent to saying:
 \begin{center}
-$p, q \in \mathbb{Z}$ are coprime (as elements) $\Leftrightarrow$ $\langle p\rangle,\langle q\rangle$ are coprime (as ideals) $\Leftrightarrow$ $\gcd(p,q)=1$.
+    $a, b \in R$ are coprime\ \ $\Longleftrightarrow$\ \ there exists $p, q \in R$ such that $ap + bq = 1$ (Exercise).
 \end{center}
-which gives us back our usual definition of what coprime means in $\mathbb{Z}$.
+{\bf Upshot: We defined what it means for $a, b \in R$ to be coprime without defining `common factors'!}
+
+Note that in the prototype case when $R=\mathbb{Z}$, the above statement and Bezout's theorem imply that 
+\begin{center}
+$a, b \in \mathbb{Z}$ are coprime\ \ $\Longleftrightarrow$\ \ $\gcd(a,b)=1$.
+\end{center}
+which gives us back our usual definition of what coprime means in $\mathbb{Z}$. 
 
 \begin{definition}[Prime and Maximal Ideals]
 Let $R$ be an integral domain. We say a {\it proper} ideal (i.e. $I\neq R$) $I\triangleleft R$ is 
@@ -723,31 +729,29 @@ Since $\mathbb{Z}$ is an integral domain, it follows that $\langle x \rangle$ is
 \begin{enumerate}
     \item 
     Let $a+I, b+I \in R/I$. Then
-    \[
+    \(
     (a+I)(b+I) = 0+I
-    \quad \Longleftrightarrow \quad
+    \Longleftrightarrow
     ab \in I.
-    \]
+    \)
 
-    Suppose $I$ is prime. Then
+    $(\Rightarrow)$ Suppose $I$ is prime. Suppose $a+I, b +I$ be such that $(a+I)(b+I) = 0 +I$. By the first sentence of the proof, this implies
     \[
     ab \in I \Longrightarrow a \in I \text{ or } b \in I.
     \]
     Hence
     \[
-    (a+I)(b+I)=0
-    \Longrightarrow
     a+I=0 \text{ or } b+I=0.
     \]
     Therefore $R/I$ has no zero divisors and is an integral domain.
 
-    Conversely, suppose $R/I$ is an integral domain and $ab \in I$. Then
+    $(\Leftarrow)$ Conversely, suppose $R/I$ is an integral domain. Consider $ab \in I$. Then the first sentence of the proof says
     \[
     (a+I)(b+I)=0 +I.
     \]
     Since $R/I$ has no zero divisors, this implies
     \[
-    a+I=0 \text{ or } b+I=0,
+    a+I=0+I \text{ or } b+I=0+I,
     \]
     hence $a \in I$ or $b \in I$. Thus $I$ is prime.
 
@@ -775,12 +779,12 @@ Let $R$ be an integral domain. If $I \triangleleft R$ is maximal, then $I$ is pr
 If $I$ is maximal, then $R/I$ is a field. Since every field is an integral domain, $R/I$ is an integral domain.  
 Hence $I$ is prime.
 \end{proof}
-
+Indeed, one can proof the above corollary directly without using quotient rings. We leave it as an exercise.
 
 
 \section{Principal Ideal Domains}
 
-Recall that for any unital commutative ring,
+Recall that for any integral domain (indeed for unital commutative rings as well),
 \[
 I \text{ maximal } \Longrightarrow I \text{ prime}.
 \]
@@ -857,12 +861,14 @@ To show $\langle p\rangle$ is maximal, let $J$ be any ideal with
 Again using that $R$ is a PID, write $J=\langle a\rangle$ for some $a\in R$.
 The inclusion $\langle p\rangle \subseteq \langle a\rangle$ means $p\in \langle a\rangle$, i.e. $p=ab$ for some $b\in R$.
 
-Since $\langle p\rangle$ is prime, the element $p$ is \emph{prime} (i.e. $p\mid uv \Rightarrow p\mid u$ or $p\mid v$).
-In an integral domain, prime elements are irreducible, hence from $p=ab$ we conclude that $a$ is a unit or $b$ is a unit.
-If $a$ is a unit then $\langle a\rangle=R$, so $J=R$.
-If $b$ is a unit then $a\sim p$, so $\langle a\rangle=\langle p\rangle$, i.e. $J=I$.
+Now we use the fact that $\langle p \rangle$ is prime ideal, or equivalently $p \in R$ is prime element. One has
+$$p = ab\ \Rightarrow\ p \ | \ ab \ \Rightarrow\  p \ |\ a\ \ \mathrm{or}\ \ p \ |\ b.$$
+Suppose first of all $p\ |\ a$. Then $a = pq$ for some $q \in R$. Hence
+$$p = ab = pqb \ \Rightarrow\ 1 = qb,$$
+i.e. $b \in U(R)$. Consequently
+$$p = ab,\ b \in U(R) \ \Rightarrow\ p \sim a \ \Rightarrow \ \langle p \rangle = \langle a \rangle = J$$
 
-Thus there is no ideal strictly between $I$ and $R$, so $I$ is maximal.
+On the other hand, suppose $p\ |\ b$. Then one has $a \in U(R)$ similarly, and hence $J = \langle a \rangle = R$. Either way, there is no ideal $J$ lying strictly between $I = \langle p \rangle$ and $R$, so $I$ is maximal.
 \end{proof}
 
 
@@ -877,8 +883,7 @@ whenever $\langle a \rangle \subseteq \langle b \rangle \subseteq R$ for some $b
 \end{center}
 \end{definition}
 
-The following lemma gives a more concrete characterization of irreducibility in terms of elements of $R$.
-
+As before, we give a characterization of irreducibility in terms of elements of $R$.
 \begin{lemma}
 Let $R$ be an integral domain, and let $a \in R$ be a nonzero nonunit. Then
 \[
@@ -963,7 +968,7 @@ Every PID satisfies the ACCP.
 \end{lemma}
 
 \begin{proof}
-Let $\langle a_1 \rangle \subseteq \langle a_2 \rangle \subseteq \cdots$ be an ascending chain of principal ideals in a PID $R$. Set $I := \bigcup_{n=1}^{\infty} \langle a_n \rangle$. One verifies that $I$ is an ideal of $R$ (see Homework 10), so since $R$ is a PID, $I = \langle r \rangle$ for some $r \in R$. Since $r \in I$, we have $r \in \langle a_M \rangle$ for some $M \in \mathbb{N}$. Then for all $n \geq M$,
+Let $\langle a_1 \rangle \subseteq \langle a_2 \rangle \subseteq \cdots$ be an ascending chain of principal ideals in a PID $R$. Set $I := \bigcup_{n=1}^{\infty} \langle a_n \rangle$. One verifies that $I$ is an ideal of $R$ (see Homework), so since $R$ is a PID, $I = \langle r \rangle$ for some $r \in R$. Since $r \in I$, we have $r \in \langle a_M \rangle$ for some $M \in \mathbb{N}$. Then for all $n \geq M$,
 \[
 I = \langle r \rangle \subseteq \langle a_M \rangle \subseteq \langle a_n \rangle \subseteq I,
 \]
@@ -975,13 +980,26 @@ If $R$ satisfies the ACCP, then $R$ is a factorization domain.
 \end{lemma}
 
 \begin{proof}
-Suppose for contradiction that there exists a nonzero nonunit $x_0 \in R$ that cannot be written as a finite product of irreducibles. In particular, $x_0$ is not itself irreducible, so we may write $x_0 = y_0 z_0$ where $y_0, z_0$ are both nonunits. Then $x_0 \not\sim y_0$ and $x_0 \not\sim z_0$, which gives $\langle x_0 \rangle \subsetneq \langle y_0 \rangle$.
-
-Since $x_0$ cannot be expressed as a finite product of irreducibles, at least one of $y_0, z_0$ also cannot be so expressed; call it $x_1$. Then $\langle x_0 \rangle \subsetneq \langle x_1 \rangle$, and $x_1$ is again not irreducible. Repeating this argument produces a strictly ascending chain
-\[
-\langle x_0 \rangle \subsetneq \langle x_1 \rangle \subsetneq \langle x_2 \rangle \subsetneq \cdots,
-\]
-contradicting the ACCP. Hence every nonzero nonunit in $R$ factors into a finite product of irreducibles.
+Let 
+$$F:=\{x \in R \mid x \sim x_1 \cdots x_r, \ x_i \text{ irreducibles}, r \in \mathbb{N} \cup\{0\}\}
+$$ 
+We want to show that $R = F$. Note that
+\begin{itemize}
+\item[(a)] $1 \in F$. More generally, all units are in $F$ ($r = 0$).
+\item[(b)] All irreducible elements $x \in R$ are in $F$ ($r=1$).
+\item[(c)] $F$ is closed under multiplication (i.e. if $a, b \in F$, then $ab \in F$).
+\end{itemize}
+Suppose on contrary there exists $x_0 \in R \backslash F$. Then by (b) $x_0 =y_0z_0$ is reducible, where $y_0$, $z_0$ are not units. 
+Therefore,
+$$x_0 \nsim y_0 \ \mathrm{and} \ x_0 \nsim z_0 \iff \langle x_0 \rangle \neq \langle y_0 \rangle, \langle z_0 \rangle$$
+By (c), either $y_0 \in R \setminus F$ or $z_0 \in R \setminus F$ (or both). Without loss of generality, assume $x_1 = y_0 \in R \setminus F$. Therefore, 
+$$x_0 = x_1 z_0 \implies x_0 \in \langle x_1 \rangle \implies
+\langle x_0 \rangle \subsetneq \langle x_1 \rangle \quad (\mathrm{and}\ \langle x_1 \rangle \neq R).$$ 
+Since $x_1$ not unit, we continue same argument on $x_1$ and get
+$$\langle x_0 \rangle \subsetneq \langle x_1 \rangle \subsetneq \langle x_2 \rangle \subsetneq \cdots$$
+contradicting (ACCP) which says there exists $N \in \mathbb{N}$ such that
+$$\langle x_n \rangle = \langle x_{n+1} \rangle = \langle x_{n+2} \rangle = \cdots \quad $$
+This is a contradiction, and consequently there is no such $x_0 \in R \setminus F$, In other words, $R = F$.
 \end{proof}
 
 \begin{theorem}
@@ -997,7 +1015,7 @@ We have shown that in a PID, every nonzero nonunit factors into irreducibles. We
 \begin{proposition}
 Let $R$ be an integral domain and suppose
 \[
-u \cdot x_1 x_2 \cdots x_r = y_1 y_2 \cdots y_n,
+ x_1 x_2 \cdots x_r \sim y_1 y_2 \cdots y_n,
 \]
 where $u \in U(R)$ is a unit, $x_1, \dots, x_r$ are primes, and $y_1, \dots, y_n$ are irreducible nonunits. Then $r = n$ and there exists a permutation $\sigma \in S_r$ such that $x_i \sim y_{\sigma(i)}$ for all $i$.
 \end{proposition}
@@ -1009,15 +1027,17 @@ We proceed by induction on $r$.
 \noindent \textit{Base case} ($r = 0$): The left-hand side equals a unit, so $y_1 \cdots y_n \sim 1$. This forces each $y_j$ to be a unit, contradicting the assumption that $y_j$ are nonunits. Hence $n = 0$.
 
 \medskip
-\noindent \textit{Inductive step}: Assume the result holds for all products of fewer than $r$ primes. Consider $u \cdot x_1 \cdots x_r = y_1 \cdots y_n$. Since $x_r$ is prime and $x_r \mid y_1 \cdots y_n$, we have $x_r \mid y_j$ for some $j$. Write $y_j = x_r \cdot a$ for some $a \in R$. Since $y_j$ is irreducible and $x_r$ is a nonunit, $a$ must be a unit, so $y_j \sim x_r$. Cancelling $x_r$ from both sides (valid since $R$ is an integral domain) gives
+\noindent \textit{Inductive step}: Assume the result holds for all products of fewer than $r$ primes. Consider 
+$$u \cdot x_1 \cdots x_r = y_1 \cdots y_n.$$ Since $x_r$ is prime and $x_r \mid y_1 \cdots y_n$, we have $x_r \mid y_j$ for some $j$. Write $y_j = x_r \cdot a$ for some $a \in R$. Since $y_j$ is irreducible and $x_r$ is a nonunit, $a$ must be a unit, so $y_j \sim x_r$. Canceling $x_r$ from both sides (valid since $R$ is an integral domain) gives
 \[
-u \cdot x_1 \cdots x_{r-1} \sim y_1 \cdots \widehat{y_j} \cdots y_n,
+u \cdot x_1 \cdots x_{r-1} = y_1 \cdots \widehat{y_j} \cdots y_n \ \ 
+\Longleftrightarrow \ \ x_1 \cdots x_{r-1} \sim y_1 \cdots \widehat{y_j} \cdots y_n
 \]
 where $\widehat{y_j}$ denotes that $y_j$ is omitted. By the inductive hypothesis, $r - 1 = n - 1$ (so $r = n$) and there exists $\sigma \in S_{r-1}$ matching $x_i \sim y_{\sigma(i)}$ for $i = 1, \dots, r-1$. Extending $\sigma$ by setting $\sigma(r) = j$ yields the desired permutation in $S_r$.
 \end{proof}
 
 \begin{corollary}
-Let $R$ be a PID. Then every nonzero nonunit $x \in R$ can be written as a finite product of irreducibles, and this factorization is unique up to order and associates. In particular, irreducible and prime elements coincide in $R$.
+Let $R$ be a PID. Then every nonzero nonunit $x \in R$ can be written as a finite product of irreducibles (= primes), and this factorization is unique up to order and associates.
 \end{corollary}
 
 \noindent This generalizes the Fundamental Theorem of Arithmetic (the case $R = \mathbb{Z}$) to all PIDs.
@@ -1042,241 +1062,378 @@ By uniqueness of factorization, $p$ must be an associate of some $a_i$ or some $
 
 \noindent \textbf{Summary.} We have established the following strict chain of inclusions among classes of integral domains:
 \[
-\text{Fields} \subsetneq \text{Euclidean Domains} \subsetneq \text{PIDs} \subsetneq \text{UFDs} \subsetneq \text{Integral Domains.}
+\text{Fields} \subsetneq \text{PIDs} \subsetneq \text{UFDs} \subsetneq \text{Integral Domains.}
 \]
-Examples separating these classes: $\mathbb{Z}[\sqrt{-5}]$ is an integral domain but not a UFD (since $2 + \sqrt{-5})(2 - \sqrt{-5}) = 3 \cdot 3$ gives a non-unique factorization into irreducibles); $\mathbb{Z}[x]$ is a UFD but not a PID; $\mathbb{Z}$ is a PID (in fact a Euclidean domain) but not a field; $\mathbb{Q}[x]$ is a Euclidean domain but not a field.
+Examples separating these classes: 
+\begin{itemize}
+    \item $\mathbb{Z}[\sqrt{-5}]$ is an integral domain but not a UFD, since irreducible does not imply prime (Homework), while irreducible and prime are the same for UFDs;
+    \item $\mathbb{Z}[x]$ is a UFD but not a PID - we have seen it is not a PID, and will prove that it is a UFD in Section \ref{sec:polyrings} below.
+\end{itemize}
+
 
 \section{Euclidean Domain}
-\begin{definition}(Euclidean Function)
-Let $R$ be ID. A \textbf{\underline{Euclidean function}} on $R$ is $N: R \setminus \{0\} \to \mathbb{N} \setminus \{0\}$ s.t.: $\forall a, b \in R$, either (i) $b \mid a$, or (ii) $\exists q \in R, r \in R \setminus \{0\}$, s.t.: $a = bq + r$ with $N(r) < N(b)$.
+
+We now establish the connection between Euclidean domains and principal ideal domains.
+
+\begin{definition}[Euclidean Function]
+Let $R$ be an integral domain. A function 
+\[
+N: R \setminus \{0\} \to \mathbb{N} \cup \{0\}
+\]
+is called a \textbf{Euclidean function} on $R$ if for all $a, b \in R$ with $b \neq 0$, either 
+\begin{itemize}
+    \item[(i)] $b \mid a$; or
+    \item[(ii)] there exist $q, r \in R$ with $r \neq 0$ such that $a = bq + r$ and $N(r) < N(b)$.
+\end{itemize}
 \end{definition}
 
 \begin{example}
+We have already seen the following examples of Euclidean functions:
 \begin{itemize}
-    \item $R = \mathbb{Z}$, $N(m) := |m|$. Then (ii) is simply the division algorithm for integers.
-    \item $R = \mathbb{F}[x]$, $N(p(x)) := \deg(p)$. Then (ii) is division algorithm for polynomials.
+    \item $R = \mathbb{Z}$, $N(m) := |m|$. Then (ii) is the division algorithm for integers.
+    \item $R = \mathbb{F}[x]$ (polynomials over a field), $N(p(x)) := \deg(p)$. Then (ii) is the division algorithm for polynomials.
 \end{itemize}
 \end{example}
 
-\begin{definition}(Euclidean Domain)
-An ID $R$ is a \textbf{Euclidean Domain} if $R$ has (at least) one Euclidean function. \\
-So $\mathbb{Z}, \mathbb{F}[x]$ are EDs. \\
-If the Euclidean function (``norm function'') $N$ satisfies $N(ab) = N(a)N(b) \quad \forall a, b \in R$ we say $N$ is \textbf{multiplicative}. \\
-(eg.: $R = \mathbb{Z}, N(a) = |a|$ (multiplicative) ; $R = \mathbb{F}[x], N(p) = \deg(p)$ (\textbf{NOT} multiplicative) )
+\begin{definition}[Euclidean Domain]
+An integral domain $R$ is a \textbf{Euclidean domain (ED)} if there exists at least one Euclidean function on $R$. 
+
+If a Euclidean function $N$ satisfies $N(ab) = N(a)N(b)$ for all nonzero $a, b \in R$, we say $N$ is \textbf{multiplicative}.
 \end{definition}
 
-\begin{proposition} $\mathbb{Z}[i]$ is a Euclidean domain with $N(a+bi) = a^2+b^2, \forall a, b \in \mathbb{Q}$. 
-($\mathbb{Z}[i] := \{a+bi \mid a, b \in \mathbb{Z}\}$ is called \textbf{Gaussian integers}) \\
-\textbf{Proof:} Let $\alpha, \beta \in \mathbb{Z}[i]$. Assume $\beta \neq 0$. Then consider $\alpha/\beta = c_1+c_2i, c_i \in \mathbb{Q}$. Let $n_1, n_2 \in \mathbb{Z}$ be the closest integers of $c_1, c_2 \in \mathbb{Q}$ (so that $|n_i - c_i| \leq \frac{1}{2}$), and let $q := n_1+n_2i$. Hence, $\alpha/\beta = q + ((c_1-n_1) + (c_2-n_2)i)$. \\
-$\Rightarrow \alpha = \beta q + ((c_1-n_1) + (c_2-n_2)i)\beta$. Then $N[((c_1-n_1) + (c_2-n_2)i)\beta] = N((c_1-n_1) + (c_2-n_2)i) \cdot N(\beta)$ \\
-$\leq [(\frac{1}{2})^2 + (\frac{1}{2})^2] N(\beta) = \frac{1}{2} N(\beta) < N(\beta)$. \hfill $\square$
+\begin{remark}
+The Euclidean function $N(a) = |a|$ on $\mathbb{Z}$ is multiplicative. However, the degree function $N(p) = \deg(p)$ on $\mathbb{F}[x]$ is not multiplicative. To make it multiplicative, one can take $N'(p) := 2^{\deg(p)}$ which is still a (multiplicative) Euclidean function on $\mathbb{F}[x]$.
+\end{remark}
+
+\begin{theorem}
+Let $R$ be an integral domain.
+\begin{itemize}
+    \item[(a)] If $R$ is a field, then $R$ is a Euclidean domain.
+    \item[(b)] If $R$ is a Euclidean domain, then $R$ is a principal ideal domain.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\noindent \textit{(a):} Let $R$ be a field and define $N: R \setminus \{0\} \to \mathbb{N} \cup \{0\}$ by $N(a) := 1$ for all $a \in R \setminus \{0\}$. For any $a, b \in R$ with $b \neq 0$, since $R$ is a field, $b$ is a unit, so $b \mid a$. Thus condition (i) of the Euclidean function is satisfied, making $N$ a Euclidean function on $R$.
+
+\medskip
+\noindent \textit{(b):} Let $N$ be a Euclidean function on $R$, and let $I$ be a nonzero ideal of $R$. Choose $a \in I \setminus \{0\}$ such that $N(a)$ is minimal among all nonzero elements in $I$ (such an element exists since $N$ takes values in $\mathbb{N} \cup \{0\}$ and $I$ is nonzero). We claim that $I = \langle a \rangle$.
+
+For any $i \in I$, apply the definition of Euclidean function to the pair $(i, a)$. Either $a \mid i$, or there exist $q, r \in R$ with $r \neq 0$ such that $i = aq + r$ with $N(r) < N(a)$.
+
+In the first case, $i \in \langle a \rangle$.
+
+In the second case, we have $r = i - aq$. Since $i, a \in I$ and $I$ is an ideal, we have $r \in I$. Moreover, $r \neq 0$ and $N(r) < N(a)$, contradicting the minimality of $N(a)$. Therefore, this case cannot occur.
+
+Thus for all $i \in I$, we have $a \mid i$, which means $i \in \langle a \rangle$. Therefore $I \subseteq \langle a \rangle$. Since $a \in I$, we also have $\langle a \rangle \subseteq I$. Hence $I = \langle a \rangle$, so $R$ is a principal ideal domain.
+\end{proof}
+
+\noindent \textbf{Summary.} We have established the following strict chain of inclusions among classes of integral domains:
+\[
+\text{Fields} \subsetneq \text{EDs} \subsetneq \text{PIDs} \subsetneq \text{UFDs} \subsetneq \text{Integral Domains}.
+\]
+It is harder to get an example of a PID but not an ED:
+\begin{example}[PID but not ED]
+An example of a principal ideal domain that is not a Euclidean domain is more subtle. We present the ring
+\[
+R = \mathbb{Z}\left[\frac{1+\sqrt{-19}}{2}\right] = \left\{a + b\frac{1+\sqrt{-19}}{2} \ \Bigg|\ a, b \in \mathbb{Z}\right\}.
+\]
+The reason why $R$ is a PID is one of the main content of MAT 5210 -- Advanced Abstract Algebra I, based on the fact that the class number of the {\it number field} $\mathbb{Q}(\sqrt{-19})$ is $1$.
+
+%(Note: The quadratic fields with discriminant $d < 0$ and class number $1$ are finite in number. The cases $d \in \{-1, -2, -3, -7, -11, -19, -43, -67, -163\}$ give class number $1$. The case $d = -19$ is one such example. A related interesting phenomenon is that $e^{\pi \sqrt {163}}$ is very close to an integer!)
+
+As for why $R$ is not a Euclidean domain, it is left as an Homework exercise. 
+
+%For $R$ to be a Euclidean domain, it would need to admit a Euclidean function $N: R \setminus \{0\} \to \mathbb{N} \cup \{0\}$.  However, it can be shown that no such function exists for $R = \mathbb{Z}\left[\frac{1+\sqrt{-19}}{2}\right]$ by analyzing the divisibility properties and the structure of the norm map. Specifically:
+\end{example}
+
+
+\begin{proposition}
+The Gaussian integers $\mathbb{Z}[i] := \{a + bi \mid a, b \in \mathbb{Z}\}$ form a Euclidean domain with Euclidean function 
+\[
+N(a + bi) = a^2 + b^2.
+\]
 \end{proposition}
 
+\begin{proof}
+Let $\alpha, \beta \in \mathbb{Z}[i]$ with $\beta \neq 0$. Consider $\frac{\alpha}{\beta} = c_1 + c_2 i$ where $c_1, c_2 \in \mathbb{Q}$. 
 
-\begin{theorem} If $R \in$ ED, then $R \in$ PID. 
-\end{theorem}
-\textbf{Therefore, $\mathbb{Z}[i]$ is PID.} \\
-\textbf{Q: What are the (primes $\Leftrightarrow$ irreducibles) in the Gaussian integer $\mathbb{Z}[i]$?} \\
-(eg. $5$ is prime in $\mathbb{Z}$, but $5 = (2+i)(2-i)$ not prime in $\mathbb{Z}[i]$ )
+Let $n_1, n_2 \in \mathbb{Z}$ be integers closest to $c_1$ and $c_2$ respectively, so that $|n_j - c_j| \leq \frac{1}{2}$ for $j = 1, 2$. Set $q := n_1 + n_2 i \in \mathbb{Z}[i]$.
+Then 
+\[
+\frac{\alpha}{\beta} - q = (c_1 - n_1) + (c_2 - n_2)i.
+\]
+Multiplying by $\beta$ gives 
+\[
+\alpha - \beta q = [(c_1 - n_1) + (c_2 - n_2)i] \beta.
+\]
+Set $r := \alpha - \beta q$. If $r = 0$, then $\beta \mid \alpha$. Otherwise, $r \neq 0$ and 
+\begin{align*}
+N(r) &= N[(c_1 - n_1) + (c_2 - n_2)i] \cdot N(\beta) \\
+&= [(c_1 - n_1)^2 + (c_2 - n_2)^2] \cdot N(\beta) \\
+&\leq \left[\left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2\right] N(\beta) \\
+&= \frac{1}{2} N(\beta) < N(\beta).
+\end{align*}
+Thus the Euclidean property holds, and $\mathbb{Z}[i]$ is a Euclidean domain.
+\end{proof}
 
-\noindent \textbf{Simple Observations:}
+
+\noindent \textbf{Classification of Gaussian Primes.} Since $\mathbb{Z}[i]$ is a ED (and hence a PID), irreducible elements are precisely prime elements. We now classify the primes in $\mathbb{Z}[i]$.
+
+\begin{lemma}
+The units in $\mathbb{Z}[i]$ are $U(\mathbb{Z}[i]) = \{\pm 1, \pm i\}$. An element $\alpha = a + bi \in \mathbb{Z}[i]$ is a unit if and only if $N(\alpha) = 1$.
+\end{lemma}
+
+\begin{lemma}
+If $\beta \in \mathbb{Z}[i]$ satisfies $N(\beta) = p$ where $p$ is a prime integer, then $\beta$ is prime in $\mathbb{Z}[i]$.
+\end{lemma}
+
+\begin{proof}
+Suppose $\beta = \gamma \delta$ for some $\gamma, \delta \in \mathbb{Z}[i]$. Then 
+\[
+p = N(\beta) = N(\gamma) N(\delta).
+\]
+Since $p$ is prime, either $N(\gamma) = 1$ or $N(\delta) = 1$. Thus $\gamma$ or $\delta$ is a unit, so $\beta$ is irreducible. Since $\mathbb{Z}[i]$ is a UFD, $\beta$ is prime.
+\end{proof}
+
+\begin{lemma}
+Let $p$ be a prime integer in $\mathbb{Z}$. Then either 
 \begin{itemize}
-    \item If $n \in \mathbb{Z}$ is \textbf{NOT} prime in $\mathbb{Z}$, then $n$ is \underline{NOT} prime in $\mathbb{Z}[i]$.
-    \item $U(\mathbb{Z}[i]) = \{ \pm 1, \pm i \}$. Therefore, $\alpha \in U(\mathbb{Z}[i]) \Leftrightarrow N(\alpha) = 1$.
-    \item If $N(\beta) = p$ is prime in $\mathbb{Z}$, then $\beta$ is prime in $\mathbb{Z}[i]$. (e.g.: $\beta = 2+i$ is prime in $\mathbb{Z}[i]$, since $N(\beta) = 5$ in $\mathbb{Z}$) \\
-    $\Rightarrow p = N(\beta) = N(\gamma) N(\delta) \Rightarrow N(\gamma) = 1$ or $N(\delta) = 1$.
-    $\Rightarrow \gamma$ or $\delta$ is a unit in $\mathbb{Z}[i] \Rightarrow \beta \sim \gamma$ or $\beta \sim \delta$, i.e.: $\beta$ is irreducible $\Leftrightarrow$ prime.
+\item[(i)] $p$ is prime in $\mathbb{Z}[i]$, or \item[(ii)] $p = (a + bi)(a - bi)$ where $a + bi$ and $a - bi$ are primes in $\mathbb{Z}[i]$ with $a, b \neq 0$.
 \end{itemize}
-
-\begin{lemma}
-Let $p$ be a prime integer. Then either (i) $p$ is a Gaussian prime in $\mathbb{Z}[i]$, or (ii) $p = (a+bi)(a-bi)$ for some $(a+bi), (a-bi)$ Gaussian primes.
 \end{lemma}
 
-\noindent \textbf{Proof:} Suppose $p$ is \textbf{NOT} a Gaussian prime. Then $p = \gamma \cdot \delta$ for nonunits $\gamma, \delta$. $\Rightarrow p^2 = N(p) = N(\gamma) N(\delta) \Rightarrow N(\gamma) = N(\delta) = p$ \\
-$\Rightarrow \gamma, \delta$ Gaussian primes. \\
-$p= (a+bi)(c+di) \Rightarrow \bar{p} = p = (a-bi)(c-di) \Rightarrow p = (a+bi)(a-bi)$. \hfill $\square$
+\begin{proof}
+Suppose $p$ is not prime in $\mathbb{Z}[i]$. Then $p = \gamma \delta$ for nonunits $\gamma, \delta \in \mathbb{Z}[i]$. Taking norms,
+\[
+p^2 = N(p) = N(\gamma) N(\delta).
+\]
+Thus $N(\gamma) = N(\delta) = p$. By the previous lemma, both $\gamma$ and $\delta$ are prime in $\mathbb{Z}[i]$.
 
-\vspace{1em}
-\noindent Now let's study Gaussian primes of the form $a+bi$ ($a, b \neq 0$).
+Since $p \in \mathbb{Z}$ is real, $\bar{p} = p$. If $p = \gamma \delta$, then $p = \overline{\gamma \delta} = \bar{\gamma} \bar{\delta}$. Write $\gamma = a + bi$. Then $\bar{\gamma} = a - bi$, and by uniqueness of factorization in the UFD $\mathbb{Z}[i]$, we have $\bar{\gamma} \sim \delta$ (up to units and reordering). Since $N(\gamma) = N(\bar{\gamma}) = p$, we have $p = \gamma \bar{\gamma} = (a + bi)(a - bi)$.
+\end{proof}
 
 \begin{lemma}
-Let $a+bi \in \mathbb{Z}[i]$ with $a, b \neq 0$. Then ($a+bi$ is Gaussian prime) $\Leftrightarrow$ ($a^2+b^2 = p$, $p$ prime integer).
+Let $a + bi \in \mathbb{Z}[i]$ with $a, b \neq 0$. Then $a + bi$ is prime in $\mathbb{Z}[i]$ if and only if $a^2 + b^2 = p$ for some prime integer $p$.
 \end{lemma}
 
-\noindent \textbf{Proof:} ($\Leftarrow$): is done in the simple observations. \\
-($\Rightarrow$): Suppose $a+bi$ Gaussian prime. Then $a-bi = \overline{a+bi}$ is also Gaussian prime. Consider $(a+bi)(a-bi) = p_1 \dots p_r$, $p_i$ prime in $\mathbb{Z}$, this is a factorization in $\mathbb{Z}[i]$. By $\mathbb{Z}[i]$ ED, $\mathbb{Z}[i]$ is PID $\Rightarrow$ UFD, $r \leq 2$. Suppose on contrary $r=2$. Then $(a+bi)(a-bi) = p_1 p_2$. \\
-By UFD again, $p_1, p_2$ must be (prime as irreducible) in $\mathbb{Z}[i]$. \\
-$\therefore$ By UFD again, $p_1 \sim (a \pm bi)$, $p_2 \sim (a \mp bi) \Rightarrow p_1 = u \cdot (a \pm bi)$ where $u \in U(\mathbb{Z}[i]) = \{ \pm 1, \pm i \}$, contradicting $a, b \neq 0$. \\
-$\therefore r=1 \Rightarrow (a+bi)(a-bi) = p_1 \Rightarrow a^2+b^2 = p_1$. \hfill $\square$
+\begin{proof}
+($\Leftarrow$) If $a^2 + b^2 = p$ is prime, then $N(a + bi) = p$, so by the previous lemma, $a + bi$ is prime.
 
-\vspace{1em}
-\noindent \textbf{CONCLUSION:}
-\begin{enumerate}
-    \item[(i)] If $n \in \mathbb{Z}$ is \textbf{NOT} a prime number in $\mathbb{Z}$, then $n$ is \underline{NOT} Gaussian prime.
-    \item[(ii)] Prime $p \in \mathbb{Z}$ is either a Gaussian prime or $p = (a+bi)(a-bi)$, $a \pm bi$ Gaussian primes.
-    \item[(iii)] $a+bi \in \mathbb{Z}[i], a, b \neq 0$ is Gaussian prime $\Leftrightarrow a^2+b^2 = p$, $p \in \mathbb{Z}$ prime number.
-\end{enumerate}
+($\Rightarrow$) Suppose $a + bi$ is prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. Then $\bar{a + bi} = a - bi$ is also prime. Consider the factorization of $(a + bi)(a - bi) = a^2 + b^2$ into primes in $\mathbb{Z}$. Write $a^2 + b^2 = p_1 \cdots p_r$ where each $p_i$ is prime in $\mathbb{Z}$. This gives a factorization in $\mathbb{Z}[i]$ into irreducibles. By uniqueness of factorization, we have $r \leq 2$.
+
+If $r = 2$, then $(a+bi)(a-bi) = p_1 p_2$. Both $p_1$ and $p_2$ are irreducible (hence prime) in $\mathbb{Z}[i]$. By uniqueness, we have $a+bi \sim p_i$ for some $i$, meaning $a+bi = u \cdot p_i$ for a unit $u \in \{\pm 1, \pm i\}$. But then $a + bi = \pm p_i$ or $a + bi = \pm i p_i$, contradicting $a, b \neq 0$.
+
+Therefore $r = 1$, so $a^2 + b^2 = p_1$ is prime in $\mathbb{Z}$.
+\end{proof}
 
 \begin{theorem}
-Let $p$ be a prime integer. Then $p$ is Gaussian prime $\Leftrightarrow p \equiv 3 \pmod 4$.
+Let $p$ be a prime integer. Then $p$ is prime in $\mathbb{Z}[i]$ if and only if $p \equiv 3 \pmod{4}$.
 \end{theorem}
 
-\noindent \textbf{Proof:} ($\Leftarrow$) contrapositive. If $p$ is \underline{NOT} Gaussian prime. Then (ii) says $p = (a+bi)(a-bi) = a^2+b^2 \equiv 0 \pmod 4$ or $1 \pmod 4$ or $2 \pmod 4$. \\
-$\Rightarrow p \not\equiv 3 \pmod 4$. \\
-($\Rightarrow$) Contrapositive. Suppose $p \equiv 1 \pmod 4$. Then by [Lagrange's Lemma], $p \mid m^2+1$ for some integer $m$. $\Rightarrow p \mid (m+i)(m-i)$. But $p \nmid m+i$, otherwise we have $p \cdot \gamma = m+i$ for $\gamma \in \mathbb{Z}[i] \Rightarrow \gamma = \frac{m}{p} + \frac{1}{p}i \notin \mathbb{Z}[i]$. Similarly $p \nmid m-i$. \\
-$\therefore p$ is \textbf{NOT} a prime in $\mathbb{Z}[i]$. \hfill $\square$
+\begin{proof}
+We prove the contrapositive in both directions.
+
+($\Rightarrow$) Suppose $p \not\equiv 3 \pmod{4}$. If $p = 2$, then $2 = (1+i)(1-i)$, so $2$ is not prime in $\mathbb{Z}[i]$. If $p$ is an odd prime with $p \equiv 1 \pmod{4}$, then by Fermat's theorem on sums of two squares (or Lagrange's lemma), there exist integers $a, b$ with $a^2 + b^2 = p$. Thus $p = (a+bi)(a-bi)$ with $a, b \neq 0$, so $p$ is not prime in $\mathbb{Z}[i]$.
+
+($\Leftarrow$) Suppose $p$ is not prime in $\mathbb{Z}[i]$. If $p = 2$, then $2 = (1+i)(1-i)$ with $1+i, 1-i$ prime (since $N(1+i) = 2$), so $2 \equiv 2 \pmod{4} \not\equiv 3 \pmod{4}$. If $p$ is odd and not prime in $\mathbb{Z}[i]$, then by the previous lemma, $p = a^2 + b^2$ for some integers $a, b$. Now $a^2 + b^2 \equiv 0, 1, \text{ or } 2 \pmod{4}$ depending on the parities of $a$ and $b$. Thus $p \not\equiv 3 \pmod{4}$.
+\end{proof}
 
 \begin{corollary}
-The Gaussian primes in $\mathbb{Z}[i]$ must be of the form \\
-(i) $p \in \mathbb{Z}$ , $p \equiv 3 \pmod 4$ \quad or \quad (ii) $a+bi \in \mathbb{Z}[i]$ , $a, b \neq 0$ , $a^2+b^2=p$ \\
-(or $p \in \mathbb{Z}$ , $p \equiv 3 \pmod 4$) \\
-(This is classification of all primes in $\mathbb{Z}[i]$. )
+The primes in $\mathbb{Z}[i]$ are precisely the elements of the following forms:
+\begin{itemize}
+    \item[(i)] $p \in \mathbb{Z}$ with $p \equiv 3 \pmod{4}$ (which remain prime);
+    \item[(ii)] $1 + i$ and $1 - i$ (which split the prime $2$);
+    \item[(iii)] $a + bi \in \mathbb{Z}[i]$ with $a, b \neq 0$ and $a^2 + b^2 = p$ where $p$ is a prime in $\mathbb{Z}$ with $p \equiv 1 \pmod{4}$ (and their associates).
+\end{itemize}
 \end{corollary}
 
-\begin{corollary} (Fermat's Theorem of 2 squares). \\
-If $p = 4n+1$ is a prime , then $\exists$ $a,b \in \mathbb{Z}$ s.t.: $p=a^2+b^2$ \\
-(e.g.: $5 = 1^2+2^2$ , $13 = 2^2+3^2$ , $17 = 1^2+4^2$ , $1013 = ?^2+?^2$)
+\begin{corollary}[Fermat's Theorem on Sums of Two Squares]
+If $p$ is a prime integer with $p \equiv 1 \pmod{4}$, then there exist integers $a, b$ such that $p = a^2 + b^2$.
 \end{corollary}
 
-\noindent \textbf{Proof:} By above, $p$ is \textbf{NOT} a Gaussian prime, so $p=(a+bi)(a-bi)$ by (ii). $\therefore p=a^2+b^2$. \hfill $\square$
+\begin{proof}
+If $p \equiv 1 \pmod{4}$, then $p$ is not prime in $\mathbb{Z}[i]$ by the previous theorem. Therefore, $p = (a+bi)(a-bi)$ for some $a+bi$ prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. Taking norms, $p^2 = N(a+bi) \cdot N(a-bi) = (a^2+b^2)^2$, so $p = a^2 + b^2$.
+\end{proof}
 
-\vspace{1em}
-\noindent \textbf{One other application:} (HW 10) \\
-The integer solutions $(x, y, z)$ of the equation $x^2+y^2=z^2$ are all of the form $x=(m^2-n^2)k$ , $y=(2mn)k$ , $z=(m^2+n^2)k$ for integers $m, n, k$.
+\begin{example}
+We have $5 = 1^2 + 2^2$, $13 = 2^2 + 3^2$, $17 = 1^2 + 4^2$, and $29 = 2^2 + 5^2$.
+\end{example}
 
-\vspace{1em}
-\begin{theorem}
-If $R$ is ED , then $R$ is PID .
-\end{theorem}
+\section{Polynomial Rings} \label{sec:polyrings}
 
-\noindent \textbf{Proof:} Let $N$ be the ``norm function'' of $R$ . For any $I \triangleleft R$ , take any $a \in I \setminus \{0\}$ such that $N(a) > 0$ is minimal among all $r \in R$ . Now for any $i \in R$ , one has $a|i$ or $i=aq+r$ with $N(r) < N(a)$ . But $r=i-aq \in I$ with smaller norm than $a$. Contradict. \\
-$\therefore a|i \Rightarrow i=aq \in \langle a \rangle$ \quad Hence , $I = \langle a \rangle$. \hfill $\square$
-
-\section{Polynomial Rings}
-
-In this section, we'll study ring of polynomials $R[x]$.
-A main reason why it is important is the following:
+In this section, we study rings of polynomials $R[x]$. A main reason why polynomial rings are important is the following:
 
 \begin{theorem}
-Let $\mathbb{F}$ be a field. Suppose $f(x) \in \mathbb{F}[x]$ is irreducible, then $\mathbb{F}[x] / \langle f(x) \rangle$ is a field.
+Let $\mathbb{F}$ be a field and suppose $f(x) \in \mathbb{F}[x]$ is irreducible. Then $\mathbb{F}[x] / \langle f(x) \rangle$ is a field.
 \end{theorem}
 
-\noindent \textbf{Proof:} Since $\mathbb{F}[x]$ is ED, then PID. $I = \langle f(x) \rangle$ is prime, since $f(x)$ is irreducible $\Leftrightarrow$ prime. Therefore, $I = \langle f(x) \rangle$ is a maximal ideal, and the result follows from Section on max/prime ideals.
+\begin{proof}
+Since $F[x]$ is a Euclidean domain, it is a principal ideal domain. The ideal $I = \langle f(x) \rangle$ is prime (= maximal) because $f(x)$ is irreducible (= prime). Therefore, $I = \langle f(x) \rangle$ is a maximal ideal, and the result follows from the general theory of maximal ideals.
+\end{proof}
 
-\noindent As a consequence, one has an injective homomorphism of fields $\phi: \mathbb{F} \rightarrow \mathbb{F}[x] / \langle f(x) \rangle =: \mathbb{K}$ with $\phi(a) := a + \langle f(x) \rangle$, i.e.: we can "extend" $\mathbb{F}$ to a large field.
+As a consequence, there is an injective homomorphism of fields 
+$$\phi: F \to F[x] / \langle f(x) \rangle =: K$$ 
+defined by $\phi(a) := a + \langle f(x) \rangle$. This allows us to ``extend'' $F$ to a larger field.
 
-\begin{quote}
-    \textbf{Galois theory}: Understand roots of (irreducible) polynomials $f(x) \in \mathbb{F}[x]$ \\
-    As before, we write $\overline{x} := x + \langle f(x) \rangle \in \mathbb{K}$. \\
-    Then in $\mathbb{K}$, $f(\overline{x}) = f(x) + \langle f(x) \rangle = 0_{\mathbb{K}}$. \\
-    So $\overline{x}$ is a root of $f(x)$ in $\mathbb{K}$!
-\end{quote}
+In \textbf{Galois Theory}, one tries to understand roots of (irreducible) polynomials $f(x) \in F[x]$. Let $\bar{x} := x + \langle f(x) \rangle \in K$. Then in $K$, we have 
+\[
+f(\bar{x}) = f(x) + \langle f(x) \rangle = 0_{K}.
+\]
+So $\bar{x}$ is a root of $f(x)$ in $K$! So the above construction gives a way to construct roots of any (irreducible) polynomials.
 
-\noindent Now we know the importance of studying when a polynomial is irreducible. In this section, we'll offer ways to check whether $p \in \mathbb{Q}[x]$ (or $\mathbb{Z}[x]$) is irreducible.
-
-\noindent Although $\mathbb{Z}$ is \textbf{NOT} a field, it is useful in understanding whether $p(x) \in \mathbb{Q}[x]$ with $\mathbb{Z}$-coefficients in irreducible or not.
+\medskip
+Under such perspective, it is important to determine when a polynomial is irreducible. In this section, we present methods for checking whether $f(x) \in \mathbb{Q}[x]$ (or $\mathbb{Z}[x]$) is irreducible. Although $\mathbb{Z}$ is \textbf{not} a field, it is useful for understanding irreducibility of polynomials $f(x) \in \mathbb{Q}[x]$ with integer coefficients.
 
 \begin{lemma}
-Let $\phi : R \to S$ be unital ring homomorphism (e.g.: $\mathbb{Z} \hookrightarrow \mathbb{Q}$, $\mathbb{Z} \twoheadrightarrow \mathbb{Z}_p$). Then $\tilde{\phi} : R[x] \to S[x]$ with $\tilde{\phi}(a_0 + a_1x + \dots + a_n x^n) := \phi(a_0) + \phi(a_1)x + \dots + \phi(a_n)x^n$ is a unital ring homomorphism.
+Let $\phi: R \to S$ be a unital ring homomorphism (e.g., $\mathbb{Z} \hookrightarrow \mathbb{Q}$ or $\mathbb{Z} \twoheadrightarrow \mathbb{Z}_p$). Then the map $\tilde{\phi}: R[x] \to S[x]$ defined by 
+\[
+\tilde{\phi}(a_0 + a_1 x + \cdots + a_n x^n) := \phi(a_0) + \phi(a_1) x + \cdots + \phi(a_n) x^n
+\]
+is a unital ring homomorphism.
 \end{lemma}
 
-\begin{theorem}(Reduction Test)
-Let $f \in \mathbb{Z}[x]$ monic, $p$ prime such that $\tilde{\phi}(f) \in \mathbb{Z}_p[x]$ is irreducible. Then $f$ is irreducible.
+\begin{theorem}[Reduction Modulo Prime Test]
+Let $f \in \mathbb{Z}[x]$ be monic and let $p$ be a prime integer. If $\tilde{\phi}(f) \in \mathbb{Z}_p[x]$ is irreducible, then $f$ is irreducible in $\mathbb{Z}[x]$.
 \end{theorem}
 
-\noindent \textbf{Proof:} Let $f = gh$ (WTS: $g$ or $h \in \mathbb{Z}[x]$ are constant) \\
-$\Rightarrow \tilde{f} = \tilde{g} \tilde{h}$ in $\mathbb{Z}_p[x]$ \\
-Since $f$ is monic, $g$ and $h$ are monic (up to units $\pm 1$) and hence $\tilde{f}, \tilde{g}, \tilde{h}$ monic with $\deg(\tilde{g}) = \deg(g)$, $\deg(\tilde{h}) = \deg(h)$. \\
-But since $\tilde{f}$ is irreducible, then $\deg(\tilde{g})$ or $\deg(\tilde{h}) = 0$. \\
-$\Rightarrow \deg(g)$ or $\deg(h) = 0$. \hfill $\square$
+\begin{proof}
+Suppose $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit.
 
-\vspace{1em}
-\begin{example} $f(x) = x^3 + 3x + 7 \xlongrightarrow{p=2} \tilde{f} = \tilde{\phi}(f) = x^3 + x + 1$ \\
-$\tilde{f}$ cannot be factorized into $\tilde{g} \cdot \tilde{h}$, since if so either $\deg(\tilde{g})$ or $\deg(\tilde{h}) = 1$, i.e.: $\tilde{g}$ or $\tilde{h} = x$ or $x+1$. \\
-By factor theorem, this implies $\tilde{f}(0)$ or $\tilde{f}(1) = 0$ in $\mathbb{Z}_2$.
+Applying $\tilde{\phi}$, we have $\tilde{f} = \tilde{g} \cdot \tilde{h}$ in $\mathbb{Z}_p[x]$.
+
+Since $f$ is monic, both $g$ and $h$ must be monic as well (up to units $\pm 1$). Therefore, $\tilde{f}$, $\tilde{g}$, and $\tilde{h}$ are all monic with $\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
+
+Since $\tilde{f}$ is irreducible, either $\deg(\tilde{g}) = 0$ or $\deg(\tilde{h}) = 0$. Therefore, either $\deg(g) = 0$ or $\deg(h) = 0$, which means $g$ or $h$ is a constant polynomial. Since $f$ is monic with degree greater than $0$, this constant must be $\pm 1$, making $g$ or $h$ a unit in $\mathbb{Z}[x]$. Thus $f$ is irreducible.
+\end{proof}
+
+\begin{example}
+Consider $f(x) = x^3 + 3x + 7$ and reduce modulo $p = 2$. We get $\tilde{f}(x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$.
+
+To show $\tilde{f}$ is irreducible in $\mathbb{Z}_2[x]$, note that if $\tilde{f}$ factors, then it must have a linear factor, and hence either $\tilde{f}(0) = 0$ or $\tilde{f}(1) = 0$ in $\mathbb{Z}_2$ (by the factor theorem). We compute:
+\[
+\tilde{f}(0) = 1 \neq 0 \pmod{2}, \quad \tilde{f}(1) = 1 + 1 + 1 = 1 \neq 0 \pmod{2}.
+\]
+Therefore, $\tilde{f}$ has no linear factors in $\mathbb{Z}_2[x]$, so it is irreducible. Thus $f(x) = x^3 + 3x + 7$ is irreducible in $\mathbb{Z}[x]$.
 \end{example}
 
-\begin{theorem}(Eisenstein's criterion)
-Suppose $f(x) = a_n x^n + \dots + a_1 x + a_0 \in \mathbb{Z}[x]$ is such that $\gcd(a_n, \dots, a_1) = 1$ ($f$ is primitive) and $p$ prime number such that: \\
-(1) $p \mid a_i \quad \forall 0 \le i < n$ ; (2) $p \nmid a_n$ ; (3) $p^2 \nmid a_0$. \\
-Then $f(x)$ is irreducible in $\mathbb{Z}[x]$.
+\begin{theorem}[Eisenstein's Criterion]
+Let $f(x) = a_n x^n + \cdots + a_1 x + a_0 \in \mathbb{Z}[x]$ and suppose $p$ is a prime integer such that:
+\begin{enumerate}
+    \item[(1)] $p \mid a_i$ for all $0 \le i < n$;
+    \item[(2)] $p \nmid a_n$;
+    \item[(3)] $p^2 \nmid a_0$.
+\end{enumerate}
+Moreover, suppose $\gcd(a_n, \ldots, a_0) = 1$ (i.e., $f$ is primitive). Then $f(x)$ is irreducible in $\mathbb{Z}[x]$.
 \end{theorem}
 
-(e.g.: $f(x) = x^4 + 4x + 6$ \quad ($p=2$) \quad is irreducible )
+\begin{proof}
+Suppose $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit.
 
-\noindent \textbf{Proof:} Use $\sim : \mathbb{Z}[x] \to \mathbb{Z}_p[x]$ . Then consider $f = gh \in \mathbb{Z}[x]$ \\
-(WTS: $g$ or $h$ is constant) .
+Consider the reduction map $\tilde{\phi}: \mathbb{Z}[x] \to \mathbb{Z}_p[x]$. By condition (1), we have 
+\[
+\tilde{f}(x) = \overline{a_n} x^n
+\]
+where $\overline{a_n} \neq 0$ in $\mathbb{Z}_p$ by condition (2).
 
-\noindent $\tilde{f} = [a_n]x^n \in \mathbb{Z}_p[x]$ by (1) where $[a_n] \neq [0]$ in $\mathbb{Z}_p$ by (2) \\
-$\Rightarrow \tilde{g} \cdot \tilde{h} = \tilde{f} \sim x^n$ . Then $\tilde{g} \sim x^i$ ; $\tilde{h} \sim x^{n-i}$ \quad ($0 \le i \le n$) \\
-Suppose $i \neq 0, n$ . Then $\tilde{g} \sim x^i \Rightarrow$ constant term of $g$ is a multiple of $p$ . Similarly , $\tilde{h} \sim x^{n-i} \Rightarrow$ constant term of $h$ is also multiple of $p$ . \\
-$\Rightarrow$ constant term of $f=gh$ is a multiple of $p^2$ , which contradict (3) of Eisenstein's criterion .
+From $\tilde{f} = \tilde{g} \cdot \tilde{h}$ and $\tilde{f} \sim x^n$ in $\mathbb{Z}_p[x]$ (up to nonzero scalar multiple), we must have $\tilde{g} \sim x^i$ and $\tilde{h} \sim x^{n-i}$ for some $0 \le i \le n$.
 
-\noindent $\therefore \tilde{g}$ or $\tilde{h}$ is a constant function in $\mathbb{Z}_p[x]$ \quad —— (*)
+Now suppose $0 < i < n$. Then the constant term of $\tilde{g}$ is $0$ in $\mathbb{Z}_p$, which means $p$ divides the constant term of $g$. Similarly, $p$ divides the constant term of $h$. Therefore, $p^2$ divides the constant term of $gh = f$, contradicting condition (3).
 
-\noindent Now: \\
-$\bullet \quad \deg(g) + \deg(h) = \deg(f) = \deg(\tilde{f}) = \deg(\tilde{g}) + \deg(\tilde{h})$ . \\
-$\bullet \quad \deg(\tilde{g}) \le \deg(g)$ ; $\deg(\tilde{h}) \le \deg(h)$
+Thus either $i = 0$ or $i = n$, which means either $\tilde{g}$ or $\tilde{h}$ is a constant in $\mathbb{Z}_p[x]$.
 
-\noindent $\therefore \deg(\tilde{g}) = \deg(g)$ ; $\deg(\tilde{h}) = \deg(h)$
+Since $\deg(g) + \deg(h) = \deg(f) = \deg(\tilde{f}) = \deg(\tilde{g}) + \deg(\tilde{h})$ and $\deg(\tilde{g}) \le \deg(g)$, $\deg(\tilde{h}) \le \deg(h)$, we have $\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
 
-\noindent $\therefore \deg(g)$ or $\deg(h) = 0$ by (*) , so either $g$ or $h$ is constant polynomial. \hfill $\square$
+Therefore, either $\deg(g) = 0$ or $\deg(h) = 0$, so $g$ or $h$ is a constant polynomial. Since $f$ is primitive, this constant must be $\pm 1$, making $g$ or $h$ a unit. Thus $f$ is irreducible.
+\end{proof}
 
-\vspace{1em}
-\begin{example} $g(x) = x^4 + 1$ . Consider $f(x) = g(x+1) = (x+1)^4 + 1 = x^4 + 4x^3 + 6x^2 + 4x + 1 + 1 = x^4 + 4x^3 + 6x^2 + 4x + 2$ . Since $2 \mid 4, 6, 4, 2$ and $2^2 \nmid 2$ , then $f(x)$ (and $g(x)$) is irreducible.
+\begin{example}
+Consider $g(x) = x^4 + 1$. Define $f(x) = g(x+1) = (x+1)^4 + 1$. Expanding:
+\[
+f(x) = x^4 + 4x^3 + 6x^2 + 4x + 2.
+\]
+Taking $p = 2$, we verify Eisenstein's criterion:
+\begin{enumerate}
+    \item $2 \mid 4, 6, 4, 2$ (all non-leading coefficients);
+    \item $2 \nmid 1$ (the leading coefficient);
+    \item $2^2 = 4 \nmid 2$ (the constant term).
+\end{enumerate}
+Therefore, $f(x)$ is irreducible in $\mathbb{Z}[x]$, and hence $g(x) = x^4 + 1$ is also irreducible in $\mathbb{Z}[x]$.
 \end{example}
 
-\vspace{1em}
-\noindent \textbf{Q: How about irreducibility in $\mathbb{Q}[x]$?}
+\begin{definition}[Primitive Polynomial]
+A polynomial $f(x) = a_n x^n + \cdots + a_0 \in \mathbb{Z}[x]$ is called \textbf{primitive} if $\gcd(a_n, \ldots, a_0) = 1$.
+\end{definition}
 
-\begin{theorem}(Gauss' Lemma)
-A nonconstant polynomial $f \in \mathbb{Z}[x]$ is irreducible $\Leftrightarrow f \in \mathbb{Q}[x]$ is irreducible and $f$ is primitive.
+\noindent Now we address irreducibility in $\mathbb{Q}[x]$.
+
+\begin{theorem}[Gauss' Lemma]
+A nonconstant polynomial $f \in \mathbb{Z}[x]$ is irreducible in $\mathbb{Z}[x]$ if and only if $f$ is primitive and irreducible in $\mathbb{Q}[x]$.
 \end{theorem}
 
-\noindent \textbf{Proof:} $(\Leftarrow)$ Suppose $f \in \mathbb{Z}[x]$ and $f = g \cdot h$, $g, h \in \mathbb{Z}[x]$. \\
-(WTS: $g$ or $h$ is a unit in $\mathbb{Z}[x]$) \\
-By hypothesis, $f$ is irreducible in $\mathbb{Q}[x]$ and $g, h \in \mathbb{Z}[x] \subseteq \mathbb{Q}[x]$, therefore, $\deg(g) = 0$ or $\deg(h) = 0$. \\
-$\Rightarrow g$ or $h$ must be a constant integer. \\
-By hypothesis again, since $f$ is primitive, this constant integer can only be $1$ or $-1$. $\Rightarrow g$ or $h$ is a unit in $\mathbb{Z}[x]$.
+\begin{proof}
+$(\Leftarrow)$ Suppose $f \in \mathbb{Z}[x]$ is primitive, irreducible in $\mathbb{Q}[x]$, and $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit in $\mathbb{Z}[x]$.
 
-\noindent $(\Rightarrow)$ If $f$ is irreducible in $\mathbb{Z}[x]$, then obviously $f$ is primitive. Otherwise $f = a_n x^n + \dots + a_0$ and $2 \le d = \gcd(a_n, \dots, a_0)$, then $f = d \cdot [\frac{a_n}{d} x^n + \dots + \frac{a_0}{d}]$ where $d$ and $[\frac{a_n}{d} x^n + \dots + \frac{a_0}{d}]$ are both NOT units in $\mathbb{Z}[x]$ contradicting $f$ irreducible in $\mathbb{Z}[x]$. \\
-To see why $f$ is irreducible in $\mathbb{Q}[x]$, suppose $f = g \cdot h$, $g, h \in \mathbb{Q}[x]$. \\
-(WTS: $g, h$ are units in $\mathbb{Q}[x]$, i.e.: $g, h \in \mathbb{Q} \setminus \{0\}$) \\
-Let $\lambda, \mu \in \mathbb{N}$ be the smallest positive integers such that $\lambda \cdot g$ and $\mu \cdot h \in \mathbb{Z}[x]$. Let $g' = \lambda \cdot g$, $h' = \mu \cdot h \in \mathbb{Z}[x]$. \\
-\noindent \underline{Claim:} $\lambda = 1$: Suppose on contrary, $\exists p \mid \lambda$. Then "$p \mid \lambda f$" (which means the coefficients of $\lambda f \in \mathbb{Z}[x]$ are multiples of $p$). \\
-$\Rightarrow p \mid (\lambda \alpha^{-1} g) \cdot (\alpha h) \Rightarrow$ "$p \mid g' h'$" in $\mathbb{Z}[x]$ \\
-Therefore, $\tilde{g}' \cdot \tilde{h}' \equiv 0$ in $\mathbb{Z}_p[x] \Rightarrow \tilde{g}' \equiv 0$ or $\tilde{h}' \equiv 0$ in $\mathbb{Z}_p[x]$ \\
-$\Rightarrow$ "$p \mid g'$" --- (*) or "$p \mid h'$" --- (**) in $\mathbb{Z}[x]$ \\
-In (*), "$p \mid g'$" $\Leftrightarrow$ "$p \mid \lambda \alpha^{-1} g$" $\Rightarrow (\frac{\lambda}{p}) \alpha^{-1} g$, $\alpha h \in \mathbb{Z}[x]$, contradicting the minimality of $\lambda$. \\
-In (**), "$p \mid \alpha h$" $\Rightarrow (\frac{\lambda}{p})(\frac{\alpha}{p})^{-1} g = \lambda \alpha^{-1} g \in \mathbb{Z}[x]$ and $(\frac{\alpha}{p}) h \in \mathbb{Z}[x]$, contradicting the minimality of $\lambda$. \\
-$\therefore p \nmid \lambda$ for any prime number, and $\lambda = 1$. \\
-Therefore, we have $\alpha \in \mathbb{Q} \setminus \{0\}$ s.t.: $f = gh$ in $\mathbb{Q}[x]$ and $f = (\alpha^{-1} g)(\alpha h)$ in $\mathbb{Z}[x]$, since we have $f$ irreducible in $\mathbb{Z}[x]$ by hypothesis, $\alpha^{-1} g$ or $\alpha h$ is a unit in $\mathbb{Z}[x] \Rightarrow \alpha^{-1} g = \pm 1$ or $\alpha h = \pm 1$. \\
-$\Rightarrow g = \alpha'$ where $\alpha' \in \mathbb{Q} \setminus \{0\}$ or $h = \alpha''$ where $\alpha'' \in \mathbb{Q} \setminus \{0\}$. \hfill $\square$
+Since $g, h \in \mathbb{Z}[x] \subseteq \mathbb{Q}[x]$ and $f$ is irreducible in $\mathbb{Q}[x]$, either $g$ or $h$ must be a unit in $\mathbb{Q}[x]$, i.e., a nonzero constant. Say $g = c \in \mathbb{Q}$.
 
-\vspace{1em}
+Since $g \in \mathbb{Z}[x]$, we have $c \in \mathbb{Z}$. Moreover, since $f$ is primitive, $\gcd(\text{coefficients of } f) = 1$. If $c \neq \pm 1$, then $c$ divides all coefficients of $f = gh = c \cdot h$, contradicting primitivity of $f$. Therefore, $c = \pm 1$, so $g$ is a unit in $\mathbb{Z}[x]$.
+
+$(\Rightarrow)$ Suppose $f$ is irreducible in $\mathbb{Z}[x]$.
+
+First, we show $f$ is primitive. If not, then $\gcd(\text{coefficients of } f) = d \ge 2$. We can write $f = d \cdot f'$ where $f' \in \mathbb{Z}[x]$ and $\deg(f') = \deg(f) > 0$. Since neither $d$ nor $f'$ is a unit in $\mathbb{Z}[x]$, this contradicts irreducibility of $f$. Thus $f$ is primitive.
+
+Next, we show $f$ is irreducible in $\mathbb{Q}[x]$. Suppose $f = gh$ for some $g, h \in \mathbb{Q}[x]$. We must show that $g$ or $h$ is a unit in $\mathbb{Q}[x]$.
+
+Let $\lambda, \mu \in \mathbb{N}$ be the smallest positive integers such that $\lambda g$ and $\mu h$ have integer coefficients. Define $g' := \lambda g \in \mathbb{Z}[x]$ and $h' := \mu h \in \mathbb{Z}[x]$. Then 
+\[
+f = gh = \frac{g'}{\lambda} \cdot \frac{h'}{\mu},
+\]
+so $\lambda \mu f = g' h'$.
+
+\noindent \textbf{Claim:} $\lambda = 1$.
+
+\noindent \textit{Proof of claim:} Suppose for contradiction that $\lambda > 1$, so there exists a prime $p \mid \lambda$. Then $p \mid \lambda \mu f$, so all coefficients of $\lambda \mu f \in \mathbb{Z}[x]$ are divisible by $p$. In particular, $p \mid g' h'$ in $\mathbb{Z}[x]$.
+
+Consider the reduction map $\tilde{\phi}: \mathbb{Z}[x] \to \mathbb{Z}_p[x]$. We have $\tilde{g'} \cdot \tilde{h'} \equiv 0$ in $\mathbb{Z}_p[x]$. Since $\mathbb{Z}_p[x]$ is an integral domain, either $\tilde{g'} \equiv 0$ or $\tilde{h'} \equiv 0$ in $\mathbb{Z}_p[x]$. This means either $p \mid g'$ or $p \mid h'$.
+
+If $p \mid g'$, then all coefficients of $g' = \lambda g$ are divisible by $p$. But then $(\lambda/p) g$ has integer coefficients and is a scalar multiple of $g$, contradicting the minimality of $\lambda$.
+
+Similarly, if $p \mid h'$, then $(\mu/p) h$ has integer coefficients, contradicting the minimality of $\mu$.
+
+Therefore, $\lambda = 1$, and $g' = g \in \mathbb{Z}[x]$ and $h' = \mu h \in \mathbb{Z}[x]$.
+
+By the same argument applied to $\mu$, we also have $\mu = 1$, so $h \in \mathbb{Z}[x]$.
+
+Now $f = gh$ with $g, h \in \mathbb{Z}[x]$. Since $f$ is irreducible in $\mathbb{Z}[x]$, either $g$ or $h$ is a unit in $\mathbb{Z}[x]$, which means either $g$ or $h$ is $\pm 1 \in \mathbb{Q}[x]$. Thus $f$ is irreducible in $\mathbb{Q}[x]$.
+\end{proof}
+
 \begin{theorem}
-$\mathbb{Z}[x]$ is a UFD (but not PID by HW).
+$\mathbb{Z}[x]$ is a unique factorization domain, though not a principal ideal domain (by homework).
 \end{theorem}
 
-Proof: Let $f \in \mathbb{Z}[x]$ be primitive.\\
-Claim: $f$ can be factorized into $f = g_1 \dots g_n$, $g_i \in \mathbb{Z}[x]$ primitive
-irreducible. To see why, use induction on $\deg(f)$.
-True for $\deg(f) = 0$ or $1$. So assume claim holds for $\deg(f) < k$
-Then for $f$ with $\deg(f) = k$ and primitive:\\
-$\bullet$ $f$ is irreducible ; $\bullet$ $f = h_1 h_2$, $h_1, h_2 \in \mathbb{Z}[x]$ NOT units.\\
-If $\deg(h_1)$ or $\deg(h_2) = 0$, then $h_1$ or $h_2$ equal to constant $\neq \pm 1$
-contradicting $f$ is primitive. Hence, $\deg(h_1) \& \deg(h_2) > 0$ by
-induction.
-To see why $\mathbb{Z}[x]$ is UFD, note that we can factorize any primitive
-$f \in \mathbb{Z}[x]$ into irreducibles (primitive). \\
-To see the
-factorization is unique, suppose $f = g_1 \dots g_n = h_1 \dots h_m$, $g_i, h_j \in \mathbb{Z}[x]$
-primitive irreducible. Then since $\mathbb{Z}[x] \subseteq (\mathbb{Q}[x] \text{ UFD})$ and by
-Gauss' Lemma $g_i, h_j \in \mathbb{Q}[x]$ irreducible by unique factorization
-of $\mathbb{Q}[x]$, we have $n = m$, and $\exists \sigma \in S_n$, s.t.: $g_i \sim h_{\sigma(i)}$ (in $\mathbb{Q}[x]$)
-$\Rightarrow g_i = h_{\sigma(i)} \cdot u$ where $u \in (\text{unit in } \mathbb{Q}[x])$
-Since $g_i, h_{\sigma(i)}$ primitive, $u \in \{\pm 1\} \Rightarrow g_i \sim h_{\sigma(i)}$ in $\mathbb{Z}[x]$. \hfill $\square$
+\begin{proof}
+First, we show that every primitive polynomial $f \in \mathbb{Z}[x]$ with $\deg(f) \ge 1$ can be factored into primitive irreducible polynomials. We proceed by induction on $\deg(f)$.
 
-\vspace{1em}
-\noindent \textbf{Remark (more generally):} \\
-If $R$ is a UFD, then $R[x]$ is UFD. To prove it, use Field of Fractions (HW ?) $F = \text{Frac}(R)$ and the fact that $F[x]$ is a PID ($\Rightarrow$ UFD).
+\noindent \textit{Base case:} If $\deg(f) = 1$, then $f$ is irreducible.
+
+\noindent \textit{Inductive step:} Assume the claim holds for all primitive polynomials of degree less than $k$. Let $f$ be primitive with $\deg(f) = k > 1$. Either:
+\begin{itemize}
+    \item $f$ is irreducible; or
+    \item $f = h_1 h_2$ for some $h_1, h_2 \in \mathbb{Z}[x]$ with $1 \le \deg(h_i) < k$.
+\end{itemize}
+In the second case, since $f$ is primitive, $h_1$ and $h_2$ must also be primitive (otherwise their gcd would divide $f$'s coefficients, contradicting primitivity). By induction, both $h_1$ and $h_2$ factor into primitive irreducibles, so $f$ does as well.
+
+Now, to show factorization is unique, suppose $f = g_1 \cdots g_n = h_1 \cdots h_m$ where $g_i, h_j \in \mathbb{Z}[x]$ are primitive and irreducible. 
+
+By Gauss' Lemma, $g_i$ and $h_j$ are also irreducible in $\mathbb{Q}[x]$. Since $\mathbb{Q}[x]$ is a principal ideal domain (hence a UFD), we have $n = m$ and there exists a permutation $\sigma \in S_n$ such that $g_i$ and $h_{\sigma(i)}$ are associates in $\mathbb{Q}[x]$. That is, $g_i = c_i h_{\sigma(i)}$ for some nonzero $c_i \in \mathbb{Q}$.
+
+Since $g_i, h_{\sigma(i)} \in \mathbb{Z}[x]$ and both are primitive, we must have $c_i \in \{\pm 1\}$ (a rational number that makes integer polynomials remain primitive). Therefore, $g_i \sim h_{\sigma(i)}$ in $\mathbb{Z}[x]$.
+
+Thus factorization into primitive irreducibles is unique up to order and associates.
+
+For a general polynomial $f \in \mathbb{Z}[x]$, write $f = d \cdot f'$ where $d \in \mathbb{Z}$ and $f'$ is primitive. Factor $d$ uniquely in $\mathbb{Z}$ and factor $f'$ uniquely into primitive irreducibles in $\mathbb{Z}[x]$. The factorization of $f$ is therefore unique, making $\mathbb{Z}[x]$ a UFD.
+\end{proof}
+
+\begin{remark}
+More generally, if $R$ is a unique factorization domain, then $R[x]$ is also a unique factorization domain. The proof uses the field of fractions $F = \text{Frac}(R)$ and the fact that $F[x]$ is a principal ideal domain (hence a UFD).
+\end{remark}
