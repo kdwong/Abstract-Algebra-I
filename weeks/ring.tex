@@ -1178,10 +1178,11 @@ Thus the Euclidean property holds, and $\mathbb{Z}[i]$ is a Euclidean domain.
 \end{proof}
 
 
-\noindent \textbf{Classification of Gaussian Primes.} Since $\mathbb{Z}[i]$ is a ED (and hence a PID), irreducible elements are precisely prime elements. We now classify the primes in $\mathbb{Z}[i]$.
+\noindent \textbf{Classification of Gaussian Primes.} Since $\mathbb{Z}[i]$ is a ED (and hence a PID), irreducible elements are precisely prime elements. 
 
+We now classify the primes in $\mathbb{Z}[i]$. Before doing so, we give two preliminary lemmas:
 \begin{lemma}
-The units in $\mathbb{Z}[i]$ are $U(\mathbb{Z}[i]) = \{\pm 1, \pm i\}$. An element $\alpha = a + bi \in \mathbb{Z}[i]$ is a unit if and only if $N(\alpha) = 1$.
+The units in $\mathbb{Z}[i]$ are $U(\mathbb{Z}[i]) = \{\pm 1, \pm i\}$. In other words, $\alpha \in \mathbb{Z}[i]$ is a unit if and only if $N(\alpha) = 1$.
 \end{lemma}
 
 \begin{lemma}
@@ -1196,6 +1197,10 @@ p = N(\beta) = N(\gamma) N(\delta).
 Since $p$ is prime, either $N(\gamma) = 1$ or $N(\delta) = 1$. Thus $\gamma$ or $\delta$ is a unit, so $\beta$ is irreducible. Since $\mathbb{Z}[i]$ is a UFD, $\beta$ is prime.
 \end{proof}
 
+We divide into two cases to determine all primes in $\mathbb{Z}[i]$:
+
+\medskip
+\noindent{\underline{\bf Case 1: Elements of the form $a + 0i$ (or $0 + ai$).}} Since $a + 0i$ and $0 + ai$ only differ by a unit $i \in U(\mathbb{Z}[i])$, it suffices to check whether $a + 0i$ is prime or not. Obviously, if $a$ is a composite integer, then they are obviously not prime. So we assume $a = p$ is a prime integer. In such a case, one has:
 \begin{lemma}
 Let $p$ be a prime integer in $\mathbb{Z}$. Then either 
 \begin{itemize}
@@ -1213,19 +1218,6 @@ Thus $N(\gamma) = N(\delta) = p$. By the previous lemma, both $\gamma$ and $\del
 Since $p \in \mathbb{Z}$ is real, $\bar{p} = p$. If $p = \gamma \delta$, then $p = \overline{\gamma \delta} = \bar{\gamma} \bar{\delta}$. Write $\gamma = a + bi$. Then $\bar{\gamma} = a - bi$, and by uniqueness of factorization in the UFD $\mathbb{Z}[i]$, we have $\bar{\gamma} \sim \delta$ (up to units and reordering). Since $N(\gamma) = N(\bar{\gamma}) = p$, we have $p = \gamma \bar{\gamma} = (a + bi)(a - bi)$.
 \end{proof}
 
-\begin{lemma}
-Let $a + bi \in \mathbb{Z}[i]$ with $a, b \neq 0$. Then $a + bi$ is prime in $\mathbb{Z}[i]$ if and only if $a^2 + b^2 = p$ for some prime integer $p$.
-\end{lemma}
-
-\begin{proof}
-($\Leftarrow$) If $a^2 + b^2 = p$ is prime, then $N(a + bi) = p$, so by the previous lemma, $a + bi$ is prime.
-
-($\Rightarrow$) Suppose $a + bi$ is prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. Then $\bar{a + bi} = a - bi$ is also prime. Consider the factorization of $(a + bi)(a - bi) = a^2 + b^2$ into primes in $\mathbb{Z}$. Write $a^2 + b^2 = p_1 \cdots p_r$ where each $p_i$ is prime in $\mathbb{Z}$. This gives a factorization in $\mathbb{Z}[i]$ into irreducibles. By uniqueness of factorization, we have $r \leq 2$.
-
-If $r = 2$, then $(a+bi)(a-bi) = p_1 p_2$. Both $p_1$ and $p_2$ are irreducible (hence prime) in $\mathbb{Z}[i]$. By uniqueness, we have $a+bi \sim p_i$ for some $i$, meaning $a+bi = u \cdot p_i$ for a unit $u \in \{\pm 1, \pm i\}$. But then $a + bi = \pm p_i$ or $a + bi = \pm i p_i$, contradicting $a, b \neq 0$.
-
-Therefore $r = 1$, so $a^2 + b^2 = p_1$ is prime in $\mathbb{Z}$.
-\end{proof}
 
 \begin{theorem}
 Let $p$ be a prime integer. Then $p$ is prime in $\mathbb{Z}[i]$ if and only if $p \equiv 3 \pmod{4}$.
@@ -1234,30 +1226,72 @@ Let $p$ be a prime integer. Then $p$ is prime in $\mathbb{Z}[i]$ if and only if 
 \begin{proof}
 We prove the contrapositive in both directions.
 
-($\Rightarrow$) Suppose $p \not\equiv 3 \pmod{4}$. If $p = 2$, then $2 = (1+i)(1-i)$, so $2$ is not prime in $\mathbb{Z}[i]$. If $p$ is an odd prime with $p \equiv 1 \pmod{4}$, then by Fermat's theorem on sums of two squares (or Lagrange's lemma), there exist integers $a, b$ with $a^2 + b^2 = p$. Thus $p = (a+bi)(a-bi)$ with $a, b \neq 0$, so $p$ is not prime in $\mathbb{Z}[i]$.
 
-($\Leftarrow$) Suppose $p$ is not prime in $\mathbb{Z}[i]$. If $p = 2$, then $2 = (1+i)(1-i)$ with $1+i, 1-i$ prime (since $N(1+i) = 2$), so $2 \equiv 2 \pmod{4} \not\equiv 3 \pmod{4}$. If $p$ is odd and not prime in $\mathbb{Z}[i]$, then by the previous lemma, $p = a^2 + b^2$ for some integers $a, b$. Now $a^2 + b^2 \equiv 0, 1, \text{ or } 2 \pmod{4}$ depending on the parities of $a$ and $b$. Thus $p \not\equiv 3 \pmod{4}$.
+($\Leftarrow$) Suppose $p$ is not prime in $\mathbb{Z}[i]$, then by the previous lemma, $p = a^2 + b^2$ for some integers $a, b$. Now $a^2 + b^2 \equiv 0, 1, \text{ or } 2 \pmod{4}$ depending on the parities of $a$ and $b$. Thus $p \not\equiv 3 \pmod{4}$.
+
+($\Rightarrow$) Suppose $p \not\equiv 3 \pmod{4}$. There are two possibilities:
+\begin{itemize}
+    \item If $p = 2$, then $2 = (1+i)(1-i)$, so $2$ is not prime in $\mathbb{Z}[i]$.
+    \item If $p$ is an odd prime with $p \equiv 1 \pmod{4}$, then by Lagrange's lemma (see Homework), 
+    $$p \ |\ m^2 + 1$$
+    (in $\mathbb{Z}$) for some integer $m$. So we have $p\ |\ (m+i)(m-i)$ in $\mathbb{Z}[i]$.
+
+    We {\it claim} that $p \nmid (m+i)$ and $p \nmid (m-i)$ in $\mathbb{Z}[i]$: Suppose on contrary that $p \mid (m+i)$, then there exists $a + bi \in \mathbb{Z}[i]$ such that
+    $$p(a+bi) = m+i.$$
+    However, by comparing the imaginary parts on both sides of the equation, one has $pb = 1$, which is impossible. Similar argument also holds for $p \nmid (m-i)$. Consequently, $p$ is not prime in $\mathbb{Z}[i]$.
+\end{itemize}
+ 
 \end{proof}
 
+\noindent{\underline{\bf Case 2: Elements of the form $a+bi \in \mathbb{Z}[i]$ with $a, b \neq 0$.} In such a case, one has:
+\begin{theorem}
+Let $a + bi \in \mathbb{Z}[i]$ with $a, b \neq 0$. Then $a + bi$ is prime in $\mathbb{Z}[i]$ if and only if $a^2 + b^2 = p$ for some prime integer $p$.
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) If $a^2 + b^2 = p$ is prime, then $N(a + bi) = p$, so $a + bi$ is prime.
+
+($\Rightarrow$) Suppose $a + bi$ is prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. Then $\overline{a + bi} = a - bi$ is also prime (Exercise). 
+
+Consider the factorization of $(a + bi)(a - bi) = a^2 + b^2$ into primes in $\mathbb{Z}$. Write 
+$$(a + bi)(a - bi) = a^2 + b^2 = p_1 \cdots p_r,$$ 
+where each $p_i \in \mathbb{Z}$ is a prime integer. Note that the left hand side has only two irreducible factors in $\mathbb{Z}[i]$, hence by uniqueness of factorization, we have $r \leq 2$ or else there are at least three irreducible factors on the right hand side.
+
+If $r = 2$, then $(a+bi)(a-bi) = p_1 p_2$. Then both $p_1$ and $p_2$ are irreducible (hence prime) in $\mathbb{Z}[i]$. By unique factorization, we have $a+bi \sim p_i$ for some $i$, meaning $a+bi = u \cdot p_i$ for a unit $u \in \{\pm 1, \pm i\}$. But then $a + bi = \pm p_i$ or $a + bi = \pm i p_i$, contradicting $a, b \neq 0$.
+
+Therefore $r = 1$, so $a^2 + b^2 = p_1$ is prime in $\mathbb{Z}$.
+\end{proof}
+
+Combining the two cases, one has a full classification of prime elements in $\mathbb{Z}[i]$:
 \begin{corollary}
-The primes in $\mathbb{Z}[i]$ are precisely the elements of the following forms:
+The primes in $\mathbb{Z}[i]$ are precisely the elements of the following forms (and their associates):
 \begin{itemize}
-    \item[(i)] $p \in \mathbb{Z}$ with $p \equiv 3 \pmod{4}$ (which remain prime);
-    \item[(ii)] $1 + i$ and $1 - i$ (which split the prime $2$);
-    \item[(iii)] $a + bi \in \mathbb{Z}[i]$ with $a, b \neq 0$ and $a^2 + b^2 = p$ where $p$ is a prime in $\mathbb{Z}$ with $p \equiv 1 \pmod{4}$ (and their associates).
+    \item[(i)] $p$ is prime integer satisfying $p \equiv 3 \pmod{4}$ (which remain prime);
+    \item[(ii)] $a + bi$ with $a, b \neq 0$ and $a^2 + b^2 = p$, such that 
+    \begin{itemize}
+        \item $p = 2$, or
+        \item $p$ is a prime integer satisfying $p \equiv 1 \pmod{4}$.
+    \end{itemize} 
 \end{itemize}
 \end{corollary}
+
+
+
+
 
 \begin{corollary}[Fermat's Theorem on Sums of Two Squares]
 If $p$ is a prime integer with $p \equiv 1 \pmod{4}$, then there exist integers $a, b$ such that $p = a^2 + b^2$.
 \end{corollary}
 
 \begin{proof}
-If $p \equiv 1 \pmod{4}$, then $p$ is not prime in $\mathbb{Z}[i]$ by the previous theorem. Therefore, $p = (a+bi)(a-bi)$ for some $a+bi$ prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. Taking norms, $p^2 = N(a+bi) \cdot N(a-bi) = (a^2+b^2)^2$, so $p = a^2 + b^2$.
+If $p \equiv 1 \pmod{4}$, then $p$ is not prime in $\mathbb{Z}[i]$ by the previous theorem. Therefore, 
+$$p = (a+bi)(a-bi)$$ 
+for some $a+bi$ prime in $\mathbb{Z}[i]$ with $a, b \neq 0$. So $p = a^2 + b^2$.
 \end{proof}
 
 \begin{example}
-We have $5 = 1^2 + 2^2$, $13 = 2^2 + 3^2$, $17 = 1^2 + 4^2$, and $29 = 2^2 + 5^2$.
+We have 
+$$5 = 1^2 + 2^2,\quad 13 = 2^2 + 3^2,\quad 17 = 1^2 + 4^2,\quad 29 = 2^2 + 5^2,\quad \cdots$$
 \end{example}
 
 \section{Polynomial Rings} \label{sec:polyrings}
@@ -1269,18 +1303,20 @@ Let $\mathbb{F}$ be a field and suppose $f(x) \in \mathbb{F}[x]$ is irreducible.
 \end{theorem}
 
 \begin{proof}
-Since $F[x]$ is a Euclidean domain, it is a principal ideal domain. The ideal $I = \langle f(x) \rangle$ is prime (= maximal) because $f(x)$ is irreducible (= prime). Therefore, $I = \langle f(x) \rangle$ is a maximal ideal, and the result follows from the general theory of maximal ideals.
+Since $\mathbb{F}[x]$ is a Euclidean Domain, it is a Principal Ideal Domain. The ideal $I = \langle f(x) \rangle$ is prime (= maximal) because $f(x)$ is irreducible (= prime). Therefore, $I = \langle f(x) \rangle$ is a maximal ideal, and the result follows from the general theory of maximal ideals.
 \end{proof}
 
 As a consequence, there is an injective homomorphism of fields 
-$$\phi: F \to F[x] / \langle f(x) \rangle =: K$$ 
-defined by $\phi(a) := a + \langle f(x) \rangle$. This allows us to ``extend'' $F$ to a larger field.
+$$\phi: \mathbb{F} \hookrightarrow \mathbb{F}[x] / \langle f(x) \rangle =: \mathbb{K}$$ 
+defined by 
+$$\phi(a) := a + \langle f(x) \rangle.$$ 
+This allows us to ``extend'' $\mathbb{F}$ to a larger field.
 
-In \textbf{Galois Theory}, one tries to understand roots of (irreducible) polynomials $f(x) \in F[x]$. Let $\bar{x} := x + \langle f(x) \rangle \in K$. Then in $K$, we have 
+In Galois Theory, one tries to understand roots of (irreducible) polynomials $f(x) \in \mathbb{F}[x]$. Let $\bar{x} := x + \langle f(x) \rangle \in \mathbb{K}$. Then in $\mathbb{K}$, we have 
 \[
 f(\bar{x}) = f(x) + \langle f(x) \rangle = 0_{K}.
 \]
-So $\bar{x}$ is a root of $f(x)$ in $K$! So the above construction gives a way to construct roots of any (irreducible) polynomials.
+So $\bar{x}$ is a root of $f(x)$ in $\mathbb{K}$! So the above construction gives a way to construct roots of any (irreducible) polynomials.
 
 \medskip
 Under such perspective, it is important to determine when a polynomial is irreducible. In this section, we present methods for checking whether $f(x) \in \mathbb{Q}[x]$ (or $\mathbb{Z}[x]$) is irreducible. Although $\mathbb{Z}$ is \textbf{not} a field, it is useful for understanding irreducibility of polynomials $f(x) \in \mathbb{Q}[x]$ with integer coefficients.
@@ -1300,49 +1336,59 @@ Let $f \in \mathbb{Z}[x]$ be monic and let $p$ be a prime integer. If $\tilde{\p
 \begin{proof}
 Suppose $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit.
 
-Applying $\tilde{\phi}$, we have $\tilde{f} = \tilde{g} \cdot \tilde{h}$ in $\mathbb{Z}_p[x]$.
-
-Since $f$ is monic, both $g$ and $h$ must be monic as well (up to units $\pm 1$). Therefore, $\tilde{f}$, $\tilde{g}$, and $\tilde{h}$ are all monic with $\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
-
-Since $\tilde{f}$ is irreducible, either $\deg(\tilde{g}) = 0$ or $\deg(\tilde{h}) = 0$. Therefore, either $\deg(g) = 0$ or $\deg(h) = 0$, which means $g$ or $h$ is a constant polynomial. Since $f$ is monic with degree greater than $0$, this constant must be $\pm 1$, making $g$ or $h$ a unit in $\mathbb{Z}[x]$. Thus $f$ is irreducible.
+Applying $\tilde{\phi}$, we have 
+$$\tilde{f} = \tilde{g} \cdot \tilde{h} \in \mathbb{Z}_p[x].$$ Since $f$ is monic, both $g$ and $h$ must be monic as well (up to units $\pm 1$). Therefore, $\tilde{f}$, $\tilde{g}$, and $\tilde{h}$ are all monic with 
+\begin{center}
+$\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
+\end{center}
+Since $\tilde{f}$ is irreducible, either $\tilde{g}$ or $\tilde{h}$ is a unit. In other words, $\deg(\tilde{g}) = 0$ or $\deg(\tilde{h}) = 0$. Therefore, either $\deg(g) = 0$ or $\deg(h) = 0$, which means $g$ or $h$ is a constant polynomial. Since $f$ is monic with degree greater than $0$, this constant must be $\pm 1$, making $g$ or $h$ a unit in $\mathbb{Z}[x]$. Thus $f$ is irreducible.
 \end{proof}
 
 \begin{example}
-Consider $f(x) = x^3 + 3x + 7$ and reduce modulo $p = 2$. We get $\tilde{f}(x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$.
-
-To show $\tilde{f}$ is irreducible in $\mathbb{Z}_2[x]$, note that if $\tilde{f}$ factors, then it must have a linear factor, and hence either $\tilde{f}(0) = 0$ or $\tilde{f}(1) = 0$ in $\mathbb{Z}_2$ (by the factor theorem). We compute:
+Consider $f(x) = x^3 + 3x + 7$ and reduce modulo $p = 2$. We get 
+$$\tilde{f}(x) = x^3 + x + 1 \in \mathbb{Z}_2[x].$$
+To show $\tilde{f}$ is irreducible in $\mathbb{Z}_2[x]$, note that if $\tilde{f}$ (or more generally any cubic polynomial) factors, then it must have a linear factor. Hence by the factor theorem, either $\tilde{f}(0) = 0$ or $\tilde{f}(1) = 0$ in $\mathbb{Z}_2$. However, we compute:
 \[
 \tilde{f}(0) = 1 \neq 0 \pmod{2}, \quad \tilde{f}(1) = 1 + 1 + 1 = 1 \neq 0 \pmod{2}.
 \]
 Therefore, $\tilde{f}$ has no linear factors in $\mathbb{Z}_2[x]$, so it is irreducible. Thus $f(x) = x^3 + 3x + 7$ is irreducible in $\mathbb{Z}[x]$.
 \end{example}
 
+\begin{definition}[Primitive Polynomial]
+A polynomial $f(x) = a_n x^n + \cdots + a_0 \in \mathbb{Z}[x]$ is called \textbf{primitive} if $\gcd(a_n, \ldots, a_0) = 1$.
+\end{definition}
+
+
 \begin{theorem}[Eisenstein's Criterion]
-Let $f(x) = a_n x^n + \cdots + a_1 x + a_0 \in \mathbb{Z}[x]$ and suppose $p$ is a prime integer such that:
+Let $f(x) = a_n x^n + \cdots + a_1 x + a_0 \in \mathbb{Z}[x]$ be a primitive polynomial. Suppose $p$ is a prime integer such that:
 \begin{enumerate}
     \item[(1)] $p \mid a_i$ for all $0 \le i < n$;
     \item[(2)] $p \nmid a_n$;
     \item[(3)] $p^2 \nmid a_0$.
 \end{enumerate}
-Moreover, suppose $\gcd(a_n, \ldots, a_0) = 1$ (i.e., $f$ is primitive). Then $f(x)$ is irreducible in $\mathbb{Z}[x]$.
+Then $f(x)$ is irreducible in $\mathbb{Z}[x]$.
 \end{theorem}
 
 \begin{proof}
-Suppose $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit.
-
-Consider the reduction map $\tilde{\phi}: \mathbb{Z}[x] \to \mathbb{Z}_p[x]$. By condition (1), we have 
+Suppose $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit. Consider the reduction map $\tilde{\phi}: \mathbb{Z}[x] \to \mathbb{Z}_p[x]$. By condition (1), we have 
 \[
 \tilde{f}(x) = \overline{a_n} x^n
 \]
 where $\overline{a_n} \neq 0$ in $\mathbb{Z}_p$ by condition (2).
 
-From $\tilde{f} = \tilde{g} \cdot \tilde{h}$ and $\tilde{f} \sim x^n$ in $\mathbb{Z}_p[x]$ (up to nonzero scalar multiple), we must have $\tilde{g} \sim x^i$ and $\tilde{h} \sim x^{n-i}$ for some $0 \le i \le n$.
+From $\tilde{f} = \tilde{g} \cdot \tilde{h}$ and $\tilde{f} \sim x^n$ in $\mathbb{Z}_p[x]$ (since $\overline{a_n}$ is a unit in $\mathbb{Z}_p$), we must have 
+\begin{center}
+$\tilde{g} \sim x^i$ and $\tilde{h} \sim x^{n-i}$
+\end{center}
+for some $0 \le i \le n$ by unique factorization of $\mathbb{Z}_p[x]$. Suppose on contrary $0 < i < n$. Then the constant term of $\tilde{g}$ is $0$ in $\mathbb{Z}_p$, which means $p$ divides the constant term of $g$. Similarly, $p$ divides the constant term of $h$. Therefore, $p^2$ divides the constant term of $gh = f$, contradicting condition (3).
 
-Now suppose $0 < i < n$. Then the constant term of $\tilde{g}$ is $0$ in $\mathbb{Z}_p$, which means $p$ divides the constant term of $g$. Similarly, $p$ divides the constant term of $h$. Therefore, $p^2$ divides the constant term of $gh = f$, contradicting condition (3).
-
-Thus either $i = 0$ or $i = n$, which means either $\tilde{g}$ or $\tilde{h}$ is a constant in $\mathbb{Z}_p[x]$.
-
-Since $\deg(g) + \deg(h) = \deg(f) = \deg(\tilde{f}) = \deg(\tilde{g}) + \deg(\tilde{h})$ and $\deg(\tilde{g}) \le \deg(g)$, $\deg(\tilde{h}) \le \deg(h)$, we have $\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
+Thus either $i = 0$ or $i = n$, which means either $\tilde{g}$ or $\tilde{h}$ is a constant in $\mathbb{Z}_p[x]$. Finally, Ssnce 
+$$\deg(g) + \deg(h) = \deg(f) = \deg(\tilde{f}) = \deg(\tilde{g}) + \deg(\tilde{h})$$ 
+and 
+\begin{center}
+$\deg(\tilde{g}) \le \deg(g)$, $\deg(\tilde{h}) \le \deg(h)$, 
+\end{center}
+we have $\deg(\tilde{g}) = \deg(g)$ and $\deg(\tilde{h}) = \deg(h)$.
 
 Therefore, either $\deg(g) = 0$ or $\deg(h) = 0$, so $g$ or $h$ is a constant polynomial. Since $f$ is primitive, this constant must be $\pm 1$, making $g$ or $h$ a unit. Thus $f$ is irreducible.
 \end{proof}
@@ -1361,34 +1407,120 @@ Taking $p = 2$, we verify Eisenstein's criterion:
 Therefore, $f(x)$ is irreducible in $\mathbb{Z}[x]$, and hence $g(x) = x^4 + 1$ is also irreducible in $\mathbb{Z}[x]$.
 \end{example}
 
-\begin{definition}[Primitive Polynomial]
-A polynomial $f(x) = a_n x^n + \cdots + a_0 \in \mathbb{Z}[x]$ is called \textbf{primitive} if $\gcd(a_n, \ldots, a_0) = 1$.
-\end{definition}
-
-\noindent Now we address irreducibility in $\mathbb{Q}[x]$.
+Now we address irreducibility in $\mathbb{Q}[x]$.
 
 \begin{theorem}[Gauss' Lemma]
-A nonconstant polynomial $f \in \mathbb{Z}[x]$ is irreducible in $\mathbb{Z}[x]$ if and only if $f$ is primitive and irreducible in $\mathbb{Q}[x]$.
+Let $f \in \mathbb{Z}[x] (\subseteq \mathbb{Q}[x])$ be a nonconstant polynomial with integer coefficients. Then 
+\begin{center}
+$f(x)$ is irreducible in $\mathbb{Z}[x]$ \quad  $\Longleftrightarrow$ \quad $f(x)$ is primitive, and is irreducible in $\mathbb{Q}[x]$.
+\end{center}
 \end{theorem}
 
 \begin{proof}
-$(\Leftarrow)$ Suppose $f \in \mathbb{Z}[x]$ is primitive, irreducible in $\mathbb{Q}[x]$, and $f = gh$ for some $g, h \in \mathbb{Z}[x]$. We must show that $g$ or $h$ is a unit in $\mathbb{Z}[x]$.
+$(\Leftarrow)$ Assume $f \in \mathbb{Z}[x]$ is primitive, irreducible in $\mathbb{Q}[x]$. Suppose 
+$$f = gh, \quad \quad g, h \in \mathbb{Z}[x]$$ 
+We must show that $g$ or $h$ is a unit in $\mathbb{Z}[x]$.
 
-Since $g, h \in \mathbb{Z}[x] \subseteq \mathbb{Q}[x]$ and $f$ is irreducible in $\mathbb{Q}[x]$, either $g$ or $h$ must be a unit in $\mathbb{Q}[x]$, i.e., a nonzero constant. Say $g = c \in \mathbb{Q}$.
-
-Since $g \in \mathbb{Z}[x]$, we have $c \in \mathbb{Z}$. Moreover, since $f$ is primitive, $\gcd(\text{coefficients of } f) = 1$. If $c \neq \pm 1$, then $c$ divides all coefficients of $f = gh = c \cdot h$, contradicting primitivity of $f$. Therefore, $c = \pm 1$, so $g$ is a unit in $\mathbb{Z}[x]$.
+Since $g, h \in \mathbb{Z}[x] \subseteq \mathbb{Q}[x]$ and $f$ is irreducible in $\mathbb{Q}[x]$, either $g$ or $h$ must be a unit in $\mathbb{Q}[x]$, i.e., a nonzero constant. Say $g = c \in \mathbb{Q}$. But $g \in \mathbb{Z}[x]$, we have $c \in \mathbb{Z}$. Moreover, since $f$ is primitive, $\gcd(\text{coefficients of } f) = 1$. If $c \neq \pm 1$, then $c$ divides all coefficients of $f = gh = c \cdot h$, contradicting primitivity of $f$. Therefore, $c = \pm 1$, so $g$ is a unit in $\mathbb{Z}[x]$.
 
 $(\Rightarrow)$ Suppose $f$ is irreducible in $\mathbb{Z}[x]$.
+Then $f$ must be primitive, otherwise it has a nonunit constant factor $d := \gcd(\text{coefficients of } f)$. We can write 
+$$f = d \cdot f'$$ 
+where $f' \in \mathbb{Z}[x]$ and $\deg(f') = \deg(f) > 0$. Since neither $d$ nor $f'$ is a unit in $\mathbb{Z}[x]$, this contradicts irreducibility of $f$. Thus $f$ is primitive.
 
-First, we show $f$ is primitive. If not, then $\gcd(\text{coefficients of } f) = d \ge 2$. We can write $f = d \cdot f'$ where $f' \in \mathbb{Z}[x]$ and $\deg(f') = \deg(f) > 0$. Since neither $d$ nor $f'$ is a unit in $\mathbb{Z}[x]$, this contradicts irreducibility of $f$. Thus $f$ is primitive.
+Next, we show $f$ is irreducible in $\mathbb{Q}[x]$. Suppose 
+$$f = gh \quad \quad g, h \in \mathbb{Q}[x].$$ 
+We must show that $g$ or $h$ is a unit in $\mathbb{Q}[x]$.
+Let \(\lambda \in \mathbb{N}\) be the smallest positive integer such that there exists \( \alpha \in \mathbb{Q}\setminus\{0\} \) with
+\[
+h' := \alpha h \in \mathbb{Z}[x]
+\qquad \text{and} \qquad
+g' := \lambda \alpha^{-1} g \in \mathbb{Z}[x].
+\]
+Then \(
+g'h' = (\lambda \alpha^{-1} g)(\alpha h)=\lambda gh=\lambda f.
+\) in $\mathbb{Z}[x]$.
 
-Next, we show $f$ is irreducible in $\mathbb{Q}[x]$. Suppose $f = gh$ for some $g, h \in \mathbb{Q}[x]$. We must show that $g$ or $h$ is a unit in $\mathbb{Q}[x]$.
+\noindent \textbf{Claim:} \(\lambda = 1\).
 
-Let $\lambda, \mu \in \mathbb{N}$ be the smallest positive integers such that $\lambda g$ and $\mu h$ have integer coefficients. Define $g' := \lambda g \in \mathbb{Z}[x]$ and $h' := \mu h \in \mathbb{Z}[x]$. Then 
+\noindent \textit{Proof of claim:} Suppose for contradiction that \(\lambda > 1\). Then there exists a prime \(p\) such that \(p \mid \lambda\). Since
+\[
+\lambda f = g'h',
+\]
+all coefficients of \(g'h'\) are divisible by \(p\). Hence, reducing modulo \(p\), we get
+\[
+\widetilde{g'}\widetilde{h'} = 0
+\quad \text{in }\ \mathbb{Z}_p[x].
+\]
+Since \(\mathbb{Z}_p[x]\) is an integral domain, it follows that
+\(
+\widetilde{g'}=0\) or \(\widetilde{h'}=0.\)
+Equivalently,
+\[
+p \mid g' \qquad \text{or} \qquad p \mid h'
+\qquad \text{in } \mathbb{Z}[x].
+\]
+If \(p \mid g'\), then
+\[
+\frac{1}{p}g'=\frac{\lambda}{p}\alpha^{-1}g \in \mathbb{Z}[x].
+\]
+Together with \(\alpha h \in \mathbb{Z}[x]\), this contradicts the minimality of \(\lambda\).
+
+If \(p \mid h'\), then
+\[
+\frac{1}{p}h'=\frac{\alpha}{p}h \in \mathbb{Z}[x].
+\]
+Also,
+\[
+\frac{\lambda}{p}\left(\frac{\alpha}{p}\right)^{-1}g
+=
+\frac{\lambda}{p}\cdot \frac{p}{\alpha}g
+=
+\lambda \alpha^{-1}g
+\in \mathbb{Z}[x].
+\]
+Thus, with \(\alpha' := \alpha/p\), we have
+\[
+\alpha' h \in \mathbb{Z}[x]
+\qquad \text{and} \qquad
+\frac{\lambda}{p}(\alpha')^{-1}g \in \mathbb{Z}[x],
+\]
+again contradicting the minimality of \(\lambda\).
+
+Therefore no prime divides \(\lambda\), so \(\lambda=1\). This proves the claim.
+
+\medskip
+
+Hence there exists \(\alpha \in \mathbb{Q}\setminus\{0\}\) such that
+\[
+\alpha^{-1}g \in \mathbb{Z}[x]
+\qquad \text{and} \qquad
+\alpha h \in \mathbb{Z}[x].
+\]
+Thus
+\[
+f = (\alpha^{-1}g)(\alpha h)
+\]
+is a factorization of \(f\) in \(\mathbb{Z}[x]\). Since \(f\) is irreducible in \(\mathbb{Z}[x]\), either \(\alpha^{-1}g\) or \(\alpha h\) is a unit in \(\mathbb{Z}[x]\). Hence either \(\alpha^{-1}g=\pm 1\) or \(\alpha h=\pm 1\). In the first case,
+\(
+g=\pm \alpha \in \mathbb{Q} \backslash \{0\},
+\)
+so \(g\) is a unit in \(\mathbb{Q}[x]\). In the second case,
+\(
+h=\pm \alpha^{-1}  \in \mathbb{Q} \backslash \{0\},
+\) so \(h\) is a unit in \(\mathbb{Q}[x]\). Therefore \(f\) is irreducible in \(\mathbb{Q}[x]\).
+\end{proof}
+
+{\color{blue} We present a flawed proof here - it will be a good exercise to (a) find a counterexample of the proof below; and (b) which part of the proof goes wrong:
+
+Next, we show $f$ is irreducible in $\mathbb{Q}[x]$. Suppose 
+$$f = gh \quad \quad g, h \in \mathbb{Q}[x].$$ 
+We must show that $g$ or $h$ is a unit in $\mathbb{Q}[x]$.
+To do so, let $\lambda, \mu \in \mathbb{N}$ be the smallest positive integers such that $g' := \lambda g \in \mathbb{Z}[x]$ and $h' := \mu h \in \mathbb{Z}[x]$ have integer coefficients. Then 
 \[
 f = gh = \frac{g'}{\lambda} \cdot \frac{h'}{\mu},
 \]
-so $\lambda \mu f = g' h'$.
+so that $\lambda \mu f = g' h'$ in $\mathbb{Z}[x]$.
 
 \noindent \textbf{Claim:} $\lambda = 1$.
 
@@ -1396,20 +1528,16 @@ so $\lambda \mu f = g' h'$.
 
 Consider the reduction map $\tilde{\phi}: \mathbb{Z}[x] \to \mathbb{Z}_p[x]$. We have $\tilde{g'} \cdot \tilde{h'} \equiv 0$ in $\mathbb{Z}_p[x]$. Since $\mathbb{Z}_p[x]$ is an integral domain, either $\tilde{g'} \equiv 0$ or $\tilde{h'} \equiv 0$ in $\mathbb{Z}_p[x]$. This means either $p \mid g'$ or $p \mid h'$.
 
-If $p \mid g'$, then all coefficients of $g' = \lambda g$ are divisible by $p$. But then $(\lambda/p) g$ has integer coefficients and is a scalar multiple of $g$, contradicting the minimality of $\lambda$.
+If $p \mid g'$, then all coefficients of $g' = \lambda g$ are divisible by $p$. But then $(\lambda/p) g$ has integer coefficients and is a scalar multiple of $g$, contradicting the minimality of $\lambda$. Similarly, if $p \mid h'$, then $(\mu/p) h$ has integer coefficients, contradicting the minimality of $\mu$.
 
-Similarly, if $p \mid h'$, then $(\mu/p) h$ has integer coefficients, contradicting the minimality of $\mu$.
-
-Therefore, $\lambda = 1$, and $g' = g \in \mathbb{Z}[x]$ and $h' = \mu h \in \mathbb{Z}[x]$.
-
-By the same argument applied to $\mu$, we also have $\mu = 1$, so $h \in \mathbb{Z}[x]$.
+Therefore, $\lambda = 1$, and $g' = g \in \mathbb{Z}[x]$ and $h' = \mu h \in \mathbb{Z}[x]$. By the same argument applied to $\mu$, we also have $\mu = 1$, so $h \in \mathbb{Z}[x]$.
 
 Now $f = gh$ with $g, h \in \mathbb{Z}[x]$. Since $f$ is irreducible in $\mathbb{Z}[x]$, either $g$ or $h$ is a unit in $\mathbb{Z}[x]$, which means either $g$ or $h$ is $\pm 1 \in \mathbb{Q}[x]$. Thus $f$ is irreducible in $\mathbb{Q}[x]$.
-\end{proof}
+}
 
-\begin{theorem}
-$\mathbb{Z}[x]$ is a unique factorization domain, though not a principal ideal domain (by homework).
-\end{theorem}
+\begin{corollary}
+$\mathbb{Z}[x]$ is a Unique Factorization Domain (but not a Principal Ideal Domain).
+\end{corollary}
 
 \begin{proof}
 First, we show that every primitive polynomial $f \in \mathbb{Z}[x]$ with $\deg(f) \ge 1$ can be factored into primitive irreducible polynomials. We proceed by induction on $\deg(f)$.
@@ -1419,21 +1547,23 @@ First, we show that every primitive polynomial $f \in \mathbb{Z}[x]$ with $\deg(
 \noindent \textit{Inductive step:} Assume the claim holds for all primitive polynomials of degree less than $k$. Let $f$ be primitive with $\deg(f) = k > 1$. Either:
 \begin{itemize}
     \item $f$ is irreducible; or
-    \item $f = h_1 h_2$ for some $h_1, h_2 \in \mathbb{Z}[x]$ with $1 \le \deg(h_i) < k$.
+    \item $f = h_1 h_2$ for some $h_1, h_2 \in \mathbb{Z}[x]$ with $0 < \deg(h_i) < k$.
 \end{itemize}
 In the second case, since $f$ is primitive, $h_1$ and $h_2$ must also be primitive (otherwise their gcd would divide $f$'s coefficients, contradicting primitivity). By induction, both $h_1$ and $h_2$ factor into primitive irreducibles, so $f$ does as well.
 
-Now, to show factorization is unique, suppose $f = g_1 \cdots g_n = h_1 \cdots h_m$ where $g_i, h_j \in \mathbb{Z}[x]$ are primitive and irreducible. 
+Now, to show factorization is unique, suppose 
+$$f = g_1 \cdots g_n = h_1 \cdots h_m$$ 
+where $g_i, h_j \in \mathbb{Z}[x]$ are primitive and irreducible. 
 
-By Gauss' Lemma, $g_i$ and $h_j$ are also irreducible in $\mathbb{Q}[x]$. Since $\mathbb{Q}[x]$ is a principal ideal domain (hence a UFD), we have $n = m$ and there exists a permutation $\sigma \in S_n$ such that $g_i$ and $h_{\sigma(i)}$ are associates in $\mathbb{Q}[x]$. That is, $g_i = c_i h_{\sigma(i)}$ for some nonzero $c_i \in \mathbb{Q}$.
+By Gauss' Lemma, $g_i$ and $h_j$ are also irreducible in $\mathbb{Q}[x]$. Since $\mathbb{Q}[x]$ is a principal ideal domain (hence a UFD), we have $n = m$ and there exists a permutation $\sigma \in S_n$ such that $g_i$ and $h_{\sigma(i)}$ are associates in $\mathbb{Q}[x]$. That is, $g_i = c_i h_{\sigma(i)}$ for some $c_i \in \mathbb{Q} \backslash \{0\}$.
 
-Since $g_i, h_{\sigma(i)} \in \mathbb{Z}[x]$ and both are primitive, we must have $c_i \in \{\pm 1\}$ (a rational number that makes integer polynomials remain primitive). Therefore, $g_i \sim h_{\sigma(i)}$ in $\mathbb{Z}[x]$.
+Since $g_i, h_{\sigma(i)} \in \mathbb{Z}[x]$ and both are primitive, we must have $c_i \in \{\pm 1\}$. Therefore, $g_i \sim h_{\sigma(i)}$ in $\mathbb{Z}[x]$. Thus factorization into primitive irreducibles is unique up to order and associates.
 
-Thus factorization into primitive irreducibles is unique up to order and associates.
-
-For a general polynomial $f \in \mathbb{Z}[x]$, write $f = d \cdot f'$ where $d \in \mathbb{Z}$ and $f'$ is primitive. Factor $d$ uniquely in $\mathbb{Z}$ and factor $f'$ uniquely into primitive irreducibles in $\mathbb{Z}[x]$. The factorization of $f$ is therefore unique, making $\mathbb{Z}[x]$ a UFD.
+For a general polynomial $f \in \mathbb{Z}[x]$, one can pull out the greatest common factor $d \in \mathbb{Z}$ of the coefficients of $f$, and write 
+$f = d \cdot f'$
+where $d \in \mathbb{Z}$ and $f'$ is primitive. One can factor $d$ uniquely in $\mathbb{Z}$, and factor $f'$ uniquely into primitive irreducibles in $\mathbb{Z}[x]$. The factorization of $f$ is therefore unique, making $\mathbb{Z}[x]$ a UFD.
 \end{proof}
 
 \begin{remark}
-More generally, if $R$ is a unique factorization domain, then $R[x]$ is also a unique factorization domain. The proof uses the field of fractions $F = \text{Frac}(R)$ and the fact that $F[x]$ is a principal ideal domain (hence a UFD).
+More generally, if $R$ is a unique factorization domain, then $R[x]$ is also a unique factorization domain. The proof uses the field of fractions $F = \text{Frac}(R)$ and the fact that $\mathbb{F}[x]$ is a principal ideal domain (hence a UFD).
 \end{remark}
