@@ -1,69 +1,76 @@
 \chapter{Fields}
 
-\textbf{Recall:} $\mathbb{F}$ is a field if $\mathbb{F}$ is an integral domain (unital) and for all $x \in \mathbb{F} \setminus \{0\}$, there exists a multiplicative inverse $x^{-1} \in \mathbb{F} \setminus \{0\}$.
-
-In general, there are 3 kinds of fields:
+\textbf{Recall:} $\mathbb{F}$ is a field if $\mathbb{F}$ is an integral domain, and for all $x \in \mathbb{F} \setminus \{0\}$, there exists a multiplicative inverse $x^{-1} \in \mathbb{F} \setminus \{0\}$. In general, there are 3 kinds of fields:
 \begin{enumerate}
-    \item \textbf{Number field} (a subfield of $\mathbb{C}$) \\ (e.g., $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{Q}(i)$, \dots)
-    \item \textbf{Finite field} (a field $\mathbb{F}$ with $|\mathbb{F}| < \infty$) \\ (e.g., $\mathbb{Z}_p = \mathbb{F}_p$ for $p$ prime. $\mathbb{F}_2[x]/\langle x^3+x+1 \rangle$ has $8=2^3$ elements.)
-    \item \textbf{Function fields} \\ (e.g., $\mathbb{C}(x) = \text{Frac}(\mathbb{C}[x]) = \{ f(x)/g(x) \mid f(x), g(x) \in \mathbb{C}[x], g(x) \neq 0 \}$)
+    \item \textbf{Number field} (a field `in between' $\mathbb{Q}$ and $\mathbb{C}$) -- for example, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{Q}(i)$, $\dots$
+    \item \textbf{Finite field} (a field $\mathbb{F}$ with $|\mathbb{F}| < \infty$) -- for example, $\mathbb{Z}_p = \mathbb{F}_p$ for $p$ prime. $\mathbb{F}_2[x]/\langle x^3+x+1 \rangle$ has $8=2^3$ elements.
+    \item \textbf{Function fields} -- for example, 
+    $$\mathbb{C}(x) = \text{Frac}(\mathbb{C}[x]) = \{ f(x)/g(x) \mid f(x), g(x) \in \mathbb{C}[x], g(x) \neq 0 \}$$
 \end{enumerate}
-We'll only focus on (1) or (2).
+We will only focus on (1) or (2).
 
 \section{Field Extension and Degree}
 
-\textbf{Motivation:} Given a field $\mathbb{F}$, construct a "bigger" field $\mathbb{K}$ that "contains" $\mathbb{F}$.
+\textbf{Motivation:} Given a field $\mathbb{F}$, construct a ``bigger'' field $\mathbb{K}$ that "contains" $\mathbb{F}$. For example, by the discussions at the polynomial ring section, let $\mathbb{F} = \mathbb{F}_2$ and $\mathbb{K} = \mathbb{F}_2[x]/\langle x^3+x+1 \rangle$.
 
-For example, let $\mathbb{F} = \mathbb{F}_2$ and $\mathbb{K} = \mathbb{F}_2[x]/\langle x^3+x+1 \rangle$.
-Then we have an injective unital ring (or field) homomorphism $i: \mathbb{F} \to \mathbb{K}$ where $i(0) = 0 + \langle x^3+x+1 \rangle$ and $i(1) = 1 + \langle x^3+x+1 \rangle$. So we say $\mathbb{K}$ "contains" $\mathbb{F}$.
+Since $x^3+x+1$ is irreducible in $\mathbb{F}_2[x]$, we have an injective unital ring (or field) homomorphism $i: \mathbb{F} \to \mathbb{K}$ where $i(0) = 0 + \langle x^3+x+1 \rangle$ and $i(1) = 1 + \langle x^3+x+1 \rangle$. 
 
 \begin{definition}
-Let $\mathbb{F}$ and $\mathbb{K}$ be fields. We say $\mathbb{F}$ is a \textbf{subfield} of $\mathbb{K}$ or $\mathbb{K}$ is a \textbf{field extension} of $\mathbb{F}$ if there is an injective unital field homomorphism $i: \mathbb{F} \to \mathbb{K}$.
+Let $\mathbb{F}$ and $\mathbb{K}$ be fields. We say $\mathbb{K}$ is a \textbf{field extension} of $\mathbb{F}$ if there is an injective unital field homomorphism $i: \mathbb{F} \hookrightarrow  \mathbb{K}$.
 \end{definition}
 
-In this case, $\mathbb{K}$ is a vector space over $\mathbb{F}$. There is a scalar multiplication map $\cdot: \mathbb{F} \times \mathbb{K} \to \mathbb{K}$ defined by $\alpha \cdot x = i(\alpha)x$ for $\alpha \in \mathbb{F}, x \in \mathbb{K}$, that satisfies:
-\begin{itemize}
-    \item $0 \cdot x = 0$
-    \item $1 \cdot x = x$
-    \item $\alpha \cdot (x+y) = (\alpha \cdot x) + (\alpha \cdot y)$
-    \item \dots
-\end{itemize}
+In this case, $\mathbb{K}$ is a vector space over $\mathbb{F}$. More explicitly, there is a scalar multiplication map and vector addition $$\cdot: \mathbb{F} \times \mathbb{K} \to \mathbb{K} 
+\quad \quad +: \mathbb{K} \times \mathbb{K} \to \mathbb{K}$$
+defined by $\alpha \cdot x = i(\alpha)x$ for $\alpha \in \mathbb{F}, x \in \mathbb{K}$, and $+$ is the usual addition in $\mathbb{K}$. 
 
-The \textbf{degree} of extension is defined as:
-\[ [\mathbb{K}:\mathbb{F}] := \dim_{\mathbb{F}}(\mathbb{K}) \quad (\text{as a vector space over } \mathbb{F}) \]
+From now on, we write
+\begin{center}
+    $\mathbb{F} \subseteq \mathbb{K}$ (by abuse of notations) or $\mathbb{K} : \mathbb{F}$
+\end{center}
+for field extensions.
+
+\begin{definition}
+Let $\mathbb{K} : \mathbb{F}$ be a field extension. Its \textbf{degree} of extension is defined as:
+\[ [\mathbb{K}:\mathbb{F}] := \dim_{\mathbb{F}}(\mathbb{K})\]    
+as a vector space over $\mathbb{F}$.
+\end{definition}
+
 
 \begin{example}
 \begin{enumerate}
-    \item $\mathbb{F}=\mathbb{R}$, $\mathbb{K}=\mathbb{C}$, with the inclusion $i: \mathbb{R} \hookrightarrow \mathbb{C}$. \\
-    Then $[\mathbb{C}:\mathbb{R}] = 2$, since $\mathbb{C} = \{a+bi \mid a,b \in \mathbb{R}\} = \text{span}_{\mathbb{R}}\{1, i\}$. \\
+    \item $\mathbb{F}=\mathbb{R}$, $\mathbb{K}=\mathbb{C}$, with the inclusion $i: \mathbb{R} \hookrightarrow \mathbb{C}$. Then $[\mathbb{C}:\mathbb{R}] = 2$, since $$\mathbb{C} = \{a+bi \mid a,b \in \mathbb{R}\} = \text{Span}_{\mathbb{R}}\{1, i\}.$$
     Thus, $\dim_{\mathbb{R}}(\mathbb{C}) = 2$ (since $\{1,i\}$ is linearly independent over $\mathbb{R}$).
 
     \item $\mathbb{F}=\mathbb{Q}$, $\mathbb{K}=\mathbb{R}$, with the inclusion $i: \mathbb{Q} \hookrightarrow \mathbb{R}$. \\
-    To find $[\mathbb{R}:\mathbb{Q}]$, consider that $\mathbb{R} = \text{span}_{\mathbb{Q}}\{1, \sqrt{2}, \sqrt{3}, e, \pi, \dots\}$. \\
+    To find $[\mathbb{R}:\mathbb{Q}]$, consider that $\mathbb{R} = \text{Span}_{\mathbb{Q}}\{1, \sqrt{2}, \sqrt{3}, e, \pi, \dots\}$. \\
     The set of transcendental numbers like $e, \pi$ is infinite and they are linearly independent over $\mathbb{Q}$.
     Thus, $[\mathbb{R}:\mathbb{Q}] = \infty$.
 \end{enumerate}
 \end{example}
 
-\section{Splitting Extension}
-In field theory, we want to understand roots of polynomials $p(x) \in \mathbb{F}[x]$. More precisely, we would like to
-construct $\mathbb{E}:\mathbb{F}$ such that $\mathbb{E}$ contains some (or all) roots of $\mathbb{F}[x]$.
-The first step is the following:
-\begin{theorem}[Kronecker]
+Here is an important example of field extension:
+\begin{theorem}[Kronecker] \label{thm:kronecker}
 Let $\mathbb{F}$ be a field, and $p(x) \in \mathbb{F}[x]$ be an irreducible polynomial of degree $m$.
-Then $\mathbb{K} = \mathbb{F}[x]/\langle p(x) \rangle$ is a field extension of $\mathbb{F}$ such that $[\mathbb{K}:\mathbb{F}]=m$.
+Then $\mathbb{K} = \mathbb{F}[x]/\langle p(x) \rangle$ is a field extension of $\mathbb{F}$ such that 
+$$[\mathbb{K}:\mathbb{F}]=m.$$
 Moreover, there exists an element $\alpha \in \mathbb{K}$ such that:
 \begin{itemize}
-    \item $\mathbb{K} = \mathbb{F}[\alpha] := \{a_{n}\alpha^n + \dots + a_1\alpha + a_0 \mid a_i \in \mathbb{F}, n \in \mathbb{N} \}$.
+    \item $\mathbb{K} = \mathrm{Span}_{\mathbb{F}}\{1, \alpha, \dots, \alpha^{m-1}\}$, i.e. $\{1, \alpha, \dots, \alpha^{m-1}\}$ is a basis of $\mathbb{K}$ as a $\mathbb{F}$-vector space; and
     \item $p(\alpha) = 0$ in $\mathbb{K}$.
 \end{itemize}
 \end{theorem}
 
 \begin{proof}
-Since $p(x) = b_mx^m + \dots + b_1 x + b_0 \in \mathbb{F}[x]$ is irreducible, the ideal $\langle p(x) \rangle$ is a maximal ideal in $\mathbb{F}[x]$.
-This implies that $\mathbb{K} = \mathbb{F}[x]/\langle p(x) \rangle$ is a field.
+Let $p(x) = b_mx^m + \dots + b_1 x + b_0 \in \mathbb{F}[x]$. Then the ideal $\langle p(x) \rangle$ is a maximal in $\mathbb{F}[x]$.
+This implies that $\mathbb{K} = \mathbb{F}[x]/\langle p(x) \rangle$ is a field, and
+$$i: \mathbb{F} \hookrightarrow \mathbb{K}, \quad \quad i(a) := a + \langle p(x) \rangle.$$
+is a field extension.
 
-Let's study the dimension, $\dim_{\mathbb{F}}(K)$. Consider the element $\alpha := x + \langle p(x) \rangle \in \mathbb{K}$. Then in $\mathbb{K}$,
+Now we study the dimension $\dim_{\mathbb{F}}(\mathbb{K})$. Consider the element $\alpha := x + \langle p(x) \rangle \in \mathbb{K}$. Then for 
+\begin{center}
+$p(x) = b_m x^m + \dots  + b_0 \in \mathbb{K}[x]$\quad (more precisely, $p(x) = i(b_m) x^m + \dots + i(b_0) \in \mathbb{K}[x]$),
+\end{center}
+one has
 \begin{align*}
 p(\alpha) &= b_m \alpha^m + \dots + b_1 \alpha + b_0 \\
 &= b_m(x+\langle p(x) \rangle)^m + \dots + b_1(x+\langle p(x) \rangle) + b_0(1+\langle p(x) \rangle) \\
@@ -91,15 +98,15 @@ But this is a contradiction, because $\deg(g(x)) \le m-1$ while $\deg(p(x)) = m$
 The set is linearly independent.
 
 Since $\{1, \alpha, \dots, \alpha^{m-1}\}$ is a basis for $\mathbb{K}$ over $\mathbb{F}$, the dimension is $m$.
-Therefore, $[K:\mathbb{F}] = m$.
+Therefore, $[\mathbb{K}:\mathbb{F}] = m$.
 \end{proof}
 
 \begin{example}
-Let $\mathbb{F}=\mathbb{Q}$, $p(x)=x^3-2 \in \mathbb{Q}[x]$ (irreducible by Eisenstein's criterion).
-Then $[K:\mathbb{Q}]=3$ for $\mathbb{K}=\mathbb{Q}[x]/\langle x^3-2 \rangle$.
-Let $\alpha = x + \langle x^3-2 \rangle$. Then $\mathbb{K} = \text{Span}_{\mathbb{Q}}\{1, \alpha, \alpha^2\} = \{a_2\alpha^2+a_1\alpha+a_0 \mid a_i \in \mathbb{Q}\}$.
-We know $\alpha^3-2=0$, so $\alpha^3=2$.
-$\mathbb{K}$ is a field that contains $\mathbb{Q}$ and a cube root of 2. We also know how to do arithmetic in $\mathbb{K}$, for instance:
+Let $\mathbb{F}=\mathbb{Q}$, $p(x)=x^3-2 \in \mathbb{Q}[x]$ (irreducible by Eisenstein's criterion and Gauss' Lemma).
+Then $[\mathbb{K}:\mathbb{Q}]=3$ for $\mathbb{K}=\mathbb{Q}[x]/\langle x^3-2 \rangle$.
+Let $\alpha = x + \langle x^3-2 \rangle$. Then $$\mathbb{K} = \text{Span}_{\mathbb{Q}}\{1, \alpha, \alpha^2\} = \{a_2\alpha^2+a_1\alpha+a_0 \mid a_i \in \mathbb{Q}\}.$$
+We know $\alpha^3-2=0$, so $\alpha^3=2$, i.e.
+$\mathbb{K}$ is a field that `contains' $\mathbb{Q}$ and a cube root of 2. We also know how to do arithmetic in $\mathbb{K}$, for instance:
 \begin{align*}
 (2\alpha^2+\tfrac{3}{4}) \cdot (\alpha-6) &= 2\alpha^3 - 12\alpha^2 + \tfrac{3}{4}\alpha - \tfrac{18}{4} \\
 &= 2(2) - 12\alpha^2 + \tfrac{3}{4}\alpha - \tfrac{9}{2} \\
@@ -109,14 +116,23 @@ $\mathbb{K}$ is a field that contains $\mathbb{Q}$ and a cube root of 2. We also
 \textbf{Exercise:} What is $\alpha^{-1} \in \mathbb{K}$?
 \end{example}
 
-In the above example, under the extension $\mathbb{K}:\mathbb{Q}$, one can treat the polynomial $p(x) = x^3 - 2 \in \mathbb{Q}[x] \subseteq \mathbb{K}[x]$ under the extended field. By Kronecker's theorem, $p(x) \in \mathbb{K}[x]$ has a root:
-$$p(x) = (x-\alpha)(x^2 + \alpha x + \alpha^2) \in \mathbb{K}[x]$$ 
-However, $\mathbb{K}$ does not contain all the roots of $p(x)$.
+In the above example, By taking $\mathbb{K} = \mathbb{Q}[x]/\langle x^3-2\rangle : \mathbb{Q}$, Kronecker's theorem implies that $x^3 -2$ has a root $\alpha \in \mathbb{K}$. So Factor Theorem implies:
+$$x^3 -2 = (x-\alpha)(x^2 + \alpha x + \alpha^2) \in \mathbb{K}[x]$$ 
+However, $\mathbb{K}$ does not contain all the roots of $p(x)$. So we have to construct a larger field $\mathbb{E} : \mathbb{K}$. To do so, consider $\mathbb{E} = \mathbb{K}[x]/\langle x^2+\alpha x+\alpha^2 \rangle : \mathbb{K}$. Then $\mathbb{E}$ must contain a root $\beta$ of the polynomial $x^2+\alpha x+\alpha^2 \in \mathbb{K}[x] \subseteq \mathbb{E}[x]$, i.e.
+$$(x-\beta) \mid x^2+\alpha x+\alpha^2 \quad \Longrightarrow \quad x^2+\alpha x+\alpha^2 = (x-\beta)(x-\gamma) \in \mathbb{E}[x].$$
+Therefore,
+$$x^3-2 = (x-\alpha)(x-\beta)(x-\gamma) \in \mathbb{E}[x],$$
+i.e. $\alpha, \beta, \gamma \in \mathbb{E}$ contains all the roots of $x^3 - 2$.
 
 \begin{definition}
-Let $\mathbb{F}$ be a field, and $p(x) \in \mathbb{F}[x]$. We say a field extension $\mathbb{E}:\mathbb{F}$ splits $p(x)$ if
-$p(x) = a(x-a_1)\cdots(x-a_n).$
+Let $\mathbb{F}$ be a field, and $p(x) \in \mathbb{F}[x]$. We say a field extension $\mathbb{E}:\mathbb{F}$ {\bf splits} $p(x)$ if it can be factorized linearly in $\mathbb{E}[x]$:
+$$p(x) = a(x-a_1)\cdots(x-a_n)\ \ \mathrm{in}\ \ \mathbb{E}[x].$$
+In other words, $\mathbb{E}$ contains all the roots of $p(x)$.
 \end{definition}
+
+In the above example above, $\mathbb{K}: \mathbb{Q}$ does not split $x^3-2$, while $\mathbb{E} : \mathbb{Q}$ splits $x^3 -2$. Also, all polynomials $f(x) \in \mathbb{R}[x]$ splits in $\mathbb{C}$. This is the celebrated Fundamental Theorem of Algebra!
+
+
 
 \begin{proposition}
 For any field $\mathbb{F}$ and any polynomial $p(x) \in \mathbb{F}[x]$, there exists a field extension $\mathbb{E}:\mathbb{F}$ such that $\mathbb{E}$ splits $p(x)$.
@@ -128,48 +144,14 @@ So $p(x) = (x-a) g(x)$ in $\mathbb{K}[x]$, where $\deg(g(x)) = k-1$.
 By the induction hypothesis, there exists an extension $\mathbb{E}:\mathbb{K}$ such that $g(x)$ splits in $\mathbb{E}[x]$, say $g(x) = c(x-a_2)...(x-a_k)$. So we have $p(x) = c(x-a)(x-a_2)...(x-a_k)$ in $\mathbb{E}[x]$, and we are done.
 \end{proof}
 
-Now we know for any $p(x) \in \mathbb{F}[x]$, there is a field extension $\mathbb{E}:\mathbb{F}$ such that $\mathbb{E}$ contains all the roots of $p(x)$. We want to find `the smallest' extension that contains all the roots of $p(x)$.
-
-\begin{definition}
-Let $\mathbb{E}:\mathbb{F}$ be a field extension, and $e_1, \dots, e_n \in E$. Write $\mathbb{F}(e_1, \dots, e_n)$ for the smallest field extension of $\mathbb{F}$ containing $e_1, \dots, e_n$. In other words,
-\[ \mathbb{F}(e_1, \dots, e_n) := \bigcap_{K \le E, \ e_1, \dots, e_n \in \mathbb{K}} K \]
-\end{definition}
-
-\begin{proposition}
-$\mathbb{F}(e_1, e_2, \dots, e_n) = (\mathbb{F}(e_1))(e_2, \dots, e_n) = \dots = ((\mathbb{F}(e_1)(e_2))\dots(e_{n-1}))(e_n)$.
-\end{proposition}
-\begin{proof}
-Easy.
-\end{proof}
-
-\begin{definition}
-Suppose $\mathbb{E}:\mathbb{F}$ is a field extension such that $\mathbb{E}$ splits a polynomial $p(x) \in \mathbb{F}[x] \subseteq \mathbb{E}[x]$ with roots $a_1, \dots, a_n \in \mathbb{E}$. Then a \textbf{splitting field} of $p(x)$ over $\mathbb{F}$ is the smallest subfield $\mathbb{F}(a_1, \dots, a_n)$ of $\mathbb{E}$ containing all the roots $a_i$ of $p(x)$ in $\mathbb{E}$.
-\end{definition}
-
-\begin{example}
-\
-\begin{enumerate}
-    \item Let $p(x) = x^2 + 3x + 3 \in \mathbb{Q}[x]$. Then for $\mathbb{E} = \mathbb{Q}[x]/\langle p(x) \rangle$, the polynomial $p(x)$ splits automatically into $(x-a)(x-b)$. So $\mathbb{Q}(a,b) = \mathbb{Q}[x]/\langle p(x) \rangle$ is a splitting field.
-
-    On the other hand, $p(x)$ splits in $\mathbb{C}$ and the roots are $-3/2 \pm i\sqrt{3}/2$. So $\mathbb{Q}(i\sqrt{3})$ is also a splitting field of $p(x)$.
-
-    \item Let $p(x) = x^3 - 2 \in \mathbb{Q}[x]$. Then $\mathbb{F} = \mathbb{Q}[x]/\langle x^3-2 \rangle$ has a root $\alpha \in \mathbb{E}$. We can form $\mathbb{E} = \mathbb{F}[x]/\langle x^2+\alpha x+\alpha^2 \rangle$. The field $\mathbb{E}$ is a splitting field, which we can write as $\mathbb{Q}(a,b,c)$ where $a,b,c$ are the roots.
-
-    On the other hand, working in $\mathbb{C}$, the roots are $2^{1/3}, 2^{1/3}\omega, 2^{1/3}\omega^2$ (where $\omega = e^{i2\pi/3}$). Then $\mathbb{Q}(2^{1/3}, 2^{1/3}\omega, 2^{1/3}\omega^2) = \mathbb{Q}(2^{1/3}, \omega)$ is also a splitting field of $p(x)$.
-\end{enumerate}
-\end{example}
-
-\begin{theorem} (will prove in MAT5210)
-All splitting fields of the same polynomial are isomorphic.
-\end{theorem}
-
 \section{Simple Extension}
-In the previous section, we begin with a irreducible polynomial $p(x) \in \mathbb{F}[x]$,  and extend to $\mathbb{E}$ so that $\mathbb{E}$ contains some (or all) roots of $p(x)$.
-In this section, we change our perspective a little bit – we begin with a field extension $\mathbb{E}:\mathbb{F}$, and see which elements
-in $\mathbb{E}$ are roots of a polynomial $p(x) \in \mathbb{F}[x]$. Such $\mathbb{E}:\mathbb{F}$ always exists by the virtue of the previous section.
+In the previous section, we begin with a irreducible polynomial $p(x) \in \mathbb{F}[x]$,  and {\bf construct} a field extension $\mathbb{E}$ so that it contains some (or all) roots of $p(x)$.
+
+In this section, we change our perspective a little bit – we {\bf fix} a field extension $\mathbb{L}:\mathbb{F}$, and see which elements
+in $\mathbb{L}$ are roots of a polynomial $p(x) \in \mathbb{F}[x]$.
 
 \begin{definition}
-Let $\mathbb{F}$ be a field and $\mathbb{L}$ be a field extension of $\mathbb{F}$ (e.g., $\mathbb{F}=\mathbb{Q} \subseteq \mathbb{L}=\mathbb{C}$).
+Let $\mathbb{F}$ be a field and $\mathbb{L}$ be a field extension of $\mathbb{F}$.
 An element $\alpha \in \mathbb{L}$ is
 \begin{itemize}
     \item \textbf{algebraic} if there exists a non-zero polynomial $p(x) \in \mathbb{F}[x]$ such that $p(\alpha)=0$ (in $\mathbb{L}$).
@@ -177,8 +159,8 @@ An element $\alpha \in \mathbb{L}$ is
 \end{itemize}
 \end{definition}
 
-\begin{example}[Elements over $\mathbb{Q}$]
-\
+\begin{example}
+Let $\mathbb{F}=\mathbb{Q} \subseteq \mathbb{L}=\mathbb{C}$:
 \begin{itemize}
     \item $i = \sqrt{-1}$ is algebraic over $\mathbb{Q}$ (its polynomial is $p(x) = x^2+1$).
     \item $\sqrt[4]{2}, \sqrt{3}$ are algebraic over $\mathbb{Q}$ (their polynomials are $p(x)=x^4-2$ and $x^2-3$, respectively).
@@ -190,10 +172,15 @@ An element $\alpha \in \mathbb{L}$ is
 \begin{theorem}
 If $\alpha$ is transcendental over $\mathbb{F}$, then $\mathbb{F}[\alpha] \cong \mathbb{F}[x]$ as rings (but not as fields).
 \end{theorem}
+\begin{proof}
+    Consider the ring homomorphism $\phi: \mathbb{F}[x] \to \mathbb{F}[\alpha]$ given by
+    $$\phi(p(x)) := p(\alpha)$$
+    Since $\alpha$ is transcendental, $p(\alpha) \neq 0$ for any polynomial $p(x)$. Hence $\phi$ is an injective map. Also, $\phi$ is surjective by definition. Consequently, it is a ring isomorphism.
+\end{proof}
 
 As for $\beta$ algebraic:
 \begin{proposition} \label{prop:minpoly}
-Let $\beta \in \mathbb{L}$ be algebraic over $\mathbb{F}$. Consider the set $I = \{ f(x) \in \mathbb{F}[x] \mid \mathbb{F}(\beta) = 0 \}$.
+Let $\beta \in \mathbb{L}$ be algebraic over $\mathbb{F}$. Consider the set $I = \{ g(x) \in \mathbb{F}[x] \mid g(\beta) = 0 \}$.
 Then:
 \begin{enumerate}
     \item $I$ is a non-zero ideal in $\mathbb{F}[x]$.
@@ -201,7 +188,7 @@ Then:
     \item $p(x)$ is the unique monic polynomial of smallest degree in $I$.
     \item $p(x)$ is irreducible.
 \end{enumerate}
-This polynomial $p(x)$ is called the \textbf{minimal polynomial} of $\beta$ over $\mathbb{F}$.
+This polynomial $m_{\beta}(x) := p(x)$ is called the \textbf{minimal polynomial} of $\beta$ over $\mathbb{F}$.
 \end{proposition}
 
 \begin{proof}
@@ -214,55 +201,76 @@ This means either $h_1(x) \in I$ or $h_2(x) \in I$.
 But $\deg(h_1) < \deg(p)$ and $\deg(h_2) < \deg(p)$, which contradicts the fact that $p(x)$ is a polynomial of smallest degree in $I$. Thus, $p(x)$ must be irreducible.
 \end{proof}
 
-\begin{definition}
-Let $\mathbb{F}$ be a field, $\beta \in \mathbb{L}$ (a field extension of $\mathbb{F}$). The polynomial $m_{\beta}(x) := p(x)$ appearing in Proposition \ref{prop:minpoly} above is called the \textbf{minimal polynomial} of $\beta$ over $\mathbb{F}$.
-\end{definition}
 
 \begin{example}
-Minimal polynomials over $\mathbb{Q}$:
+Let $\mathbb{F} = \mathbb{Q}$ be the base field, and $\mathbb{L} = \mathbb{C}$.
 \begin{itemize}
     \item For $\beta = i$, the minimal polynomial is $m_{\beta}(x) = x^2+1$.
     \item For $\beta = \sqrt[4]{2}$, the minimal polynomial is $m_{\beta}(x) = x^4-2$.
-    \item For $\beta = e^{2\pi i/5}$, the minimal polynomial is $m_{\beta}(x) = x^4+x^3+x^2+x+1$. \\(Since $\beta^5=1$, and $x^5-1 = (x-1)p(x)$).
+    \item For $\beta = e^{2\pi i/5}$, the minimal polynomial is $m_{\beta}(x) = x^4+x^3+x^2+x+1$. \\(Since $\beta^5=1$, and $x^5-1 = (x-1)(x^4+x^3+x^2+x+1)$).
 \end{itemize}
 \end{example}
 
 \begin{theorem}
-Let $\mathbb{L}:\mathbb{F}$ be a field extension, and $\beta \in \mathbb{L}$ be algebraic. Then the smallest field extension $\mathbb{F}(\beta):\mathbb{F}$ containing $\beta$ is equal to the polynomial ring $\mathbb{F}[\beta]$, which is isomorphic to $\mathbb{F}[x]/\langle m_\beta(x) \rangle$.
+Let $\mathbb{L}:\mathbb{F}$ be a field extension, and $\beta \in \mathbb{L}$ be algebraic. Then the polynomial ring $\mathbb{F}[\beta]$ satisfies
+$$\mathbb{F}[\beta] \cong \mathbb{F}[x]/\langle m_\beta(x) \rangle$$ 
+and consequently it is a field.
 \end{theorem}
-
 \begin{proof}
-Consider the ring homomorphism $\phi: \mathbb{F}[x] \to \mathbb{F}[\beta]$ defined by evaluation at $\beta$:
+Consider the surjective ring homomorphism $\phi: \mathbb{F}[x] \to \mathbb{F}[\beta]$ defined by evaluation at $\beta$:
 \[ \phi(a_n x^n + \dots + a_0) = a_n \beta^n + \dots + a_0 \]
 The kernel of this map is precisely the ideal $I = \{ f(x) \in \mathbb{F}[x] \mid \mathbb{F}(\beta)=0 \}$, which we know is equal to $\langle m_\beta(x) \rangle$.
-So the result follows by the First Isomorphism Theorem for rings. Since $\langle m_\beta(x) \rangle$ is a maximal ideal, $\mathbb{F}[x]/\langle m_\beta(x) \rangle$ is a field, and therefore $\mathbb{F}[\beta]$ is also a field.
+So the result follows by the First Isomorphism Theorem for rings. 
+
+Since $m_\beta(x)$ is irreducible, $\langle m_\beta(x) \rangle$ is a maximal ideal and hence $\mathbb{F}[x]/\langle m_\beta(x) \rangle \cong \mathbb{F}[\beta]$ is a field.
 \end{proof}
+
+Combining the above result with Kronecker's Theorem, one has
+$$\mathbb{F}(\beta) := \mathbb{F}[\beta] = \mathrm{Span}_{\mathbb{F}}\{1,\beta,\dots, \beta^{\deg(m_{\beta}(x))-1}\}.$$
+(we use round bracket $\mathbb{F}(\beta)$ instead of square bracket $\mathbb{F}[\beta] $ to emphasize that it is a field).
 
 \begin{definition}
-The field extension $\mathbb{F}(\beta) := \mathbb{F}[\beta]$ of $\mathbb{F}$ is called the \textbf{simple extension} of $\mathbb{F}$ by $\beta$.
+Under the above setting, the field extension 
+$$\mathbb{F}(\beta): \mathbb{F}$$ 
+is the \textbf{simple extension} of $\mathbb{F}$ by $\beta$. It is the smallest field extension of $\mathbb{F}$ containing $\beta$.
 \end{definition}
 
-\begin{corollary}
-If $\alpha, \beta \in \mathbb{L}$ are algebraic over $\mathbb{F}$ and are roots of the same irreducible polynomial $p(x) \in \mathbb{F}[x]$, then $\mathbb{F}(\alpha) \cong \mathbb{F}(\beta)$.
-\end{corollary}
+%\begin{corollary}
+%If $\alpha, \beta \in \mathbb{L}$ are algebraic over $\mathbb{F}$ and are roots of the same irreducible polynomial $p(x) \in \mathbb{F}[x]$, then $\mathbb{F}(\alpha) \cong \mathbb{F}(\beta)$.
+%\end{corollary}
+%\begin{proof}
+%$m_\alpha(x) = m_\beta(x) = p(x)$. So $\mathbb{F}(\alpha) \cong \mathbb{F}[x]/\langle p(x) \rangle \cong \mathbb{F}(\beta)$.
+%\end{proof}
+
+We can also extend `non-simply' to any (finite) set of elements:
+\begin{definition}
+Let $\mathbb{L}:\mathbb{F}$ be a field extension, and $\alpha_1, \dots, \alpha_k \in \mathbb{L}$. Write 
+$$\mathbb{F}(\alpha_1, \dots, \alpha_k): \mathbb{F}$$ 
+as the smallest field extension containing $\alpha_1, \dots, \alpha_k$. In other words,
+\[ \mathbb{F}(\alpha_1, \dots, \alpha_k) := \bigcap_{\mathbb{F} \subseteq \mathbb{K} \subseteq \mathbb{L}, \ \alpha_1, \dots, \alpha_k \in \mathbb{K}} \mathbb{K} \]
+\end{definition}
+
+\begin{proposition}
+$\mathbb{F}(\alpha_1, \alpha_2, \alpha_3, \dots, \alpha_k) = (\mathbb{F}(\alpha_1))(\alpha_2, \alpha_3,\dots, \alpha_k) = (\mathbb{F}(\alpha_1,\alpha_2))(\alpha_3 \dots, \alpha_k) = \dots $.
+\end{proposition}
 \begin{proof}
-$m_\alpha(x) = m_\beta(x) = p(x)$. So $\mathbb{F}(\alpha) \cong \mathbb{F}[x]/\langle p(x) \rangle \cong \mathbb{F}(\beta)$.
+Check the case of $k = 2$, i.e. $\mathbb{F}(\alpha,\beta) = (\mathbb{F}(\alpha))(\beta)$ and use induction (Homework).
 \end{proof}
 
-Let $\mathbb{E}:\mathbb{F}$ be a field extension, and $\alpha_1, \dots, \alpha_k \in E$ be algebraic over $\mathbb{F}$. Then the field extension $\mathbb{F}(\alpha_1, \dots, \alpha_k)$ can be constructed inductively as follows:
+As a corollary of the above proposition, when $\alpha_1, \dots, \alpha_k \in \mathbb{L}$ are all algebraic over $\mathbb{F}$, the field extension $\mathbb{F}(\alpha_1, \dots, \alpha_k)$ can be constructed inductively as follows:
 Define a sequence of fields by $\mathbb{F}_0 = \mathbb{F}$ and
 \[ \mathbb{F}_{i+1} := \mathbb{F}_i(\alpha_{i+1}) \cong \frac{\mathbb{F}_i[x]}{\langle m^{\mathbb{F}_i}_{\alpha_{i+1}}(x) \rangle} \quad \text{for } 0 \le i \le k-1. \]
 where $m^{\mathbb{F}_i}_{\alpha_{i+1}}(x) \in \mathbb{F}_i[x]$ is the minimal polynomial of the element $\alpha_{i+1}$ over the field $\mathbb{F}_i$. Then $\mathbb{F}_k = \mathbb{F}(\alpha_1, \dots, \alpha_k)$.
 
 \section{Algebraic Extension}
-We have seen that a simple extension $\mathbb{F}(\beta):\mathbb{F}$ contains an algebraic element $\beta$. What about the other elements in $\mathbb{F}(\beta) = \text{Span}_{\mathbb{F}}\{1, \beta, \dots, \beta^{\deg(m_\beta(x))-1}\}$? Are they algebraic? More generally, how about the non-simple extension $\mathbb{F}(\beta_1, \dots, \beta_k)$?
+We have seen that a simple extension $\mathbb{F}(\beta):\mathbb{F}$ contains an algebraic element $\beta$. Are the the other elements in $\mathbb{F}(\beta)$ also algebraic? More generally, how about the non-simple extension $\mathbb{F}(\beta_1, \dots, \beta_k)$?
 
 \begin{definition}
-An extension $\mathbb{E}:\mathbb{F}$ is called \textbf{algebraic} if every element $\alpha \in E$ is algebraic over $\mathbb{F}$.
+An extension $\mathbb{E}:\mathbb{F}$ is called \textbf{algebraic} if every element $\alpha \in \mathbb{E}$ is algebraic over $\mathbb{F}$.
 \end{definition}
 
 \begin{theorem}
-If $[\mathbb{E}:\mathbb{F}] < \infty$ (i.e., it is a finite extension), then $\mathbb{E}$ is an algebraic extension of $\mathbb{F}$.
+If $[\mathbb{E}:\mathbb{F}] < \infty$ (i.e., it is a finite extension), then $\mathbb{E}:\mathbb{F}$ is an algebraic extension.
 \end{theorem}
 \begin{proof}
 Suppose $[\mathbb{E}:\mathbb{F}]=n$. Then for any $\alpha \in E$, consider the set $\{1, \alpha, \alpha^2, \dots, \alpha^n\}$. This is a set of $n+1$ elements in an $n$-dimensional vector space, so it must be linearly dependent over $\mathbb{F}$.
@@ -271,12 +279,13 @@ Thus, $\alpha$ is a root of the non-zero polynomial $p(x) = c_nx^n + \dots + c_0
 \end{proof}
 
 \begin{corollary}
-Let $\mathbb{E}:\mathbb{F}$ be a field extension, and $\beta_1, \dots, \beta_k \in E$ are algebraic over $\mathbb{F}$. Then the extension $\mathbb{F}(\beta_1, \dots, \beta_k):\mathbb{F}$ is algebraic.
+Let $\mathbb{E}:\mathbb{F}$ be a field extension, and $\beta \in \mathbb{E}$ is algebraic over $\mathbb{F}$. Then the simple extension $\mathbb{F}(\beta):\mathbb{F}$ is algebraic.
 \end{corollary}
 \begin{proof}
-For the special case when $k = 1$, one has $[\mathbb{F}(\beta):\mathbb{F}] = \deg(m_\beta(x))$ which is finite. The proof of the general case is given in Corollary \ref{cor:extextfinite} below.
+By Kronecker's Theorem, $[\mathbb{F}(\beta):\mathbb{F}] = \deg(m_\beta(x))$ which is finite. So the result follows.
 \end{proof}
 
+One may ask how about the more general extension $\mathbb{F}(\beta_1, \dots, \beta_k):\mathbb{F}$ for algebraic $\beta_1, \dots, \beta_k \in \mathbb{E}$? We give a (partial) answer by the very powerful theorem below:
 \begin{theorem}[Primitive Element Theorem]
 Let $\mathbb{F}$ be a field with characteristic $\text{char}(\mathbb{F})=0$. Let $a, b \in \mathbb{K}$ be algebraic over $\mathbb{F}$ in some extension $\mathbb{K}:\mathbb{F}$. Then there exists an element $c \in \mathbb{F}(a,b)$ such that $\mathbb{F}(c) = \mathbb{F}(a,b)$. (Such an element $c$ is called a primitive element for the extension).
 \end{theorem}
@@ -327,6 +336,15 @@ Therefore, the only possibility is that $j=1$, which means $b_j = b_1 = b$, and 
 $$m(x) = x - b$$
 in $\mathbb{F}(c)[x]$, i.e. $b \in \mathbb{F}(c)$ and the theorem is proved.
 \end{proof}
+\begin{corollary}
+Let $\mathbb{E}:\mathbb{F}$ be a field extension with $char(\mathbb{F}) = 0$, and $\beta_1, \dots, \beta_k \in \mathbb{E}$ are algebraic over $\mathbb{F}$. Then the extension $\mathbb{F}(\beta_1, \dots, \beta_k):\mathbb{F}$ is algebraic.
+\end{corollary}
+\begin{proof}
+By repeatedly applying Primitive Element Theorem, 
+$$\mathbb{F}(\beta_1, \beta_2, \beta_3,\dots, \beta_k) = \mathbb{F}(\beta_1,\beta_2) (\beta_3,\dots, \beta_k) = \mathbb{F}(c_2)(\beta_3,\dots, \beta_k) = \mathbb{F}(c_3)(\dots, \beta_k) = \cdots = \mathbb{F}(c_k).$$
+Since the simple extension $\mathbb{F}(c_k) : \mathbb{F}$ is algebraic, the result follows.
+\end{proof}
+One may still find the above proof unsatisfactory, since it assumes $char(\mathbb{F}) = 0$. In the next section, we will show that the same corollary holds for any $\mathbb{F}(\beta_1, \beta_2, \beta_3,\dots, \beta_k) ; \mathbb{F}$ without any assumptions (Corollary \ref{cor:extextfinite}).
 
 \section{Tower Law}
 \begin{theorem}[Tower Law]
@@ -338,7 +356,7 @@ Then:
 
 \begin{proof}
 Let $\{e_1, \dots, e_n\}$ be a basis of $\mathbb{K}$ over $\mathbb{F}$. This means $[\mathbb{K}:\mathbb{F}] = n$.
-Let $\{f_1, \dots, f_m\}$ be a basis of $\mathbb{L}$ over $\mathbb{K}$. This means $[L:K] = m$.
+Let $\{f_1, \dots, f_m\}$ be a basis of $\mathbb{L}$ over $\mathbb{K}$. This means $[\mathbb{L}:\mathbb{K}] = m$.
 
 \textbf{Claim:} The set $\mathcal{B} = \{e_i f_j \mid 1 \le i \le n, 1 \le j \le m\}$ is a basis of $\mathbb{L}$ over $\mathbb{F}$.
 If this claim is true, then the dimension of $\mathbb{L}$ over $\mathbb{F}$ is $n \cdot m$, which proves the theorem. We need to show that $\mathcal{B}$ is a spanning set and is linearly independent over $\mathbb{F}$.

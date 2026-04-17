@@ -891,7 +891,7 @@ a \text{ is irreducible} \iff \text{whenever } a = xy,\ \text{we have } a \sim x
 \]
 \end{lemma}
 
-\noindent (Recall that $a \sim x$ means $a = ux$ for some unit $u \in U(R)$.)
+\noindent (Recall that $a \sim x$ means $a = ux$ for some unit $u \in U(R)$. In other words, $a$ is irreducible iff whenever $a = xy$, either $x$ is a unit or $y$ is a unit.)
 
 \begin{proof}
 $(\Rightarrow)$: Suppose $a$ is irreducible and $a = xy$. Then $a \in \langle x \rangle$, so $\langle a \rangle \subseteq \langle x \rangle$. By irreducibility, either $\langle a \rangle = \langle x \rangle$ or $\langle x \rangle = R$.
@@ -940,7 +940,7 @@ The equivalence $\langle a \rangle$ maximal $\Leftrightarrow$ $\langle a \rangle
 It remains to show that irreducible $\Rightarrow$ prime in a PID. Let $a \in R$ be irreducible. By definition, $\langle a \rangle$ is maximal among proper principal ideals. Since every ideal in a PID is principal, $\langle a \rangle$ is in fact a maximal ideal, hence a prime ideal, so $a$ is prime.
 \end{proof}
 
-To conclude the four conditions — maximal ideal, prime ideal, prime element, irreducible element — are all equivalent (for nonzero nonunits) for PIDs. This is a very special property: for instance, in $\mathbb{Z}[x]$ (which is \emph{not} a PID), the element $x$ generates a prime ideal $\langle x \rangle$ that is \emph{not} maximal; and in $\mathbb{Z}[\sqrt{-5}]$ (which is not even a UFD), the element $3$ is irreducible but \emph{not} prime.
+To conclude, the four conditions — maximal ideal, prime ideal, prime element, irreducible element — are all equivalent (for nonzero nonunits) for PIDs. This is a very special property: for instance, in $\mathbb{Z}[x]$ (which is \emph{not} a PID), the element $x$ generates a prime ideal $\langle x \rangle$ that is \emph{not} maximal; and in $\mathbb{Z}[\sqrt{-5}]$ (which is not even a UFD), the element $3$ is irreducible but \emph{not} prime.
 
 \section{Unique Factorization Domain}
 
@@ -1001,6 +1001,7 @@ contradicting (ACCP) which says there exists $N \in \mathbb{N}$ such that
 $$\langle x_n \rangle = \langle x_{n+1} \rangle = \langle x_{n+2} \rangle = \cdots \quad $$
 This is a contradiction, and consequently there is no such $x_0 \in R \setminus F$, In other words, $R = F$.
 \end{proof}
+
 
 \begin{theorem}
 Every PID is a factorization domain.
