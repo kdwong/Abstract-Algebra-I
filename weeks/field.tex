@@ -231,8 +231,8 @@ $$\mathbb{F}(\beta) := \mathbb{F}[\beta] = \mathrm{Span}_{\mathbb{F}}\{1,\beta,\
 
 \begin{definition}
 Under the above setting, the field extension 
-$$\mathbb{F}(\beta): \mathbb{F}$$ 
-is the \textbf{simple extension} of $\mathbb{F}$ by $\beta$. It is the smallest field extension of $\mathbb{F}$ containing $\beta$.
+$\mathbb{F}(\beta): \mathbb{F}$
+is called the \textbf{simple extension} of $\mathbb{F}$ by $\beta$. It is the smallest field extension of $\mathbb{F}$ containing $\beta$.
 \end{definition}
 
 %\begin{corollary}
@@ -270,7 +270,7 @@ An extension $\mathbb{E}:\mathbb{F}$ is called \textbf{algebraic} if every eleme
 \end{definition}
 
 \begin{theorem}
-If $[\mathbb{E}:\mathbb{F}] < \infty$ (i.e., it is a finite extension), then $\mathbb{E}:\mathbb{F}$ is an algebraic extension.
+If $[\mathbb{E}:\mathbb{F}] < \infty$ (a {\bf finite} extension), then $\mathbb{E}:\mathbb{F}$ is an algebraic extension.
 \end{theorem}
 \begin{proof}
 Suppose $[\mathbb{E}:\mathbb{F}]=n$. Then for any $\alpha \in E$, consider the set $\{1, \alpha, \alpha^2, \dots, \alpha^n\}$. This is a set of $n+1$ elements in an $n$-dimensional vector space, so it must be linearly dependent over $\mathbb{F}$.
@@ -282,31 +282,24 @@ Thus, $\alpha$ is a root of the non-zero polynomial $p(x) = c_nx^n + \dots + c_0
 Let $\mathbb{E}:\mathbb{F}$ be a field extension, and $\beta \in \mathbb{E}$ is algebraic over $\mathbb{F}$. Then the simple extension $\mathbb{F}(\beta):\mathbb{F}$ is algebraic.
 \end{corollary}
 \begin{proof}
-By Kronecker's Theorem, $[\mathbb{F}(\beta):\mathbb{F}] = \deg(m_\beta(x))$ which is finite. So the result follows.
+By Kronecker's Theorem, $[\mathbb{F}(\beta):\mathbb{F}] = \deg(m_\beta(x)) < \infty$. So the result follows.
 \end{proof}
 
 One may ask how about the more general extension $\mathbb{F}(\beta_1, \dots, \beta_k):\mathbb{F}$ for algebraic $\beta_1, \dots, \beta_k \in \mathbb{E}$? We give a (partial) answer by the very powerful theorem below:
 \begin{theorem}[Primitive Element Theorem]
-Let $\mathbb{F}$ be a field with characteristic $\text{char}(\mathbb{F})=0$. Let $a, b \in \mathbb{K}$ be algebraic over $\mathbb{F}$ in some extension $\mathbb{K}:\mathbb{F}$. Then there exists an element $c \in \mathbb{F}(a,b)$ such that $\mathbb{F}(c) = \mathbb{F}(a,b)$. (Such an element $c$ is called a primitive element for the extension).
+Let $\mathbb{F}$ be a field with characteristic $\text{char}(\mathbb{F})=0$. Let $a, b \in \mathbb{K}$ be algebraic over $\mathbb{F}$ in some extension $\mathbb{K}:\mathbb{F}$. Then there exists an element $c \in \mathbb{F}(a,b)$ such that $\mathbb{F}(c) = \mathbb{F}(a,b)$. (Such an element $c$ is called a {\bf primitive element} for the extension).
 \end{theorem}
 
 \begin{proof}
-Let $p(x)$ be the minimal polynomial of $a$ over $\mathbb{F}$.
-Let $q(x)$ be the minimal polynomial of $b$ over $\mathbb{F}$.
+Let $p(x), q(x)$ be the minimal polynomials of $a$ and $b$ over $\mathbb{F}$ respectively. Take a field extension $\mathbb{L}:\mathbb{F}$ such that both $p(x)$ and $q(x)$ split in $\mathbb{L}[x]$.
 
-Take a field extension $\mathbb{L}:\mathbb{K}$ such that $p(x)$ and $q(x)$ split completely in $\mathbb{L}[x]$.
-Suppose $a_1, \dots, a_m \in \mathbb{L}$ are the roots of $p(x)$, with $a_1=a$.
-Suppose $b_1, \dots, b_n \in \mathbb{L}$ are the roots of $q(x)$, with $b_1=b$.
-
-Since $\text{char}(\mathbb{F})=0$, the field $\mathbb{F}$ is infinite. This allows us to choose an element $d \in \mathbb{F}$ such that
-\[ d \neq \frac{a_i - a_j}{b_k - b_l} \]
-for all $i, j$ and for all $k \neq l$. In particular, we choose $d \in \mathbb{F}$ such that for any $i$ and any $j > 1$:
+Suppose $a_1, \dots, a_m \in \mathbb{L}$ are the roots of $p(x)$, with $a_1=a$, and $b_1, \dots, b_n \in \mathbb{L}$ are the roots of $q(x)$, with $b_1=b$. Since $\text{char}(\mathbb{F})=0$, the field $\mathbb{F}$ is infinite. This allows us to choose an element $d \in \mathbb{F}$ such that
+for any $i, j > 1$:
 \[ d \neq \frac{a_i - a}{b - b_j} \]
-(Note that the elements on the right-hand side may not be in $\mathbb{F}$, but there are only a finite number of such values, so we can always find a $d \in \mathbb{F}$ that avoids them).
+(Note that the element on the right is only in $\mathbb{L}$. If it is not in $\mathbb{F}$, ignore it. For those that are in $\mathbb{F}$, there are only a finite number of such values, so we can always find a $d \in \mathbb{F}$ that avoids them).
 
-Consider the element $c := a + db$.
-Then, it is clear that $\mathbb{F}(c) \subseteq \mathbb{F}(a,b)$ since $a,b \in \mathbb{F}(a,b)$ and $d \in \mathbb{F} \subseteq \mathbb{F}(a,b)$.
-
+For the choice of $d \in \mathbb{F}$ above, consider the element:
+$$c := a + db \in \mathbb{F}(c) \subseteq \mathbb{F}(a,b)\ (\subseteq \mathbb{L}).$$
 To show the other inclusion, $\mathbb{F}(a,b) \subseteq \mathbb{F}(c)$, it is enough to show that $b \in \mathbb{F}(c)$, because if $b \in \mathbb{F}(c)$, then $a = c - db \in \mathbb{F}(c)$ as well.
 
 Consider the polynomials $r(x) = p(c-dx)$ and $q(x)$, both viewed as polynomials in $\mathbb{F}(c)[x]$.
@@ -315,25 +308,22 @@ We evaluate both polynomials at $b$:
     \item $r(b) = p(c-db) = p(a) = 0$.
     \item $q(b) = 0$.
 \end{itemize}
-Let $m(x) \in \mathbb{F}(c)[x]$ be the minimal polynomial of $b$ over the field $\mathbb{F}(c)$.
-Since $b$ is a root of both $r(x)$ and $q(x)$ (which are in $\mathbb{F}(c)[x]$), it must be that $m(x)$ divides both $r(x)$ and $q(x)$ in $\mathbb{F}(c)[x]$.
-\[ m(x) \mid r(x) \quad \text{and} \quad m(x) \mid q(x) \]
-Now let's study the polynomial $m(x) \in \mathbb{F}(c)[x] \subseteq \mathbb{L}[x]$.
+Let $m_b(x) \in \mathbb{F}(c)[x]$ be the minimal polynomial of $b$ over the field $\mathbb{F}(c)$.
+Since $b$ is a root of both $r(x)$ and $q(x)$ (which are in $\mathbb{F}(c)[x]$), it must be that $m_b(x)$ divides both $r(x)$ and $q(x)$ in $\mathbb{F}(c)[x]$.
+\[ m_b(x) \mid r(x) \quad \text{and} \quad m(x) \mid q(x) \]
+Now study the polynomial $m_b(x) \in \mathbb{F}(c)[x] \subseteq \mathbb{L}[x]$. Since $m_b(x) \mid q(x)$ and $q(x)$ splits in $\mathbb{L}[x]$, the roots of $m_b(x)$ must be a subset of the roots of $q(x)$, which are $\{b = b_1, b_2, \dots, b_n\}$.
 
-Since $m(x) \mid q(x)$ and $q(x)$ splits in $\mathbb{L}[x]$, the roots of $m(x)$ must be a subset of the roots of $q(x)$, which are $\{b = b_1, b_2, \dots, b_n\}$.
-
-Consider any root $b_j$ of $m(x)$. Since $m(x)$ also divides $r(x)$, this $b_j$ must also be a root of $r(x)$.
+Consider any root $b_j$ of $m_b(x)$. Since $m_b(x)$ also divides $r(x)$, this $b_j$ must also be a root of $r(x)$.
 So, for such a $b_j$, we must have $r(b_j) = p(c - db_j) = 0$.
-This implies that $c - db_j$ must be one of the roots of $p(x)$, say $a_i$.
+This implies that 
 \[ c - db_j = a_i \]
-Substituting $c=a+db$:
-\[ a + db - db_j = a_i \]
-\[ d(b - b_j) = a_i - a \]
+must be one of the roots of $p(x)$. Substituting $c=a+db$:
+\[ a + db - db_j = a_i \quad \Longrightarrow \quad d(b - b_j) = a_i - a \]
 If $j \neq 1$, then $b \neq b_j$. We can write:
 \[ d = \frac{a_i - a}{b - b_j} \]
 But this contradicts our initial choice of $d$, which was chosen specifically to not be equal to any of these values.
-Therefore, the only possibility is that $j=1$, which means $b_j = b_1 = b$, and hence 
-$$m(x) = x - b$$
+Therefore, the only possibility is that $j=1$, which means the only root of $m_b(x)$ is $b_1 = b$, and hence 
+$$m_b(x) = x - b$$
 in $\mathbb{F}(c)[x]$, i.e. $b \in \mathbb{F}(c)$ and the theorem is proved.
 \end{proof}
 \begin{corollary}
@@ -344,7 +334,7 @@ By repeatedly applying Primitive Element Theorem,
 $$\mathbb{F}(\beta_1, \beta_2, \beta_3,\dots, \beta_k) = \mathbb{F}(\beta_1,\beta_2) (\beta_3,\dots, \beta_k) = \mathbb{F}(c_2)(\beta_3,\dots, \beta_k) = \mathbb{F}(c_3)(\dots, \beta_k) = \cdots = \mathbb{F}(c_k).$$
 Since the simple extension $\mathbb{F}(c_k) : \mathbb{F}$ is algebraic, the result follows.
 \end{proof}
-One may still find the above proof unsatisfactory, since it assumes $char(\mathbb{F}) = 0$. In the next section, we will show that the same corollary holds for any $\mathbb{F}(\beta_1, \beta_2, \beta_3,\dots, \beta_k) ; \mathbb{F}$ without any assumptions (Corollary \ref{cor:extextfinite}).
+One may still find the above proof unsatisfactory, since it assumes $char(\mathbb{F}) = 0$. In the next section, we will show that the same corollary holds for any $\mathbb{F}(\beta_1, \beta_2, \beta_3,\dots, \beta_k) : \mathbb{F}$ without any assumptions (Corollary \ref{cor:extextfinite}).
 
 \section{Tower Law}
 \begin{theorem}[Tower Law]
@@ -544,16 +534,88 @@ To address these ancient Greek problems, we translate geometric constructions in
 A real number $\alpha$ is \textbf{constructible} if we can construct a line segment of length $|\alpha|$ using only a ruler and compass, starting from a segment of length 1.
 \end{definition}
 
+\begin{proposition}
+Every rational number is constructible. In other words,
+\[
+\mathbb{Q}\subseteq \{\text{constructible real numbers}\}.
+\]
+\end{proposition}
+
+\begin{proof}
+It suffices to construct 
+\[
+q=\frac{a}{b}\in \mathbb{Q},
+\]
+for \(a, b\in \mathbb{N} \backslash \{0\}\). Since every positive integer is constructible, we can construct segments of lengths \(a\) and \(b\).
+
+Now construct a right triangle \(ABC\) with
+\(
+AB=b\),\( AC=a\) ,\(\angle A = 90^\circ.\)
+On the segment \(AB\), mark a point $D$ on $AB$ so that it is of $1$ unit from $A$. Then draw a line through $D$ parallel to $CB$. The new line intersects $AC$ at $E$:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, every node/.style={font=\small}]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (6,0);
+    \coordinate (C) at (0,4);
+    \coordinate (D) at (2,0);
+    \coordinate (E) at (0,4/3); % for the chosen drawing scale: AE/AC = AD/AB = 1/6
+
+    % Triangle ABC
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+    % Smaller similar triangle ADE
+    \draw[thick] (D) -- (E);
+
+    % Mark points
+    \fill (A) circle (1.5pt) node[below left] {$A$};
+    \fill (B) circle (1.5pt) node[below] {$B$};
+    \fill (C) circle (1.5pt) node[left] {$C$};
+    \fill (D) circle (1.5pt) node[above] {$D$};
+    \fill (E) circle (1.5pt) node[right] {$E$};
+
+    % Right angle at A
+    \draw pic[draw, angle radius=5pt] {right angle = B--A--C};
+
+    % Parallel indication
+    \draw[dashed] (D) -- (E);
+
+    % Length labels
+    \draw[decorate, decoration={brace, mirror, raise=4pt}] (A) -- (B)
+        node[midway, below=8pt] {$b$};
+    \draw[decorate, decoration={brace, raise=4pt}] (A) -- (C)
+        node[midway, left=8pt] {$a$};
+    \draw[decorate, decoration={mirror, raise=3pt}] (A) -- (D)
+        node[midway, above=0pt] {$1$};
+\end{tikzpicture}
+\end{center}
+
+Because \(DE \parallel BC\), the triangles \(\triangle ADE\) and \(\triangle ABC\) are similar. Hence
+\(
+\frac{AE}{AC}=\frac{AD}{AB}.
+\)
+Substituting the known lengths gives
+\[
+\frac{AE}{a}=\frac{1}{b},
+\]
+so
+\(
+AE=\frac{a}{b}.
+\), i.e. \(\frac{a}{b} \in \mathbb{Q}\) is constructible.
+\end{proof}
+
+
+
 \begin{theorem}
 If $\alpha \in \mathbb{R}$ is constructible, then the degree of the extension $[\mathbb{Q}(\alpha) : \mathbb{Q}]$ must be a power of $2$. 
 \end{theorem}
 
-\begin{proof}[Sketch]
+\begin{proof}[Sketch Proof]
 Every point created by a ruler and compass is the intersection of two lines, a line and a circle, or two circles. Algebraically, these intersections involve solving linear or quadratic equations. Thus, every new point lies in a field $\mathbb{K}_{i+1}$ obtained by a quadratic extension of the previous field $\mathbb{K}_i$:
-\[ \mathbb{Q} = K_0 \subset K_1 \subset K_2 \subset \dots \subset K_m \]
-where $[K_{i+1} : K_i] = 2$ for all $i$. By the \textbf{Tower Law}:
-\[ [K_m : \mathbb{Q}] = [K_m : K_{m-1}] \dots [K_1 : K_0] = 2^m \]
-If $\alpha$ is constructed, then $\alpha \in \mathbb{K}_m$. Since $\mathbb{Q} \subseteq \mathbb{Q}(\alpha) \subseteq K_m$, the Tower Law again tells us that $[\mathbb{Q}(\alpha) : \mathbb{Q}]$ must divide $2^m$. Therefore, $[\mathbb{Q}(\alpha) : \mathbb{Q}] = 2^k$ for some $k \le m$.
+\[ \mathbb{Q} = \mathbb{K}_0 \subset \mathbb{K}_1 \subset \mathbb{K}_2 \subset \dots \subset \mathbb{K}_m \]
+where $[\mathbb{K}_{i+1} : \mathbb{K}_i] = 1$ or $2$ for all $i$. By the \textbf{Tower Law}:
+\[ [\mathbb{K}_m : \mathbb{Q}] = [\mathbb{K}_m : \mathbb{K}_{m-1}] \cdots [\mathbb{K}_1 : \mathbb{K}_0] = 2^k \]
+for some $k \leq m$. If $\alpha$ is constructed, then $\alpha \in \mathbb{K}_m$. Since $\mathbb{Q} \subseteq \mathbb{Q}(\alpha) \subseteq \mathbb{K}_m$, the Tower Law again tells us that $[\mathbb{Q}(\alpha) : \mathbb{Q}]$ must divide $2^k$. Therefore, $[\mathbb{Q}(\alpha) : \mathbb{Q}] = 2^{\ell}$ for some $\ell \le k$.
 \end{proof}
 
 
@@ -573,9 +635,9 @@ Let $\theta = 20^\circ$, so $3\theta = 60^\circ$. Since $\cos 60^\circ = 1/2$, l
 \[ \frac{1}{2} = 4\alpha^3 - 3\alpha \implies 8\alpha^3 - 6\alpha - 1 = 0 \]
 To simplify, let $u = 2\alpha$. Substituting $\alpha = u/2$:
 \[ 8\left(\frac{u}{2}\right)^3 - 6\left(\frac{u}{2}\right) - 1 = 0 \implies u^3 - 3u - 1 = 0 \]
-Let $\mathbb{F}(u) = u^3 - 3u - 1$. By the Rational Root Theorem, the only possible rational roots are $\pm 1$. 
-Checking them: $\mathbb{F}(1) = -3 \neq 0$ and $\mathbb{F}(-1) = 1 \neq 0$. 
-Since $\mathbb{F}(u)$ is a cubic polynomial with no rational roots, it is irreducible over $\mathbb{Q}$.
+Let $f(u) = u^3 - 3u - 1$. By the Rational Root Theorem (Homework), the only possible rational roots are $\pm 1$. 
+Checking them: $f(1) = -3 \neq 0$ and $f(-1) = 1 \neq 0$. 
+Since $f(u)$ is a cubic polynomial with no rational roots, it is irreducible over $\mathbb{Q}$.
 Thus:
 \[ [\mathbb{Q}(\alpha) : \mathbb{Q}] = [\mathbb{Q}(u) : \mathbb{Q}] = 3 \]
 Because $3$ is not a power of $2$, $\cos 20^\circ$ is not constructible. Therefore, the angle $60^\circ$ cannot be trisected.
